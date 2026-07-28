@@ -192,7 +192,11 @@ MVP에서는 기본 생애주기만 사용합니다.
 
 카드 보상 후보를 만들 때는 직전 웨이브의 `failureHintTags`와 다음 웨이브의 `EnemyRoleProfile.minimumCounterTags`를 함께 봅니다.
 
-단, 후보 3장을 전부 같은 대응 태그로 채우지 않습니다. 한 장은 직접 대응, 한 장은 다른 방식의 우회 대응, 한 장은 덱을 가볍게 유지하는 선택이나 골드 선택으로 두는 편이 좋습니다.
+단, 후보 3장을 전부 같은 대응 태그로 채우지 않습니다.
+
+한 장은 직접 대응, 한 장은 빌드 연결, 한 장은 덱 상태를 읽게 하는 카드여야 합니다.
+
+골드 거절은 카드 후보 슬롯이 아니라 별도 버튼이며, 덱을 가볍게 유지할 이유가 강할 때 설명 문구만 강조합니다.
 
 ## 비용 기준
 
@@ -336,7 +340,7 @@ MVP에서는 기본 생애주기만 사용합니다.
 | --- | --- | --- |
 | 직업 직접 대응 | 방금 겪은 문제를 자기 직업 방식으로 풉니다. |
 | 직업 우회 대응 | 다음 웨이브나 다른 카드 라인을 준비합니다. |
-| 공용 보완 또는 골드 거절 | 덱을 얇게 유지하거나 약한 빈틈을 보완합니다. |
+| 덱 상태 보완 | 덱 장수, 비용 곡선, 손패 막힘, 약한 빈틈을 읽게 합니다. |
 
 후보 생성 제한:
 
@@ -362,6 +366,48 @@ MVP에서는 기본 생애주기만 사용합니다.
 웨이브 겹치기, 클리어 시간, 처치 수는 전리품 풀 비율을 바꾸지 않습니다.
 
 상점과 이벤트는 별도 전리품 풀을 사용할 수 있지만, 이 경우에도 저주와 영웅 카드는 명시적인 선택과 대가가 있어야 합니다.
+
+### 71~100일 후반 전리품 잠금
+
+후반 카드 보상은 새 빌드 탐색보다 기존 덱의 병목을 줄이는 데 집중합니다.
+
+71일 이후 후보 3장은 아래 구조를 기본으로 합니다.
+
+| 슬롯 | 역할 | 설명 |
+| --- | --- | --- |
+| 직업 직접 보완 | 방금 막힌 전장 문제를 현재 직업의 방식으로 풉니다. | 수호자는 버티는 위치, 건축가는 재건 지점, 원소술사는 묶인 적 정리, 땜장이는 살릴 구조물을 다룹니다. |
+| 직업 우회 보완 | 다음 2~3일의 압박을 준비합니다. | 새 아키타입 대신 이미 가진 카드나 아티팩트와 붙는 조건을 우선합니다. |
+| 공용 보완 또는 거절 골드 | 덱을 얇게 유지하거나 작은 빈틈을 막습니다. | 공용 카드는 최대 1장이고, 후반 거절 골드는 정상 선택으로 표시합니다. |
+
+후반 잠금표:
+
+| 잠금 ID | 적용 | 일반 | 희귀 | 영웅 | 후보 풀 축 | 금지선 |
+| --- | --- | ---: | ---: | ---: | --- | --- |
+| `loot_lock_round_071_080` | 71~79일 일반 라운드 | 50 | 35 | 15 | 손패 정리, 후방 킬존, 결빙 이전, 대형 적 저지 | 새 아키타입 시작 |
+| `loot_lock_boss_080` | 80일 보스 개인 카드 | 45 | 40 | 15 | 결빙 회수, 후방 재건, 부위 집중, 기존 빌드 압축 | 결빙 성과로 희귀도 상승 |
+| `loot_lock_round_081_090` | 81~89일 일반 라운드 | 50 | 35 | 15 | 압력 밖 보조선, 구조물 이전, 우선 처치, 손패 막힘 완화 | 압력 타일 삭제권 |
+| `loot_lock_boss_090` | 90일 보스 개인 카드 | 40 | 45 | 15 | 91~100일 약점 보완, 압력 순환 대응, 마지막 덱 정리 | 100일 보스 정답 카드 지급 |
+| `loot_lock_round_091_094` | 91~94일 일반 라운드 | 45 | 40 | 15 | 빠른 누수 보완, 자원 꼬임 해소, 파괴 후 복구, 우선 처치 | 새 콤보 진입 |
+| `loot_lock_shop_final_095` | 95일 최종 상점 카드 슬롯 | 45 | 40 | 15 | 이미 쓰는 축의 강화, 제거, 마지막 공용 보완 | 영웅 랜덤 판매, 희귀도 보정 |
+| `loot_lock_round_096_099` | 96~99일 일반 라운드 | 45 | 40 | 15 | 마지막 위치 보정, 기지 위기 대응, 보유 아티팩트와의 마무리 | 새 아키타입 추천 |
+| `loot_lock_boss_100_result` | 100일 결과 | 없음 | 없음 | 없음 | 결과 기록, 도감, 다음 해금 후보 안내 | 완료한 런에 영향을 주는 카드 보상 |
+
+후반 희귀도별 역할:
+
+| 희귀도 | 71~90일 역할 | 91~99일 역할 |
+| --- | --- | --- |
+| 일반 | 덱이 돌게 하는 낮은 비용, 위치 보정, 짧은 수리/지연 | 마지막 손패 꼬임을 푸는 안전 선택 |
+| 희귀 | 현재 빌드가 결빙, 압력, 구조물 이전에 적응하게 함 | 이미 쓰는 축을 최종 보스 패턴에 맞게 좁힘 |
+| 영웅 | 지원 크레딧과 전투 증거가 있을 때 빌드 문장을 선명하게 함 | 새 빌드 금지, 보유 아키타입의 마침표만 허용 |
+| 저주 | 일반 랜덤 보상 없음, 이벤트/상점 명시 선택만 허용 | 일반 랜덤 보상 없음, 95일 이후 신규 저주 계약 기본 금지 |
+
+91일 이후 영웅 후보는 `requiresExistingArchetypeCommitment: true`를 가져야 합니다.
+
+게이트 조건을 만족하지 못한 영웅 후보는 같은 대응 태그의 희귀 또는 일반 카드로 내려갑니다.
+
+100일 보스 클리어 후에는 완료한 런의 전투력을 바꾸는 카드 보상을 주지 않습니다.
+
+결과 화면은 어떤 카드 라인이 유효했는지, 다음 런에서 어떤 해금 후보가 열렸는지를 보여줄 수 있지만, 클리어 성과로 다음 런의 희귀도나 후보 수를 올리지는 않습니다.
 
 ## 100일 카드 성장 곡선
 
@@ -412,7 +458,8 @@ MVP에서는 기본 생애주기만 사용합니다.
 - 첫 10일에는 일반 카드를 중심으로 보여주고, 희귀 카드는 역할을 명확히 이해할 수 있을 때만 섞습니다.
 - 같은 보상 화면에 같은 역할 카드 3장을 모두 넣지 않습니다.
 - 직업 전용 카드 2장과 공용 보완 카드 1장 구성을 기본값으로 삼습니다.
-- 방금 실패한 문제를 직접 해결하는 카드 1장, 다음 날을 준비하는 카드 1장, 덱을 가볍게 유지하는 선택 1개가 보이면 좋습니다.
+- 방금 실패한 문제를 직접 해결하는 카드 1장, 다음 날을 준비하는 카드 1장, 덱 상태를 읽게 하는 카드 1장이 보이면 좋습니다.
+- 덱을 가볍게 유지해야 할 때는 카드 슬롯을 줄이지 않고 골드 거절 버튼의 이유 문구를 강조합니다.
 - 웨이브 겹치기 횟수, 클리어 시간, 처치 수는 후보 수와 희귀도를 바꾸지 않습니다.
 
 직업별 첫 10일 보상 방향:
@@ -423,6 +470,243 @@ MVP에서는 기본 생애주기만 사용합니다.
 | 건축가 | 바리케이드, 잔해, 둔화, 회수 | 연쇄 붕괴, 큰 경로 교란 | 경로를 비트는 감각을 익힌 뒤 붕괴 콤보로 확장해야 합니다. |
 | 원소술사 | 화염구, 둔화, 넉백, 취약 | 전장 전체 피해, 장기 정지 | 킬존에 모인 적을 보는 습관이 먼저입니다. |
 | 땜장이 | 원격 수리, 오라, 과부하, 보강 | 오라 공유, 재조립 기계 | 무엇을 살릴지 고르기 전에 자동 복구가 정답이 되면 안 됩니다. |
+
+### 1~30일 MVP 전리품 샘플 운영
+
+1~30일 샘플은 고정 드랍표가 아닙니다.
+
+같은 카드 3장 선택 규칙 안에서, 매일의 전투 질문이 후보 3장의 등장 이유로 이어지는지 확인하는 제작 기준입니다.
+
+샘플은 아래 데이터 흐름을 따릅니다.
+
+```text
+MvpRewardShopEventDay
+-> MvpLootSampleDay
+-> MvpLootRarityLock
+-> CardRewardRailPolicy
+-> CardRewardCandidateGenerationTrace
+```
+
+`MvpLootSampleDay`는 후보 수, 희귀도, 골드 거절량, 웨이브 겹치기 보상을 바꾸지 않습니다.
+
+샘플이 고정하는 것은 "몇 장을 주는가"가 아니라 "그 3장이 서로 다른 질문인가"입니다.
+
+| 구간 | 핵심 질문 | 직접 대응 레일 | 빌드 연결 레일 | 덱 상태 레일 | 감사 포인트 |
+| --- | --- | --- | --- | --- | --- |
+| 1~4일 | 시작 덱의 빈틈을 이해했는가? | 첫 누수, 빠른 적, 군집, 구조물 손상 | 직업 기본 루프와 낮은 복잡도 신호 | 0~1비용, 공용 보완 최대 1장 | 영웅/저주/변형/비활성 방향 금지 |
+| 5~9일 | 첫 상점과 첫 보스 준비가 연결되는가? | 파괴형, 손패 막힘, 우선 처치, 킬존 유지 | 잔해, 수리, 부위 집중, 지연 타이밍 | 거절 골드와 제거 이유 형성 | 겹치기 학습을 보상 증가로 설명 금지 |
+| 10일 | 보스가 남긴 약점을 운영 축으로 바꾸는가? | 보스 실패 태그 회수 | 11~20일 운영 축 선택 | 15~19장 덱의 첫 정리 판단 | 부위 파괴 성과 보너스 금지 |
+| 11~14일 | 첫 아티팩트와 카드가 실제로 맞는가? | 아티팩트와 맞지 않는 빈틈 보완 | 희귀 전환 카드, 안전 변형 | 덱 장수와 비용 부담 확인 | 일반 라운드 영웅 금지 |
+| 15~19일 | 이벤트/상점 선택이 전투에서 검증되는가? | 계약 후유증, 반복 실패 태그, 고밀도 회복 | 강점 강화 또는 약점 보완 유지 | 쓰지 않는 카드, 버리기, 마나 꼬임 | 강제 저주, 겹치기 보상, 확정 영웅 금지 |
+| 20일 | 변형 보스 후 빌드를 유지할지 바꿀지 보이는가? | 변형 보스 실패 태그 회수 | 21~30일 확정 또는 정리 | 핵심 카드 비중과 제거 욕구 | 보스 성과 영웅 보너스 금지 |
+| 21~24일 | 준비된 빌드만 확정 질문을 받는가? | 정예, 분담, 붕괴 압박 대응 | 지원 크레딧과 전투 증거가 있는 영웅 또는 희귀 전환 | 집기와 거절 모두 정상 선택 | 영웅 2장 동시 노출 금지 |
+| 25일 | 계절 전환이 보상 축제가 아니라 정비로 읽히는가? | 전환이 드러낸 약점 보완 | 기존 아키타입을 다음 압박에 맞춤 | 계약과 상점 중 하나만 깊게 고민 | 보스급 보상, 새 아티팩트 금지 |
+| 26~29일 | 최종 준비가 새 빌드 시작이 아닌가? | 속도, 고밀도, 위치 보정, 부위 집중 예고 | 현재 빌드의 타이밍을 좁힘 | 압축, 거절, 낮은 비용 후보 | 새 적 역할, 새 시스템, 랜덤 저주 금지 |
+| 30일 | MVP 운영을 유지할지 정리할지 판단하는가? | 보스 결과 태그 회수 | 다음 런에 유지할 운영과 버릴 운영 분리 | 21~28장 덱의 정리 판단 | 31일 새 빌드 강제 금지 |
+
+샘플 패킷 생성 규칙:
+
+1. 완료한 일자의 `MvpRewardShopEventDay.primaryRewardLockId`를 먼저 읽습니다.
+2. 해당 일자의 `MvpLootSampleDay`는 정확히 세 레일만 요구합니다.
+3. `directAnswerIntent`는 직전 전투 리포트와 다음 웨이브 최소 대응 태그를 함께 봅니다.
+4. `buildBridgeIntent`는 현재 직업 아키타입, 보유 아티팩트, 다음 2~3일 압박을 봅니다.
+5. `deckStateIntent`는 덱 장수, 비용 곡선, 버리기 사용률, 손패 막힘을 봅니다.
+6. 후보가 3장을 채우지 못하면 직업 안전 카드, 약한 공용 보완, 같은 역할의 낮은 희귀도 순서로 내려갑니다.
+7. 보스일은 보스 역할 태그로 후보 이유만 좁히고 희귀도나 후보 수를 올리지 않습니다.
+8. 25일은 전환일이지만 보스일이 아니므로 `loot_lock_round_021_030` 샘플만 사용합니다.
+9. 웨이브를 겹치면 완료한 일자별 `MvpLootSampleDay`를 각각 보존하고, 압축 정산 화면에서 순서대로 처리합니다.
+
+솔로 콘텐츠 투영:
+
+| 멀티에서의 질문 | 솔로 동쪽 전선 투영 | 카드 제작 기준 |
+| --- | --- | --- |
+| 북쪽 장거리 압박 | 동쪽 전방의 긴 우회로와 늦은 도착 타이밍 | 방향명이 아니라 `long_approach`, `early_hold` 태그 사용 |
+| 서쪽 붕괴 압박 | 동쪽 중간 킬존의 구조물 손상과 재건 창 | `rear_rebuild`, `repair_window`처럼 위치 역할 태그 사용 |
+| 남쪽 후방 압박 | 동쪽 후방의 짧은 누수 경로와 기지 위기 | `base_crisis_patch` 사용, 남쪽 전용 문구 금지 |
+| 4인 분담 압박 | 동쪽 전선 안의 우선 대상, 구조물, 손패 판단을 시간차로 배치 | 한 카드가 특정 방위를 요구하지 않게 작성 |
+
+따라서 카드 텍스트와 보상 이유는 `북쪽`, `서쪽`, `남쪽` 같은 고정 방위보다 `가장 긴 접근로`, `최근 무너진 킬존`, `기지에 가까운 적`, `현재 활성 전선` 같은 표현을 우선합니다.
+
+### 1~30일 샘플 카드 ID 라우팅
+
+`MvpLootSampleCardRouteSet`은 샘플 일자가 실제 어떤 카드 ID를 우선 후보로 볼지 정리하는 연결표입니다.
+
+이 라우팅은 고정 드랍표가 아니며, 아래 순서로 후보를 좁히는 데만 사용합니다.
+
+```text
+일자 샘플
+-> 카드 라우트 세트
+-> 플레이어 직업의 직접 대응 후보 목록
+-> 플레이어 직업의 빌드 연결 후보 목록
+-> 덱 상태 공용 후보 목록
+-> 희귀도 잠금과 반복 피로도 검사
+-> 최종 3장 후보
+```
+
+라우팅 원칙:
+
+1. 기본 라운드 보상은 `starter` 카드를 새 복사본으로 지급하지 않습니다.
+2. 1~20일 일반 라운드 라우트는 `class_round_loot`와 `common_soft_gap` 카드만 우선 사용합니다.
+3. 10일 보스 보상은 보스에서 확인한 태그로 후보 이유를 좁히지만, 영웅 후보를 열지 않습니다.
+4. 20일 보스와 21~30일 일반 보상은 영웅 ID를 `gatedBridgeCandidateIds`로만 가질 수 있습니다.
+5. 영웅 후보는 `MvpHeroicCommitGate`의 지원 크레딧, 실제 지원 카드 보유, 런 중 선택 지원, 최근 전투 증거 조건을 통과하지 못하면 같은 역할의 희귀/일반 카드로 내려갑니다.
+6. 공용 후보는 한 보상 화면에 최대 1장만 들어갑니다.
+7. 공용 확장 잠금 카드인 `card_common_pressure_signal`, `card_common_reposition_line`, `card_common_emergency_battery`, `card_common_joint_operation`, `card_common_silent_call`은 30일 MVP 일반 라운드 기본 라우트에 넣지 않습니다.
+8. 라우트 세트는 웨이브 겹치기, 클리어 시간, 처치 수, 보스 부위 파괴 수로 바뀌지 않습니다.
+
+### 20~30일 영웅 후보 게이트
+
+영웅 후보는 보상 생성기의 성공 보너스가 아니라, 이미 선택한 덱 방향을 끝까지 밀지 묻는 확정 질문입니다.
+
+`requires_two_archetype_support_credits`는 단순히 같은 태그 카드 2장을 세는 규칙이 아닙니다. 실제 판정은 아래 순서를 따릅니다.
+
+1. 보상 출처가 20일 보스 개인 보상, 21~30일 라운드 보상, 20~30일 `shop_heroic_tune` 중 하나인지 확인합니다.
+2. 해당 영웅의 `MvpHeroicCommitGate`를 읽고 실제 덱 안의 같은 아키타입 지원 카드 수를 먼저 확인합니다.
+3. 강화나 장착 아티팩트가 `HeroicEquivalentSupportProfile`에 등록되어 있으면 한 게이트당 최대 1개만 지원 크레딧으로 더합니다.
+4. 실제 지원 카드가 0장이면 동등 지원을 아무리 갖고 있어도 영웅을 열지 않습니다.
+5. 지원 크레딧 합계가 2 이상이고, 그중 최소 1개가 런 중 선택한 보상 카드, 적용 강화, 장착 아티팩트에서 나온 것인지 확인합니다. 시작 덱에 원래 있던 카드만으로는 영웅을 열지 않습니다.
+6. 최근 5일 전투 리포트 또는 직전 보스 리포트에서 해당 전술을 실제로 수행한 증거 태그 1개 이상을 확인합니다.
+7. 후보 카드 상세에 남는 약점과 대가 태그가 표시되지 않으면 같은 역할의 일반/희귀 카드로 내려갑니다.
+8. 게이트 실패는 후보 수, 희귀도, 골드 거절량을 바꾸지 않고 `heroic_candidate_downgraded`로만 기록합니다.
+
+직업별 MVP 영웅 게이트:
+
+| 영웅 카드 | 아키타입 | 지원 카드 조건 | 전투 증거 태그 | 하향 후보 | 남는 대가 |
+| --- | --- | --- | --- | --- | --- |
+| `card_guardian_thorn_throne` | `archetype_guardian_thorn_anchor` | `card_guardian_thorn_growth`, `card_guardian_reflective_oath`, `card_guardian_crack_shield`, `card_guardian_iron_wall` 중 2개 이상 | `taunt_anchor_tanked_hits`, `thorn_damage_triggered`, `stack_pressure_hits_on_taunt` | `card_guardian_reflective_oath`, `card_guardian_crack_shield` | 수리 효율 감소, 반복 피격 위험 |
+| `card_guardian_unbroken_gate` | `archetype_guardian_boss_hold` | `card_guardian_last_gate`, `card_guardian_front_swap`, `card_guardian_iron_wall`, `card_guardian_binding_oath` 중 2개 이상 | `boss_part_focus_window_created`, `base_critical_hold`, `taunt_anchor_survived` | `card_guardian_last_guard`, `card_guardian_front_swap` | 높은 비용, 보스 본체 패턴 취소 금지 |
+| `card_architect_chain_collapse` | `archetype_architect_planned_collapse` | `card_architect_debris_blast`, `card_architect_delayed_charge`, `card_architect_slippery_debris`, `card_architect_shard_recovery` 중 2개 이상 | `planned_collapse_resolved`, `destroy_record_spent_correctly`, `swarm_compressed_by_debris` | `card_architect_delayed_charge`, `card_architect_slippery_debris` | 파괴 기록 소모, 무한 회수 금지 |
+| `card_architect_inverted_path` | `archetype_architect_long_maze` | `card_architect_barricade`, `card_architect_double_barricade`, `card_architect_reinforced_blueprint`, `card_architect_compact_design` 중 2개 이상 | `path_extension_seconds_high`, `maze_preview_used`, `boss_path_cost_read` | `card_architect_reinforced_blueprint`, `card_architect_double_barricade` | 완전 길막 금지, 경로 검사 필수 |
+| `card_elementalist_eye_of_stillness` | `archetype_elementalist_control_window` | `card_elementalist_frost_zone`, `card_elementalist_pushback`, `card_elementalist_rewind_gust`, `card_elementalist_frost_shard` 중 2개 이상 | `control_window_prevented_leak`, `stack_pressure_control_used`, `boss_control_weakened_understood` | `card_elementalist_rewind_gust`, `card_elementalist_frost_shard` | 보스/정예 CC 약화 변환 |
+| `card_elementalist_storm_ritual` | `archetype_elementalist_mark_execution` | `card_elementalist_mark`, `card_elementalist_overcharged_bolt`, `card_elementalist_elemental_rift`, `card_elementalist_fire_ring` 중 2개 이상 | `marked_target_followed_up`, `boss_part_focus_marked`, `forecast_hit_landed` | `card_elementalist_overcharged_bolt`, `card_elementalist_elemental_rift` | 표식 없을 때 효율 급감, 긴 예고 |
+| `card_tinkerer_resonance_amp` | `archetype_tinkerer_aura_engine` | `card_tinkerer_amplifier`, `card_tinkerer_lubrication`, `card_tinkerer_emergency_wiring`, `card_tinkerer_preheater` 중 2개 이상 | `aura_target_window_used`, `overcluster_risk_survived`, `aura_core_repositioned` | `card_tinkerer_emergency_wiring`, `card_tinkerer_lubrication` | 밀집 배치 위험, 오라 중심부 취약 |
+| `card_tinkerer_reassembly_machine` | `archetype_tinkerer_emergency_maintenance` | `card_tinkerer_remote_repair`, `card_tinkerer_spare_parts`, `card_tinkerer_auto_rebuild`, `card_tinkerer_reinforced_screw` 중 2개 이상 | `structure_destroyed_then_recovered`, `repair_window_saved_core`, `rebuild_penalty_understood` | `card_tinkerer_reinforced_screw`, `card_tinkerer_auto_extinguisher` | 재건 대기 시간, 같은 자리 반복 재건 페널티 |
+
+#### 강화/아티팩트 동등 지원 기준
+
+동등 지원은 카드 보상 운이 조금 비틀렸을 때 빌드 의도를 읽어주는 보조 판정입니다. 영웅 후보를 싸게 열어주는 보너스나 웨이브 겹치기 보상이 아닙니다.
+
+| 기준 | 설계 규칙 |
+| --- | --- |
+| 실제 카드 우선 | `supportCardIds`에 해당하는 실제 덱 카드가 최소 1장 있어야 합니다. |
+| 최대 1크레딧 | 강화와 아티팩트를 여러 개 갖고 있어도 한 영웅 게이트에서는 1크레딧만 더합니다. |
+| 명시 등록 | `HeroicEquivalentSupportProfile`에 등록된 강화/아티팩트만 인정합니다. |
+| 장착/적용 상태 | 적용된 강화, 현재 장착 중인 아티팩트만 인정합니다. 휴면, 방출, 임시 복제, 훈련 전용 효과는 제외합니다. |
+| 보상 중립 | 동등 지원은 후보 수, 희귀도, 골드, 보스 파편, 상점 가격, 웨이브 겹치기 보상을 절대 바꾸지 않습니다. |
+
+직업별 대표 동등 지원 예시는 아래처럼 잠급니다.
+
+| 영웅 카드 | 인정 가능한 동등 지원 예시 | 인정하지 않는 예 |
+| --- | --- | --- |
+| `card_guardian_thorn_throne` | 가시 반사 상한 강화, 파손 왕관 아티팩트 | 단순 체력 증가, 자동 반사만 발생한 전투 |
+| `card_guardian_unbroken_gate` | 보스 부위 집중 창 아티팩트, 전방 교대 경로 미리보기 강화 | 보스 본체 정지, 비활성 방향 방어 기록 |
+| `card_architect_chain_collapse` | 잔해 기억 아티팩트, 긴 도화선 폭발 강화 | 길막 보상 증가, 파괴 없는 설치 수 증가 |
+| `card_architect_inverted_path` | 경로 렌즈 아티팩트, 바리케이드 경로 표시 강화 | 완전 길막, 적 스폰 방향 변경 |
+| `card_elementalist_eye_of_stillness` | 예측 제어 아티팩트, 냉기 저항 표시 강화 | 보스 장기 정지, 순수 피해량 강화 |
+| `card_elementalist_storm_ritual` | 검은 닻 아티팩트, 부위 집중 균열 강화 | 무작위 낙뢰 자동 추적, 처치 보상 증가 |
+| `card_tinkerer_resonance_amp` | 과열 증폭 코어 아티팩트, 안전 간격 표시 강화 | 전역 공격 속도 증가만 있는 효과 |
+| `card_tinkerer_reassembly_machine` | 금 간 종 아티팩트, 위기 수리 선택 강화 | 무료 재건, 파괴 기록 무시 |
+
+#### 영웅 카드 상세 표시 기준
+
+영웅 카드 상세는 카드가 강하다는 사실보다, 왜 지금 이 덱에서 책임질 수 있는 선택인지 먼저 설명해야 합니다.
+
+카드 앞면과 펼침 정보는 분리합니다.
+
+| 위치 | 먼저 보여줄 것 | 숨기거나 펼침으로 보낼 것 |
+| --- | --- | --- |
+| 카드 앞면 | 비용, 희귀도, 역할 태그, `준비된 운영`, 남는 대가 1개 | 지원 카드 목록, 세부 카운트, 후보 하향 기록 |
+| 카드 펼침 | 지원 카드, 동등 지원, 최근 증거, 남는 대가 | 처치 수, 클리어 시간, 웨이브 겹치기 횟수 |
+| 하향 후보 펼침 | 같은 역할 대체 후보와 부드러운 이유 1개 | 잠긴 영웅 카드 실루엣, 실패 도장 |
+| 상점 조율 패널 | 대상 플레이어, 가격, 증거, 대가, 대체 선택 | 랜덤 판매 슬롯, 추천 순위 |
+
+카드 문구는 아래 순서를 따릅니다.
+
+1. 이 카드가 어떤 운영을 확정하는지 한 문장으로 말합니다.
+2. 실제 전투에서 확인된 증거를 짧게 붙입니다.
+3. 남는 대가를 카드 효과 바로 아래에 둡니다.
+4. 보스 정책이나 반복 상한은 상세 펼침에 둡니다.
+
+예시:
+
+| 카드 | 좋은 상세 문구 방향 | 피할 문구 |
+| --- | --- | --- |
+| `card_guardian_thorn_throne` | 도발 구조물이 실제로 맞아준 덱에서 반사 운영을 확정합니다. 수리 효율이 낮아집니다. | 이번 런 최고의 방어 영웅 |
+| `card_architect_inverted_path` | 이미 경로를 읽고 늘린 덱에서 짧은 구간을 더 비틀어 시간을 법니다. 완전 길막은 할 수 없습니다. | 길막 정답 카드 |
+| `card_elementalist_storm_ritual` | 표식과 후속 집중이 있는 덱에서 예고 지점에 큰 피해를 넣습니다. 자동 추적하지 않습니다. | 보스 삭제 번개 |
+| `card_tinkerer_reassembly_machine` | 파괴된 핵심 구조물을 낮은 체력으로 되돌립니다. 반복 재건 대가가 남습니다. | 구조물 손실 무효화 |
+
+영웅 게이트는 활성 방향 투영을 통과해야 합니다.
+
+솔로에서는 동쪽 전선 안의 전방, 중간, 후방, 경로 길이, 적 역할 순서로 증거 태그를 만들며, 북쪽/서쪽/남쪽 전용 조건을 요구하지 않습니다.
+
+#### 전투 증거 태그 생성 기준
+
+영웅 후보의 최근 전투 증거는 `CombatReportHeroicProofTagProfile`에서 생성됩니다.
+
+이 태그는 플레이어가 카드를 냈다는 사실이 아니라, 그 카드나 구조물이 전투에서 실제 판단을 만들었다는 기록입니다.
+
+공통 기준:
+
+- 최근 12초 안에 배치, 카드 사용, 수리, 표식, 경로 변경, 핑 확인 같은 플레이어 행동이 있어야 합니다.
+- 활성 전선 밖에서 생긴 사건은 증거가 되지 않습니다.
+- 한 전투 리포트는 플레이어당 영웅 증거 태그를 최대 2개까지만 기록합니다.
+- 같은 영웅 게이트에는 한 전투 리포트당 1개 증거만 계산합니다.
+- 웨이브 겹치기로 밀도가 높아진 상황에서도 태그 요구량, 보상, 가격, 후보 수, 희귀도는 바뀌지 않습니다.
+- 자동 아티팩트 발동만으로는 부족하며, 플레이어가 최근에 의도한 행동이 연결되어야 합니다.
+
+직업별 판정 질문:
+
+| 직업 | 증거가 되는 행동 | 부족한 행동 |
+| --- | --- | --- |
+| 수호자 | 도발 구조물이 실제로 맞고, 가시/반사/붙잡기가 누수나 보스 부위 집중 시간을 만듦 | 도발 타워를 설치했지만 적이 거의 때리지 않음 |
+| 건축가 | 의도한 구조물 파괴, 잔해 압축, 합법 경로 연장이 적의 시간을 실제로 빼앗음 | 완전 길막 실패, 미리보기 없이 막다른 배치 |
+| 원소술사 | 둔화/밀침/표식/예고 공격이 후속 화력이나 누수 방지로 이어짐 | 넓은 피해만 넣었지만 제어 창이나 표식 후속이 없음 |
+| 땜장이 | 오라 중심 유지, 위험한 밀집 생존, 수리/재건 창이 구조물 붕괴를 늦춤 | 오라가 켜졌지만 주변 구조물이 활용하지 못함 |
+
+### 20~30일 영웅 카드 효과 잠금
+
+영웅 카드는 게이트를 통과한 뒤에도 `CardSpecProfile`과 `MvpHeroicCardSpecLock`을 함께 통과해야 합니다.
+
+이 잠금은 수치를 세게 만드는 표가 아니라, 영웅 카드가 아래 네 가지 중 하나를 반드시 남기게 하는 표입니다.
+
+1. 높은 비용 또는 긴 예고
+2. 이번 웨이브 안의 반복 상한
+3. 구조물, 수리 효율, 다음 제어 저항 같은 후유증
+4. 보스 본체 약화 변환과 패턴 취소 금지
+
+MVP 영웅 카드 v1 효과:
+
+| 카드 | 비용 | 대상/범위 | 발동/지속 | 효과 | 상한/대가 | 보스 정책 |
+| --- | ---: | --- | --- | --- | --- | --- |
+| `card_guardian_thorn_throne` | 3 | 모든 아군 도발 구조물 | 1초 예고/웨이브 종료까지 | 모든 도발 구조물이 받은 피해의 20%를 반사하고 기존 가시는 +10%p 강화됩니다. | 모든 도발 구조물 수리 효율 -30%, 총 반사 발동 60회 | 보스 본체 직접 피해 보너스 없음, 보스가 실제 구조물을 때린 경우만 반사 |
+| `card_guardian_unbroken_gate` | 4 | 빈 설치 타일, 6타일 | 1초 예고/영구 구조물 | 체력 24, 도발 반경 2.5타일의 공격 없는 성문을 설치합니다. 파괴 시 주변 일반 적을 1.2초 멈춥니다. | 웨이브당 1회, 공격 기능 없음, 위치 실패 손해 큼 | 정예 0.4초, 보스 본체 정지 없음, 보스 부위 취약 3초 |
+| `card_architect_chain_collapse` | 3 | 자기 구조물 폭발 규칙 | 1초 예고/웨이브 종료까지 | 다음 3회 아군 구조물 폭발 피해 +2, 직전 폭발 4타일 안이면 추가 +1 | 총 추가 피해 18, 같은 구조물 반복 폭발 불가 | 보스 본체 피해 30%, 부위 피해 50%, 패턴 취소 없음 |
+| `card_architect_inverted_path` | 3 | 활성 전선 안 경로 5타일 | 1초 예고/6초 | 선택 구간 경로 비용 +4, 구간 내 적 이동 속도 -20% | 완전 길막 불가, 사용 전후 경로 검사 필수 | 보스 본체 경로 비용 +1.5로 약화, 정지 없음 |
+| `card_elementalist_eye_of_stillness` | 3 | 원형 반경 3타일, 6타일 | 1초 예고/5초 지대 | 일반 적 이동 속도 -70%, 정예 -35%, 보스 본체 -15% | 종료 후 영향받은 적 둔화 저항 +40% 8초 | 보스 본체 정지 없음, 부위 집중 시간만 보조 |
+| `card_elementalist_storm_ritual` | 4 | 활성 전선 안 고정 지점 4개 | 1.5초 예고/즉발 | 각 지점 반경 1.2타일에 피해 6을 줍니다. | 자동 추적 없음, 같은 적은 최대 2회 적중 | 보스 부위 50%, 보스 본체 25%, 패턴 취소 없음 |
+| `card_tinkerer_resonance_amp` | 3 | 빈 설치 타일, 6타일 | 1초 예고/영구 오라 구조물 | 체력 14, 오라 반경 2타일. 3타일 안 오라 구조물끼리 오라 효과 40%를 공유합니다. | 네트워크 3기 상한, 총 공격 속도 오라 +60% 상한, 연결 구조물 범위 피해 +20% | 보스 압력 권역에 밀집하면 취약, 보스 패턴 완화 없음 |
+| `card_tinkerer_reassembly_machine` | 4 | 최근 8초 안에 파괴된 비임시 구조물 위치, 7타일 | 1초 예고/즉발 | 같은 구조물을 최대 체력 35%로 재설치합니다. | 버프와 파괴 보상 기록 제거, 같은 타일 반복 재건 페널티 | 보스가 만든 경로 압박을 지우지 않음, 경로 검사 실패 시 사용 불가 |
+
+영웅 카드가 약하게 느껴질 때도 피해량이나 회복량을 먼저 올리지 않습니다.
+
+먼저 게이트가 너무 늦게 열리는지, 강한 타이밍이 충분히 예고되는지, UI가 상한과 대가를 읽히게 하는지 확인합니다.
+
+영웅 카드가 강하게 느껴질 때는 마나 비용보다 반복 상한, 보스 배율, 실패 손해, 후유증 시간을 먼저 조정합니다.
+
+라우팅이 후보를 고르는 예:
+
+| 상황 | 수호자 | 건축가 | 원소술사 | 땜장이 | 공용 덱 상태 |
+| --- | --- | --- | --- | --- | --- |
+| 빠른 누수 | `card_guardian_crack_shield` | `card_architect_slippery_debris` | `card_elementalist_rewind_gust` | `card_tinkerer_lubrication` | `card_common_temporary_turret` |
+| 구조물 붕괴 | `card_guardian_last_guard` | `card_architect_shard_recovery` | `card_elementalist_rewind_gust` | `card_tinkerer_reinforced_screw` | `card_common_battlefield_cleanup` |
+| 우선 처치 | `card_guardian_crack_shield` | `card_architect_delayed_charge` | `card_elementalist_overcharged_bolt` | `card_tinkerer_lubrication` | `card_common_focus_fire` |
+| 손패 막힘 | `card_guardian_last_guard` | `card_architect_shard_recovery` | `card_elementalist_frost_shard` | `card_tinkerer_auto_extinguisher` | `card_common_reorganize` |
+| 보스 집중 | `card_guardian_last_guard` | `card_architect_reinforced_blueprint` | `card_elementalist_overcharged_bolt` | `card_tinkerer_auto_extinguisher` | `card_common_tactical_map` |
+
+같은 라우트 세트 안에 여러 카드가 있어도 화면에 전부 나오지 않습니다.
+
+최종 화면은 항상 `직접 대응` 1장, `빌드 연결` 1장, `덱 상태` 1장이라는 읽기 구조를 우선합니다.
 
 ### 기대 덱 크기
 
@@ -457,8 +741,72 @@ MVP에서는 기본 생애주기만 사용합니다.
 
 - 80일 이후 처음 성립하는 전용 콤보
 - 91일 이후 영웅 카드 중심 새 빌드 유도
+- 91일 이후 게이트 없는 영웅 후보 노출
 - 카드 보상 희귀도 보정으로 후반 파워를 억지로 끌어올리기
 - 웨이브 겹치기 사용 횟수에 따른 보상 풀 변경
+- 100일 클리어 후 완료한 런에 영향을 주는 카드 보상
+
+### 직업별 71~100일 후반 전리품 카드
+
+후반 신규 전리품 카드는 직업마다 6장만 먼저 설계합니다.
+
+각 직업은 일반 2장, 희귀 3장, 영웅 1장을 기본으로 하며, 저주는 71~100일 일반/보스 개인 보상에 새로 넣지 않습니다.
+
+모든 후반 카드는 기존 아키타입의 `patch` 또는 `payoff` 역할만 가집니다.
+
+`starter`, `new_archetype_signal`, `risk_accelerator` 역할로 등록하지 않습니다.
+
+#### 수호자 후반 카드
+
+| 카드 | 희귀도 | 비용 | 등장 | 효과 | 기존 아키타입 | 남겨야 하는 약점 |
+| --- | --- | ---: | --- | --- | --- | --- |
+| 후퇴 명령 | 일반 | 1 | 71일 이후 | 도발 중인 구조물 1개를 현재 활성 전선의 유효 후방 타일로 1~2칸 옮기고 짧게 도발을 갱신합니다. | 성문 교대 | 완전 길막, 비활성 방향 이동, 보스 패턴 취소 금지 |
+| 균열 받침 | 일반 | 1 | 71일 이후 | 도발 구조물 1개가 6초 안에 파괴될 때 즉시 사라지지 않고 2초 동안 금 간 장애물로 남습니다. 이 동안 수리할 수 없습니다. | 철벽 앵커, 가시 성채 | 구조물 완전 보호가 아니라 딜타임 2초 확보 |
+| 압력 밖 성표 | 희귀 | 2 | 81일 이후 | 압력 타일 밖의 도발 구조물 1개가 받는 피해를 줄이고, 그 구조물을 때린 대형 적에게 짧은 집중 표식을 남깁니다. | 철벽 앵커, 보스 붙잡기 | 압력 타일 안에서는 효과가 약화됩니다. |
+| 가시 이식 | 희귀 | 1 | 81일 이후 | 이번 웨이브에 가시가 있는 도발 구조물이 파괴되면, 가까운 구조물 1개가 약한 가시를 이어받습니다. 이어받은 구조물은 수리 효율이 감소합니다. | 가시 성채, 성문 교대 | 가시 피해 총량 상한을 넘지 않음 |
+| 수문 경보 | 희귀 | 0 | 91일 이후 | 이번 웨이브에 기지가 피해를 받았거나 적이 내측 구간에 도달했을 때만 카드 1장을 버리고 1장을 뽑습니다. 다음 수호자 카드 비용이 1 감소합니다. 웨이브당 1회입니다. | 철벽 앵커, 성문 교대 | 조건 없는 드로우/마나 이득 금지 |
+| 겨울 관문 | 영웅 | 3 | 91일 이후 | 도발 구조물 2개를 짧게 연결합니다. 연결 구간을 처음 지나는 대형 적 또는 보스 부위 대상은 둔화와 집중 표식을 받습니다. | 철벽 앵커, 성문 교대, 보스 붙잡기 | 보스 본체 패턴을 멈추지 않고, 후반 영웅 게이트 조건 필요 |
+
+#### 건축가 후반 카드
+
+| 카드 | 희귀도 | 비용 | 등장 | 효과 | 기존 아키타입 | 남겨야 하는 약점 |
+| --- | --- | ---: | --- | --- | --- | --- |
+| 후방 기초 | 일반 | 1 | 71일 이후 | 다음 바리케이드를 현재 주 킬존 뒤쪽 유효 타일에 설치하면 체력이 증가합니다. 이 구조물은 파괴 보너스가 감소합니다. | 후방 재건, 긴 미로 | 같은 자리 반복 재건 정답화 금지 |
+| 압력 측량 | 일반 | 0 | 81일 이후 | 다음 압력 순환에서 안전한 설치 후보 타일을 표시합니다. 표시 타일에 설치한 첫 건축가 구조물은 설치 시간이 짧아집니다. | 후방 재건 | 비용 감소, 보상 증가, 자동 설치 없음 |
+| 접히는 미로 | 희귀 | 2 | 71일 이후 | 바리케이드 최대 2개를 2초 예고 후 가까운 유효 후방 타일로 옮깁니다. 이동 후 경로 검사를 다시 통과해야 합니다. | 긴 미로, 후방 재건 | 완전 길막과 경로 단축 악용 금지 |
+| 잔해 말뚝 | 희귀 | 1 | 81일 이후 | 잔해 1개를 소모해 짧게 지속되는 둔화 말뚝으로 바꿉니다. 소모한 잔해는 폭발/회수 기록으로 다시 쓰지 못합니다. | 잔해 제어, 계획 철거 | 잔해 가치 중복 소모 금지 |
+| 마지막 우회로 | 희귀 | 2 | 91일 이후 | 선택한 전방 구조물이 파괴되면 미리 고른 후방 타일에 취약 바리케이드 1개를 설치합니다. 이 바리케이드는 회수 가치가 없습니다. | 후방 재건, 긴 미로 | 자동 완전 복구가 아니라 후방 시간 벌기 |
+| 겨울형 붕괴도 | 영웅 | 3 | 91일 이후 | 최근 파괴 기록을 최대 3개 소모해 현재 활성 전선 위 지정 지점에 지연 파편 폭발을 예약합니다. | 계획 철거, 후방 재건 | 파괴 기록 재사용, 골드 회수, 보스 즉시 삭제 금지 |
+
+#### 원소술사 후반 카드
+
+| 카드 | 희귀도 | 비용 | 등장 | 효과 | 기존 아키타입 | 남겨야 하는 약점 |
+| --- | --- | ---: | --- | --- | --- | --- |
+| 좁은 화염선 | 일반 | 1 | 71일 이후 | 좁은 선형 구역에 피해를 줍니다. 도발 또는 둔화 중인 적에게만 추가 피해가 붙습니다. | 킬존 점화 | 흩어진 적과 광역 저항형에 약함 |
+| 잔서리 표식 | 일반 | 1 | 71일 이후 | 결빙 예정지나 압력 경계에서 벗어나는 적에게 짧은 표식을 남깁니다. 다음 파티 피해가 약한 둔화를 붙입니다. | 한파 제어, 표식 처형 | hard CC가 아니라 약한 추적 보조 |
+| 압력 밖 번개 | 희귀 | 2 | 81일 이후 | 선택한 적에서 압력 타일 밖의 가까운 적들에게 번개가 전이됩니다. 압력 타일 안 대상에게는 피해가 감소합니다. | 표식 처형, 킬존 점화 | 압력 타일 삭제나 내부 정답 카드가 아님 |
+| 해동 파열 | 희귀 | 1 | 80일 이후 | 결빙 예정지 또는 결빙 직후 타일 주변 적에게 피해와 약한 밀침을 줍니다. 타일 결빙 자체는 제거하지 않습니다. | 한파 제어 | 설치 공간 압박을 지우지 않음 |
+| 잔광 표식 | 희귀 | 0 | 91일 이후 | 표식이 있는 정예나 보스 부위가 살아남았을 때만 표식을 갱신하고 다음 비원소 피해를 강조 표시합니다. 피해는 주지 않습니다. | 표식 처형 | 조건 없는 0비용 피해/드로우 금지 |
+| 백색 낙뢰 의식 | 영웅 | 4 | 91일 이후 | 표식이 있는 대상 최대 3곳에 긴 예고 후 낙뢰를 떨어뜨립니다. 표식이 없으면 고정 예고 지점만 타격합니다. | 표식 처형, 킬존 점화 | 자동 추적, 보스 본체 패턴 취소, 전장 전체 정리 금지 |
+
+#### 땜장이 후반 카드
+
+| 카드 | 희귀도 | 비용 | 등장 | 효과 | 기존 아키타입 | 남겨야 하는 약점 |
+| --- | --- | ---: | --- | --- | --- | --- |
+| 접이식 증폭기 | 일반 | 1 | 71일 이후 | 오라 장치 1개를 가까운 유효 타일로 옮깁니다. 이동 후 2초 동안 오라가 약해집니다. | 오라 엔진 | 밀집 배치 위험은 그대로 남음 |
+| 냉각 핀 | 일반 | 1 | 71일 이후 | 다음 과부하의 후유 피해를 줄이지만 공격 속도 보너스도 줄입니다. | 과부하 폭주 | 과부하 대가 삭제 금지 |
+| 압력 밖 회로 | 희귀 | 2 | 81일 이후 | 압력 타일 밖의 오라 장치가 가장 가까운 압력 경계 구조물 1개에 약한 방어/공속 펄스를 보냅니다. | 오라 엔진, 긴급 정비 | 오라가 압력 안에 있으면 효과 없음 |
+| 분해 수리 | 희귀 | 1 | 81일 이후 | 낮은 체력 구조물 1개를 해체해 다른 구조물 1개를 수리합니다. 해체된 구조물의 파괴/회수 효과는 발동하지 않습니다. | 긴급 정비 | 파괴 가치 중복 획득 금지 |
+| 비상 배터리 공유 | 희귀 | 0 | 91일 이후 | 손패가 3장 이하이고 피해 입은 구조물이 있을 때만 다음 수리 또는 과부하 카드 비용을 1 줄입니다. 그 대상은 짧게 취약해집니다. | 유지보수 경제, 과부하 폭주 | 조건 없는 마나 순증가 금지 |
+| 최후의 정비반 | 영웅 | 3 | 91일 이후 | 8초 동안 오라 범위 안에서 처음 파괴될 구조물 1개가 2초 더 버틴 뒤 비활성화됩니다. 그 사이 수리하지 못하면 파괴됩니다. | 긴급 정비, 오라 엔진 | 구조물 완전 부활과 무한 수리 금지 |
+
+후반 카드 공통 규칙:
+
+- 모든 카드는 `soloProjectionSafe: true`를 가져야 합니다.
+- 특정 방위 이름 대신 현재 활성 전선, 선택 전선, 가장 가까운 압박 전선을 기준으로 작동합니다.
+- 91일 이후 영웅 카드는 같은 아키타입 지원 크레딧, 실제 지원 카드, 동등한 아티팩트/강화 조건 중 필요한 게이트 조건을 만족해야 후보가 됩니다.
+- 0비용 후반 카드는 조건부 연결 카드로만 쓰며, 조건 없는 드로우, 마나 순증가, 피해, 대량 수리를 만들 수 없습니다.
+- 구조물 이동 카드는 이동 뒤 경로 검사를 통과해야 하며, 완전 길막이나 비활성 방향 이동을 만들 수 없습니다.
 
 ## 직업별 카드 기둥
 
@@ -514,6 +862,73 @@ MVP에서는 카드 종류를 늘리기 전에 아래 구분을 먼저 지킵니
 
 따라서 1~10일 보상은 시작 카드의 직접 복제보다 같은 행동을 다른 조건으로 여는 보상 카드를 우선합니다.
 
+#### MVP 직업별 실제 카탈로그 잠금
+
+아래 표는 30일 MVP에서 반드시 존재해야 하는 카드 ID의 1차 잠금입니다.
+
+이름, 수치, 카드 문구는 테스트로 조정할 수 있지만, 시작 덱 매수, 카탈로그 역할, 기본 보상 경로가 바뀌면 시작 덱, 전리품 풀, 상점, 이벤트 계약을 함께 다시 검수합니다.
+
+| 직업 | 시작 덱 10장 | 일반/희귀 보상 5종 | 영웅 확정 2종 | 저주 계약 1종 |
+| --- | --- | --- | --- | --- |
+| 수호자 | `card_guardian_taunt_wall` x2, `card_guardian_shield_wrap` x2, `card_guardian_thorn_growth` x2, `card_guardian_binding_oath` x1, `card_guardian_last_gate` x1, `card_guardian_counter_stance` x2 | `card_guardian_iron_wall`, `card_guardian_reflective_oath`, `card_guardian_front_swap`, `card_guardian_crack_shield`, `card_guardian_last_guard` | `card_guardian_thorn_throne`, `card_guardian_unbroken_gate` | `card_guardian_heavy_vow` |
+| 건축가 | `card_architect_barricade` x3, `card_architect_slowing_stake` x2, `card_architect_debris_blast` x2, `card_architect_temporary_path` x1, `card_architect_salvage_work` x1, `card_architect_compact_design` x1 | `card_architect_double_barricade`, `card_architect_shard_recovery`, `card_architect_delayed_charge`, `card_architect_slippery_debris`, `card_architect_reinforced_blueprint` | `card_architect_chain_collapse`, `card_architect_inverted_path` | `card_architect_overbuilt` |
+| 원소술사 | `card_elementalist_fireball` x2, `card_elementalist_frost_zone` x2, `card_elementalist_pushback` x2, `card_elementalist_chain_lightning` x1, `card_elementalist_mark` x2, `card_elementalist_big_blast` x1 | `card_elementalist_fire_ring`, `card_elementalist_frost_shard`, `card_elementalist_rewind_gust`, `card_elementalist_overcharged_bolt`, `card_elementalist_elemental_rift` | `card_elementalist_eye_of_stillness`, `card_elementalist_storm_ritual` | `card_elementalist_forbidden_lantern` |
+| 땜장이 | `card_tinkerer_amplifier` x2, `card_tinkerer_remote_repair` x3, `card_tinkerer_armor_plate` x2, `card_tinkerer_overdrive` x1, `card_tinkerer_spare_parts` x1, `card_tinkerer_auto_rebuild` x1 | `card_tinkerer_lubrication`, `card_tinkerer_reinforced_screw`, `card_tinkerer_emergency_wiring`, `card_tinkerer_preheater`, `card_tinkerer_auto_extinguisher` | `card_tinkerer_resonance_amp`, `card_tinkerer_reassembly_machine` | `card_tinkerer_risky_mod` |
+
+카탈로그 잠금 규칙:
+
+- `starter` 카드는 시작 덱 인스턴스로만 지급합니다. 상점의 제거/강화는 이미 보유한 시작 카드 인스턴스를 대상으로 할 수 있지만, 기본 라운드 보상은 같은 시작 카드를 새 복사본으로 주지 않습니다.
+- `class_round_loot` 5종은 직업의 4개 카드 풀 라인을 모두 최소 1번 이상 건드려야 합니다. 특정 라인만 보상 카드로 몰리면 보상 화면이 빌드 선택이 아니라 반복 강화처럼 보입니다.
+- `class_heroic_commit` 2종은 21일 이후에도 `MvpHeroicCommitGate`의 지원 크레딧, 실제 지원 카드 보유, 런 중 선택 지원, 최근 전투 증거 조건을 만족할 때만 기본 보상 후보가 됩니다.
+- `class_curse_contract` 1종은 일반 라운드, 보스 개인 보상의 랜덤 후보에 들어가지 않고, 이벤트 계약이나 특수 상점 확인 UI를 통해서만 획득합니다.
+- 모든 카드 ID는 활성 전선 투영 규칙을 따릅니다. 솔로 플레이의 동쪽 전선에서도 특정 방위가 없어서 죽는 카드가 되면 안 됩니다.
+- 웨이브 겹치기, 클리어 시간, 처치 수, 보스 부위 파괴 수는 이 표의 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+
+#### 보상 후보 3레일
+
+카드 3장 보상은 무작위 3장이 아니라, 서로 다른 질문을 가진 3개의 레일에서 뽑습니다.
+
+| 레일 ID | 기본 후보 | 입력 신호 | 좋은 결과 | 금지선 |
+| --- | --- | --- | --- | --- |
+| `reward_rail_direct_answer` | 직업 전용 1장 | 방금 뚫린 적 역할, 피해 방향, 구조물 붕괴 태그 | 지금 겪은 문제를 자기 직업 방식으로 바로 풀게 함 | 정답 카드처럼 한 문제를 완전히 삭제 |
+| `reward_rail_build_bridge` | 직업 전용 1장 | 현재 덱의 아키타입 수, 다음 3일 압박, 보유 아티팩트 | 이미 잡은 방향과 다음 압박을 연결 | 게이트 없는 영웅 확정 카드 강제 |
+| `reward_rail_deck_state` | 공용 보완 또는 안전 직업 카드 | 덱 장수, 손패 막힘, 버리기 사용률, 마나 꼬임 | 덱을 더 두껍게 할 이유와 거절할 이유를 함께 읽게 함 | 공용 카드가 직업 고유 역할을 같은 강도로 대체 |
+
+영웅 후보가 희귀도 추첨에 걸렸지만 게이트 조건을 만족하지 못하면 아래 순서로 내려갑니다.
+
+1. 같은 아키타입의 희귀 `pivot` 카드.
+2. 같은 대응 태그의 일반 또는 희귀 `signal` 카드.
+3. 해당 레일에 맞는 공용 보완 카드.
+4. 안전한 낮은 복잡도 직업 카드.
+
+이 하향은 실패 보상이 아니라 카탈로그 안전장치입니다.
+
+골드 거절은 하향 후보가 아니라 항상 열려 있는 별도 선택입니다.
+
+덱 상태 레일이 후보를 찾기 어렵거나 덱 과밀 신호가 강하면 카드 슬롯은 안전 후보로 유지하고, 골드 거절 버튼에 `덱을 가볍게 유지` 이유를 붙입니다.
+
+#### 보상 반복 피로도 방지
+
+카드 풀은 작게 시작해야 하지만, 같은 카드가 너무 자주 보이면 플레이어는 선택지가 좁다고 느낍니다.
+
+반복 피로도 방지는 카드의 등장 확률을 보상처럼 올리는 장치가 아니라, 최근 노출된 카드와 같은 계열을 잠시 뒤로 미루는 제작 규칙입니다.
+
+| 반복 단위 | 피로 신호 | 우선 조정 |
+| --- | --- | --- |
+| 정확히 같은 카드 | 최근 5개 보상 팩 안에 2회 이상 노출 | 같은 레일의 다른 카드, 안전 직업 카드, 약한 공용 보완 순서로 대체 |
+| 같은 카드 계열 | 기준 카드와 변형 카드가 같은 화면에 함께 등장 | 같은 계열 중 1장만 남김 |
+| 같은 풀 라인 | 3팩 연속 같은 `poolLaneId`가 핵심 후보 | 다른 레일의 연결 카드로 우회 |
+| 같은 대응 태그 | 매번 같은 문제의 직접 답만 노출 | 직접 대응은 유지하되 빌드 연결과 덱 상태 레일을 바꿈 |
+| 반복 거절 카드 | 같은 카드가 2번 이상 골드 거절됨 | 5팩 동안 우선순위를 낮춤 |
+
+첫 10일에는 학습 회수를 위해 같은 개념을 다시 보여줄 수 있습니다.
+
+이때도 같은 카드 복사본을 반복하기보다, 같은 역할을 다른 비용, 대상, 타이밍으로 여는 카드를 우선합니다.
+
+변형 카드는 기준 카드와 같은 계열로 취급합니다.
+
+MVP 보상 화면에서는 기준 카드와 그 변형 카드를 같은 3장 안에 동시에 넣지 않습니다.
+
 #### 날짜별 카탈로그 노출
 
 | 일자 | 열어도 되는 카드 | 막아야 하는 카드 | 보상 화면 질문 |
@@ -533,7 +948,7 @@ MVP에서는 카드 종류를 늘리기 전에 아래 구분을 먼저 지킵니
 2. 직업 전용 후보는 최소 1장 포함합니다.
 3. 공용 보완 후보는 최대 1장만 포함합니다.
 4. 같은 카드 풀 라인 후보는 기본적으로 한 화면 1장을 넘지 않습니다.
-5. 영웅 확정 카드는 해당 아키타입 선행 카드가 2장 이상 있을 때만 일반 라운드 후보로 밀 수 있습니다.
+5. 영웅 확정 카드는 해당 아키타입 지원 크레딧과 최근 전투 증거가 있을 때만 일반 라운드 후보로 밀 수 있습니다.
 6. 저주 카드는 이벤트 계약이나 특수 상점처럼 명시 동의 UI가 있을 때만 들어옵니다.
 7. 웨이브 겹치기, 클리어 시간, 처치 수는 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
 8. 특정 방위 전용 조건은 쓰지 않고, 현재 활성 전선과 선택 전선 기준으로 효과를 투영합니다.
@@ -544,12 +959,21 @@ MVP에서는 카드 종류를 늘리기 전에 아래 구분을 먼저 지킵니
 
 웨이브 겹치기로 여러 일자를 한 번에 처리해도 각 보상 팩은 자기 일자의 고정 희귀도 프로필을 그대로 씁니다.
 
+희귀도별 제작 역할:
+
+| 희귀도 | 제작 질문 | 쓰면 좋은 효과 | 피해야 할 효과 |
+| --- | --- | --- | --- |
+| 일반 | 이 직업의 기본 행동을 더 자주, 더 안정적으로 쓰게 하는가? | 낮은 비용, 명확한 대상, 짧은 대응 | 희귀 카드의 하위호환 |
+| 희귀 | 같은 문제를 다른 타이밍이나 대가로 풀게 하는가? | 예고, 조건부 보상, 아키타입 연결 | 일반 카드보다 무조건 강한 수치 |
+| 영웅 | 이미 준비한 덱이 결심할 만한가? | 게이트 조건 설명, 높은 비용의 강한 창 | 준비 없는 덱도 집는 자동 정답 |
+| 저주 | 플레이어가 위험을 알고 받는가? | 명시 계약, 활용 카드, 제거/안정화 비용 | 랜덤 벌칙, 파티 강요 |
+
 | 프로필 ID | 경로 | 적용 일자 | 일반 | 희귀 | 영웅 | 저주 | 후보 화면 규칙 |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
 | `rarity_profile_round_001_004` | 일반 라운드 | 1~4일 | 90 | 10 | 0 | 0 | 희귀 최대 1장, 공용 보완 최대 1장 |
 | `rarity_profile_round_005_010` | 일반 라운드 | 5~10일 | 80 | 20 | 0 | 0 | 보스 준비 카드를 열되 영웅 미등장 |
 | `rarity_profile_round_011_020` | 일반 라운드 | 11~20일 | 70 | 30 | 0 | 0 | 희귀 전환 카드 최대 2장 |
-| `rarity_profile_round_021_030` | 일반 라운드 | 21~30일 | 60 | 35 | 5 | 0 | 영웅 최대 1장, 선행 아키타입 카드 2장 필요 |
+| `rarity_profile_round_021_030` | 일반 라운드 | 21~30일 | 60 | 35 | 5 | 0 | 영웅 최대 1장, `MvpHeroicCommitGate` 통과 필요 |
 | `rarity_profile_boss_personal_010` | 보스 개인 | 10일 | 75 | 25 | 0 | 0 | 보스에서 확인한 역할 태그만 편향 |
 | `rarity_profile_boss_personal_020` | 보스 개인 | 20일 | 60 | 35 | 5 | 0 | 변형 보스 약점과 다음 구간 준비 연결 |
 | `rarity_profile_boss_personal_030` | 보스 개인 | 30일 | 50 | 40 | 10 | 0 | MVP 덱 확정 또는 골드 거절 |
@@ -564,10 +988,26 @@ MVP에서는 카드 종류를 늘리기 전에 아래 구분을 먼저 지킵니
 - 직업 전용 후보는 최소 1장입니다.
 - 공용 보완 후보는 최대 1장입니다.
 - 같은 `poolLaneId`는 기본적으로 한 화면 1장만 허용합니다.
-- 영웅 후보는 같은 아키타입 선행 카드가 2장 이상 없으면 내려갑니다.
+- 20~30일 MVP 영웅 후보는 `MvpHeroicCommitGate`를 통과하지 못하면 내려갑니다.
 - 저주는 일반 라운드와 보스 개인 보상의 랜덤 후보에 들어가지 않습니다.
 
 이 규칙의 목적은 좋은 카드를 숨기는 것이 아니라, 희귀도를 "강함 순서"가 아니라 "판단 비용과 빌드 의존도"로 읽히게 만드는 것입니다.
+
+#### 희귀도 노출 밴드
+
+아래 밴드는 실제 런에서 보정을 걸기 위한 천장표가 아니라, 카드 풀 제작과 샘플 빌드 검수 기준입니다.
+
+| 밴드 | 일자 | 새로 열 수 있는 것 | 아직 미루는 것 |
+| --- | --- | --- | --- |
+| `rarity_band_mvp_core_001_002` | 1~2일 | 직업 일반 보강, 낮은 복잡도 희귀 신호 | 전리품 변형, 영웅, 저주 |
+| `rarity_band_mvp_response_003_004` | 3~4일 | 빠른 적/군집/첫 누수 직접 대응 | 대가 전환 변형, 확정 빌드 |
+| `rarity_band_mvp_shop_bridge_005` | 5일 | 덱 상태를 읽게 하는 일반 카드와 첫 상점 카드 | 희귀 상점 보상처럼 보이는 판매 |
+| `rarity_band_mvp_boss_prep_006_009` | 6~9일 | 파괴, 수리, 손패 보완 희귀 카드 | 웨이브 겹치기 보상 문구 |
+| `rarity_band_mvp_boss_010` | 10일 | 첫 보스에서 확인한 역할 태그 회수 | 부위 파괴 희귀도 보너스 |
+| `rarity_band_mvp_artifact_bridge_011_019` | 11~19일 | 첫 아티팩트와 이어지는 희귀 전환, 안전/타이밍 변형 | 일반 라운드 영웅 |
+| `rarity_band_mvp_branch_boss_020` | 20일 | 지원 크레딧과 전투 증거가 있는 영웅 후보, 변형 보스 약점 회수 | 보스 성과 기반 영웅 증가 |
+| `rarity_band_mvp_commit_021_029` | 21~29일 | 지원 크레딧과 전투 증거가 있는 영웅 확정, 기존 아키타입 변형 | 새 아키타입 강제, 저주 랜덤 후보 |
+| `rarity_band_mvp_result_030` | 30일 | MVP 덱 유지/정리 판단 | 클리어 보너스 희귀도 상승 |
 
 ### 카드 풀 라인
 
@@ -647,7 +1087,7 @@ MVP에서는 직업마다 3개 아키타입만 명확히 보여줍니다.
 
 - 현재 덱에서 가장 많이 집은 아키타입을 안정화하는 카드 1장
 - 방금 웨이브에서 드러난 약점을 보완하는 같은 직업 카드 1장
-- 공용 보완 카드 또는 골드 거절 선택 1개
+- 덱 상태를 읽게 하는 공용 보완 또는 안전 직업 카드 1장
 
 아직 특정 아키타입 카드가 2장 미만이면 영웅 확정 카드를 보상 후보로 밀지 않습니다.
 
@@ -667,7 +1107,9 @@ MVP에서는 직업마다 3개 아키타입만 명확히 보여줍니다.
 
 - 방금 겪은 문제를 직접 푸는 직업 카드 1장
 - 같은 문제를 우회하거나 다음 웨이브를 준비하는 직업 카드 1장
-- 덱을 가볍게 유지하는 공용 카드 또는 골드 거절 선택 1개
+- 덱 상태를 읽게 하는 공용 카드 또는 안전 직업 카드 1장
+
+골드 거절은 위 3장과 별도로 항상 표시하고, 덱 과밀이나 비용 꼬임이 강할 때만 이유 문구를 더 선명하게 보여줍니다.
 
 피해야 할 구성:
 
@@ -785,6 +1227,24 @@ MVP 카드 수치는 "강한 카드와 약한 카드"가 아니라, 어떤 전�
 | `stat_budget_crisis_3` | 비용 3 위기 대응 | 큰 광역, 강한 방어, 보스 부위 집중 중 하나 | 1초 이상 예고, 후유증, 웨이브당 제한 |
 | `stat_budget_commit_4` | 비용 4 이상 결전 카드 | 빌드 축을 바꾸는 큰 효과 | 선행 아키타입, 큰 실패 손해, 보스 본체 약화 |
 | `stat_budget_curse` | 저주 계약 카드 | 비용 대비 즉시 이득이 큼 | 장기 대가, 명시 확인, 제거/안정화 경쟁 |
+
+예산 배정은 `effectBudgetId`와 `statBudgetLockId`를 함께 봅니다.
+
+`effectBudgetId`는 카드의 실제 모양이고, `statBudgetLockId`는 그 모양을 어떤 안전장치로 검수할지 정하는 값입니다.
+
+| `effectBudgetId` | 기본 `statBudgetLockId` | 대표 카드 | 추가 검수 |
+| --- | --- | --- | --- |
+| `budget_cost0_connector` | `stat_budget_connector_0` | 응전 태세, 원소 표식, 재정비, 빠른 손놀림 | 순수 드로우/마나 순증가 금지 |
+| `budget_cost0_risky_boost` | `stat_budget_risky_boost_0` | 과부하, 긴급 배선, 위험한 개조 | 구조물 피해, 다음 드로우 손실, 회수 가치 제외 중 1개 이상 |
+| `budget_cost1_single_basic` | `stat_budget_basic_1` | 도발벽, 방패 두르기, 바리케이드, 밀어내기 | 단일 대상 조건과 실패 피드백 |
+| `budget_cost1_small_area_instant` | `stat_budget_basic_1` | 화염구, 빙결 지대, 원소 균열 | 작은 반경, 낮은 보스 배율, 반복 저항 |
+| `budget_cost1_global_support` | `stat_budget_flexible_1` | 원격 수리, 수리 대기열 | 낮은 수치, 반복 효율 감소, 대상 조건 |
+| `budget_cost1_aura_device` | `stat_budget_flexible_1` | 증폭기, 좁은 증폭장 | 오라 중첩 상한, 장치 위치 위험 |
+| `budget_cost1_risky_focus` | `stat_budget_curse` | 금지된 등불 | 명시 계약/저주 확인, 일반 처치 자원 대가 |
+| `budget_cost2_tactical_shift` | `stat_budget_tactical_2` | 붙잡는 맹세, 번개 연결, 예열 장치 | 예고, 중첩 제한, 보스 약화 변환 |
+| `budget_cost3_crisis_answer` | `stat_budget_crisis_3` | 최후의 문, 대폭발, 정지의 눈 | 1초 이상 예고, 후유증, 웨이브 제한 |
+| `budget_cost3_engine_commitment` | `stat_budget_crisis_3` | 공명 증폭기 | 위치 위험, 네트워크 상한, 밀집 붕괴 위험 |
+| `budget_cost4_commitment` | `stat_budget_commit_4` | 불굴의 성문, 낙뢰 의식, 재조립 기계 | 선행 아키타입과 큰 실패 손해 |
 
 축 초과 규칙:
 
@@ -1044,6 +1504,38 @@ MVP 카드 수치는 "강한 카드와 약한 카드"가 아니라, 어떤 전�
 | 불굴의 성문 | `guardian_boss_hold` | `boss_commit` | 큰 보스 압박을 한 지점에 묶을 것인가? | 설치 위치를 잘못 잡으면 비용 손실이 큽니다. |
 | 무거운 서약 | `guardian_taunt_anchor` | `hand_jammed`, `stack_pressure` | 다음 드로우를 줄이고 지금 전선을 붙잡을 것인가? | 손패가 적을 때 더 큰 막힘을 만듭니다. |
 
+##### 수호자 상세 리워크 v1
+
+수호자 카드의 손맛은 "강한 벽을 세운다"가 아니라 "어디서 맞게 하고, 그 몇 초를 무엇으로 바꿀 것인가"에서 나와야 합니다.
+
+아래 표는 수호자 14종이 반드시 가져야 하는 판단 질문, 대가, 콤보 연결, 실패 손해입니다.
+
+| 카드 ID | 역할 | 판단 질문 | 필요 전장 읽기 | 대가 태그 | 콤보 연결 | 실패 손해 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `card_guardian_taunt_wall` | 시작 보강 | 첫 공격을 어느 타일로 끌어들일 것인가? | 빈 설치 타일, 완전 길막 여부, 후속 화력 위치 | `low_damage`, `position_commitment` | `elementalist_area_damage`, `architect_path_extension`, `tinkerer_repair_window` | `bad_taunt_position_clusters_enemies` |
+| `card_guardian_shield_wrap` | 시작 보강 | 이 구조물이 다음 6초를 살 가치가 있는가? | 피해 예고, 구조물 체력, 수리 가능 거리 | `requires_prior_setup`, `low_damage` | `tinkerer_repair_window`, `guardian_line_delay` | `premature_shield_low_value` |
+| `card_guardian_thorn_growth` | 시작 보강 | 맞을 구조물을 피해원으로 바꿀 것인가? | 도발 중 구조물, 곧 들어올 피격 수, 군집 밀도 | `requires_prior_setup`, `repeat_penalty` | `elementalist_area_damage`, `tinkerer_repair_window` | `played_without_incoming_hits` |
+| `card_guardian_binding_oath` | 시작 보강 | 이미 도발된 적을 더 오래 붙잡을 것인가? | 도발 대상 수, 킬존 체류 시간, 보스 감속 약화 정책 | `requires_prior_setup`, `low_damage` | `elementalist_area_damage`, `architect_planned_collapse` | `no_taunted_targets` |
+| `card_guardian_last_gate` | 시작 보강 | 지금 이 구조물이 무너지면 패배 흐름인가? | 파괴 직전 구조물, 보스 접근, 후방 방어선 준비 | `structure_hp_loss`, `requires_prior_setup`, `repeat_penalty` | `tinkerer_repair_window`, `architect_rear_rebuild` | `spent_crisis_on_nonlethal_damage` |
+| `card_guardian_counter_stance` | 시작 보강 | 다음 피해를 받아내며 손패를 이어갈 것인가? | 곧 들어올 단일 피해, 구조물 체력, 손패 막힘 | `requires_prior_setup`, `resource_loop_guard` | `guardian_line_delay`, `card_common_mana_convert` | `no_incoming_hit_no_refund` |
+| `card_guardian_iron_wall` | 방향 신호 | 이번 웨이브의 핵심 전면을 하나로 정할 것인가? | 가장 오래 맞을 도발 구조물, 다른 전선 여유 | `position_commitment`, `low_damage` | `tinkerer_repair_window`, `archetype_guardian_iron_anchor` | `overcommitted_wrong_front` |
+| `card_guardian_reflective_oath` | 방향 신호 | 수리 효율을 낮추고 반사 피해를 택할 것인가? | 반복 피격 수, 수리 여유, 원거리 지원형 존재 | `repair_efficiency_down`, `repeat_penalty` | `card_guardian_thorn_growth`, `tinkerer_repair_window` | `repair_debt_without_hits` |
+| `card_guardian_front_swap` | 전환 | 도발 위치를 옮겨 새 킬존을 열 것인가? | 이동 가능한 빈 타일, 이동 전후 경로, 후속 화력 | `position_commitment`, `requires_prior_setup` | `architect_rear_rebuild`, `elementalist_area_damage` | `moved_taunt_out_of_killzone` |
+| `card_guardian_crack_shield` | 전환 | 맞는 구조물 주변을 둔화 구역으로 만들 것인가? | 피격 빈도, 군집 밀도, 둔화 저항 | `requires_prior_setup`, `repeat_penalty` | `card_guardian_reflective_oath`, `elementalist_slow_knockback` | `shield_never_triggered` |
+| `card_guardian_last_guard` | 전환 | 낮은 기지 체력에서 전면을 잠깐 붙잡을 것인가? | 기지 체력, 다음 누수 예상, 남은 수리/마나 | `requires_prior_setup`, `low_damage` | `tinkerer_repair_window`, `card_common_emergency_repair` | `spent_last_guard_before_real_leak` |
+| `card_guardian_thorn_throne` | 확정 | 파티 수리 효율을 희생하고 반사 빌드로 확정할 것인가? | 도발 구조물 수, 가시 선행 카드, 수리 담당 유무 | `repair_efficiency_down`, `requires_prior_setup`, `repeat_penalty` | `card_guardian_reflective_oath`, `tinkerer_repair_window`, `elementalist_area_damage` | `locked_party_into_repair_debt` |
+| `card_guardian_unbroken_gate` | 확정 | 큰 보스 압박을 한 지점에 묶어 부위 집중 시간을 만들 것인가? | 보스 경로, 부위 노출 타이밍, 설치 타일 안전성 | `position_commitment`, `requires_prior_setup`, `low_damage` | `card_common_focus_fire`, `elementalist_element_mark`, `tinkerer_aura_timing` | `placed_gate_without_followup_damage` |
+| `card_guardian_heavy_vow` | 위험 가속 | 다음 드로우를 줄이고 지금 전선을 강제로 붙잡을 것인가? | 손패 막힘, 현재 전선 붕괴 위험, 다음 드로우 손실 감당 여부 | `next_draw_down`, `structure_hp_loss` | `card_guardian_last_gate`, `card_guardian_counter_stance`, `tinkerer_repair_window` | `draw_loss_before_next_crisis` |
+
+수호자 리워크 금지선:
+
+- 수호자 카드는 광역 정리, 장기 수리, 경로 설계를 같은 강도로 대체하지 않습니다.
+- 도발, 둔화, 구조물 보호는 보스 본체 패턴을 취소하지 않고 보스 부위 집중 시간으로 약화 변환합니다.
+- 가시 계열은 피격 기반 가치이며, 적이 때리지 않아도 피해가 나가는 지속 광역으로 바꾸지 않습니다.
+- 0비용 수호자 카드는 조건 없는 마나 순증가나 드로우 순증가를 만들지 않습니다.
+- 수호자 카드는 특정 동서남북 방향이 아니라 현재 활성 전선 안의 앞, 중간, 후방 구간으로 투영합니다.
+- 웨이브 겹치기, 처치 수, 클리어 시간은 수호자 카드의 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+
 #### 건축가 카드
 
 | 카드 | 라인 | 강한 타이밍 | 판단 질문 | 대가/약점 |
@@ -1062,6 +1554,38 @@ MVP 카드 수치는 "강한 카드와 약한 카드"가 아니라, 어떤 전�
 | 연쇄 붕괴 | `architect_planned_collapse` | `stack_pressure` | 여러 붕괴 타이밍을 한 번에 맞출 것인가? | 준비가 없으면 영웅 카드답지 않게 약합니다. |
 | 뒤집힌 통로 | `architect_path_extension` | `boss_commit`, `stack_pressure` | 짧은 시간 특정 구역의 경로 비용을 올릴 것인가? | 완전 차단이 아니라 지연만 허용합니다. |
 | 무리한 증축 | `architect_rear_rebuild` | `collapse_aftershock`, `hand_jammed` | 취약한 무료 구조물로 시간을 살 것인가? | 취약 상태라 곧 부서질 전제를 가집니다. |
+
+##### 건축가 상세 리워크 v1
+
+건축가 카드의 손맛은 "많이 짓는다"가 아니라 "어느 길을 남기고, 어느 구조물을 무너뜨려, 무너진 뒤 무엇을 회수할 것인가"에서 나와야 합니다.
+
+건축가의 카드가 강해질수록 경로 미리보기, 파괴 예고, 회수 기록, 임시 구조물 제외 규칙이 더 선명해야 합니다.
+
+| 카드 ID | 역할 | 판단 질문 | 필요 전장 읽기 | 대가 태그 | 콤보 연결 | 실패 손해 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `card_architect_barricade` | 시작 보강 | 길을 얼마나 늘리고 어느 타일을 비워둘 것인가? | 현재 활성 전선 경로, 우회로, 후속 킬존 위치 | `position_commitment`, `low_damage` | `guardian_taunt_anchor`, `elementalist_area_damage`, `tinkerer_repair_window` | `route_shortened_or_blocked_by_bad_wall` |
+| `card_architect_slowing_stake` | 시작 보강 | 적이 밟을 위치를 예측할 것인가? | 적 역할, 첫 접촉 지점, 경로 회전 | `position_commitment`, `requires_prior_setup` | `elementalist_slow_knockback`, `guardian_taunt_anchor` | `trap_placed_off_path` |
+| `card_architect_debris_blast` | 시작 보강 | 곧 부서질 구조물을 피해원으로 바꿀 것인가? | 파괴 직전 구조물, 주변 적 밀도, 폭발 예고 | `requires_prior_setup`, `repeat_penalty` | `guardian_taunt_anchor`, `elementalist_area_damage` | `no_collapse_no_blast` |
+| `card_architect_temporary_path` | 시작 보강 | 4초짜리 임시 벽으로 어느 접근을 늦출 것인가? | 빠른 적 도달 시간, 임시 구조물 소멸 시간, 후방 빈칸 | `temporary_only`, `temporary_no_salvage` | `guardian_line_delay`, `card_common_battlefield_cleanup` | `temporary_path_expired_before_followup` |
+| `card_architect_salvage_work` | 시작 보강 | 무너진 기록을 지금 마나로 바꿀 것인가? | 최근 파괴 기록, 다음 설치 비용, 임시/자동복구 제외 여부 | `resource_loop_guard`, `requires_prior_setup` | `card_architect_barricade`, `tinkerer_maintenance_economy` | `salvaged_records_needed_for_next_plan` |
+| `card_architect_compact_design` | 시작 보강 | 다음 큰 설치를 위해 지금 행동을 늦출 것인가? | 다음 손패 설치 카드, 남은 마나, 현재 전선 위기 | `requires_prior_setup`, `position_commitment` | `card_architect_double_barricade`, `card_architect_reinforced_blueprint` | `held_discount_during_crisis` |
+| `card_architect_double_barricade` | 방향 신호 | 두 칸 설치로 길을 크게 비틀 것인가? | 두 타일 모두의 경로 검사, 예상 추가 이동 시간, 시야 가독성 | `position_commitment`, `low_damage` | `elementalist_area_damage`, `guardian_taunt_anchor` | `maze_readability_broken` |
+| `card_architect_shard_recovery` | 방향 신호 | 손실을 골드/정비 가치로 바꿀 것인가? | 최근 파괴 기록, 상점까지 남은 일자, 회수 중복 여부 | `resource_loop_guard`, `requires_prior_setup` | `shop_deck_trim`, `tinkerer_maintenance_economy` | `recovered_wrong_destroy_record` |
+| `card_architect_delayed_charge` | 전환 | 부서지기 전에 능동적으로 터뜨릴 것인가? | 군집 밀도, 폭발 4초 뒤 위치, 구조물 생존 시간 | `requires_prior_setup`, `position_commitment` | `card_architect_debris_blast`, `elementalist_area_damage` | `detonated_after_enemies_left` |
+| `card_architect_slippery_debris` | 전환 | 파괴 지점을 새 둔화 지점으로 쓸 것인가? | 잔해 위치, 다음 적 경로, 잔해 지속 상한 | `requires_prior_setup`, `repeat_penalty` | `card_architect_debris_blast`, `elementalist_slow_knockback` | `no_debris_to_extend` |
+| `card_architect_reinforced_blueprint` | 전환 | 오래 버티는 미로로 갈지, 파괴 가치를 늦출지 고를 것인가? | 다음 설치 계획, 파괴형 적 존재, 파괴 보상 카드 보유 | `position_commitment`, `requires_prior_setup` | `tinkerer_repair_window`, `archetype_architect_long_maze` | `overbuilt_when_collapse_needed` |
+| `card_architect_chain_collapse` | 확정 | 여러 붕괴 타이밍을 한 번에 맞출 준비가 됐는가? | 폭발 예약 수, 구조물 간 거리, 적 군집 흐름 | `requires_prior_setup`, `repeat_penalty`, `position_commitment` | `card_architect_delayed_charge`, `card_architect_debris_blast`, `guardian_taunt_anchor` | `chain_collapse_without_setup` |
+| `card_architect_inverted_path` | 확정 | 짧은 시간 특정 구간의 경로 비용을 올릴 것인가? | 현재 활성 전선 경로, 보스 위치, 우회 가능성 | `position_commitment`, `requires_prior_setup` | `elementalist_area_damage`, `guardian_boss_hold` | `path_cost_changed_wrong_segment` |
+| `card_architect_overbuilt` | 위험 가속 | 취약한 무료 구조물로 지금 시간을 살 것인가? | 손패 막힘, 파괴형 적 접근, 회수 제외 규칙 | `temporary_only`, `resource_loop_guard`, `structure_hp_loss` | `card_architect_salvage_work`, `guardian_line_delay` | `free_wall_fed_breakers` |
+
+건축가 리워크 금지선:
+
+- 건축가 카드는 완전 길막, 스폰 고립, 보스 경로 차단을 만들지 않습니다.
+- 임시 구조물과 저주 구조물은 회수 작업, 파편 회수, 파괴 보상, 잔해 가치의 반복 자원으로 계산하지 않습니다.
+- 파괴 보상 카드는 파괴가 실제로 읽히고 준비된 경우에만 가치가 생겨야 하며, 아무 구조물이나 반복해서 부수는 자원 버튼이 되면 안 됩니다.
+- 경로 비용을 바꾸는 카드는 사용 전후 경로 미리보기를 보여주고, 현재 활성 전선 안에서만 작동합니다.
+- 건축가 카드만으로 광역 정리, 장기 수리, 보스 저지를 모두 대체하지 않습니다.
+- 웨이브 겹치기, 처치 수, 클리어 시간, 보스 부위 파괴 수는 건축가 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
 
 #### 원소술사 카드
 
@@ -1082,6 +1606,39 @@ MVP 카드 수치는 "강한 카드와 약한 카드"가 아니라, 어떤 전�
 | 낙뢰 의식 | `elementalist_priority_burst` | `boss_commit`, `stack_pressure` | 예고된 지점들에 큰 피해를 몰 것인가? | 자동 추적이 아니므로 예측이 필요합니다. |
 | 금지된 등불 | `elementalist_element_mark` | `boss_commit` | 일반 처치 자원 효율을 낮추고 보스 부위를 밀 것인가? | 일반 웨이브 템포가 느려집니다. |
 
+##### 원소술사 상세 리워크 v1
+
+원소술사 카드의 손맛은 "큰 피해를 누른다"가 아니라 "적이 모인 순간, 밀어낼 방향, 함께 볼 표식을 읽는다"에서 나와야 합니다.
+
+아래 표는 원소술사 14종이 반드시 가져야 하는 판단 질문, 대가, 콤보 연결, 실패 손해입니다.
+
+| 카드 ID | 역할 | 판단 질문 | 필요 전장 읽기 | 대가 태그 | 콤보 연결 | 실패 손해 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `card_elementalist_fireball` | 시작 보강 | 지금 터뜨릴 것인가, 더 모일 때까지 기다릴 것인가? | 군집 밀도, 도발/둔화 위치, 광역 저항형 포함 여부 | `low_single_target`, `position_commitment` | `guardian_taunt_anchor`, `architect_path_extension`, `tinkerer_aura_timing` | `cast_on_scattered_targets` |
+| `card_elementalist_frost_zone` | 시작 보강 | 이 지점에서 멈추면 구조물이 몇 초 더 사는가? | 접근 경로, 반복 제어 저항, 구조물 피해 예고 | `repeat_penalty`, `low_damage` | `guardian_line_delay`, `architect_slippery_debris` | `froze_low_pressure_segment` |
+| `card_elementalist_pushback` | 시작 보강 | 뒤로 밀었을 때 킬존 안에 다시 들어오는가? | 밀림 후 위치, 경로 밖 밀림 금지, 무거운 적 저항 | `repeat_penalty`, `position_commitment` | `guardian_boss_hold`, `architect_inverted_path` | `pushed_target_out_of_killzone` |
+| `card_elementalist_chain_lightning` | 시작 보강 | 가까이 붙은 적 사이에서 연쇄가 충분히 이어지는가? | 적 간 거리, 같은 대상 재타격 여부, 지원형 위치 | `requires_prior_setup`, `low_single_target` | `guardian_taunt_anchor`, `tinkerer_overdrive_tradeoff` | `chain_broke_on_spread_targets` |
+| `card_elementalist_mark` | 시작 보강 | 파티가 지금 같은 정예나 부위를 함께 볼 준비가 됐는가? | 우선 대상, 후속 피해 카드, 보스 부위 노출 시간 | `requires_followup`, `low_damage` | `card_elementalist_overcharged_bolt`, `tinkerer_aura_timing`, `guardian_boss_hold` | `marked_without_followup_focus` |
+| `card_elementalist_big_blast` | 시작 보강 | 큰 마나를 써도 다음 위기에 대응할 여유가 남는가? | 군집 중심, 예고 후 적 이동, 남은 마나/손패 | `high_cost`, `forecast_required` | `architect_planned_collapse`, `guardian_taunt_anchor` | `spent_blast_after_cluster_split` |
+| `card_elementalist_fire_ring` | 방향 신호 | 적이 머무를 구역을 미리 태울 것인가? | 다음 6초 경로, 둔화/도발 위치, 경로 변화 예정 | `forecast_required`, `position_commitment` | `architect_path_extension`, `card_elementalist_frost_zone` | `fire_ring_missed_predicted_path` |
+| `card_elementalist_frost_shard` | 방향 신호 | 이미 느려진 적을 끊어 우선 처치로 바꿀 것인가? | 둔화/빙결 대상, 정예 체력, 후속 연쇄 가능성 | `requires_prior_setup`, `low_damage` | `card_elementalist_frost_zone`, `card_elementalist_mark` | `shard_without_chilled_target` |
+| `card_elementalist_rewind_gust` | 전환 | 전선을 되감으면 방어선이 복구되는가, 킬존이 깨지는가? | 밀림 후 경로, 기지와의 거리, 보스/대형 적 저항 | `repeat_penalty`, `position_commitment`, `boss_weakened_conversion` | `guardian_line_delay`, `architect_inverted_path` | `rewound_wrong_segment` |
+| `card_elementalist_overcharged_bolt` | 전환 | 우선 대상 처치가 실제로 나서 전이가 이어지는가? | 대상 남은 체력, 표식 여부, 전이 후보 거리 | `requires_prior_setup`, `execution_check` | `card_elementalist_mark`, `tinkerer_overdrive_tradeoff` | `bolt_failed_to_execute_target` |
+| `card_elementalist_elemental_rift` | 전환 | 한 구역을 파티 화력 집중점으로 만들 준비가 됐는가? | 파티 공격 범위, 구역 안 체류 시간, 활성 균열 수 | `position_commitment`, `repeat_penalty` | `guardian_taunt_anchor`, `tinkerer_aura_timing`, `architect_path_extension` | `rift_zone_without_party_focus` |
+| `card_elementalist_eye_of_stillness` | 확정 | 넓은 제어를 지금 쓰고 다음 제어 약화를 감수할 것인가? | 누수 위험, 제어 저항 누적, 다음 10초 위협 | `repeat_penalty`, `high_cost`, `boss_weakened_conversion` | `guardian_last_gate`, `architect_rear_rebuild` | `spent_stillness_before_real_stack` |
+| `card_elementalist_storm_ritual` | 확정 | 예고 지점을 맞힐 만큼 적의 흐름을 읽었는가? | 4초 뒤 적 위치, 보스 부위 노출, 도발/둔화 고정점 | `forecast_required`, `high_cost`, `position_commitment` | `card_elementalist_mark`, `architect_planned_collapse`, `guardian_boss_hold` | `ritual_struck_empty_warning_tiles` |
+| `card_elementalist_forbidden_lantern` | 위험 가속 | 일반 처치 자원 효율을 낮추고 보스 부위 처형에 걸 것인가? | 남은 일반 웨이브, 보스 부위 체력, 표식 후속 카드 | `kill_mana_loss`, `requires_followup`, `curse_debt` | `card_elementalist_mark`, `card_elementalist_storm_ritual` | `lantern_slowed_normal_wave_economy` |
+
+원소술사 리워크 금지선:
+
+- 원소술사 카드는 전장 전체를 지우는 광역 버튼이 아니라, 현재 활성 전선 안의 특정 군집과 부위를 읽는 카드입니다.
+- 빙결, 둔화, 넉백은 보스 본체 패턴을 취소하지 않고 이동 속도 감소, 부위 취약, 짧은 집중 시간으로 약화 변환합니다.
+- 넉백은 적을 경로 밖, 기지 안쪽, 비활성 방향으로 밀어내지 않으며, 보스 접근 자체를 삭제하지 않습니다.
+- 표식과 우선 처치 카드는 후속 화력이나 예고 지점이 있어야 강해지고, 자동 추적이나 무제한 전이로 바뀌지 않습니다.
+- `card_elementalist_mark` 같은 0비용 연결 카드는 조건 없는 드로우, 마나 순증가, 보상 후보 증가를 만들지 않습니다.
+- 웨이브 겹치기, 처치 수, 클리어 시간, 보스 부위 파괴 수는 원소술사 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+- 솔로에서는 동쪽 전선의 앞/중간/후방 구간 안에서 군집 정리, 제어, 표식, 보스 부위 예측이 모두 투영됩니다.
+
 #### 땜장이 카드
 
 | 카드 | 라인 | 강한 타이밍 | 판단 질문 | 대가/약점 |
@@ -1101,6 +1658,40 @@ MVP 카드 수치는 "강한 카드와 약한 카드"가 아니라, 어떤 전�
 | 재조립 기계 | `tinkerer_maintenance_economy` | `collapse_aftershock`, `boss_commit` | 무너진 핵심 구조물을 낮은 체력으로 되돌릴 것인가? | 같은 자리 반복 재건 페널티를 받습니다. |
 | 위험한 개조 | `tinkerer_overdrive_tradeoff` | `priority_exposed`, `boss_commit` | 구조물 자해를 감수하고 처치 창을 열 것인가? | 수리와 방어선 여유가 없으면 역효과입니다. |
 
+##### 땜장이 상세 리워크 v1
+
+땜장이 카드의 손맛은 "모든 구조물을 살린다"가 아니라 "살릴 구조물, 버릴 구조물, 위험하게 증폭할 구조물을 고른다"에서 나와야 합니다.
+
+아래 표는 땜장이 14종이 반드시 가져야 하는 판단 질문, 대가, 콤보 연결, 실패 손해입니다.
+
+| 카드 ID | 역할 | 판단 질문 | 필요 전장 읽기 | 대가 태그 | 콤보 연결 | 실패 손해 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `card_tinkerer_amplifier` | 시작 보강 | 어느 방어선을 오라 중심으로 삼을 것인가? | 빈 설치 타일, 주변 공격 구조물 수, 보스/광역 압력 후보 | `aura_stack_cap`, `position_commitment` | `elementalist_area_damage`, `guardian_line_delay`, `architect_path_extension` | `aura_core_clustered_in_boss_pressure` |
+| `card_tinkerer_remote_repair` | 시작 보강 | 지금 이 구조물을 살릴 가치가 있는가, 버리는 편이 나은가? | 치명 피해 예고, 구조물 역할, 같은 대상 반복 수리 보정 | `global_target_budget`, `repeat_penalty`, `low_damage` | `guardian_line_delay`, `architect_rear_rebuild` | `repaired_structure_without_lethal_pressure` |
+| `card_tinkerer_armor_plate` | 시작 보강 | 다음 몇 초 동안 맞을 구조물에 방어를 몰 것인가? | 피격 예상 수, 도발/바리케이드 여부, 후속 수리 계획 | `requires_prior_setup`, `position_commitment` | `guardian_taunt_anchor`, `card_tinkerer_remote_repair` | `plated_safe_backline_structure` |
+| `card_tinkerer_overdrive` | 시작 보강 | 구조물 체력을 깎고 지금 우선 처치 창을 열 것인가? | 대상 구조물 체력, 우선 대상 노출, 수리 가능성 | `structure_hp_loss`, `repair_debt`, `aura_stack_cap` | `elementalist_priority_burst`, `card_tinkerer_auto_extinguisher` | `overdrive_broke_needed_structure` |
+| `card_tinkerer_spare_parts` | 시작 보강 | 곧 잃을 구조물을 보험으로 바꿀 것인가? | 파괴 확률, 임시 구조물 제외 여부, 회수 중복 여부 | `resource_loop_guard`, `requires_prior_setup` | `architect_planned_collapse`, `card_tinkerer_reassembly_machine` | `insurance_on_structure_that_survived` |
+| `card_tinkerer_auto_rebuild` | 시작 보강 | 핵심 구조물을 한 번만 되살릴 만큼 중요한가? | 파괴 직전 구조물, 같은 자리 반복 복구 기록, 후속 방어선 | `repeat_penalty`, `requires_prior_setup`, `low_rebuild_hp` | `guardian_last_gate`, `architect_rear_rebuild` | `auto_rebuild_saved_wrong_structure` |
+| `card_tinkerer_lubrication` | 방향 신호 | 지금 한 타워의 짧은 화력 창을 열 것인가? | 공격 대상 체류 시간, 오라 안팎, 과부하 중첩 상한 | `aura_stack_cap`, `requires_target_window` | `card_elementalist_mark`, `guardian_taunt_anchor` | `buffed_tower_without_target_window` |
+| `card_tinkerer_reinforced_screw` | 방향 신호 | 장기 유지할 핵심 구조물을 하나 정할 것인가? | 전선 중심 구조물, 파괴형 적 접근, 후방 안전 타일 여부 | `position_commitment`, `repeat_penalty` | `guardian_line_delay`, `architect_path_extension` | `screw_locked_wrong_anchor` |
+| `card_tinkerer_emergency_wiring` | 전환 | 오라 범위를 넓히는 대신 코어를 위험하게 만들 것인가? | 오라 장치 체력, 추가로 닿는 구조물 수, 범위 압박 예고 | `structure_hp_loss`, `aura_stack_cap`, `repair_debt` | `card_tinkerer_amplifier`, `card_tinkerer_remote_repair` | `wiring_exposed_aura_core` |
+| `card_tinkerer_preheater` | 전환 | 웨이브 초반 화력 창에 자원을 몰 것인가? | 웨이브 시작 후 시간, 첫 군집 도착, 후반 붕괴 위험 | `timing_limited`, `structure_hp_loss` | `elementalist_area_damage`, `card_tinkerer_lubrication` | `preheater_after_opening_window` |
+| `card_tinkerer_auto_extinguisher` | 전환 | 과부하 대가를 한 번 줄여도 화력 손해를 감수할 것인가? | 과부하 중 구조물, 남은 후유 피해, 다음 우선 대상 | `requires_prior_setup`, `reduced_payoff`, `repeat_penalty` | `card_tinkerer_overdrive`, `card_tinkerer_risky_mod` | `extinguisher_without_overdrive_debt` |
+| `card_tinkerer_resonance_amp` | 확정 | 오라 네트워크를 밀집시키고 범위 압력 위험을 감수할 것인가? | 오라 구조물 간 거리, 공유 상한, 보스 압력 권역 | `aura_stack_cap`, `position_commitment`, `area_pressure_vulnerable` | `card_tinkerer_amplifier`, `card_tinkerer_emergency_wiring`, `guardian_boss_hold` | `resonance_network_overclustered` |
+| `card_tinkerer_reassembly_machine` | 확정 | 무너진 핵심 구조물을 낮은 체력으로 되돌릴 것인가? | 최근 파괴 기록, 재건 자리 안전성, 같은 자리 반복 페널티 | `low_rebuild_hp`, `repeat_penalty`, `resource_loop_guard` | `architect_rear_rebuild`, `card_tinkerer_spare_parts` | `reassembled_without_followup_defense` |
+| `card_tinkerer_risky_mod` | 위험 가속 | 큰 자해와 수리 효율 감소를 감수하고 처치 창을 열 것인가? | 대상 구조물 체력, 보스/정예 노출, 수리 효율 감소 종료 시간 | `structure_hp_loss`, `repair_efficiency_down`, `curse_debt` | `card_tinkerer_auto_extinguisher`, `elementalist_priority_burst` | `risky_mod_backlash_collapsed_line` |
+
+땜장이 리워크 금지선:
+
+- 땜장이 카드는 구조물 파괴를 삭제하지 않고, 파괴까지 남은 시간을 몇 초 늘리거나 짧은 화력 창으로 바꿉니다.
+- 원격 수리는 전장 전체 편의성을 가지는 대신 낮은 회복량, 반복 효율 감소, 대상 조건을 반드시 가집니다.
+- 오라 계열은 합산 상한과 밀집 위험을 가지며, 사방 모든 전선을 동시에 안정화하지 않습니다.
+- 과부하와 위험한 개조는 구조물 체력 손실, 수리 효율 감소, 종료 피해 중 하나 이상을 남기며 자동 소화로 완전 무효화되지 않습니다.
+- 자동 복구와 재조립 기계는 같은 자리 반복 재건을 제한하고, 임시 구조물이나 회수 가치 없는 구조물을 자원 루프로 바꾸지 않습니다.
+- 땜장이 카드만으로 광역 정리, 경로 설계, 보스 저지를 모두 대체하지 않습니다.
+- 웨이브 겹치기, 처치 수, 클리어 시간, 보스 부위 파괴 수는 땜장이 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+- 솔로에서는 동쪽 전선의 핵심 구조물, 오라 중심, 과부하 대상, 후방 재건 지점으로 모든 판단이 투영됩니다.
+
 #### 공용 카드
 
 공용 카드는 빠진 역할을 완전히 대신하지 않고, 실패를 읽고 다시 시도할 시간을 줍니다.
@@ -1115,6 +1706,82 @@ MVP 카드 수치는 "강한 카드와 약한 카드"가 아니라, 어떤 전�
 | 빠른 손놀림 | `hand_jammed` | 덱을 얇게 유지하며 손패를 정리할 것인가? | 조건 없는 무료 드로우가 되면 안 됩니다. |
 | 전술 지도 | `prebuild` | 다음 위험 정보를 더 보고 배치할 것인가? | 정답 배치를 자동 추천하면 안 됩니다. |
 | 임시 포탑 | `first_contact`, `collapse_aftershock` | 짧게 유지되는 빈틈 보완을 놓을 것인가? | 직업 전용 공격 타워를 대체하면 안 됩니다. |
+
+##### 공용 카드 상세 리워크 v1
+
+공용 카드의 손맛은 "없는 직업을 대신한다"가 아니라 "한 번 더 판단할 시간을 산다"에서 나와야 합니다.
+
+아래 표는 공용 8종이 반드시 가져야 하는 판단 질문, 대가, 콤보 연결, 실패 손해입니다.
+
+| 카드 ID | 역할 | 판단 질문 | 필요 전장 읽기 | 대가 태그 | 콤보 연결 | 실패 손해 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `card_common_reorganize` | 손패 보완 | 지금 카드 1장을 포기하고 다음 선택지를 볼 것인가? | 손패 막힘, 포기할 카드의 다음 웨이브 가치, 덱 장수 | `discard_no_reward`, `resource_loop_guard` | `card_common_mana_convert`, `card_guardian_counter_stance` | `discarded_needed_answer` |
+| `card_common_focus_fire` | 약한 우선 처치 보완 | 파티가 지금 같은 대상에 피해를 몰 준비가 됐는가? | 정예/부위 노출, 타워 사거리, 광역 피해 의존 여부 | `soft_gap_only`, `low_area_value` | `guardian_boss_hold`, `card_elementalist_mark`, `tinkerer_aura_timing` | `focused_without_party_damage` |
+| `card_common_emergency_repair` | 약한 수리 보완 | 땜장이 없이 이 구조물을 몇 초만 더 살릴 것인가? | 구조물 체력, 치명 피해 예고, 사거리, 반복 수리 보정 | `low_repair`, `range_limit`, `repeat_penalty` | `guardian_line_delay`, `architect_rear_rebuild` | `repaired_after_lethal_window` |
+| `card_common_battlefield_cleanup` | 붕괴 후 수습 | 무너진 자리에서 잠깐 시간을 벌 것인가? | 최근 파괴 위치, 다음 적 경로, 잔해/회수 가치 제외 여부 | `collapse_record_required`, `low_damage`, `temporary_no_salvage` | `architect_planned_collapse`, `elementalist_slow_knockback` | `cleanup_without_collapse_record` |
+| `card_common_mana_convert` | 손패 보완 | 비용 있는 카드 1장을 포기하고 이번 행동을 이어갈 것인가? | 남은 마나, 버릴 카드 비용, 웨이브당 사용 여부 | `discard_no_reward`, `resource_loop_guard`, `once_per_wave` | `card_common_reorganize`, `card_guardian_counter_stance` | `converted_future_answer` |
+| `card_common_quick_hands` | 손패 보완 | 지금 1장을 보고 1장을 버려 손패를 얇게 유지할 것인가? | 손패 장수, 버릴 카드 후보, 덱 남은 장수 | `discard_no_reward`, `no_net_draw`, `resource_loop_guard` | `card_common_reorganize`, `card_common_mana_convert` | `cycled_into_same_jam` |
+| `card_common_tactical_map` | 정보 보완 | 다음 위험 정보를 더 보고 배치하되 정답은 직접 고를 것인가? | 활성 방향, 첫 압박 타이밍, 적 역할 태그 | `information_only`, `combat_locked`, `no_auto_recommend` | `architect_path_extension`, `guardian_taunt_anchor` | `map_used_after_commitment` |
+| `card_common_temporary_turret` | 약한 빈틈 보완 | 짧게 유지되는 약한 화력으로 누수를 늦출 것인가? | 빈 설치 타일, 누수 경로, 직업 구조물 슬롯/가치 비교 | `temporary_only`, `temporary_no_salvage`, `low_damage`, `slot_cap` | `card_common_battlefield_cleanup`, `tinkerer_repair_window` | `turret_replaced_needed_class_structure` |
+
+공용 카드 리워크 금지선:
+
+- 공용 카드는 직업 전용 대응을 같은 강도로 대체하지 않고, `counterStrength`는 기본적으로 `soft` 또는 `normal`에 머뭅니다.
+- 재정비, 마나 전환, 빠른 손놀림으로 버린 카드는 비상 탈출기 마나 회복, 버리기 스택 보상, 별도 버리기 보상 효과를 발동하지 않습니다.
+- 0비용 공용 카드는 조건 없는 순수 드로우, 마나 순증가, 손패 순증가를 만들지 않습니다.
+- 집중 사격은 원소 표식보다 안정적인 광역 피해 증폭이 아니며, 같은 대상 증폭은 높은 값만 적용합니다.
+- 긴급 보수는 원격 수리와 자동 복구보다 낮은 수치, 짧은 사거리, 반복 효율 감소를 가집니다.
+- 전장 수습은 잔해 생성, 폭발 피해, 회수 가치, 완전 길막을 제공하지 않습니다.
+- 전술 지도는 활성 방향 정보만 더 명확히 보여주고, 정답 배치 추천이나 비활성 방향 정보 공개를 하지 않습니다.
+- 임시 포탑은 도발, 오라, 잔해, 회수 가치, 직업 전용 타워 성능을 가지지 않습니다.
+- 웨이브 겹치기, 처치 수, 클리어 시간, 보스 부위 파괴 수는 공용 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+- 솔로에서는 동쪽 전선의 손패 막힘, 누수, 붕괴 자리, 다음 압박 예고로만 공용 카드 판단이 투영됩니다.
+
+### 카드 실패 피드백 체계
+
+카드 실패 피드백은 플레이어를 혼내는 문구가 아니라, 다음 사용에서 무엇을 읽어야 하는지 알려주는 짧은 회수 문장입니다.
+
+카드가 약하게 들어갔을 때 수치부터 올리기 전에 먼저 아래 피드백이 충분히 보이는지 확인합니다.
+
+| 피드백 종류 | 발생 상황 | 자원/카드 처리 | 표시 위치 | 문구 톤 |
+| --- | --- | --- | --- | --- |
+| `hard_block` | 규칙상 사용할 수 없음 | 마나와 카드 모두 소모하지 않음 | 손패 위 작은 말풍선 | 단호한 이유 |
+| `soft_miss` | 사용은 됐지만 좋은 조건이 아님 | 카드와 마나를 소모함 | 대상/구역 위 짧은 노란 태그 | 다음에 볼 조건 |
+| `tradeoff_preview` | 쓰기 전에 대가를 알아야 함 | 확정 전 소모 없음 | 카드 위 확인 칩 | 잃는 것 먼저 |
+| `tradeoff_resolved` | 대가가 실제로 적용됨 | 카드 효과와 함께 적용 | 구조물/손패/게이지 옆 아이콘 | 남은 후유증 |
+| `resistance_conversion` | 보스/저항형에게 약화 적용 | 카드와 마나를 소모함 | 대상 체력바 옆 작은 아이콘 | 감소 이유 |
+| `loop_guard_blocked` | 버리기/회수/임시 구조물 루프 차단 | 추가 보상만 발동하지 않음 | 관련 게이지 옆 툴팁 | 보상 미발동 이유 |
+
+MVP 필수 카드 실패 문구:
+
+| 키 | 기본 문구 | 사용처 | 연결 태그 |
+| --- | --- | --- | --- |
+| `ui.card.fail.not_enough_mana` | 마나가 부족합니다. | 사용 불가 | `hard_block` |
+| `ui.card.fail.no_target` | 사용할 대상이 없습니다. | 사용 불가 | `hard_block` |
+| `ui.card.fail.out_of_range` | 사거리가 닿지 않습니다. | 사용 불가 | `hard_block` |
+| `ui.card.fail.path_blocked` | 기지로 향하는 경로가 필요합니다. | 설치 불가 | `hard_block`, `path_cost_change` |
+| `ui.card.fail.need_collapse_record` | 최근 파괴 기록이 필요합니다. | 회수/수습 카드 | `collapse_record_required` |
+| `ui.card.fail.scattered_targets` | 적이 흩어져 효과가 낮습니다. | 광역 카드 약화 | `soft_miss`, `low_single_target` |
+| `ui.card.fail.no_followup_focus` | 후속 화력이 없으면 효과가 낮습니다. | 표식/집중 카드 | `requires_followup` |
+| `ui.card.fail.control_resisted` | 반복 제어로 효과가 줄었습니다. | 둔화/빙결/넉백 | `repeat_penalty` |
+| `ui.card.fail.boss_weakened` | 보스에게 약화된 효과로 적용됩니다. | 보스 대상 상태이상 | `boss_weakened_conversion` |
+| `ui.card.fail.discard_no_reward` | 이 버리기는 보상을 발동하지 않습니다. | 재정비/마나 전환/빠른 손놀림 | `discard_no_reward` |
+| `ui.card.fail.temporary_no_salvage` | 임시 구조물은 회수 가치가 없습니다. | 임시 구조물/임시 포탑 | `temporary_no_salvage` |
+| `ui.card.fail.aura_stack_capped` | 오라 중첩 상한에 닿았습니다. | 오라 카드 | `aura_stack_cap` |
+| `ui.card.fail.repair_repeated` | 반복 수리로 회복이 줄었습니다. | 수리 카드 | `repeat_penalty`, `low_repair` |
+| `ui.card.fail.overdrive_debt` | 과부하 후유 피해가 남습니다. | 과부하/위험한 개조 | `structure_hp_loss`, `repair_debt` |
+| `ui.card.fail.prebuild_only` | 전투 전 준비 때만 사용할 수 있습니다. | 전술 지도/일부 예고 카드 | `combat_locked` |
+
+카드 실패 피드백 규칙:
+
+- `hard_block`은 카드와 마나를 절대 소모하지 않습니다.
+- `soft_miss`는 사용 자체는 성공한 것이므로 카드와 마나를 소모하되, 왜 낮은 효과였는지 짧게 보여줍니다.
+- `tradeoff_preview`가 필요한 카드에는 확정 전 대가 칩을 보여주고, 대가를 숨긴 채 즉시 발동하지 않습니다.
+- 같은 플레이어에게 동시에 보이는 카드 실패 문구는 1개, 전장 위 약화 태그는 2개까지만 표시합니다.
+- 기지 도달, 보스 도달, 구조물 붕괴 직전 경고가 있으면 카드 실패 문구보다 생존 경고가 우선합니다.
+- 피드백 문구에는 `실수`, `잘못`, `못함`처럼 플레이어를 탓하는 표현을 쓰지 않습니다.
+- 피드백 문구는 보상, 희귀도, 후보 수, 골드, 비활성 방향 정보를 암시하지 않습니다.
+- 솔로에서는 모든 카드 실패 이유가 동쪽 전선 안의 대상, 경로, 손패, 구조물 상태로만 설명됩니다.
 
 ### 수호자
 
@@ -1298,7 +1965,7 @@ MVP 강화 규칙:
 - 강화된 카드는 덱 안에서 같은 카드의 다른 복사본과 구분됩니다.
 - 시작 카드와 일반 카드는 안정 강화 또는 특화 강화 중 하나를 고릅니다.
 - 희귀 카드는 안정 강화, 특화 강화, 전환 강화 중 카드별로 최대 2개 후보만 가집니다.
-- 영웅 카드는 확정 조율만 허용하고, 선행 카드 없이 강해지는 강화는 금지합니다.
+- 영웅 카드는 확정 조율만 허용하고, 게이트 없이 강해지는 강화는 금지합니다.
 - 저주 카드는 안정화 강화만 허용하되, 대가를 완전히 제거하지 않습니다.
 
 강화 후보가 3개 이상이면 상점 체류 시간이 늘어나고, 플레이어가 카드 효과보다 강화 트리를 외우게 됩니다.
@@ -1313,7 +1980,7 @@ MVP 강화 규칙:
 | 특화 강화 | 강한 타이밍을 더 날카롭게 만듭니다. | 범위, 피해, 지연, 조건부 발동 | 조건 없이 순수 수치 상승이 됩니다. |
 | 전환 강화 | 보조 아키타입 하나를 약하게 지원합니다. | `archetypeIds`, `comboHookTags`, 작은 부가 효과 | 직업 약점이나 아키타입 약점을 지웁니다. |
 | 안정화 강화 | 위험 카드의 대가를 다룰 수 있게 합니다. | 페널티 크기, 페널티 시점, 회수 조건 | 저주나 과부하가 공짜 이득이 됩니다. |
-| 확정 조율 | 이미 준비된 영웅 카드의 마무리 선택을 만듭니다. | 선행 조건 보상, 실패 손해, 발동 창 | 준비 없이도 무조건 집는 카드가 됩니다. |
+| 확정 조율 | 이미 준비된 영웅 카드의 마무리 선택을 만듭니다. | 게이트 조건 설명, 실패 손해, 발동 창 | 준비 없이도 무조건 집는 카드가 됩니다. |
 
 ### 강화 후보 설계 질문
 
@@ -1339,6 +2006,102 @@ MVP 강화 규칙:
 | 빙결 지대 | 첫 적용 시간이 안정됩니다. | 더 오래 얼리지만 이후 둔화 저항을 더 줍니다. |
 | 원격 수리 | 치명 상태 구조물 선택이 쉬워집니다. | 오라 안 구조물을 더 수리하지만 오라 밖 수리량은 줄어듭니다. |
 | 과부하 | 종료 피해 예고가 명확해집니다. | 우선 대상 처치 시 종료 피해가 줄지만 처치 실패 시 피해가 커집니다. |
+
+### 전리품 변형 카드
+
+전리품 변형 카드는 기존 카드의 이름 옆에 `+1`을 붙인 강화 카드가 아닙니다.
+
+기준 카드의 핵심 질문을 빌리되, 사용 타이밍이나 대가를 바꾼 별도 `CardData`입니다.
+
+예를 들어 `화염구`의 변형 카드는 "더 강한 화염구"가 아니라, "즉발 피해를 낮추고 예고를 붙여 킬존 체류를 더 요구하는 다른 광역 카드"여야 합니다.
+
+| 변형 종류 | 주로 바꾸는 축 | 남겨야 할 약점 | 좋은 사용처 |
+| --- | --- | --- | --- |
+| 안정 변형 | 조준, 예고, 대상 판독성 | 피해, 회복량, 지속 시간은 그대로이거나 낮음 | 기본 카드가 손에 잡혀도 사용 장면을 자주 놓치는 덱 |
+| 타이밍 변형 | 강한 시점과 예고 시간 | 즉발성이 낮아지고 빗나갈 수 있음 | 킬존, 도발, 붕괴, 오라처럼 준비된 전장 |
+| 대가 전환 변형 | 드로우 손실, 구조물 피해, 위치 부담의 형태 | 대가는 사라지지 않음 | 저주 또는 위험 가속을 감당할 수 있는 덱 |
+| 아키타입 연결 변형 | 보조 아키타입 태그 1개 | 주 직업 약점은 유지 | 이미 한 방향으로 치우친 덱의 좁은 연결 |
+| 보스 대응 변형 | 부위, 정예, 우선 대상 판독 | 보스 본체 패턴 취소 금지 | 20일 이후 준비된 빌드 |
+
+전리품 변형 제작 규칙:
+
+- 변형 카드는 반드시 별도 카드 ID와 별도 `CardSpecProfile`을 가집니다.
+- 변형 카드는 기준 카드의 강화 후보를 자동 상속하지 않습니다.
+- MVP 변형 카드는 기본적으로 `upgradeOptions: []`로 시작합니다.
+- 변형 카드 이름은 기준 카드와 구분되는 이름을 사용하고, `강화`, `상급`, `+` 같은 등급 표현을 쓰지 않습니다.
+- 변형 카드가 피해, 범위, 지속, 회복량, 대상 편의 중 하나를 올리면 다른 축의 대가를 명확히 붙입니다.
+- 아티팩트는 변형 카드 풀을 열 수 있지만 후보 수, 희귀도, 골드, 보스 파편을 늘릴 수 없습니다.
+- 변형 카드는 현재 활성 전선 안에서만 의미를 가져야 하며, 솔로에서는 동쪽 전선 안의 앞/중간/후방 판단으로 투영됩니다.
+
+#### 전리품 변형 보상 UX 규칙
+
+변형 카드가 보상 후보로 등장할 때의 목표는 "좋은 카드가 더 좋아졌다"가 아니라 "익숙한 질문이 다른 비용과 타이밍으로 돌아왔다"를 읽히게 하는 것입니다.
+
+카드 표면에는 아래 정보를 고정 순서로 둡니다.
+
+1. `변형 카드` 배지
+2. `기준 카드: {cardName}`
+3. 바뀐 축 1개
+4. 남는 약점 1~2개
+5. 등장 이유 태그 1개
+
+이때 희귀도는 일반 카드와 같은 위치에 두고, 변형 배지는 희귀도나 파워 상승처럼 보이지 않는 얇은 보조 배지로 처리합니다.
+
+상세 패널의 버튼 이름은 `차이 보기`이며, `강화 비교`, `상위 효과`, `+1` 같은 표현을 쓰지 않습니다.
+
+선택 연출은 새 카드가 덱 목록 끝에 들어가는 방식으로 처리하고, 기준 카드 위에 덮어씌우거나 교체되는 연출을 쓰지 않습니다.
+
+위험한 대가가 큰 `tradeoff_swap` 변형은 제한 시간 종료 시 자동 임시 선택 대상에서 제외합니다.
+
+#### MVP 전리품 변형 후보 v1
+
+MVP에서는 변형 카드 12종만 먼저 검증합니다.
+
+목표는 카드 수를 늘리는 것이 아니라, "기준 카드와 닮았지만 고르는 이유가 다른 카드"가 실제로 읽히는지 확인하는 것입니다.
+
+| ID | 기준 카드 | 희귀도 | 변형 질문 | 바뀌는 축 | 남는 약점 |
+| --- | --- | --- | --- | --- | --- |
+| `card_guardian_narrow_anchor` | `card_guardian_taunt_wall` | 일반 | 좁게 끌어들이고 더 오래 버틸 것인가? | 도발 반경 감소, 구조물 체력 증가 | 군집형 압축과 광역 연계가 약함 |
+| `card_guardian_delayed_shield` | `card_guardian_shield_wrap` | 희귀 | 지금 막는 대신 1초 뒤 큰 피해를 예측할 것인가? | 발동 예고 증가, 피해 감소량 증가 | 급한 누수 대응에 약함 |
+| `card_guardian_brittle_barb` | `card_guardian_thorn_growth` | 희귀 | 치명 상태 전선을 반사 피해 창으로 바꿀 것인가? | 낮은 체력 대상 반사 피해 증가 | 구조물 최대 체력 감소, 수리 부담 유지 |
+| `card_architect_splinter_barricade` | `card_architect_barricade` | 일반 | 오래 버티기보다 부서진 뒤 잔해를 남길 것인가? | 파괴 후 약한 잔해 생성 | 기본 체력 감소, 완전 길막 금지 |
+| `card_architect_blueprint_scrap` | `card_architect_salvage_work` | 희귀 | 마나 대신 다음 설치 준비를 회수할 것인가? | 마나 회수 감소, 다음 설치 비용 보정 | 즉시 대응력이 낮음, 임시 구조물 회수 제외 |
+| `card_architect_patient_charge` | `card_architect_debris_blast` | 희귀 | 오래 버틴 구조물을 폭발 타이밍으로 쓸 것인가? | 오래 버틴 대상 추가 피해 | 즉시 파괴 대상에는 추가 가치 없음 |
+| `card_elementalist_slow_bloom` | `card_elementalist_fireball` | 일반 | 즉발 피해보다 예고된 넓은 화염을 믿을 것인가? | 예고 증가, 범위 증가 | 빠른 적과 흩어진 적에게 약함 |
+| `card_elementalist_cracking_ice` | `card_elementalist_frost_zone` | 희귀 | 얼리는 대신 깨질 때 집중 피해 창을 만들 것인가? | 빙결 짧아짐, 종료 시 짧은 취약 | 반복 제어 저항 유지 |
+| `card_elementalist_crosswind` | `card_elementalist_pushback` | 희귀 | 뒤로 크게 밀기보다 경로 안에서 옆 굴곡을 만들 것인가? | 넉백 거리 감소, 경로 안 재정렬 | 경로 밖 밀어내기와 기지 안쪽 밀기 금지 |
+| `card_tinkerer_patch_queue` | `card_tinkerer_remote_repair` | 일반 | 한 번에 많이 고치기보다 수리 예약을 걸 것인가? | 즉시 회복 감소, 짧은 지연 회복 | 파괴되면 남은 회복 소멸 |
+| `card_tinkerer_guarded_overdrive` | `card_tinkerer_overdrive` | 희귀 | 과부하 폭발력을 낮추고 후유 피해를 예측 가능하게 만들 것인가? | 공격 속도 증가량 감소, 종료 피해 고정 | 순간 처치력이 낮음 |
+| `card_tinkerer_lean_field_amp` | `card_tinkerer_amplifier` | 희귀 | 좁은 오라에 핵심 구조물을 모을 것인가? | 오라 반경 감소, 중심 효과 증가 | 광역 피해와 밀집 붕괴 위험 증가 |
+
+#### MVP 전리품 변형 스펙 v1
+
+아래 수치는 첫 구현 기준선입니다.
+
+변형 카드가 기준 카드보다 항상 좋게 느껴지면, 먼저 피해/회복량을 올리기보다 예고, 반복 제한, 약한 상황, 보스 약화 계수를 조정합니다.
+
+| ID | 비용 | 대상/범위 | 예고/지속 | 핵심 효과 | 제한/보스 정책 |
+| --- | ---: | --- | --- | --- | --- |
+| `card_guardian_narrow_anchor` | 1 | 빈 설치 타일, 6타일 | 즉발/영구 | 도발 반경 1.25타일, 기준 도발벽보다 체력 +4, 공격 피해 없음 | 경로 미리보기 필수, 한 전선 동시 좁은 닻 2개, 보스 본체 도발 약화 |
+| `card_guardian_delayed_shield` | 1 | 아군 구조물 1개, 7타일 | 1초 예고/4초 | 받는 구조물 피해 50% 감소, 첫 큰 피해 1회는 추가 15% 감소 | 예고 중 피해는 막지 않음, 같은 구조물 8초 재적용 제한, 보스 패턴 취소 없음 |
+| `card_guardian_brittle_barb` | 1 | 체력 60% 이하 도발 구조물 1개, 7타일 | 즉발/6초 | 받은 피해의 40% 반사, 시전당 10회 상한 | 대상 최대 체력 -2가 웨이브 종료까지 남음, 보스 본체 반사 50% 적용 |
+| `card_architect_splinter_barricade` | 1 | 빈 설치 타일, 6타일 | 즉발/영구 | 체력 낮은 바리케이드 설치, 파괴 시 4초 잔해 둔화 20% 생성 | 회수/파편 보상 제외, 완전 길막 금지, 같은 타일 반복 잔해 상한 |
+| `card_architect_blueprint_scrap` | 1 | 최근 유효 파괴 기록 1개 | 즉발 | 기록을 소모해 다음 설치 카드 비용 -1, 다음 구조물 체력 +2 | 즉시 마나 회수 없음, 임시/무료 구조물 제외, 웨이브당 1회 |
+| `card_architect_patient_charge` | 1 | 아군 바리케이드 1개, 7타일 | 즉발/웨이브 종료까지 | 다음 파괴 폭발 피해 2, 8초 이상 버틴 뒤 파괴되면 피해 +2 | 즉시 파괴는 추가 피해 없음, 시전당 1회, 보스 피해 약화 |
+| `card_elementalist_slow_bloom` | 1 | 원형 반경 2타일, 6타일 | 0.9초 예고/3초 | 낮은 즉발 피해 1, 지대 안 적에게 초당 1 피해 | 빠른 적 이탈 가능, 보스 본체 피해 20%, 자동 추적 없음 |
+| `card_elementalist_cracking_ice` | 1 | 원형 반경 1.5타일, 6타일 | 0.35초 예고/2.5초 | 0.8초 빙결 후 2초 동안 광역 피해 취약 15% | 반복 제어 저항 적용, 보스 본체는 5% 둔화로 변환, 부위 취약 8% |
+| `card_elementalist_crosswind` | 1 | 활성 경로 구간 4타일, 6타일 | 0.25초 예고/즉발 | 적을 경로 안쪽 후방/측면 후보로 0.75타일 재정렬하고 1.5초 15% 둔화 | 경로 밖, 기지 안쪽, 비활성 방향 이동 금지, 보스 본체 이동 없음 |
+| `card_tinkerer_patch_queue` | 1 | 아군 구조물 1개, 전장 전체 | 즉발/4초 | 즉시 2 회복, 2초마다 2 회복을 2회 예약 | 파괴되면 예약 회복 소멸, 반복 수리 효율 적용, 보스 패턴 피해 취소 없음 |
+| `card_tinkerer_guarded_overdrive` | 0 | 공격 타워 1개, 7타일 | 즉발/6초 | 공격 속도 +35%, 종료 피해 3 고정 | 체력 30% 미만 대상 불가, 같은 구조물 웨이브당 1회, 후유 피해 제거 불가 |
+| `card_tinkerer_lean_field_amp` | 1 | 빈 설치 타일, 6타일 | 즉발/영구 | 오라 반경 1.25타일, 중심 1타일 안 공격 속도 +25% | 장치 체력 -2, 광역 피해 취약 +15%, 오라 중첩 상한 유지 |
+
+변형 스펙 공통 검수:
+
+- 비용 0 변형은 순수 드로우, 즉시 마나 순증가, 광역 피해, 대량 수리를 만들 수 없습니다.
+- 전장 전체 대상 변형은 낮은 수치, 지연, 반복 효율 감소 중 2개 이상을 가져야 합니다.
+- hard CC 변형은 반복 저항과 보스 약화 변환을 반드시 가집니다.
+- 경로 또는 위치를 바꾸는 변형은 완전 길막 검사와 활성 전선 투영을 통과해야 합니다.
+- 변형 스펙은 웨이브 겹치기 보상, 카드 후보 수, 희귀도, 골드 총량, 비활성 방향 스폰을 바꾸지 않습니다.
 
 ### MVP 대표 강화 옵션
 
@@ -1419,13 +2182,17 @@ MVP에서는 모든 카드의 강화 후보를 한 번에 완성하지 않고, �
 
 `commitmentLevel: commit` 카드는 강화로 더 쉽게 확정되면 안 됩니다.
 
-확정 카드 강화는 선행 카드 수, 현재 덱 크기, 남은 약점 태그를 UI에 함께 보여줘야 합니다.
+확정 카드 강화는 지원 크레딧, 실제 지원 카드 수, 현재 덱 크기, 남은 약점 태그를 UI에 함께 보여줘야 합니다.
 
 ### 강화와 저주
 
 저주 안정화는 저주를 지우는 기능이 아닙니다.
 
 예를 들어 다음 드로우 1장 감소를 없애는 대신 "다음 드로우 중 가장 높은 비용 카드가 늦게 들어온다"처럼 대가의 형태를 바꿀 수는 있습니다.
+
+구현상 `CardUpgradeOption.upgradeType: curse_stabilize`를 쓰더라도, 화면에서는 일반 강화처럼 보여주지 않습니다.
+
+상승 화살표, 강화 완료, 상급 카드 같은 표현 대신 `대가를 예측 가능하게 바꿈`, `남는 대가`, `제거와 비교`를 먼저 표시합니다.
 
 좋은 저주 안정화:
 
@@ -1460,7 +2227,7 @@ MVP에서는 모든 카드의 강화 후보를 한 번에 완성하지 않고, �
 | 안정 강화 | 30골드 | 판독성과 실패 손해 보정 |
 | 특화 강화 | 40골드 | 새 조건이나 대가가 필요 |
 | 전환/희귀 카드 강화 | 45골드 | 보조 아키타입 연결 |
-| 영웅 카드 확정 조율 | 55골드 + 보스 파편 1개 | 20일 이후, 선행 조건 충족 |
+| 영웅 카드 확정 조율 | 55골드 + 보스 파편 1개 | 20일/30일 허용 세션에서 `MvpHeroicCommitGate` 통과 |
 | 저주 카드 안정화 | 40골드 | 대가 제거가 아니라 형태 변경 |
 
 같은 플레이어가 이미 강화한 카드가 많거나, 같은 상점에서 두 번째 파티 골드 강화를 사거나, 같은 진단 태그를 강화로만 반복 해결하면 다음 강화 비용은 조금씩 오릅니다.

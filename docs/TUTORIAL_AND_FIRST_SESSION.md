@@ -204,6 +204,18 @@
 | 방해형 우선 처치 | 손패/마나가 막힘 | 군집보다 먼저 끊을 대상을 고르는가? |
 | 보스 부위 집중 | 본체만 때리다 기지 도달 | 부위를 먼저 보면 시간이 벌리는가? |
 
+첫 세션 도감/훈련 ID:
+
+| 연결 | 도감 ID | 훈련 ID |
+| --- | --- | --- |
+| 빠른 적 | `encyclopedia_entry_enemy_role_runner` | `training_scenario_runner_slowdown` |
+| 파괴형/표식 구조물 | `encyclopedia_entry_enemy_role_breaker`, `encyclopedia_entry_structure_mark` | `training_scenario_breaker_rebuild` |
+| 방해형 | `encyclopedia_entry_enemy_role_disruptor` | `training_scenario_disruptor_priority` |
+| 겹치기 템포 | `encyclopedia_entry_wave_stack_tempo` | 없음 |
+| 보스 부위 | `encyclopedia_entry_boss_part_focus_basic` | `training_scenario_boss_part_focus` |
+
+첫 세션 재방문에서도 도감 카드는 3줄 요약만 기본 노출하고, 훈련은 실제 런 덱과 보상을 바꾸지 않습니다.
+
 ## 장면 1: 경로 보기
 
 상황:

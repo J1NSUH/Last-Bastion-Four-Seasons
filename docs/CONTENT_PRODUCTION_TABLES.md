@@ -1,4 +1,4 @@
-# Content Production Tables
+﻿# Content Production Tables
 
 이 문서는 실제 콘텐츠 제작을 위한 목록입니다.
 
@@ -11,7 +11,8 @@
 | 직업 | 4 | 4 | 4~6 |
 | 직업별 카드 | 14종 | 24종 | 30종 이상 |
 | 공용 카드 | 8종 | 16종 | 24종 이상 |
-| 카드 강화 옵션 | 20종 | 80종 이상 | 120종 이상 |
+| 전리품 변형 카드 | 12종 | 40종 이상 | 80종 이상 |
+| 카드 강화 옵션 | 28종 | 80종 이상 | 120종 이상 |
 | 적 | 8종 | 16종 | 24종 이상 |
 | 보스 | 1~2종 | 4종 | 6종 이상 |
 | 아티팩트 | 10종 | 25종 | 40종 이상 |
@@ -92,6 +93,25 @@
 | `copy_reward_take_gold` | `ui.reward.take_gold` | 보상 | 예 | 골드 선택을 손해처럼 보이지 않게 표시 |
 | `copy_reward_temporary_lock` | `ui.reward.temporary_lock` | 보상 | 예 | 미선택 보상 임시 처리 안내 |
 | `copy_reward_revert_until_shop` | `ui.reward.revert_until_shop` | 보상 | 예 | 첫 유료 상점 투표 전 되돌리기 안내 |
+| `copy_reward_variant_badge` | `ui.reward.variant_badge` | 보상 | 예 | 변형 후보를 강화가 아닌 변형 카드로 표시 |
+| `copy_reward_variant_new_badge` | `ui.reward.variant_new_badge` | 보상 | 예 | 변형 후보가 새 카드로 들어감을 표시 |
+| `copy_reward_variant_base` | `ui.reward.variant_base` | 보상 | 예 | 기준 카드를 강화 대상이 아닌 출처로 표시 |
+| `copy_reward_variant_changed_axis` | `ui.reward.variant_changed_axis` | 보상 | 예 | 변형 카드에서 달라진 점 표시 |
+| `copy_reward_variant_kept_weakness` | `ui.reward.variant_kept_weakness` | 보상 | 예 | 변형 카드에 남는 약점 표시 |
+| `copy_reward_variant_reason` | `ui.reward.variant_reason` | 보상 | 예 | 변형 후보의 등장 이유 표시 |
+| `copy_reward_variant_compare` | `ui.reward.variant_compare` | 보상 | 예 | 강화 비교가 아닌 차이 보기 버튼 |
+| `copy_reward_variant_new_card_hint` | `ui.reward.variant_new_card_hint` | 보상 | 예 | 기존 카드를 바꾸지 않음을 안내 |
+| `copy_reward_variant_temp_lock_blocked` | `ui.reward.variant_temp_lock_blocked` | 보상 | 예 | 위험 대가 변형의 자동 임시 선택 제한 안내 |
+| `copy_reward_heroic_ready_badge` | `ui.reward.heroic_ready_badge` | 보상 | 예 | 영웅 후보를 상위 보상이 아닌 준비된 운영으로 표시 |
+| `copy_reward_heroic_support_row` | `ui.reward.heroic_support_row` | 보상 | 예 | 실제 지원 카드와 동등 지원 크레딧을 분리 표시 |
+| `copy_reward_heroic_recent_proof` | `ui.reward.heroic_recent_proof` | 보상 | 예 | 최근 전투 증거를 처치 수 보상처럼 보이지 않게 표시 |
+| `copy_reward_heroic_tradeoff` | `ui.reward.heroic_tradeoff` | 보상 | 예 | 영웅 카드의 남는 대가를 짧게 표시 |
+| `copy_reward_heroic_downgrade_reason` | `ui.reward.heroic_downgrade_reason` | 보상 | 예 | 하향 후보 사유를 벌점처럼 보이지 않게 표시 |
+| `copy_shop_heroic_tune_title` | `ui.shop.heroic_tune_title` | 상점 | 예 | 영웅 확정 조율이 랜덤 판매가 아님을 고정 |
+| `copy_shop_heroic_owner_accept` | `ui.shop.heroic_owner_accept` | 상점 | 예 | 대상 플레이어가 먼저 받을지 확인 |
+| `copy_shop_heroic_owner_hold` | `ui.shop.heroic_owner_hold` | 상점 | 예 | 대상 보류를 정상 선택으로 표시 |
+| `copy_shop_heroic_vote_title` | `ui.shop.heroic_vote_title` | 상점 | 예 | 대상 수락 후 파티 자원 투표 표시 |
+| `copy_shop_heroic_locked_state` | `ui.shop.heroic_locked_*` | 상점 | 예 | 파편 부족, 게이트 부족, 구매 완료 상태를 구매 압박 없이 표시 |
 | `copy_settlement_row_day` | `ui.settlement.row_day` | 압축 정산 | 예 | 정산 행을 일자 기준으로 표시 |
 | `copy_settlement_no_bonus` | `ui.settlement.no_bonus` | 압축 정산 | 예 | 추가 보상이 아님을 표시 |
 | `copy_shop_skip` | `ui.shop.skip` | 상점 | 예 | 구매하지 않음을 정상 선택으로 표시 |
@@ -102,6 +122,21 @@
 | `copy_curse_confirm_title` | `ui.curse.confirm_title` | 저주 | 예 | 대상 플레이어의 수령 확인 |
 | `copy_curse_service_hint` | `ui.curse.service_hint` | 저주 | 예 | 제거/안정화 가능 시점 표시 |
 | `copy_curse_decline` | `ui.curse.decline` | 저주 | 예 | 거절을 정상 선택으로 표시 |
+| `copy_card_fail_not_enough_mana` | `ui.card.fail.not_enough_mana` | 카드 | 예 | 마나 부족 사용 불가 |
+| `copy_card_fail_no_target` | `ui.card.fail.no_target` | 카드 | 예 | 대상 없음 사용 불가 |
+| `copy_card_fail_out_of_range` | `ui.card.fail.out_of_range` | 카드 | 예 | 사거리 밖 사용 불가 |
+| `copy_card_fail_path_blocked` | `ui.card.fail.path_blocked` | 카드 | 예 | 완전 길막/경로 차단 사용 불가 |
+| `copy_card_fail_need_collapse_record` | `ui.card.fail.need_collapse_record` | 카드 | 예 | 파괴 기록 필요 안내 |
+| `copy_card_fail_scattered_targets` | `ui.card.fail.scattered_targets` | 카드 | 예 | 광역 카드 조건 낮음 |
+| `copy_card_fail_no_followup_focus` | `ui.card.fail.no_followup_focus` | 카드 | 예 | 표식/집중 후속 화력 없음 |
+| `copy_card_fail_control_resisted` | `ui.card.fail.control_resisted` | 카드 | 예 | 반복 제어 저항 표시 |
+| `copy_card_fail_discard_no_reward` | `ui.card.fail.discard_no_reward` | 카드 | 예 | 버리기 보상 미발동 안내 |
+| `copy_card_fail_temporary_no_salvage` | `ui.card.fail.temporary_no_salvage` | 카드 | 예 | 임시 구조물 회수 제외 |
+| `copy_card_fail_aura_stack_capped` | `ui.card.fail.aura_stack_capped` | 카드 | 예 | 오라 중첩 상한 안내 |
+| `copy_card_fail_repair_repeated` | `ui.card.fail.repair_repeated` | 카드 | 예 | 반복 수리 효율 감소 |
+| `copy_card_fail_overdrive_debt` | `ui.card.fail.overdrive_debt` | 카드 | 예 | 과부하 후유 피해 안내 |
+| `copy_card_fail_boss_weakened` | `ui.card.fail.boss_weakened` | 카드 | 예 | 보스 약화 변환 안내 |
+| `copy_card_fail_prebuild_only` | `ui.card.fail.prebuild_only` | 카드 | 예 | 전투 전 전용 카드 안내 |
 
 위 키들은 한국어와 영어 현지화 파일에 모두 있어야 하며, 임시 문자열로 대체하지 않습니다.
 
@@ -158,9 +193,26 @@
 | `setup_item_class_select` | 준비 항목 | 예 | 직업 역할, 시작 덱, 파티 역할 빈틈 표시 |
 | `setup_item_party_intent_confirm` | 준비 항목 | 아니오 | 이번 런에서 시험할 운영 한 줄 확인 |
 | `setup_item_run_state_lock` | 준비 항목 | 예 | `playerCountAtStart`, `activeDirections`, `scalingProfileId`, `seed` 확정 |
+| `setup_suggestion_slot` | 데이터 | 아니오 | 다음 런 제안 최대 2개를 참고 메모 슬롯으로 표시 |
+| `lobby_direction_preset` | 데이터 | 예 | 1~4인 인원수별 활성/비활성 방향 프리셋 |
+| `party_intent_note` | 데이터 | 아니오 | 제안에서 가져오거나 직접 쓴 이번 런 운영 한 줄 |
+| `run_config_lock_snapshot` | 데이터 | 예 | 시작 시 확정값을 `RunState`로 넘기는 잠금 스냅샷 |
 | `ui_lobby_direction_preview` | 로비 UI | 예 | 활성/비활성 방향을 맵 미리보기에서 구분 |
+| `ui_lobby_suggestion_strip` | 로비 UI | 아니오 | 참고 메모 최대 2개를 접을 수 있는 상단 줄로 표시 |
 | `ui_party_role_gap_hint` | 로비 UI | 아니오 | 부족한 역할 태그를 정답 강요 없이 표시 |
 | `ui_run_intent_note` | 로비 UI | 아니오 | 파티가 이번 런의 실험 목표를 한 줄로 남김 |
+
+새 런 준비 제작 기준:
+
+| 제작물 | 제작 기준 | 금지선 |
+| --- | --- | --- |
+| 참고 메모 | 최대 2개, 접기 가능, 도감/훈련장 링크 가능 | 직업/카드/방향 자동 적용 |
+| 방향 미리보기 | 1인 동쪽, 2인 북/동, 3인 서/북/동, 4인 사방 | 비활성 방향을 위험 방향으로 표시 |
+| 런 길이 카드 | 예상 시간과 완료 기준만 표시 | 빠른 클리어 보상, 겹치기 보상 모드 |
+| 직업 슬롯 | 역할, 시작 덱, 준비 상태 표시 | 필수 직업, 정답 조합, 자동 선택 |
+| 역할 힌트 | 대응 태그 기준으로 약한 축을 짧게 표시 | 특정 직업/카드 강제 |
+| 파티 의도 | 한 줄 메모, 비워도 시작 가능 | 보상/난이도/방향 변경 |
+| 시작 잠금 | 확정 전 최종 확인, 확정 후 값 고정 | 시작 후 인원 변화로 재계산 |
 
 ## 중단/재개 제작표
 
@@ -304,6 +356,47 @@
 | `card_common_joint_operation` | 공동 작전 | 영웅 | 2 | 아니오 | 파티 드로우 |
 | `card_common_silent_call` | 무음 호출 | 저주 | 0 | 아니오 | 위험한 템포 |
 
+## 71~100일 후반 직업 전리품 카드 제작표
+
+후반 신규 카드는 71일 이후 기존 아키타입을 보완하는 카드입니다.
+
+새 아키타입을 여는 `signal` 카드가 아니라, `patch` 또는 기존 축의 `payoff`로만 등록합니다.
+
+| ID | 이름 | 직업 | 희귀도 | 비용 | 등장 | 풀 라인 | 아키타입 역할 | 제작 메모 |
+| --- | --- | --- | --- | ---: | --- | --- | --- | --- |
+| `card_guardian_retreat_order` | 후퇴 명령 | 수호자 | 일반 | 1 | 71~99일 | `guardian_taunt_anchor` | `patch` | 도발 구조물 후방 이동, 완전 길막 금지 |
+| `card_guardian_crack_brace` | 균열 받침 | 수호자 | 일반 | 1 | 71~99일 | `guardian_line_delay` | `patch` | 파괴 직전 2초 지연, 수리 불가 |
+| `card_guardian_pressure_sigil` | 압력 밖 성표 | 수호자 | 희귀 | 2 | 81~99일 | `guardian_boss_hold` | `patch` | 압력 밖 도발 구조물 강화, 압력 안 효과 약화 |
+| `card_guardian_thorn_graft` | 가시 이식 | 수호자 | 희귀 | 1 | 81~99일 | `guardian_thorns_value` | `patch` | 가시 일부 이전, 수리 효율 감소 |
+| `card_guardian_gate_alarm` | 수문 경보 | 수호자 | 희귀 | 0 | 91~99일 | `guardian_line_delay` | `patch` | 기지 피해/내측 도달 조건, 웨이브당 1회 |
+| `card_guardian_winter_gate` | 겨울 관문 | 수호자 | 영웅 | 3 | 91~99일 | `guardian_boss_hold` | `payoff` | 도발 구조물 2개 연결, 선행 아키타입 필요 |
+| `card_architect_rear_foundation` | 후방 기초 | 건축가 | 일반 | 1 | 71~99일 | `architect_rear_rebuild` | `patch` | 후방 바리케이드 체력 증가, 파괴 보너스 감소 |
+| `card_architect_pressure_survey` | 압력 측량 | 건축가 | 일반 | 0 | 81~99일 | `architect_rear_rebuild` | `patch` | 안전 설치 타일 표시, 보상/비용 증가 없음 |
+| `card_architect_folding_maze` | 접히는 미로 | 건축가 | 희귀 | 2 | 71~99일 | `architect_path_extension` | `patch` | 바리케이드 2개 후방 이전, 경로 검사 필수 |
+| `card_architect_debris_stake` | 잔해 말뚝 | 건축가 | 희귀 | 1 | 81~99일 | `architect_debris_control` | `patch` | 잔해 소모 둔화 말뚝, 회수/폭발 재사용 금지 |
+| `card_architect_last_detour` | 마지막 우회로 | 건축가 | 희귀 | 2 | 91~99일 | `architect_rear_rebuild` | `patch` | 전방 구조물 파괴 시 취약 후방 바리케이드 예약 |
+| `card_architect_winter_collapse_plan` | 겨울형 붕괴도 | 건축가 | 영웅 | 3 | 91~99일 | `architect_planned_collapse` | `payoff` | 파괴 기록 소모 지연 폭발, 기록 재사용 금지 |
+| `card_elementalist_narrow_fireline` | 좁은 화염선 | 원소술사 | 일반 | 1 | 71~99일 | `elementalist_area_damage` | `patch` | 좁은 선형 피해, 도발/둔화 대상 추가 피해 |
+| `card_elementalist_rime_mark` | 잔서리 표식 | 원소술사 | 일반 | 1 | 71~99일 | `elementalist_element_mark` | `patch` | 결빙/압력 경계 이탈 적에게 약한 표식 |
+| `card_elementalist_outer_pressure_bolt` | 압력 밖 번개 | 원소술사 | 희귀 | 2 | 81~99일 | `elementalist_priority_burst` | `patch` | 압력 밖 전이 피해, 압력 안 대상 피해 감소 |
+| `card_elementalist_thaw_burst` | 해동 파열 | 원소술사 | 희귀 | 1 | 80~99일 | `elementalist_slow_knockback` | `patch` | 결빙 주변 피해와 약한 밀침, 타일 결빙 제거 없음 |
+| `card_elementalist_afterglow_mark` | 잔광 표식 | 원소술사 | 희귀 | 0 | 91~99일 | `elementalist_element_mark` | `patch` | 살아남은 표식 대상 갱신, 피해 없음 |
+| `card_elementalist_white_storm_ritual` | 백색 낙뢰 의식 | 원소술사 | 영웅 | 4 | 91~99일 | `elementalist_priority_burst` | `payoff` | 표식 대상 지연 낙뢰, 자동 추적 금지 |
+| `card_tinkerer_folding_amp` | 접이식 증폭기 | 땜장이 | 일반 | 1 | 71~99일 | `tinkerer_aura_timing` | `patch` | 오라 장치 이동, 이동 후 2초 약화 |
+| `card_tinkerer_cooling_pin` | 냉각 핀 | 땜장이 | 일반 | 1 | 71~99일 | `tinkerer_overdrive_tradeoff` | `patch` | 과부하 후유 피해 감소와 보너스 감소 동시 적용 |
+| `card_tinkerer_outer_pressure_circuit` | 압력 밖 회로 | 땜장이 | 희귀 | 2 | 81~99일 | `tinkerer_aura_timing` | `patch` | 압력 밖 오라가 경계 구조물 1개 보조 |
+| `card_tinkerer_disassembly_repair` | 분해 수리 | 땜장이 | 희귀 | 1 | 81~99일 | `tinkerer_repair_window` | `patch` | 구조물 해체 후 수리, 파괴/회수 효과 발동 금지 |
+| `card_tinkerer_shared_battery` | 비상 배터리 공유 | 땜장이 | 희귀 | 0 | 91~99일 | `tinkerer_maintenance_economy` | `patch` | 손패 3장 이하와 피해 구조물 조건, 대상 취약 대가 |
+| `card_tinkerer_last_crew` | 최후의 정비반 | 땜장이 | 영웅 | 3 | 91~99일 | `tinkerer_repair_window` | `payoff` | 오라 범위 첫 파괴 구조물 2초 지연, 완전 부활 금지 |
+
+후반 카드 제작 공통 검수:
+
+- `allowedDayRange`는 100일 결과를 포함하지 않습니다.
+- 모든 후반 카드는 `soloProjectionSafe: true`입니다.
+- 모든 후반 영웅 카드는 `requiresSupportCardCount` 2 이상 또는 동등한 기존 아키타입 조건을 가집니다.
+- 모든 0비용 후반 카드는 조건부이며, 조건 없는 드로우, 마나 순증가, 피해, 대량 수리를 만들 수 없습니다.
+- 이동/재배치 카드는 경로 검사와 활성 전선 투영을 통과해야 합니다.
+
 ## MVP 카드 카탈로그 잠금 제작표
 
 이 표는 카드 ID가 어느 보상 경로에 들어갈 수 있는지 잠그는 제작 기준입니다.
@@ -318,6 +411,49 @@
 | 건축가 | 바리케이드, 둔화 말뚝, 잔해 폭발, 급조 통로, 회수 작업, 압축 설계 | 이중 바리케이드, 파편 회수, 지연 폭약, 미끄러운 잔해, 보강 설계도 | 연쇄 붕괴, 뒤집힌 통로 | 무리한 증축 |
 | 원소술사 | 화염구, 빙결 지대, 밀어내기, 번개 연결, 원소 표식, 대폭발 | 화염 고리, 서리 파편, 되감는 돌풍, 과충전 번개, 원소 균열 | 정지의 눈, 낙뢰 의식 | 금지된 등불 |
 | 땜장이 | 증폭기, 원격 수리, 보강판, 과부하, 예비 부품, 자동 복구 | 윤활 작업, 강화 나사, 긴급 배선, 예열 장치, 자동 소화 | 공명 증폭기, 재조립 기계 | 위험한 개조 |
+
+### 직업별 MVP 카드 ID 잠금표
+
+| ID | 직업 | 시작 카드 ID와 매수 | 보상 카드 ID | 영웅 ID | 저주 ID | 검수 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `mvp_class_card_catalog_guardian_030` | 수호자 | `card_guardian_taunt_wall` x2, `card_guardian_shield_wrap` x2, `card_guardian_thorn_growth` x2, `card_guardian_binding_oath` x1, `card_guardian_last_gate` x1, `card_guardian_counter_stance` x2 | `card_guardian_iron_wall`, `card_guardian_reflective_oath`, `card_guardian_front_swap`, `card_guardian_crack_shield`, `card_guardian_last_guard` | `card_guardian_thorn_throne`, `card_guardian_unbroken_gate` | `card_guardian_heavy_vow` | 4개 풀 라인 모두 포함 |
+| `mvp_class_card_catalog_architect_030` | 건축가 | `card_architect_barricade` x3, `card_architect_slowing_stake` x2, `card_architect_debris_blast` x2, `card_architect_temporary_path` x1, `card_architect_salvage_work` x1, `card_architect_compact_design` x1 | `card_architect_double_barricade`, `card_architect_shard_recovery`, `card_architect_delayed_charge`, `card_architect_slippery_debris`, `card_architect_reinforced_blueprint` | `card_architect_chain_collapse`, `card_architect_inverted_path` | `card_architect_overbuilt` | 완전 길막/무한 회수 금지 |
+| `mvp_class_card_catalog_elementalist_030` | 원소술사 | `card_elementalist_fireball` x2, `card_elementalist_frost_zone` x2, `card_elementalist_pushback` x2, `card_elementalist_chain_lightning` x1, `card_elementalist_mark` x2, `card_elementalist_big_blast` x1 | `card_elementalist_fire_ring`, `card_elementalist_frost_shard`, `card_elementalist_rewind_gust`, `card_elementalist_overcharged_bolt`, `card_elementalist_elemental_rift` | `card_elementalist_eye_of_stillness`, `card_elementalist_storm_ritual` | `card_elementalist_forbidden_lantern` | 보스 패턴 삭제 금지 |
+| `mvp_class_card_catalog_tinkerer_030` | 땜장이 | `card_tinkerer_amplifier` x2, `card_tinkerer_remote_repair` x3, `card_tinkerer_armor_plate` x2, `card_tinkerer_overdrive` x1, `card_tinkerer_spare_parts` x1, `card_tinkerer_auto_rebuild` x1 | `card_tinkerer_lubrication`, `card_tinkerer_reinforced_screw`, `card_tinkerer_emergency_wiring`, `card_tinkerer_preheater`, `card_tinkerer_auto_extinguisher` | `card_tinkerer_resonance_amp`, `card_tinkerer_reassembly_machine` | `card_tinkerer_risky_mod` | 무한 수리/상시 오라 금지 |
+
+### 보상 후보 레일 제작표
+
+| ID | 슬롯 | 후보 소스 | 입력 태그 | 후보 실패 시 대체 |
+| --- | --- | --- | --- | --- |
+| `reward_rail_direct_answer` | 1 | 직업 보상 카드 | 최근 피해, 누수, 구조물 붕괴, 적 역할 | 같은 대응 태그의 낮은 희귀도 카드 |
+| `reward_rail_build_bridge` | 2 | 직업 보상 카드 | 현재 아키타입, 보유 아티팩트, 다음 3일 압박 | 같은 풀 라인의 `signal` 또는 `pivot` 카드 |
+| `reward_rail_deck_state` | 3 | 공용 보완 또는 안전 직업 카드 | 덱 장수, 손패 막힘, 버리기 사용률, 마나 꼬임 | 골드 거절 버튼의 이유 강조 |
+
+영웅 후보가 지원 크레딧, 실제 지원 카드 보유, 런 중 선택 지원, 최근 전투 증거, 대가 표시 조건을 만족하지 못하면 `heroic_candidate_downgraded`를 기록하고, 같은 아키타입 희귀 카드, 같은 대응 태그 일반 카드, 공용 보완, 안전 직업 카드 순서로 내려갑니다.
+
+골드 거절은 카드 후보 슬롯이 아니라 항상 별도 버튼입니다.
+
+보상 레일이 깨끗한 3번째 후보를 찾지 못하면 카드 슬롯은 안전 후보로 채우고, 골드 버튼에 `덱을 가볍게 유지` 이유를 붙입니다.
+
+보상 후보 레일은 후보 수, 희귀도, 골드 총량을 늘리는 보상 장치가 아닙니다.
+
+### 보상 후보 반복 피로도 제작표
+
+작은 카드 풀에서는 같은 카드가 가끔 다시 보이는 것이 자연스럽지만, 같은 질문이 계속 반복되면 덱 빌딩이 좁게 느껴집니다.
+
+반복 피로도 제작표는 새 카드를 보장하는 장치가 아니라, 최근에 본 카드와 같은 계열을 잠시 뒤로 미루는 제작 기준입니다.
+
+| ID | 제작물 | MVP 필수 | 규칙 | 금지선 |
+| --- | --- | --- | --- | --- |
+| `reward_fatigue_guard_mvp_5pack` | 반복 피로도 가드 | 예 | 플레이어별 최근 5개 보상 팩을 기준으로 검사 | 후보 수, 희귀도, 골드량 변경 금지 |
+| `reward_exposure_memory_player_scope` | 개인 노출 기억 | 예 | 실제 표시된 카드, 계열, 풀 라인, 대응 태그, 선택/거절을 플레이어별 기록 | 파티 전체 평균으로 개인 후보를 덮어쓰기 금지 |
+| `reward_repeat_exact_card_suppress` | 같은 카드 억제 | 예 | 같은 카드가 최근 5팩 안에 2회 이상 보이면 같은 레일의 다른 후보 우선 | 미보유 카드 보장 또는 희귀도 천장으로 표시 금지 |
+| `reward_repeat_family_variant_block` | 기준/변형 동시 차단 | 예 | 기준 카드와 변형 카드는 같은 보상 화면에 함께 표시하지 않음 | 변형 후보를 강화, 업그레이드, 추가 보상처럼 표시 금지 |
+| `reward_repeat_pool_lane_cooldown` | 풀 라인 연속 억제 | 예 | 같은 `poolLaneId`가 3팩 연속 핵심 후보가 되면 다른 레일 연결 카드 우선 | 직업 약점을 지우는 공용 대체 카드 투입 금지 |
+| `reward_repeat_declined_card_cooldown` | 반복 거절 카드 쿨다운 | 예 | 같은 카드가 2회 이상 골드 거절되면 5팩 동안 우선순위 하락 | 거절하면 영구 제외된다는 문구 금지 |
+| `reward_repeat_allowed_reason_log` | 반복 허용 사유 로그 | 예 | 안전 풀이 너무 좁거나 보스 역할 회수가 필요하면 내부 사유로만 반복 허용 | 플레이어에게 보상 보정, 보너스, 정답 추천처럼 표시 금지 |
+
+반복 피로도 규칙은 최종 후보 3장의 다양성을 높이지만, 새 카드 보장, 희귀도 보정, 후보 수 증가, 웨이브 겹치기 보상 증가로 쓰지 않습니다.
 
 ### 공용 카탈로그 역할
 
@@ -343,7 +479,9 @@
 | `mvp_card_catalog_starter_10_cards` | 시작 덱 | 예 | 직업별 시작 카드 6종이 중복 매수로 10장 시작 덱을 구성 |
 | `mvp_card_catalog_class_14_cards` | 직업 카드 | 예 | 직업별 시작 6종과 보상 8종이 14종 계약을 충족 |
 | `mvp_card_catalog_common_8_cards` | 공용 카드 | 예 | 30일 MVP 공용 보완 8종만 기본 풀에 사용 |
-| `mvp_card_catalog_heroic_gate` | 영웅 카드 | 예 | 21일 이후 선행 아키타입 카드가 있을 때만 낮은 비율로 노출 |
+| `mvp_class_card_catalog_id_lock` | 직업 ID | 예 | 직업별 14종 카드 ID와 시작 덱 매수 고정 |
+| `mvp_card_reward_rail_policy` | 후보 생성 | 예 | 직접 대응, 빌드 연결, 덱 상태 3레일로 보상 후보 구성 |
+| `mvp_card_catalog_heroic_gate` | 영웅 카드 | 예 | 21일 이후 `MvpHeroicCommitGate`를 통과할 때만 낮은 비율로 노출 |
 | `mvp_card_catalog_curse_consent` | 저주 카드 | 예 | 이벤트 계약 또는 특수 상점에서만 명시 선택으로 제공 |
 | `mvp_card_catalog_no_stack_scaling` | 보상 정책 | 예 | 웨이브 겹치기로 후보 수, 희귀도, 골드 총량을 바꾸지 않음 |
 | `mvp_card_catalog_solo_projection` | 인원수 | 예 | 모든 직업 카드가 솔로 동쪽 활성 전선에서도 죽은 카드가 되지 않음 |
@@ -366,6 +504,10 @@ MVP의 직업별 14종은 시작 카드 6종과 보상 카드 8종을 합친 기
 | `class_card_pool_contract_architect_mvp_030` | 건축가 | 30일 MVP | 예 | 경로 연장, 계획 붕괴, 잔해 제어, 후방 재건 4라인 유지 |
 | `class_card_pool_contract_elementalist_mvp_030` | 원소술사 | 30일 MVP | 예 | 군집 광역, 둔화/넉백, 원소 표식, 우선 처치 4라인 유지 |
 | `class_card_pool_contract_tinkerer_mvp_030` | 땜장이 | 30일 MVP | 예 | 수리 창, 오라 타이밍, 과부하 대가, 유지보수 경제 4라인 유지 |
+| `class_card_pool_contract_guardian_full_100` | 수호자 | 100일 풀런 | 아니오 | 후퇴, 압력 밖 도발, 기지 위기 대응을 기존 3개 아키타입에만 연결 |
+| `class_card_pool_contract_architect_full_100` | 건축가 | 100일 풀런 | 아니오 | 후방 기초, 압력 측량, 겨울형 붕괴를 기존 미로/붕괴/재건 아키타입에만 연결 |
+| `class_card_pool_contract_elementalist_full_100` | 원소술사 | 100일 풀런 | 아니오 | 결빙 경계, 압력 밖 번개, 표식 낙뢰를 기존 광역/제어/표식 아키타입에만 연결 |
+| `class_card_pool_contract_tinkerer_full_100` | 땜장이 | 100일 풀런 | 아니오 | 오라 이동, 압력 밖 회로, 최후 정비를 기존 오라/정비/과부하 아키타입에만 연결 |
 
 ### 카드 풀 라인
 
@@ -439,6 +581,170 @@ MVP에서는 직업마다 3개 아키타입을 먼저 제작합니다.
 | `card_rework_matrix_tinkerer_mvp_030` | 리워크 매트릭스 | 예 | 땜장이 14종의 라인, 타이밍, 대가 기준 |
 | `card_rework_matrix_common_mvp_030` | 리워크 매트릭스 | 예 | 공용 8종의 보완 한계와 대체 금지선 |
 
+### 수호자 14종 리워크 매트릭스 제작표
+
+| 카드 ID | 아키타입 역할 | 타이밍 창 | 대가 태그 | 콤보 훅 | 실패 손해 태그 |
+| --- | --- | --- | --- | --- | --- |
+| `card_guardian_taunt_wall` | `starter` | `prebuild`, `first_contact` | `low_damage`, `position_commitment` | `elementalist_area_damage`, `architect_path_extension`, `tinkerer_repair_window` | `bad_taunt_position_clusters_enemies` |
+| `card_guardian_shield_wrap` | `starter` | `structure_critical` | `requires_prior_setup`, `low_damage` | `tinkerer_repair_window`, `guardian_line_delay` | `premature_shield_low_value` |
+| `card_guardian_thorn_growth` | `starter` | `first_contact`, `swarm_compressed` | `requires_prior_setup`, `repeat_penalty` | `elementalist_area_damage`, `tinkerer_repair_window` | `played_without_incoming_hits` |
+| `card_guardian_binding_oath` | `starter` | `first_contact`, `boss_commit` | `requires_prior_setup`, `low_damage` | `elementalist_area_damage`, `architect_planned_collapse` | `no_taunted_targets` |
+| `card_guardian_last_gate` | `starter` | `boss_commit`, `structure_critical` | `structure_hp_loss`, `requires_prior_setup`, `repeat_penalty` | `tinkerer_repair_window`, `architect_rear_rebuild` | `spent_crisis_on_nonlethal_damage` |
+| `card_guardian_counter_stance` | `starter` | `structure_critical`, `hand_jammed` | `requires_prior_setup`, `resource_loop_guard` | `guardian_line_delay`, `card_common_mana_convert` | `no_incoming_hit_no_refund` |
+| `card_guardian_iron_wall` | `signal` | `prebuild`, `first_contact` | `position_commitment`, `low_damage` | `tinkerer_repair_window`, `archetype_guardian_iron_anchor` | `overcommitted_wrong_front` |
+| `card_guardian_reflective_oath` | `signal` | `swarm_compressed`, `first_contact` | `repair_efficiency_down`, `repeat_penalty` | `card_guardian_thorn_growth`, `tinkerer_repair_window` | `repair_debt_without_hits` |
+| `card_guardian_front_swap` | `pivot` | `collapse_aftershock`, `boss_commit` | `position_commitment`, `requires_prior_setup` | `architect_rear_rebuild`, `elementalist_area_damage` | `moved_taunt_out_of_killzone` |
+| `card_guardian_crack_shield` | `pivot` | `first_contact`, `stack_pressure` | `requires_prior_setup`, `repeat_penalty` | `card_guardian_reflective_oath`, `elementalist_slow_knockback` | `shield_never_triggered` |
+| `card_guardian_last_guard` | `pivot` | `boss_commit`, `base_critical` | `requires_prior_setup`, `low_damage` | `tinkerer_repair_window`, `card_common_emergency_repair` | `spent_last_guard_before_real_leak` |
+| `card_guardian_thorn_throne` | `payoff` | `stack_pressure`, `boss_commit` | `repair_efficiency_down`, `requires_prior_setup`, `repeat_penalty` | `card_guardian_reflective_oath`, `tinkerer_repair_window`, `elementalist_area_damage` | `locked_party_into_repair_debt` |
+| `card_guardian_unbroken_gate` | `payoff` | `boss_commit`, `base_critical` | `position_commitment`, `requires_prior_setup`, `low_damage` | `card_common_focus_fire`, `elementalist_element_mark`, `tinkerer_aura_timing` | `placed_gate_without_followup_damage` |
+| `card_guardian_heavy_vow` | `risk_accelerator` | `hand_jammed`, `stack_pressure`, `structure_critical` | `next_draw_down`, `structure_hp_loss` | `card_guardian_last_gate`, `card_guardian_counter_stance`, `tinkerer_repair_window` | `draw_loss_before_next_crisis` |
+
+수호자 리워크 제작 검수:
+
+- `card_guardian_counter_stance`와 `card_guardian_heavy_vow`는 0비용이지만 조건 없는 자원 순증가를 만들 수 없습니다.
+- `card_guardian_thorn_throne`과 `card_guardian_unbroken_gate`는 `MvpHeroicCommitGate` 없이 21일 이전 기본 보상 후보로 들어갈 수 없습니다.
+- `card_guardian_last_gate`, `card_guardian_unbroken_gate`는 보스 본체 패턴을 취소하지 않고 부위 집중 시간으로만 변환합니다.
+- 모든 수호자 카드는 `soloProjectionSafe: true`이며 고정 방위 전용 문구를 쓰지 않습니다.
+- 리워크 매트릭스는 웨이브 겹치기 보상, 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+
+### 건축가 14종 리워크 매트릭스 제작표
+
+| 카드 ID | 아키타입 역할 | 타이밍 창 | 대가 태그 | 콤보 훅 | 실패 손해 태그 |
+| --- | --- | --- | --- | --- | --- |
+| `card_architect_barricade` | `starter` | `prebuild`, `first_contact` | `position_commitment`, `low_damage` | `guardian_taunt_anchor`, `elementalist_area_damage`, `tinkerer_repair_window` | `route_shortened_or_blocked_by_bad_wall` |
+| `card_architect_slowing_stake` | `starter` | `prebuild`, `first_contact` | `position_commitment`, `requires_prior_setup` | `elementalist_slow_knockback`, `guardian_taunt_anchor` | `trap_placed_off_path` |
+| `card_architect_debris_blast` | `starter` | `structure_critical`, `swarm_compressed` | `requires_prior_setup`, `repeat_penalty` | `guardian_taunt_anchor`, `elementalist_area_damage` | `no_collapse_no_blast` |
+| `card_architect_temporary_path` | `starter` | `first_contact`, `collapse_aftershock` | `temporary_only`, `temporary_no_salvage` | `guardian_line_delay`, `card_common_battlefield_cleanup` | `temporary_path_expired_before_followup` |
+| `card_architect_salvage_work` | `starter` | `collapse_aftershock`, `hand_jammed` | `resource_loop_guard`, `requires_prior_setup` | `card_architect_barricade`, `tinkerer_maintenance_economy` | `salvaged_records_needed_for_next_plan` |
+| `card_architect_compact_design` | `starter` | `prebuild`, `collapse_aftershock` | `requires_prior_setup`, `position_commitment` | `card_architect_double_barricade`, `card_architect_reinforced_blueprint` | `held_discount_during_crisis` |
+| `card_architect_double_barricade` | `signal` | `prebuild`, `stack_pressure` | `position_commitment`, `low_damage` | `elementalist_area_damage`, `guardian_taunt_anchor` | `maze_readability_broken` |
+| `card_architect_shard_recovery` | `signal` | `collapse_aftershock`, `hand_jammed` | `resource_loop_guard`, `requires_prior_setup` | `shop_deck_trim`, `tinkerer_maintenance_economy` | `recovered_wrong_destroy_record` |
+| `card_architect_delayed_charge` | `pivot` | `swarm_compressed`, `structure_critical` | `requires_prior_setup`, `position_commitment` | `card_architect_debris_blast`, `elementalist_area_damage` | `detonated_after_enemies_left` |
+| `card_architect_slippery_debris` | `pivot` | `collapse_aftershock`, `stack_pressure` | `requires_prior_setup`, `repeat_penalty` | `card_architect_debris_blast`, `elementalist_slow_knockback` | `no_debris_to_extend` |
+| `card_architect_reinforced_blueprint` | `pivot` | `prebuild`, `first_contact` | `position_commitment`, `requires_prior_setup` | `tinkerer_repair_window`, `archetype_architect_long_maze` | `overbuilt_when_collapse_needed` |
+| `card_architect_chain_collapse` | `payoff` | `stack_pressure`, `swarm_compressed` | `requires_prior_setup`, `repeat_penalty`, `position_commitment` | `card_architect_delayed_charge`, `card_architect_debris_blast`, `guardian_taunt_anchor` | `chain_collapse_without_setup` |
+| `card_architect_inverted_path` | `payoff` | `boss_commit`, `stack_pressure` | `position_commitment`, `requires_prior_setup` | `elementalist_area_damage`, `guardian_boss_hold` | `path_cost_changed_wrong_segment` |
+| `card_architect_overbuilt` | `risk_accelerator` | `collapse_aftershock`, `hand_jammed`, `structure_critical` | `temporary_only`, `resource_loop_guard`, `structure_hp_loss` | `card_architect_salvage_work`, `guardian_line_delay` | `free_wall_fed_breakers` |
+
+건축가 리워크 제작 검수:
+
+- `card_architect_temporary_path`와 `card_architect_overbuilt`은 임시/취약 구조물을 보상 회수 가치로 만들 수 없습니다.
+- `card_architect_salvage_work`와 `card_architect_shard_recovery`는 같은 파괴 기록을 중복 소모할 수 없습니다.
+- `card_architect_chain_collapse`와 `card_architect_inverted_path`는 선행 구조물, 파괴 기록, 경로 읽기 없이 영웅 후보로 강제 노출되지 않습니다.
+- 모든 경로 변경 카드는 완전 길막 검사와 사용 전후 경로 미리보기를 통과해야 합니다.
+- 모든 건축가 카드는 `soloProjectionSafe: true`이며, 비활성 방향 설치/압박/보상을 만들지 않습니다.
+- 리워크 매트릭스는 웨이브 겹치기 보상, 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+
+### 원소술사 14종 리워크 매트릭스 제작표
+
+| 카드 ID | 아키타입 역할 | 타이밍 창 | 대가 태그 | 콤보 훅 | 실패 손해 태그 |
+| --- | --- | --- | --- | --- | --- |
+| `card_elementalist_fireball` | `starter` | `swarm_compressed` | `low_single_target`, `position_commitment` | `guardian_taunt_anchor`, `architect_path_extension`, `tinkerer_aura_timing` | `cast_on_scattered_targets` |
+| `card_elementalist_frost_zone` | `starter` | `first_contact`, `structure_critical` | `repeat_penalty`, `low_damage` | `guardian_line_delay`, `architect_slippery_debris` | `froze_low_pressure_segment` |
+| `card_elementalist_pushback` | `starter` | `structure_critical` | `repeat_penalty`, `position_commitment` | `guardian_boss_hold`, `architect_inverted_path` | `pushed_target_out_of_killzone` |
+| `card_elementalist_chain_lightning` | `starter` | `swarm_compressed`, `priority_exposed` | `requires_prior_setup`, `low_single_target` | `guardian_taunt_anchor`, `tinkerer_overdrive_tradeoff` | `chain_broke_on_spread_targets` |
+| `card_elementalist_mark` | `starter` | `priority_exposed`, `boss_commit` | `requires_followup`, `low_damage` | `card_elementalist_overcharged_bolt`, `tinkerer_aura_timing`, `guardian_boss_hold` | `marked_without_followup_focus` |
+| `card_elementalist_big_blast` | `starter` | `stack_pressure`, `boss_commit` | `high_cost`, `forecast_required` | `architect_planned_collapse`, `guardian_taunt_anchor` | `spent_blast_after_cluster_split` |
+| `card_elementalist_fire_ring` | `signal` | `prebuild`, `swarm_compressed` | `forecast_required`, `position_commitment` | `architect_path_extension`, `card_elementalist_frost_zone` | `fire_ring_missed_predicted_path` |
+| `card_elementalist_frost_shard` | `signal` | `priority_exposed`, `structure_critical` | `requires_prior_setup`, `low_damage` | `card_elementalist_frost_zone`, `card_elementalist_mark` | `shard_without_chilled_target` |
+| `card_elementalist_rewind_gust` | `pivot` | `structure_critical`, `stack_pressure` | `repeat_penalty`, `position_commitment`, `boss_weakened_conversion` | `guardian_line_delay`, `architect_inverted_path` | `rewound_wrong_segment` |
+| `card_elementalist_overcharged_bolt` | `pivot` | `priority_exposed`, `swarm_compressed` | `requires_prior_setup`, `execution_check` | `card_elementalist_mark`, `tinkerer_overdrive_tradeoff` | `bolt_failed_to_execute_target` |
+| `card_elementalist_elemental_rift` | `pivot` | `boss_commit`, `swarm_compressed` | `position_commitment`, `repeat_penalty` | `guardian_taunt_anchor`, `tinkerer_aura_timing`, `architect_path_extension` | `rift_zone_without_party_focus` |
+| `card_elementalist_eye_of_stillness` | `payoff` | `stack_pressure`, `boss_commit` | `repeat_penalty`, `high_cost`, `boss_weakened_conversion` | `guardian_last_gate`, `architect_rear_rebuild` | `spent_stillness_before_real_stack` |
+| `card_elementalist_storm_ritual` | `payoff` | `boss_commit`, `stack_pressure` | `forecast_required`, `high_cost`, `position_commitment` | `card_elementalist_mark`, `architect_planned_collapse`, `guardian_boss_hold` | `ritual_struck_empty_warning_tiles` |
+| `card_elementalist_forbidden_lantern` | `risk_accelerator` | `boss_commit`, `hand_jammed` | `kill_mana_loss`, `requires_followup`, `curse_debt` | `card_elementalist_mark`, `card_elementalist_storm_ritual` | `lantern_slowed_normal_wave_economy` |
+
+원소술사 리워크 제작 검수:
+
+- `card_elementalist_fireball`, `card_elementalist_big_blast`, `card_elementalist_storm_ritual`은 전장 전체 자동 피해나 비활성 방향 피해를 만들 수 없습니다.
+- `card_elementalist_frost_zone`, `card_elementalist_pushback`, `card_elementalist_rewind_gust`, `card_elementalist_eye_of_stillness`는 보스 본체 패턴을 취소하지 않고 약화 변환만 적용합니다.
+- 넉백은 경로 밖, 기지 안쪽, 비활성 방향으로 적을 밀어내지 않습니다.
+- `card_elementalist_mark`, `card_elementalist_overcharged_bolt`, `card_elementalist_forbidden_lantern`은 후속 화력 조건 없이 자동 처형이나 무제한 전이를 만들 수 없습니다.
+- 모든 원소술사 카드는 `soloProjectionSafe: true`이며, 동쪽 전선 안에서 군집/누수/부위 노출 판단으로 투영됩니다.
+- 리워크 매트릭스는 웨이브 겹치기 보상, 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+
+### 땜장이 14종 리워크 매트릭스 제작표
+
+| 카드 ID | 아키타입 역할 | 타이밍 창 | 대가 태그 | 콤보 훅 | 실패 손해 태그 |
+| --- | --- | --- | --- | --- | --- |
+| `card_tinkerer_amplifier` | `starter` | `prebuild`, `first_contact` | `aura_stack_cap`, `position_commitment` | `elementalist_area_damage`, `guardian_line_delay`, `architect_path_extension` | `aura_core_clustered_in_boss_pressure` |
+| `card_tinkerer_remote_repair` | `starter` | `structure_critical`, `collapse_aftershock` | `global_target_budget`, `repeat_penalty`, `low_damage` | `guardian_line_delay`, `architect_rear_rebuild` | `repaired_structure_without_lethal_pressure` |
+| `card_tinkerer_armor_plate` | `starter` | `first_contact`, `structure_critical` | `requires_prior_setup`, `position_commitment` | `guardian_taunt_anchor`, `card_tinkerer_remote_repair` | `plated_safe_backline_structure` |
+| `card_tinkerer_overdrive` | `starter` | `priority_exposed`, `swarm_compressed` | `structure_hp_loss`, `repair_debt`, `aura_stack_cap` | `elementalist_priority_burst`, `card_tinkerer_auto_extinguisher` | `overdrive_broke_needed_structure` |
+| `card_tinkerer_spare_parts` | `starter` | `prebuild`, `collapse_aftershock` | `resource_loop_guard`, `requires_prior_setup` | `architect_planned_collapse`, `card_tinkerer_reassembly_machine` | `insurance_on_structure_that_survived` |
+| `card_tinkerer_auto_rebuild` | `starter` | `structure_critical`, `boss_commit` | `repeat_penalty`, `requires_prior_setup`, `low_rebuild_hp` | `guardian_last_gate`, `architect_rear_rebuild` | `auto_rebuild_saved_wrong_structure` |
+| `card_tinkerer_lubrication` | `signal` | `priority_exposed`, `swarm_compressed` | `aura_stack_cap`, `requires_target_window` | `card_elementalist_mark`, `guardian_taunt_anchor` | `buffed_tower_without_target_window` |
+| `card_tinkerer_reinforced_screw` | `signal` | `prebuild`, `first_contact` | `position_commitment`, `repeat_penalty` | `guardian_line_delay`, `architect_path_extension` | `screw_locked_wrong_anchor` |
+| `card_tinkerer_emergency_wiring` | `pivot` | `stack_pressure`, `structure_critical` | `structure_hp_loss`, `aura_stack_cap`, `repair_debt` | `card_tinkerer_amplifier`, `card_tinkerer_remote_repair` | `wiring_exposed_aura_core` |
+| `card_tinkerer_preheater` | `pivot` | `prebuild`, `first_contact` | `timing_limited`, `structure_hp_loss` | `elementalist_area_damage`, `card_tinkerer_lubrication` | `preheater_after_opening_window` |
+| `card_tinkerer_auto_extinguisher` | `pivot` | `priority_exposed`, `hand_jammed` | `requires_prior_setup`, `reduced_payoff`, `repeat_penalty` | `card_tinkerer_overdrive`, `card_tinkerer_risky_mod` | `extinguisher_without_overdrive_debt` |
+| `card_tinkerer_resonance_amp` | `payoff` | `prebuild`, `stack_pressure` | `aura_stack_cap`, `position_commitment`, `area_pressure_vulnerable` | `card_tinkerer_amplifier`, `card_tinkerer_emergency_wiring`, `guardian_boss_hold` | `resonance_network_overclustered` |
+| `card_tinkerer_reassembly_machine` | `payoff` | `collapse_aftershock`, `boss_commit` | `low_rebuild_hp`, `repeat_penalty`, `resource_loop_guard` | `architect_rear_rebuild`, `card_tinkerer_spare_parts` | `reassembled_without_followup_defense` |
+| `card_tinkerer_risky_mod` | `risk_accelerator` | `priority_exposed`, `boss_commit` | `structure_hp_loss`, `repair_efficiency_down`, `curse_debt` | `card_tinkerer_auto_extinguisher`, `elementalist_priority_burst` | `risky_mod_backlash_collapsed_line` |
+
+땜장이 리워크 제작 검수:
+
+- `card_tinkerer_remote_repair`, `card_tinkerer_auto_rebuild`, `card_tinkerer_reassembly_machine`은 구조물 파괴를 삭제하지 않고 반복 효율 감소와 낮은 복구 체력을 가집니다.
+- `card_tinkerer_amplifier`, `card_tinkerer_emergency_wiring`, `card_tinkerer_resonance_amp`는 오라 중첩 상한, 범위 미리보기, 밀집 위험 표시를 가집니다.
+- `card_tinkerer_overdrive`, `card_tinkerer_auto_extinguisher`, `card_tinkerer_risky_mod`는 과부하 대가를 완전히 무효화하지 못합니다.
+- 임시 구조물, 자동 복구 구조물, 재조립 구조물은 회수 가치와 파괴 보상 루프의 반복 자원이 될 수 없습니다.
+- 모든 땜장이 카드는 `soloProjectionSafe: true`이며, 동쪽 전선 안에서 핵심 구조물/오라 중심/후방 재건 판단으로 투영됩니다.
+- 리워크 매트릭스는 웨이브 겹치기 보상, 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+
+### 공용 8종 리워크 매트릭스 제작표
+
+| 카드 ID | 아키타입 역할 | 타이밍 창 | 대가 태그 | 콤보 훅 | 실패 손해 태그 |
+| --- | --- | --- | --- | --- | --- |
+| `card_common_reorganize` | `common_soft_gap` | `hand_jammed` | `discard_no_reward`, `resource_loop_guard` | `card_common_mana_convert`, `card_guardian_counter_stance` | `discarded_needed_answer` |
+| `card_common_focus_fire` | `common_soft_gap` | `priority_exposed`, `boss_commit` | `soft_gap_only`, `low_area_value` | `guardian_boss_hold`, `card_elementalist_mark`, `tinkerer_aura_timing` | `focused_without_party_damage` |
+| `card_common_emergency_repair` | `common_soft_gap` | `structure_critical` | `low_repair`, `range_limit`, `repeat_penalty` | `guardian_line_delay`, `architect_rear_rebuild` | `repaired_after_lethal_window` |
+| `card_common_battlefield_cleanup` | `common_soft_gap` | `collapse_aftershock` | `collapse_record_required`, `low_damage`, `temporary_no_salvage` | `architect_planned_collapse`, `elementalist_slow_knockback` | `cleanup_without_collapse_record` |
+| `card_common_mana_convert` | `common_soft_gap` | `hand_jammed` | `discard_no_reward`, `resource_loop_guard`, `once_per_wave` | `card_common_reorganize`, `card_guardian_counter_stance` | `converted_future_answer` |
+| `card_common_quick_hands` | `common_soft_gap` | `hand_jammed` | `discard_no_reward`, `no_net_draw`, `resource_loop_guard` | `card_common_reorganize`, `card_common_mana_convert` | `cycled_into_same_jam` |
+| `card_common_tactical_map` | `common_soft_gap` | `prebuild` | `information_only`, `combat_locked`, `no_auto_recommend` | `architect_path_extension`, `guardian_taunt_anchor` | `map_used_after_commitment` |
+| `card_common_temporary_turret` | `common_soft_gap` | `first_contact`, `collapse_aftershock` | `temporary_only`, `temporary_no_salvage`, `low_damage`, `slot_cap` | `card_common_battlefield_cleanup`, `tinkerer_repair_window` | `turret_replaced_needed_class_structure` |
+
+공용 카드 리워크 제작 검수:
+
+- 모든 공용 카드는 직업 카드 풀 계약의 `forbiddenReplacementResponseTags`를 `counterStrength: strong`으로 해결할 수 없습니다.
+- `card_common_reorganize`, `card_common_mana_convert`, `card_common_quick_hands`는 버리기 보상, 비상 탈출기 마나 회복, 드로우/마나 루프를 발동하지 않습니다.
+- `card_common_focus_fire`는 광역 피해 증폭이나 원소 표식 대체 효과를 가지지 않습니다.
+- `card_common_emergency_repair`는 원격 수리보다 낮은 회복량, 짧은 사거리, 반복 수리 효율 감소를 가집니다.
+- `card_common_battlefield_cleanup`은 잔해 생성, 폭발 피해, 회수 가치, 완전 길막을 제공하지 않습니다.
+- `card_common_tactical_map`은 정답 배치, 자동 추천, 비활성 방향 정보 공개를 하지 않습니다.
+- `card_common_temporary_turret`은 도발, 오라, 잔해, 회수 가치, 직업 전용 타워 성능을 가지지 않습니다.
+- 모든 공용 카드는 `soloProjectionSafe: true`이며, 동쪽 전선 안에서 손패 막힘/누수/붕괴 자리/다음 압박 예고로 투영됩니다.
+- 리워크 매트릭스는 웨이브 겹치기 보상, 카드 후보 수, 희귀도, 골드 총량을 바꾸지 않습니다.
+
+### 카드 실패 피드백 제작표
+
+| ID | 피드백 키 | 유형 | 연결 태그 | 표시 위치 | 소모 정책 | MVP |
+| --- | --- | --- | --- | --- | --- | --- |
+| `card_fail_not_enough_mana` | `ui.card.fail.not_enough_mana` | `hard_block` | `not_enough_mana` | 손패 카드 위 | 카드/마나 소모 없음 | 예 |
+| `card_fail_no_target` | `ui.card.fail.no_target` | `hard_block` | `no_valid_target` | 손패 카드 위 | 카드/마나 소모 없음 | 예 |
+| `card_fail_out_of_range` | `ui.card.fail.out_of_range` | `hard_block` | `out_of_range` | 대상 커서 옆 | 카드/마나 소모 없음 | 예 |
+| `card_fail_path_blocked` | `ui.card.fail.path_blocked` | `hard_block` | `path_cost_change`, `full_block` | 설치 타일 | 카드/마나 소모 없음 | 예 |
+| `card_fail_need_collapse_record` | `ui.card.fail.need_collapse_record` | `hard_block` | `collapse_record_required` | 카드 위 | 카드/마나 소모 없음 | 예 |
+| `card_fail_scattered_targets` | `ui.card.fail.scattered_targets` | `soft_miss` | `low_single_target`, `swarm_not_compressed` | 대상 구역 | 카드/마나 소모 | 예 |
+| `card_fail_no_followup_focus` | `ui.card.fail.no_followup_focus` | `soft_miss` | `requires_followup` | 표식 대상 | 카드/마나 소모 | 예 |
+| `card_fail_control_resisted` | `ui.card.fail.control_resisted` | `resistance_conversion` | `repeat_penalty`, `hard_cc` | 대상 체력바 | 카드/마나 소모 | 예 |
+| `card_fail_boss_weakened` | `ui.card.fail.boss_weakened` | `resistance_conversion` | `boss_weakened_conversion` | 보스 체력바 | 카드/마나 소모 | 예 |
+| `card_fail_discard_no_reward` | `ui.card.fail.discard_no_reward` | `loop_guard_blocked` | `discard_no_reward` | 버리기/드로우 게이지 | 추가 보상 없음 | 예 |
+| `card_fail_temporary_no_salvage` | `ui.card.fail.temporary_no_salvage` | `loop_guard_blocked` | `temporary_no_salvage` | 구조물 툴팁 | 회수 가치 없음 | 예 |
+| `card_fail_aura_stack_capped` | `ui.card.fail.aura_stack_capped` | `tradeoff_resolved` | `aura_stack_cap` | 오라 범위 | 카드/마나 소모 | 예 |
+| `card_fail_repair_repeated` | `ui.card.fail.repair_repeated` | `tradeoff_resolved` | `repeat_penalty`, `low_repair` | 구조물 체력바 | 카드/마나 소모 | 예 |
+| `card_fail_overdrive_debt` | `ui.card.fail.overdrive_debt` | `tradeoff_preview`, `tradeoff_resolved` | `structure_hp_loss`, `repair_debt` | 카드/구조물 | 확정 후 소모 | 예 |
+| `card_fail_prebuild_only` | `ui.card.fail.prebuild_only` | `hard_block` | `combat_locked` | 카드 위 | 카드/마나 소모 없음 | 예 |
+
+카드 실패 피드백 제작 검수:
+
+- `hard_block`은 카드와 마나를 소모할 수 없습니다.
+- `soft_miss`, `resistance_conversion`, `tradeoff_resolved`는 효과가 실제 적용된 경우에만 카드와 마나를 소모합니다.
+- 모든 `CardReworkMatrixEntry.failureFeedbackKey`는 위 표의 키 또는 직업별 확장 키를 참조해야 합니다.
+- 피드백 문구는 보상 증가, 희귀도 증가, 카드 후보 증가, 비활성 방향 정보 공개를 암시하지 않습니다.
+- 같은 플레이어에게 카드 실패 문구를 동시에 2개 이상 표시하지 않습니다.
+
 ### 카드 스펙 프로필 제작표
 
 카드 스펙 프로필은 카드의 실제 수치와 적용 제한을 제작하는 항목입니다.
@@ -511,6 +817,18 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `spec_card_common_quick_hands_mvp` | 빠른 손놀림 | `budget_cost0_connector` | 예 | 순수 드로우가 아닌 손패 정리 |
 | `spec_card_common_tactical_map_mvp` | 전술 지도 | `budget_cost1_single_basic` | 예 | 정보 카드와 정답 추천 금지 |
 | `spec_card_common_temporary_turret_mvp` | 임시 포탑 | `budget_cost1_single_basic` | 예 | 약한 임시 공격 구조물과 회수 가치 없음 |
+| `spec_card_guardian_narrow_anchor_mvp` | 좁은 닻 | `budget_cost1_single_basic` | 예 | 좁은 도발 반경과 높은 구조물 체력 |
+| `spec_card_guardian_delayed_shield_mvp` | 늦은 방패 | `budget_cost1_single_basic` | 예 | 1초 예고 방어와 즉시 대응 약점 |
+| `spec_card_guardian_brittle_barb_mvp` | 부서질 가시 | `budget_cost1_single_basic` | 예 | 낮은 체력 도발 구조물 반사와 최대 체력 대가 |
+| `spec_card_architect_splinter_barricade_mvp` | 파편 바리케이드 | `budget_cost1_single_basic` | 예 | 파괴 후 잔해와 회수 가치 제외 |
+| `spec_card_architect_blueprint_scrap_mvp` | 설계도 조각 | `budget_cost1_single_basic` | 예 | 파괴 기록을 다음 설치 준비로 전환 |
+| `spec_card_architect_patient_charge_mvp` | 기다리는 폭약 | `budget_cost1_single_basic` | 예 | 오래 버틴 구조물 폭발 보너스 |
+| `spec_card_elementalist_slow_bloom_mvp` | 느린 불꽃 | `budget_cost1_small_area_instant` | 예 | 긴 예고와 넓은 약한 지속 피해 지대 |
+| `spec_card_elementalist_cracking_ice_mvp` | 갈라지는 얼음 | `budget_cost1_small_area_instant` | 예 | 짧은 빙결과 종료 취약 창 |
+| `spec_card_elementalist_crosswind_mvp` | 가로바람 | `budget_cost1_single_basic` | 예 | 경로 안 적 재정렬과 비활성 방향 이동 금지 |
+| `spec_card_tinkerer_patch_queue_mvp` | 수리 대기열 | `budget_cost1_global_support` | 예 | 낮은 즉시 회복과 예약 회복 소멸 |
+| `spec_card_tinkerer_guarded_overdrive_mvp` | 보호 과부하 | `budget_cost0_risky_boost` | 예 | 낮은 공격 속도 보너스와 고정 후유 피해 |
+| `spec_card_tinkerer_lean_field_amp_mvp` | 좁은 증폭장 | `budget_cost1_aura_device` | 예 | 좁은 오라 집중과 밀집 붕괴 위험 |
 
 스펙 프로필 제작 시 모든 항목은 비용, 대상, 범위, 지속, 예고, 반복 제한, 보스 정책, UI 미리보기를 함께 채워야 합니다.
 
@@ -525,11 +843,39 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `stat_budget_connector_0` | `budget_cost0_connector` | 예 | 0비용 연결 카드의 순수 자원 증가 금지 |
 | `stat_budget_risky_boost_0` | `budget_cost0_risky_boost` | 예 | 0비용 위험 가속 카드의 구조물 피해/드로우 손실 대가 확인 |
 | `stat_budget_basic_1` | `budget_cost1_single_basic`, `budget_cost1_small_area_instant` | 예 | 1비용 기본 행동의 작은 범위와 실패 가능성 확인 |
-| `stat_budget_flexible_1` | `budget_cost1_global_support` | 예 | 원격/전장 전체 편의 카드의 낮은 수치와 반복 보정 확인 |
+| `stat_budget_flexible_1` | `budget_cost1_global_support`, `budget_cost1_aura_device` | 예 | 원격/전장 전체 편의 카드와 오라 장치의 낮은 수치, 반복 보정, 중첩 상한 확인 |
 | `stat_budget_tactical_2` | `budget_cost2_tactical_shift` | 예 | 중간 범위, 경로 조정, 전술 버프의 예고/중첩 제한 확인 |
 | `stat_budget_crisis_3` | `budget_cost3_crisis_answer`, `budget_cost3_engine_commitment` | 예 | 큰 위기 대응 카드의 예고, 후유증, 웨이브 제한 확인 |
 | `stat_budget_commit_4` | `budget_cost4_commitment` | 예 | 결전 카드의 선행 조건과 실패 손해 확인 |
 | `stat_budget_curse` | `budget_cost0_risky_boost`, `budget_cost1_risky_focus` | 예 | 저주 계약 카드의 명시 확인, 장기 대가, 제거/안정화 연결 확인 |
+
+### MVP 카드 예산 배정 제작표
+
+카드 스펙 제작자는 `effectBudgetId`와 `statBudgetLockId`를 둘 다 채웁니다.
+
+`effectBudgetId`는 카드의 실제 효과 모양이고, `statBudgetLockId`는 어떤 수치 안전장치로 검수할지 정하는 값입니다.
+
+| `effectBudgetId` | 기본 `statBudgetLockId` | 대표 Spec ID | 필수 확인 |
+| --- | --- | --- | --- |
+| `budget_cost0_connector` | `stat_budget_connector_0` | `spec_card_common_quick_hands_mvp` | 순수 드로우/마나 순증가 없음 |
+| `budget_cost0_risky_boost` | `stat_budget_risky_boost_0` | `spec_card_tinkerer_overdrive_mvp` | 구조물 피해, 드로우 손실, 회수 가치 제외 중 1개 이상 |
+| `budget_cost1_single_basic` | `stat_budget_basic_1` | `spec_card_guardian_taunt_wall_mvp` | 단일 대상, 작은 수치, 실패 피드백 |
+| `budget_cost1_small_area_instant` | `stat_budget_basic_1` | `spec_card_elementalist_fireball_mvp` | 반경 1.5 기준, 낮은 보스 배율 |
+| `budget_cost1_global_support` | `stat_budget_flexible_1` | `spec_card_tinkerer_remote_repair_mvp` | 낮은 수치, 반복 효율 감소, 대상 조건 |
+| `budget_cost1_aura_device` | `stat_budget_flexible_1` | `spec_card_tinkerer_amplifier_mvp` | 오라 중첩 상한, 장치 위치 위험 |
+| `budget_cost1_risky_focus` | `stat_budget_curse` | `spec_card_elementalist_forbidden_lantern_mvp` | 명시 계약/저주 확인, 장기 대가 |
+| `budget_cost2_tactical_shift` | `stat_budget_tactical_2` | `spec_card_guardian_binding_oath_mvp` | 예고, 중첩 제한, 보스 약화 변환 |
+| `budget_cost3_crisis_answer` | `stat_budget_crisis_3` | `spec_card_elementalist_big_blast_mvp` | 1초 이상 예고, 후유증, 웨이브 제한 |
+| `budget_cost3_engine_commitment` | `stat_budget_crisis_3` | `spec_card_tinkerer_resonance_amp_mvp` | 네트워크 상한, 밀집 붕괴 위험 |
+| `budget_cost4_commitment` | `stat_budget_commit_4` | `spec_card_guardian_unbroken_gate_mvp` | 영웅 게이트, 큰 실패 손해 |
+
+예산 배정 검수:
+
+- 모든 `spec_card_*_mvp`는 `effectBudgetId`와 `statBudgetLockId`를 함께 가져야 합니다.
+- `budget_cost1_aura_device`가 `stat_budget_basic_1`로 들어가면 반려합니다.
+- `budget_cost1_risky_focus`가 일반 라운드 랜덤 보상 카드에 쓰이면 반려합니다.
+- 저주 카드가 `budget_cost0_risky_boost`를 쓰더라도 명시 계약이 있으면 `stat_budget_curse`로 검수합니다.
+- 예산 배정은 솔로 보정, 웨이브 겹치기, 클리어 시간, 처치 수로 완화하지 않습니다.
 
 제작 검수 항목:
 
@@ -538,6 +884,74 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 - 원격/전장 전체 카드는 낮은 수치, 반복 효율 감소, 대상 조건 중 2개 이상을 갖는가?
 - 비용 3 이상 큰 광역은 1초 이상 예고, 웨이브 제한, 보스 본체 약화 정책 중 2개 이상을 갖는가?
 - 공용 카드가 직업 전용 강점 예산을 같은 강도로 쓰지 않는가?
+
+### 전리품 변형 카드 제작표
+
+전리품 변형 카드는 기존 카드의 강화판이 아니라, 전리품 풀에 들어가는 별도 카드입니다.
+
+MVP 변형 카드는 기본적으로 추가 강화 후보를 갖지 않고, 원래 카드 후보 3장 규칙 안에서만 등장합니다.
+
+| ID | 기준 카드 | 희귀도 | MVP | 제작 의도 |
+| --- | --- | --- | --- | --- |
+| `card_guardian_narrow_anchor` | `card_guardian_taunt_wall` | 일반 | 예 | 좁은 도발과 긴 생존으로 전면 유지 판단을 바꿈 |
+| `card_guardian_delayed_shield` | `card_guardian_shield_wrap` | 희귀 | 예 | 즉시 방어 대신 예고 피해 예측을 요구 |
+| `card_guardian_brittle_barb` | `card_guardian_thorn_growth` | 희귀 | 예 | 치명 상태 구조물의 반사 피해를 키우되 수리 부담 유지 |
+| `card_architect_splinter_barricade` | `card_architect_barricade` | 일반 | 예 | 오래 버티는 벽보다 부서진 뒤 잔해를 남기는 벽 |
+| `card_architect_blueprint_scrap` | `card_architect_salvage_work` | 희귀 | 예 | 마나 회수 대신 다음 설치 준비로 변환 |
+| `card_architect_patient_charge` | `card_architect_debris_blast` | 희귀 | 예 | 오래 버틴 구조물 폭발을 보상하되 즉시 폭파 가치는 낮춤 |
+| `card_elementalist_slow_bloom` | `card_elementalist_fireball` | 일반 | 예 | 즉발 피해보다 예고된 넓은 킬존 화염 |
+| `card_elementalist_cracking_ice` | `card_elementalist_frost_zone` | 희귀 | 예 | 긴 빙결 대신 종료 취약 창을 만듦 |
+| `card_elementalist_crosswind` | `card_elementalist_pushback` | 희귀 | 예 | 경로 안에서 적 위치를 재정렬하는 약한 제어 |
+| `card_tinkerer_patch_queue` | `card_tinkerer_remote_repair` | 일반 | 예 | 즉시 대량 수리 대신 짧은 예약 수리 |
+| `card_tinkerer_guarded_overdrive` | `card_tinkerer_overdrive` | 희귀 | 예 | 낮은 과부하와 예측 가능한 후유 피해 |
+| `card_tinkerer_lean_field_amp` | `card_tinkerer_amplifier` | 희귀 | 예 | 좁은 오라 집중과 밀집 붕괴 위험 |
+
+MVP 변형 카드 수치 검수표:
+
+| ID | Spec ID | 비용 | 핵심 수치 | 필수 제한 |
+| --- | --- | ---: | --- | --- |
+| `card_guardian_narrow_anchor` | `spec_card_guardian_narrow_anchor_mvp` | 1 | 도발 반경 1.25, 체력 +4 | 한 전선 동시 2개, 경로 검사 |
+| `card_guardian_delayed_shield` | `spec_card_guardian_delayed_shield_mvp` | 1 | 1초 뒤 피해 감소 50%, 첫 큰 피해 추가 15% | 같은 구조물 8초 제한 |
+| `card_guardian_brittle_barb` | `spec_card_guardian_brittle_barb_mvp` | 1 | 피해 40% 반사, 10회 상한 | 체력 60% 이하 도발 구조물, 최대 체력 -2 |
+| `card_architect_splinter_barricade` | `spec_card_architect_splinter_barricade_mvp` | 1 | 파괴 후 잔해 둔화 20%, 4초 | 회수 가치 제외, 완전 길막 금지 |
+| `card_architect_blueprint_scrap` | `spec_card_architect_blueprint_scrap_mvp` | 1 | 다음 설치 비용 -1, 체력 +2 | 유효 파괴 기록 1개, 웨이브당 1회 |
+| `card_architect_patient_charge` | `spec_card_architect_patient_charge_mvp` | 1 | 폭발 피해 2, 8초 이상 생존 시 +2 | 시전당 1회, 즉시 파괴 보너스 없음 |
+| `card_elementalist_slow_bloom` | `spec_card_elementalist_slow_bloom_mvp` | 1 | 반경 2, 즉발 1, 초당 1, 3초 | 0.9초 예고, 동시 지대 1개 |
+| `card_elementalist_cracking_ice` | `spec_card_elementalist_cracking_ice_mvp` | 1 | 빙결 0.8초, 취약 15% 2초 | 반복 저항, 보스 약화 변환 |
+| `card_elementalist_crosswind` | `spec_card_elementalist_crosswind_mvp` | 1 | 경로 안 재정렬 0.75타일, 둔화 15% 1.5초 | 경로 밖/기지 안쪽/비활성 방향 이동 금지 |
+| `card_tinkerer_patch_queue` | `spec_card_tinkerer_patch_queue_mvp` | 1 | 즉시 2, 예약 2x2회 | 파괴 시 예약 회복 소멸, 반복 수리 효율 |
+| `card_tinkerer_guarded_overdrive` | `spec_card_tinkerer_guarded_overdrive_mvp` | 0 | 공격 속도 +35%, 종료 피해 3 | 체력 30% 미만 대상 불가, 웨이브당 1회 |
+| `card_tinkerer_lean_field_amp` | `spec_card_tinkerer_lean_field_amp_mvp` | 1 | 오라 반경 1.25, 중심 공격 속도 +25% | 체력 -2, 광역 피해 취약 +15%, 중첩 상한 |
+
+변형 카드 제작 검수:
+
+- 모든 변형 카드는 `CardVariantProfile`과 별도 `CardSpecProfile`을 가져야 합니다.
+- 변형 카드는 기준 카드의 `upgradeOptions`를 자동 상속하지 않습니다.
+- MVP 변형 카드의 `upgradeOptions`는 빈 배열을 기본값으로 둡니다.
+- 변형 카드 문구에는 `강화`, `상급`, `+1` 같은 등급 표현을 쓰지 않습니다.
+- 아티팩트가 변형 풀을 열어도 후보 수, 희귀도, 골드 총량은 바뀌지 않습니다.
+- 변형 카드는 솔로 동쪽 전선 안에서도 사용 판단이 살아 있어야 합니다.
+
+### 전리품 변형 보상 UI 제작표
+
+전리품 변형 보상 UI는 카드 내용을 새로 만드는 표가 아니라, 이미 생성된 변형 후보가 보상 화면에서 어떻게 읽히는지 잠그는 제작표입니다.
+
+| ID | 제작물 | 필수 요소 | 금지 요소 |
+| --- | --- | --- | --- |
+| `reward_variant_candidate_card_frame` | 후보 카드 프레임 | 일반 후보와 같은 크기, `변형 카드` 보조 배지, 희귀도 동일 위치 | 네 번째 후보, 보너스 슬롯, 강화 전용 프레임 |
+| `reward_variant_base_line` | 기준 카드 줄 | `기준 카드: {cardName}` | `{cardName} 강화`, `{cardName} 업그레이드` |
+| `reward_variant_delta_chips` | 카드 하단 칩 | 달라진 점, 남는 약점, 등장 이유 | 상승 화살표, 추천 등급, 순수 상위호환 문구 |
+| `reward_variant_compare_drawer` | 상세 패널 | 기준 효과 1줄, 변형 효과 1줄, 대가 1줄 | 상점 가격, 파티 투표, 강화 후보 목록 |
+| `reward_variant_pick_animation` | 선택 연출 | 새 카드 1장이 덱에 들어감 | 기존 카드 위에 덮어쓰기, 교체 화살표 |
+| `reward_variant_temp_lock_badge` | 임시 선택 배지 | 새 카드 임시 선택, 되돌리기 마감 | 위험 대가 변형 자동 선택, 저주 자동 선택 |
+
+검수 체크:
+
+- 한 보상 팩의 카드 후보 슬롯은 항상 3장입니다.
+- 변형 배지는 희귀도 보석보다 강하게 보이면 안 됩니다.
+- 기준 카드 보유 수를 표시하더라도 대상 지정 프레임이나 연결선은 쓰지 않습니다.
+- 변형 후보 표면은 상점 강화 화면의 색, 아이콘, 가격표를 재사용하지 않습니다.
+- `RewardCandidatePresentationProfile.forbiddenVisualTags`에 걸린 요소가 아트/UX 시안에 있으면 반려합니다.
 
 ### 카드 강화 옵션 제작표
 
@@ -552,10 +966,14 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `upgrade_type_heroic_tune` | 확정 조율 | 예 | 준비된 영웅 카드의 빌드 마무리 |
 | `upgrade_slot_common_2choice` | 강화 후보 슬롯 | 예 | 일반/시작 카드는 최대 2개 후보만 표시 |
 | `upgrade_slot_rare_2choice` | 강화 후보 슬롯 | 예 | 희귀 카드는 안정/특화/전환 중 최대 2개 후보만 표시 |
-| `upgrade_slot_heroic_limited` | 강화 후보 슬롯 | 예 | 영웅 카드는 선행 카드 조건이 있는 확정 조율만 표시 |
+| `upgrade_slot_heroic_limited` | 강화 후보 슬롯 | 예 | 영웅 카드는 게이트 조건이 있는 확정 조율만 표시 |
 | `upgrade_slot_curse_stabilize` | 강화 후보 슬롯 | 예 | 저주는 안정화 또는 제거와 경쟁 |
 | `curse_service_policy_mvp_common` | 저주 처리 정책 | 예 | 안정화/제거 타이밍, 가격, 할인, 금지선을 고정 |
+| `curse_service_offer` | 상점 데이터 | 예 | 특정 저주 1장의 안정화, 제거, 보류 제안을 묶음 |
 | `curse_service_compare_row` | 상점 UI | 예 | 저주 안정화와 제거를 같은 행에서 비교 |
+| `curse_service_owner_confirm` | 개인 확인 | 예 | 저주 소유자가 안정화, 제거, 보류 중 먼저 선택 |
+| `curse_service_party_vote` | 파티 투표 | 예 | 안정화/제거 확정 시 파티 골드 사용을 확인 |
+| `curse_discount_reservation` | 할인 상태 | 예 | 25일 조용한 계약서의 -10 예약 할인과 만료 처리 |
 
 ### MVP 강화 옵션 예시
 
@@ -601,6 +1019,20 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 
 저주 안정화는 카드의 이득을 다시 발동시키지 않고, 저주 태그와 덱 장수 압박을 유지합니다.
 
+### MVP 저주 서비스 제작표
+
+| ID | 제작물 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `curse_service_offer_active` | 데이터 | 예 | 활성 저주에 안정화, 제거, 보류를 표시 |
+| `curse_service_offer_stabilized` | 데이터 | 예 | 안정화된 저주에 제거, 보류만 표시 |
+| `curse_service_offer_new_locked` | 데이터 | 예 | 신규 저주는 같은 정비에서 처리 불가로 잠금 |
+| `curse_service_compare_row` | UI | 예 | 현재 대가, 안정화 후 대가, 제거 비용, 보류를 한 행에서 비교 |
+| `curse_service_discount_badge_025` | UI | 예 | 25일 예약 할인과 상점 종료 시 만료를 표시 |
+| `curse_service_owner_first_rule` | 규칙 | 예 | 소유자 확인 전 파티 투표를 열지 않음 |
+| `curse_service_purchase_limit_rule` | 규칙 | 예 | 구매 성공 시에만 큰 파티 구매 한도 소모 |
+| `curse_service_removal_surcharge_rule` | 가격 | 예 | 제거 성공 시 파티 전체 제거 할증 증가 |
+| `telemetry_curse_service_resolved` | 로그 | 예 | 안정화, 제거, 보류, 실패 이유와 가격을 기록 |
+
 ## 카드 전리품 풀 제작표
 
 전리품 풀은 시작 덱 밖에서 얻을 수 있는 카드 후보 묶음입니다.
@@ -623,6 +1055,13 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `loot_pool_shop_day_010_015_card` | 상점 | 10~15일 | 예 | 일반/희귀 카드 구매가 제거, 강화, 회복과 경쟁 |
 | `loot_pool_shop_day_020_030_card` | 상점 | 20~30일 | 예 | 일반/희귀 카드 구매만 제공, 영웅은 조율 슬롯으로 분리 |
 | `loot_pool_event_contract_mvp` | 이벤트 계약 | 1~30일 | 예 | 저주와 특수 전리품을 명시적 선택으로 제공 |
+| `loot_pool_round_winter_space_071_080_class` | 일반 라운드 | 71~79일 직업별 | 아니오 | 좁아진 설치 공간, 후방 킬존, 결빙 이전에 맞는 카드만 제공 |
+| `loot_pool_boss_personal_080` | 보스 개인 | 80일 | 아니오 | 결빙과 후방 재건 결과를 역할 태그로 회수 |
+| `loot_pool_round_winter_pressure_081_090_class` | 일반 라운드 | 81~89일 직업별 | 아니오 | 압력 타일 밖 보조선, 구조물 이전, 우선 처치 대응 |
+| `loot_pool_boss_personal_090` | 보스 개인 | 90일 | 아니오 | 91~100일 약점 보완과 기존 빌드 마무리 |
+| `loot_pool_round_final_patch_091_094_class` | 일반 라운드 | 91~94일 직업별 | 아니오 | 빠른 누수, 자원 꼬임, 파괴 후 복구 보완 |
+| `loot_pool_shop_final_095_card` | 상점 | 95일 | 아니오 | 새 빌드가 아니라 기존 아키타입 조율, 제거, 마지막 공용 보완 |
+| `loot_pool_round_final_closure_096_099_class` | 일반 라운드 | 96~99일 직업별 | 아니오 | 마지막 위치 보정, 기지 위기 대응, 거절 골드 선택 |
 
 ### 전리품 희귀도 프로필
 
@@ -633,16 +1072,52 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `rarity_profile_round_011_020` | 11~20일 라운드 | 70 | 30 | 0 | 0 | 예 | 보스 클리어 보너스식 희귀도 상승 금지 |
 | `rarity_profile_round_021_030` | 21~30일 라운드 | 60 | 35 | 5 | 0 | 예 | 영웅 후보 2장 이상 동시 노출 금지 |
 | `rarity_profile_boss_personal_010` | 10일 보스 개인 | 75 | 25 | 0 | 0 | 예 | 보스 성과로 희귀도 상승 금지 |
-| `rarity_profile_boss_personal_020` | 20일 보스 개인 | 60 | 35 | 5 | 0 | 예 | 영웅은 선행 조건 충족 시 최대 1장 |
+| `rarity_profile_boss_personal_020` | 20일 보스 개인 | 60 | 35 | 5 | 0 | 예 | 영웅은 게이트 조건 충족 시 최대 1장 |
 | `rarity_profile_boss_personal_030` | 30일 보스 개인 | 50 | 40 | 10 | 0 | 예 | MVP 결과 보너스처럼 표시 금지 |
-| `rarity_profile_shop_card_005` | 5일 상점 카드 슬롯 | 100 | 0 | 0 | 0 | 예 | 영웅 카드 구매 기본 노출 금지 |
+| `rarity_profile_shop_card_005` | 5일 상점 카드 슬롯 | 100 | 0 | 0 | 0 | 예 | 영웅 확정 조율 기본 노출 금지 |
 | `rarity_profile_shop_card_010_015` | 10~15일 상점 카드 슬롯 | 70 | 30 | 0 | 0 | 예 | 영웅 카드 랜덤 판매 금지 |
 | `rarity_profile_shop_card_020_030` | 20~30일 상점 일반 카드 슬롯 | 55 | 45 | 0 | 0 | 예 | 영웅은 `shop_heroic_tune` 슬롯으로만 제공 |
 | `rarity_profile_event_contract_mvp` | 이벤트 계약 | 선택형 | 선택형 | 선택형 | 선택형 | 예 | 강제 저주 삽입 금지 |
+| `rarity_profile_round_071_080` | 71~79일 라운드 | 50 | 35 | 15 | 0 | 아니오 | 새 아키타입 시작 금지 |
+| `rarity_profile_boss_personal_080` | 80일 보스 개인 | 45 | 40 | 15 | 0 | 아니오 | 보스 성과로 희귀도 상승 금지 |
+| `rarity_profile_round_081_090` | 81~89일 라운드 | 50 | 35 | 15 | 0 | 아니오 | 압력 타일 삭제권 금지 |
+| `rarity_profile_boss_personal_090` | 90일 보스 개인 | 40 | 45 | 15 | 0 | 아니오 | 100일 보스 정답 카드 지급 금지 |
+| `rarity_profile_round_091_094` | 91~94일 라운드 | 45 | 40 | 15 | 0 | 아니오 | 게이트 없는 영웅 후보 금지 |
+| `rarity_profile_shop_final_095` | 95일 최종 상점 카드 슬롯 | 45 | 40 | 15 | 0 | 아니오 | 영웅 랜덤 판매 금지, 기존 아키타입 조율만 허용 |
+| `rarity_profile_round_096_099` | 96~99일 라운드 | 45 | 40 | 15 | 0 | 아니오 | 새 콤보 진입 금지 |
 
 `저주`가 `선택형`인 프로필은 일반 랜덤 후보가 아니라 별도 확인 선택을 사용합니다.
 
 희귀도 프로필은 웨이브 겹치기, 클리어 시간, 처치 수로 바뀌지 않습니다.
+
+### MVP 희귀도 노출 밴드 제작표
+
+희귀도 노출 밴드는 카드 제작자가 "이 구간에 어떤 복잡도의 카드를 열어도 되는가"를 확인하는 표입니다.
+
+런타임 천장이나 보상 보정이 아니며, 후보 수와 희귀도 비율을 바꾸지 않습니다.
+
+| ID | 적용 일자 | 연결 프로필 | 새로 열 수 있는 것 | 금지 |
+| --- | --- | --- | --- | --- |
+| `rarity_band_mvp_core_001_002` | 1~2일 | `rarity_profile_round_001_004` | 직업 일반 보강, 낮은 복잡도 희귀 신호 | 변형, 영웅, 저주, 새 아키타입 |
+| `rarity_band_mvp_response_003_004` | 3~4일 | `rarity_profile_round_001_004` | 빠른 적, 군집, 첫 누수 직접 대응 | 같은 대응 3장, 대가 전환 변형 |
+| `rarity_band_mvp_shop_bridge_005` | 5일 | `rarity_profile_round_005_010`, `rarity_profile_shop_card_005` | 덱 상태 카드, 첫 상점과 비교되는 낮은 비용 카드 | 희귀 상점 보상, 영웅 판매 |
+| `rarity_band_mvp_boss_prep_006_009` | 6~9일 | `rarity_profile_round_005_010` | 파괴, 잔해, 수리, 손패 보완 희귀 카드 | 겹치기 보상 문구, 보스 정답 카드 |
+| `rarity_band_mvp_boss_010` | 10일 | `rarity_profile_boss_personal_010` | 첫 보스 역할 태그 회수 | 부위 파괴 희귀도 보너스 |
+| `rarity_band_mvp_artifact_bridge_011_019` | 11~19일 | `rarity_profile_round_011_020` | 첫 아티팩트 연결 희귀 전환, 안전/타이밍 변형 | 일반 라운드 영웅 |
+| `rarity_band_mvp_branch_boss_020` | 20일 | `rarity_profile_boss_personal_020` | 지원 크레딧과 전투 증거가 있는 영웅 후보, 변형 보스 약점 회수 | 보스 성과 기반 영웅 증가 |
+| `rarity_band_mvp_commit_021_029` | 21~29일 | `rarity_profile_round_021_030` | 기존 아키타입 영웅 확정, 기존 축 변형 | 새 빌드 강제, 저주 랜덤 후보 |
+| `rarity_band_mvp_result_030` | 30일 | `rarity_profile_boss_personal_030` | MVP 덱 유지/정리 판단 | 클리어 보너스 희귀도 상승 |
+
+### MVP 카드 풀 단계 잠금 제작표
+
+| ID | 적용 일자 | 허용 풀 | 미루는 풀 |
+| --- | --- | --- | --- |
+| `pool_stage_mvp_core_001_002` | 1~2일 | 직업 기본 보강, 공용 보완 일부 | 전리품 변형, 영웅, 저주 |
+| `pool_stage_mvp_response_003_004` | 3~4일 | 빠른 적, 군집, 첫 누수 대응 | 보스 전용, 확정 빌드 |
+| `pool_stage_mvp_shop_bridge_005` | 5일 | 낮은 비용 카드, 덱 상태 보완, 첫 상점 비교 카드 | 희귀 상점 보상, 영웅 판매 |
+| `pool_stage_mvp_boss_prep_006_009` | 6~9일 | 파괴, 잔해, 수리 예약, 손패 보완 | 영웅, 새 아키타입 |
+| `pool_stage_mvp_artifact_bridge_011_019` | 11~19일 | 아티팩트 연결 희귀 전환, 안전/타이밍 변형 | 일반 라운드 영웅 |
+| `pool_stage_mvp_commit_020_030` | 20~30일 | 지원 크레딧과 전투 증거가 있는 영웅, 기존 아키타입 변형 | 새 아키타입 강제, 랜덤 저주 |
 
 ### MVP 전리품 희귀도 풀 잠금표
 
@@ -659,6 +1134,226 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `loot_lock_shop_card_010_015` | `rarity_profile_shop_card_010_015` | 슬롯형 | 1~2장 | 0~1장 | 0장 | 없음 | 카드 구매가 카드 제거와 강화보다 항상 우월하지 않게 가격 경쟁 |
 | `loot_lock_shop_card_020_030` | `rarity_profile_shop_card_020_030` | 슬롯형 | 1~2장 | 0~1장 | 랜덤 판매 0장 | 계약 슬롯 별도 | 영웅 확정 조율은 상품 슬롯, 전리품 랜덤 후보가 아님 |
 | `loot_lock_event_contract_mvp` | `rarity_profile_event_contract_mvp` | 선택형 | 선택지별 | 선택지별 | 명시 선택 | 명시 선택 | 저주와 특수 카드는 확인 UI, 대가 문장, 거절 선택을 함께 표시 |
+
+### 71~100일 전리품 희귀도 풀 잠금표
+
+| ID | 연결 프로필 | 후보 수 | 직업 후보 | 공용 보완 | 영웅 제한 | 저주 제한 | 제작 메모 |
+| --- | --- | ---: | --- | --- | --- | --- | --- |
+| `loot_lock_round_071_080` | `rarity_profile_round_071_080` | 3 | 2~3장 | 0~1장 | 최대 1장, 기존 축만 | 없음 | 좁은 설치 공간, 결빙 이전, 후방 킬존 대응을 우선 |
+| `loot_lock_boss_080` | `rarity_profile_boss_personal_080` | 3 | 2~3장 | 0~1장 | 최대 1장, 기존 축만 | 없음 | 80일 보스에서 확인한 결빙/재건/부위 태그만 후보 편향 |
+| `loot_lock_round_081_090` | `rarity_profile_round_081_090` | 3 | 2~3장 | 0~1장 | 최대 1장, 기존 축만 | 없음 | 압력 밖 보조선, 구조물 이전, 우선 처치 카드를 우선 |
+| `loot_lock_boss_090` | `rarity_profile_boss_personal_090` | 3 | 2~3장 | 0~1장 | 최대 1장, 선행 아키타입 필요 | 없음 | 최종 10일 약점 보완, 100일 정답 카드 지급 금지 |
+| `loot_lock_round_091_094` | `rarity_profile_round_091_094` | 3 | 2~3장 | 0~1장 | 최대 1장, 선행 아키타입 필요 | 없음 | 빠른 누수, 자원 꼬임, 파괴 후 복구 보완 |
+| `loot_lock_shop_final_095` | `rarity_profile_shop_final_095` | 슬롯형 | 1~2장 | 0~1장 | 랜덤 판매 0장, 조율 슬롯만 | 계약 신규 금지 | 새 빌드보다 제거, 강화, 기존 축 마무리를 우선 |
+| `loot_lock_round_096_099` | `rarity_profile_round_096_099` | 3 | 2~3장 | 0~1장 | 최대 1장, 선행 아키타입 필요 | 없음 | 마지막 위치 보정, 기지 위기 대응, 거절 골드 선택 |
+| `loot_lock_boss_100_result` | 없음 | 0 | 없음 | 없음 | 없음 | 없음 | 완료한 런에 영향을 주는 카드 보상 없이 결과 기록과 해금 후보만 표시 |
+
+### 1~30일 전리품 샘플 제작표
+
+이 표는 카드 보상 후보 3장의 제작 의도를 일자별로 고정합니다.
+
+고정 드랍표가 아니며, 모든 행은 후보 수 3장, 해당 일자의 `MvpLootRarityLock`, 골드 거절 값, 활성 방향 투영 규칙을 그대로 유지합니다.
+
+| ID | 일자 | 잠금 | 직접 대응 태그 | 빌드 연결 태그 | 덱 상태 태그 | 금지/후속 |
+| --- | ---: | --- | --- | --- | --- | --- |
+| `mvp_loot_sample_day_001_first_gap` | 1 | `loot_lock_round_001_004` | `first_leak_patch`, `basic_build_gap` | `starter_loop_repeat` | `low_cost_curve` | 영웅/저주/상점 없음 |
+| `mvp_loot_sample_day_002_fast_front` | 2 | `loot_lock_round_001_004` | `runner_delay`, `active_front_only` | `archetype_signal_low_complexity` | `mana_curve_check` | 비활성 방향 후보 금지 |
+| `mvp_loot_sample_day_003_cluster_hold` | 3 | `loot_lock_round_001_004` | `cluster_hold`, `small_aoe_or_delay` | `class_control_identity` | `common_soft_gap_max_one` | 같은 대응 3장 금지 |
+| `mvp_loot_sample_day_004_first_damage` | 4 | `loot_lock_round_001_004` | `structure_damage_recovery` | `save_or_sacrifice_structure` | `gold_decline_preview` | 보스 전용 정답 금지 |
+| `mvp_loot_sample_day_005_first_shop_bridge` | 5 | `loot_lock_round_005_010` | `hand_jam_patch` | `remove_upgrade_recover_compare` | `deck_pressure_notice` | `mvp_shop_lock_day_005` 연결 |
+| `mvp_loot_sample_day_006_collapse_intro` | 6 | `loot_lock_round_005_010` | `destructor_hold`, `repair_window` | `debris_or_taunt_bridge` | `dead_card_prevention` | 자동 완전 복구 금지 |
+| `mvp_loot_sample_day_007_priority_prep` | 7 | `loot_lock_round_005_010` | `priority_burst`, `long_leak_delay` | `boss_part_focus_prep` | `mana_curve_patch` | 보스 삭제 카드 금지 |
+| `mvp_loot_sample_day_008_stack_tempo` | 8 | `loot_lock_round_005_010` | `density_control`, `killzone_hold` | `tempo_recovery_bridge` | `discard_draw_window` | 겹치기 보상 문구 금지 |
+| `mvp_loot_sample_day_009_boss_gap` | 9 | `loot_lock_round_005_010` | `last_boss_gap_patch` | `part_focus_or_delay_bridge` | `decline_or_trim_reason` | 보스 정답 카드 금지 |
+| `mvp_loot_sample_day_010_boss_foundation` | 10 | `loot_lock_boss_010` | `boss_failure_tag_recall` | `foundation_build_choice` | `first_cleanup_pressure` | `artifact_pool_foundation_010`, 성과 보너스 금지 |
+| `mvp_loot_sample_day_011_artifact_mismatch` | 11 | `loot_lock_round_011_020` | `artifact_gap_patch` | `rare_pivot_intro` | `deck_size_16_21_check` | 일반 라운드 영웅 금지 |
+| `mvp_loot_sample_day_012_active_route` | 12 | `loot_lock_round_011_020` | `active_route_length_patch` | `artifact_timing_sync` | `common_gap_soft_only` | 비활성 방향 보상 이유 금지 |
+| `mvp_loot_sample_day_013_repeat_tag` | 13 | `loot_lock_round_011_020` | `repeat_failure_tag_patch` | `party_or_solo_loop_bridge` | `low_cost_glue` | 같은 아키타입 3장 금지 |
+| `mvp_loot_sample_day_014_contract_preview` | 14 | `loot_lock_round_011_020` | `pre_event_weakness_expose` | `strength_or_weakness_signal` | `save_gold_reason` | 계약 강요 금지 |
+| `mvp_loot_sample_day_015_contract_shop` | 15 | `loot_lock_round_011_020` | `contract_risk_translation` | `event_shop_choice_bridge` | `small_shop_overbuy_guard` | `event_contract_lock_mvp_015`, 강제 저주 금지 |
+| `mvp_loot_sample_day_016_choice_recall` | 16 | `loot_lock_round_011_020` | `choice_consequence_patch` | `artifact_card_fit_check` | `unused_card_visibility` | 미구매 선택 실패 표시 금지 |
+| `mvp_loot_sample_day_017_priority_loop` | 17 | `loot_lock_round_011_020` | `fast_leak_or_priority_patch` | `combo_bridge_not_payoff` | `hand_limit_check` | 새 시스템 카드 금지 |
+| `mvp_loot_sample_day_018_stack_tempo_recovery` | 18 | `loot_lock_round_011_020` | `density_recovery`, `repair_window` | `pressure_recovery_bridge` | `resource_unjam` | 겹치기 보상 금지 |
+| `mvp_loot_sample_day_019_branch_prep` | 19 | `loot_lock_round_011_020` | `pre_variant_boss_gap` | `branch_or_keep_signal` | `trim_or_decline_value` | 확정 영웅 보장 금지 |
+| `mvp_loot_sample_day_020_boss_branch` | 20 | `loot_lock_boss_020` | `variant_boss_failure_recall` | `commit_or_cleanup_bridge` | `core_card_ratio_check` | `artifact_pool_branch_020`, 성과 영웅 보너스 금지 |
+| `mvp_loot_sample_day_021_commit_entry` | 21 | `loot_lock_round_021_030` | `elite_or_split_patch` | `heroic_gate_if_supported` | `pick_or_decline_normal` | 준비 안 된 영웅 금지 |
+| `mvp_loot_sample_day_022_active_split` | 22 | `loot_lock_round_021_030` | `active_direction_role_split` | `class_synergy_position_bridge` | `common_soft_gap_max_one` | 비활성 방향 전용 카드 금지 |
+| `mvp_loot_sample_day_023_collapse_pressure` | 23 | `loot_lock_round_021_030` | `collapse_pressure_patch` | `stable_build_with_weakness` | `hand_jam_check` | 만능 공용 대체 금지 |
+| `mvp_loot_sample_day_024_transition_prep` | 24 | `loot_lock_round_021_030` | `pre_transition_leak_patch` | `weakness_visibility_keep` | `shop_event_gold_reason` | 보스급 전환 예고 금지 |
+| `mvp_loot_sample_day_025_season_turn` | 25 | `loot_lock_round_021_030` | `season_weakness_patch` | `existing_archetype_next_pressure` | `contract_shop_one_focus` | `event_contract_lock_mvp_025`, 대형 보상 금지 |
+| `mvp_loot_sample_day_026_speed_patch` | 26 | `loot_lock_round_021_030` | `late_speed_pressure_patch` | `current_build_timing_narrow` | `remove_decline_low_cost` | 새 아키타입 시작 금지 |
+| `mvp_loot_sample_day_027_density_priority` | 27 | `loot_lock_round_021_030` | `density_priority_patch` | `heroic_gate_recheck` | `hand_limit_combo_check` | 랜덤 저주 금지 |
+| `mvp_loot_sample_day_028_stack_rehearsal` | 28 | `loot_lock_round_021_030` | `high_density_killzone_hold` | `hold_or_rebuild_choice` | `draw_discard_unjam` | 겹치기 보상 증가 금지 |
+| `mvp_loot_sample_day_029_final_position` | 29 | `loot_lock_round_021_030` | `final_position_patch` | `boss_part_or_relocation_preview` | `last_decline_trim_value` | 새 적 역할/새 시스템 금지 |
+| `mvp_loot_sample_day_030_mvp_result` | 30 | `loot_lock_boss_030` | `observer_result_recall` | `keep_or_cleanup_mvp_build` | `next_run_deck_judgment` | `artifact_pool_mvp_result_030`, 31일 빌드 강제 금지 |
+
+### 1~30일 샘플 카드 라우팅 제작표
+
+`MvpLootSampleCardRouteSet`은 샘플 일자가 실제 카드 ID 후보를 어떤 우선순위로 볼지 고정합니다.
+
+표의 `G/A/E/T`는 수호자, 건축가, 원소술사, 땜장이입니다.
+
+영웅 카드가 들어간 행은 조건 충족 시 `빌드 연결` 레일에서만 쓰며, 게이트 조건이 없으면 같은 행의 일반/희귀 대체 카드로 내려갑니다.
+
+| 라우트 ID | 일자 | 직접 대응 G/A/E/T | 빌드 연결 G/A/E/T | 덱 상태 공용 후보 | 제한 |
+| --- | ---: | --- | --- | --- | --- |
+| `route_mvp_loot_day_001_first_gap` | 1 | `card_guardian_iron_wall` / `card_architect_double_barricade` / `card_elementalist_fire_ring` / `card_tinkerer_reinforced_screw` | `card_guardian_reflective_oath` / `card_architect_reinforced_blueprint` / `card_elementalist_frost_shard` / `card_tinkerer_lubrication` | `card_common_tactical_map`, `card_common_temporary_turret` | 시작 카드 직접 복제 금지 |
+| `route_mvp_loot_day_002_fast_front` | 2 | `card_guardian_crack_shield` / `card_architect_slippery_debris` / `card_elementalist_rewind_gust` / `card_tinkerer_lubrication` | `card_guardian_front_swap` / `card_architect_double_barricade` / `card_elementalist_frost_shard` / `card_tinkerer_preheater` | `card_common_temporary_turret`, `card_common_quick_hands` | 비활성 방향 후보 금지 |
+| `route_mvp_loot_day_003_cluster_hold` | 3 | `card_guardian_reflective_oath` / `card_architect_delayed_charge` / `card_elementalist_fire_ring` / `card_tinkerer_preheater` | `card_guardian_crack_shield` / `card_architect_slippery_debris` / `card_elementalist_frost_shard` / `card_tinkerer_lubrication` | `card_common_focus_fire`, `card_common_temporary_turret` | 같은 대응 3장 금지 |
+| `route_mvp_loot_day_004_first_damage` | 4 | `card_guardian_iron_wall` / `card_architect_shard_recovery` / `card_elementalist_rewind_gust` / `card_tinkerer_reinforced_screw` | `card_guardian_front_swap` / `card_architect_reinforced_blueprint` / `card_elementalist_frost_shard` / `card_tinkerer_lubrication` | `card_common_emergency_repair`, `card_common_battlefield_cleanup` | 보스 전용 정답 금지 |
+| `route_mvp_loot_day_005_first_shop_bridge` | 5 | `card_guardian_last_guard` / `card_architect_shard_recovery` / `card_elementalist_frost_shard` / `card_tinkerer_auto_extinguisher` | `card_guardian_iron_wall` / `card_architect_reinforced_blueprint` / `card_elementalist_fire_ring` / `card_tinkerer_reinforced_screw` | `card_common_reorganize`, `card_common_mana_convert`, `card_common_quick_hands` | 첫 상점 희귀 보상화 금지 |
+| `route_mvp_loot_day_006_collapse_intro` | 6 | `card_guardian_iron_wall` / `card_architect_slippery_debris` / `card_elementalist_rewind_gust` / `card_tinkerer_reinforced_screw` | `card_guardian_reflective_oath` / `card_architect_delayed_charge` / `card_elementalist_fire_ring` / `card_tinkerer_auto_extinguisher` | `card_common_emergency_repair`, `card_common_battlefield_cleanup` | 자동 완전 복구 금지 |
+| `route_mvp_loot_day_007_priority_prep` | 7 | `card_guardian_crack_shield` / `card_architect_delayed_charge` / `card_elementalist_overcharged_bolt` / `card_tinkerer_lubrication` | `card_guardian_front_swap` / `card_architect_reinforced_blueprint` / `card_elementalist_elemental_rift` / `card_tinkerer_preheater` | `card_common_focus_fire`, `card_common_tactical_map` | 보스 삭제 카드 금지 |
+| `route_mvp_loot_day_008_stack_tempo` | 8 | `card_guardian_reflective_oath` / `card_architect_delayed_charge` / `card_elementalist_fire_ring` / `card_tinkerer_preheater` | `card_guardian_crack_shield` / `card_architect_slippery_debris` / `card_elementalist_elemental_rift` / `card_tinkerer_emergency_wiring` | `card_common_quick_hands`, `card_common_mana_convert`, `card_common_reorganize` | 겹치기 보상 문구 금지 |
+| `route_mvp_loot_day_009_boss_gap` | 9 | `card_guardian_last_guard` / `card_architect_reinforced_blueprint` / `card_elementalist_frost_shard` / `card_tinkerer_reinforced_screw` | `card_guardian_front_swap` / `card_architect_delayed_charge` / `card_elementalist_overcharged_bolt` / `card_tinkerer_auto_extinguisher` | `card_common_focus_fire`, `card_common_tactical_map`, `card_common_emergency_repair` | 보스 정답 카드 금지 |
+| `route_mvp_loot_day_010_boss_foundation` | 10 | `card_guardian_last_guard` / `card_architect_reinforced_blueprint` / `card_elementalist_overcharged_bolt` / `card_tinkerer_auto_extinguisher` | `card_guardian_front_swap` / `card_architect_delayed_charge` / `card_elementalist_elemental_rift` / `card_tinkerer_emergency_wiring` | `card_common_focus_fire`, `card_common_tactical_map`, `card_common_emergency_repair` | 영웅 후보 없음 |
+| `route_mvp_loot_day_011_artifact_mismatch` | 11 | `card_guardian_iron_wall` / `card_architect_reinforced_blueprint` / `card_elementalist_fire_ring` / `card_tinkerer_reinforced_screw` | `card_guardian_front_swap` / `card_architect_shard_recovery` / `card_elementalist_elemental_rift` / `card_tinkerer_emergency_wiring` | `card_common_tactical_map`, `card_common_quick_hands` | 일반 라운드 영웅 금지 |
+| `route_mvp_loot_day_012_active_route` | 12 | `card_guardian_front_swap` / `card_architect_double_barricade` / `card_elementalist_rewind_gust` / `card_tinkerer_lubrication` | `card_guardian_crack_shield` / `card_architect_reinforced_blueprint` / `card_elementalist_fire_ring` / `card_tinkerer_preheater` | `card_common_tactical_map`, `card_common_temporary_turret` | 비활성 방향 보상 이유 금지 |
+| `route_mvp_loot_day_013_repeat_tag` | 13 | `card_guardian_reflective_oath` / `card_architect_slippery_debris` / `card_elementalist_frost_shard` / `card_tinkerer_auto_extinguisher` | `card_guardian_front_swap` / `card_architect_delayed_charge` / `card_elementalist_overcharged_bolt` / `card_tinkerer_emergency_wiring` | `card_common_quick_hands`, `card_common_reorganize` | 같은 아키타입 3장 금지 |
+| `route_mvp_loot_day_014_contract_preview` | 14 | `card_guardian_last_guard` / `card_architect_shard_recovery` / `card_elementalist_frost_shard` / `card_tinkerer_reinforced_screw` | `card_guardian_reflective_oath` / `card_architect_reinforced_blueprint` / `card_elementalist_elemental_rift` / `card_tinkerer_emergency_wiring` | `card_common_tactical_map`, `card_common_mana_convert` | 계약 강요 금지 |
+| `route_mvp_loot_day_015_contract_shop` | 15 | `card_guardian_last_guard` / `card_architect_shard_recovery` / `card_elementalist_overcharged_bolt` / `card_tinkerer_auto_extinguisher` | `card_guardian_front_swap` / `card_architect_reinforced_blueprint` / `card_elementalist_elemental_rift` / `card_tinkerer_emergency_wiring` | `card_common_reorganize`, `card_common_mana_convert`, `card_common_emergency_repair` | 강제 저주 금지 |
+| `route_mvp_loot_day_016_choice_recall` | 16 | `card_guardian_iron_wall` / `card_architect_slippery_debris` / `card_elementalist_fire_ring` / `card_tinkerer_reinforced_screw` | `card_guardian_reflective_oath` / `card_architect_delayed_charge` / `card_elementalist_frost_shard` / `card_tinkerer_preheater` | `card_common_battlefield_cleanup`, `card_common_quick_hands` | 미구매 선택 실패 표시 금지 |
+| `route_mvp_loot_day_017_priority_loop` | 17 | `card_guardian_crack_shield` / `card_architect_delayed_charge` / `card_elementalist_overcharged_bolt` / `card_tinkerer_lubrication` | `card_guardian_front_swap` / `card_architect_shard_recovery` / `card_elementalist_elemental_rift` / `card_tinkerer_emergency_wiring` | `card_common_focus_fire`, `card_common_quick_hands` | 새 시스템 카드 금지 |
+| `route_mvp_loot_day_018_stack_tempo_recovery` | 18 | `card_guardian_reflective_oath` / `card_architect_delayed_charge` / `card_elementalist_fire_ring` / `card_tinkerer_preheater` | `card_guardian_crack_shield` / `card_architect_slippery_debris` / `card_elementalist_rewind_gust` / `card_tinkerer_emergency_wiring` | `card_common_quick_hands`, `card_common_mana_convert`, `card_common_reorganize` | 겹치기 보상 금지 |
+| `route_mvp_loot_day_019_branch_prep` | 19 | `card_guardian_last_guard` / `card_architect_reinforced_blueprint` / `card_elementalist_overcharged_bolt` / `card_tinkerer_auto_extinguisher` | `card_guardian_front_swap` / `card_architect_delayed_charge` / `card_elementalist_elemental_rift` / `card_tinkerer_emergency_wiring` | `card_common_focus_fire`, `card_common_tactical_map` | 확정 영웅 보장 금지 |
+| `route_mvp_loot_day_020_boss_branch` | 20 | `card_guardian_last_guard` / `card_architect_reinforced_blueprint` / `card_elementalist_overcharged_bolt` / `card_tinkerer_auto_extinguisher` | `card_guardian_unbroken_gate` / `card_architect_inverted_path` / `card_elementalist_storm_ritual` / `card_tinkerer_reassembly_machine` | `card_common_focus_fire`, `card_common_tactical_map` | 영웅은 게이트 조건 충족 시만 |
+| `route_mvp_loot_day_021_commit_entry` | 21 | `card_guardian_crack_shield` / `card_architect_slippery_debris` / `card_elementalist_frost_shard` / `card_tinkerer_lubrication` | `card_guardian_thorn_throne` / `card_architect_chain_collapse` / `card_elementalist_eye_of_stillness` / `card_tinkerer_resonance_amp` | `card_common_focus_fire`, `card_common_quick_hands` | 영웅 게이트 실패 시 하향 |
+| `route_mvp_loot_day_022_active_split` | 22 | `card_guardian_front_swap` / `card_architect_double_barricade` / `card_elementalist_rewind_gust` / `card_tinkerer_lubrication` | `card_guardian_unbroken_gate` / `card_architect_inverted_path` / `card_elementalist_elemental_rift` / `card_tinkerer_resonance_amp` | `card_common_tactical_map`, `card_common_temporary_turret` | 비활성 방향 카드 금지 |
+| `route_mvp_loot_day_023_collapse_pressure` | 23 | `card_guardian_reflective_oath` / `card_architect_delayed_charge` / `card_elementalist_fire_ring` / `card_tinkerer_reinforced_screw` | `card_guardian_thorn_throne` / `card_architect_chain_collapse` / `card_elementalist_eye_of_stillness` / `card_tinkerer_reassembly_machine` | `card_common_battlefield_cleanup`, `card_common_emergency_repair` | 만능 공용 대체 금지 |
+| `route_mvp_loot_day_024_transition_prep` | 24 | `card_guardian_last_guard` / `card_architect_shard_recovery` / `card_elementalist_overcharged_bolt` / `card_tinkerer_auto_extinguisher` | `card_guardian_unbroken_gate` / `card_architect_inverted_path` / `card_elementalist_storm_ritual` / `card_tinkerer_resonance_amp` | `card_common_tactical_map`, `card_common_mana_convert` | 보스급 전환 예고 금지 |
+| `route_mvp_loot_day_025_season_turn` | 25 | `card_guardian_front_swap` / `card_architect_reinforced_blueprint` / `card_elementalist_rewind_gust` / `card_tinkerer_emergency_wiring` | `card_guardian_thorn_throne` / `card_architect_chain_collapse` / `card_elementalist_eye_of_stillness` / `card_tinkerer_resonance_amp` | `card_common_reorganize`, `card_common_tactical_map`, `card_common_emergency_repair` | 대형 보상, 새 아티팩트 금지 |
+| `route_mvp_loot_day_026_speed_patch` | 26 | `card_guardian_crack_shield` / `card_architect_double_barricade` / `card_elementalist_rewind_gust` / `card_tinkerer_preheater` | `card_guardian_front_swap` / `card_architect_inverted_path` / `card_elementalist_eye_of_stillness` / `card_tinkerer_resonance_amp` | `card_common_temporary_turret`, `card_common_quick_hands` | 새 아키타입 시작 금지 |
+| `route_mvp_loot_day_027_density_priority` | 27 | `card_guardian_reflective_oath` / `card_architect_delayed_charge` / `card_elementalist_overcharged_bolt` / `card_tinkerer_lubrication` | `card_guardian_thorn_throne` / `card_architect_chain_collapse` / `card_elementalist_storm_ritual` / `card_tinkerer_resonance_amp` | `card_common_focus_fire`, `card_common_mana_convert` | 랜덤 저주 금지 |
+| `route_mvp_loot_day_028_stack_rehearsal` | 28 | `card_guardian_crack_shield` / `card_architect_slippery_debris` / `card_elementalist_fire_ring` / `card_tinkerer_preheater` | `card_guardian_thorn_throne` / `card_architect_chain_collapse` / `card_elementalist_eye_of_stillness` / `card_tinkerer_emergency_wiring` | `card_common_quick_hands`, `card_common_mana_convert`, `card_common_reorganize` | 겹치기 보상 증가 금지 |
+| `route_mvp_loot_day_029_final_position` | 29 | `card_guardian_front_swap` / `card_architect_reinforced_blueprint` / `card_elementalist_rewind_gust` / `card_tinkerer_emergency_wiring` | `card_guardian_unbroken_gate` / `card_architect_inverted_path` / `card_elementalist_storm_ritual` / `card_tinkerer_reassembly_machine` | `card_common_tactical_map`, `card_common_focus_fire` | 새 적 역할/새 시스템 금지 |
+| `route_mvp_loot_day_030_mvp_result` | 30 | `card_guardian_last_guard` / `card_architect_reinforced_blueprint` / `card_elementalist_overcharged_bolt` / `card_tinkerer_auto_extinguisher` | `card_guardian_unbroken_gate` / `card_architect_inverted_path` / `card_elementalist_storm_ritual` / `card_tinkerer_reassembly_machine` | `card_common_tactical_map`, `card_common_reorganize`, `card_common_focus_fire` | 31일 빌드 강제 금지 |
+
+### 20~30일 영웅 후보 게이트 제작표
+
+`MvpHeroicCommitGate`는 위 라우트 표의 영웅 후보가 실제 보상 화면에 남을지 검사하는 제작 단위입니다.
+
+모든 게이트는 공통으로 `allowedDayRange: [20, 30]`, `requiredSupportCardCount: 2`, `requiredRunChosenSupportCount: 1`, `requiredRecentProofCount: 1`, `recentProofLookbackDays: 5`, `soloProjectionSafe: true`를 사용합니다.
+
+| 게이트 ID | 영웅 카드 | 출처 | 지원 카드 후보 | 최근 전투 증거 | 하향 후보 | UI 대가 태그 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `heroic_gate_guardian_thorn_throne` | `card_guardian_thorn_throne` | 21~30 라운드, 20~30 `shop_heroic_tune` | `card_guardian_thorn_growth`, `card_guardian_reflective_oath`, `card_guardian_crack_shield`, `card_guardian_iron_wall` | `taunt_anchor_tanked_hits`, `thorn_damage_triggered`, `stack_pressure_hits_on_taunt` | `card_guardian_reflective_oath`, `card_guardian_crack_shield` | `repair_efficiency_down`, `repeat_hit_risk` |
+| `heroic_gate_guardian_unbroken_gate` | `card_guardian_unbroken_gate` | 20/30 보스 개인, 21~30 라운드, 20~30 `shop_heroic_tune` | `card_guardian_last_gate`, `card_guardian_front_swap`, `card_guardian_iron_wall`, `card_guardian_binding_oath` | `boss_part_focus_window_created`, `base_critical_hold`, `taunt_anchor_survived` | `card_guardian_last_guard`, `card_guardian_front_swap` | `high_cost`, `boss_pattern_cancel_forbidden` |
+| `heroic_gate_architect_chain_collapse` | `card_architect_chain_collapse` | 21~30 라운드, 20~30 `shop_heroic_tune` | `card_architect_debris_blast`, `card_architect_delayed_charge`, `card_architect_slippery_debris`, `card_architect_shard_recovery` | `planned_collapse_resolved`, `destroy_record_spent_correctly`, `swarm_compressed_by_debris` | `card_architect_delayed_charge`, `card_architect_slippery_debris` | `destroy_record_spent`, `salvage_loop_forbidden` |
+| `heroic_gate_architect_inverted_path` | `card_architect_inverted_path` | 20/30 보스 개인, 21~30 라운드, 20~30 `shop_heroic_tune` | `card_architect_barricade`, `card_architect_double_barricade`, `card_architect_reinforced_blueprint`, `card_architect_compact_design` | `path_extension_seconds_high`, `maze_preview_used`, `boss_path_cost_read` | `card_architect_reinforced_blueprint`, `card_architect_double_barricade` | `path_check_required`, `complete_block_forbidden` |
+| `heroic_gate_elementalist_eye_of_stillness` | `card_elementalist_eye_of_stillness` | 21~30 라운드, 20~30 `shop_heroic_tune` | `card_elementalist_frost_zone`, `card_elementalist_pushback`, `card_elementalist_rewind_gust`, `card_elementalist_frost_shard` | `control_window_prevented_leak`, `stack_pressure_control_used`, `boss_control_weakened_understood` | `card_elementalist_rewind_gust`, `card_elementalist_frost_shard` | `boss_cc_weakened`, `elite_resistance_visible` |
+| `heroic_gate_elementalist_storm_ritual` | `card_elementalist_storm_ritual` | 20/30 보스 개인, 21~30 라운드, 20~30 `shop_heroic_tune` | `card_elementalist_mark`, `card_elementalist_overcharged_bolt`, `card_elementalist_elemental_rift`, `card_elementalist_fire_ring` | `marked_target_followed_up`, `boss_part_focus_marked`, `forecast_hit_landed` | `card_elementalist_overcharged_bolt`, `card_elementalist_elemental_rift` | `long_forecast`, `mark_required` |
+| `heroic_gate_tinkerer_resonance_amp` | `card_tinkerer_resonance_amp` | 21~30 라운드, 20~30 `shop_heroic_tune` | `card_tinkerer_amplifier`, `card_tinkerer_lubrication`, `card_tinkerer_emergency_wiring`, `card_tinkerer_preheater` | `aura_target_window_used`, `overcluster_risk_survived`, `aura_core_repositioned` | `card_tinkerer_emergency_wiring`, `card_tinkerer_lubrication` | `overcluster_risk`, `aura_core_vulnerable` |
+| `heroic_gate_tinkerer_reassembly_machine` | `card_tinkerer_reassembly_machine` | 20/30 보스 개인, 21~30 라운드, 20~30 `shop_heroic_tune` | `card_tinkerer_remote_repair`, `card_tinkerer_spare_parts`, `card_tinkerer_auto_rebuild`, `card_tinkerer_reinforced_screw` | `structure_destroyed_then_recovered`, `repair_window_saved_core`, `rebuild_penalty_understood` | `card_tinkerer_reinforced_screw`, `card_tinkerer_auto_extinguisher` | `rebuild_delay`, `same_tile_rebuild_penalty` |
+
+게이트 실패 이유는 플레이어에게 벌점처럼 보이면 안 됩니다.
+
+UI는 "조건 미달" 대신 "아직 이 운영이 충분히 굴러가지 않았습니다"에 가까운 문장으로 표시하고, 같은 역할의 하향 후보를 자연스럽게 제시합니다.
+
+### 영웅 동등 지원 제작표
+
+`HeroicEquivalentSupportProfile`은 적용 강화나 장착 아티팩트가 영웅 게이트의 지원 카드 조건을 최대 1장만큼 보조할 수 있는지를 정의합니다.
+
+이 표는 영웅 후보를 더 자주 띄우는 보상표가 아닙니다. 실제 덱 카드가 최소 1장 있고, 최근 전투 증거가 있으며, 이미 적용된 강화/장착 아티팩트가 해당 운영을 명확히 보강할 때만 쓰는 검수표입니다.
+
+| ID | 분류 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `heroic_equivalent_support_profiles` | 데이터 | 예 | 8개 영웅 게이트에 연결되는 24개 강화/아티팩트 지원 태그 정의 |
+| `heroic_support_actual_card_required_check` | 판정 | 예 | 실제 덱 지원 카드가 0장이면 동등 지원을 무시 |
+| `heroic_support_credit_cap_check` | 판정 | 예 | 한 게이트에서 동등 지원은 강화/아티팩트 합산 최대 1크레딧만 인정 |
+| `heroic_support_upgrade_artifact_state_guard` | 판정 | 예 | 적용 해제 강화, 휴면/방출/훈련/임시 아티팩트를 차단 |
+| `ui_heroic_support_credit_breakdown` | 보상 UI | 예 | 실제 카드, 강화, 아티팩트가 각각 몇 크레딧으로 계산됐는지 표시 |
+| `ui_heroic_support_locked_reason` | 보상 UI | 예 | 실제 카드 부족, 휴면 아티팩트, 증거 부족 등 하향 이유 표시 |
+| `heroic_equivalent_support_reward_neutral_guard` | 검수 | 예 | 후보 수, 희귀도, 골드, 보스 파편, 상점 가격, 웨이브 겹치기 보상 변경 금지 |
+| `heroic_equivalent_support_solo_projection_check` | 검수 | 예 | 1인 동쪽 전선에서도 동등 지원 조건이 자연스럽게 성립하는지 확인 |
+
+직업별 제작 잠금:
+
+| 영웅 게이트 | 동등 지원 태그 수 | 대표 출처 | 제작 주의점 |
+| --- | ---: | --- | --- |
+| `heroic_gate_guardian_thorn_throne` | 3 | 가시 상한 강화, 파손 왕관, 넓은 도발 강화 | 실제 피격과 반사 운영 없이 자동 발동만으로 인정하지 않음 |
+| `heroic_gate_guardian_unbroken_gate` | 3 | 검은 닻, 전방 교대 미리보기, 최후 방벽 여진 | 보스 본체 정지나 패턴 취소로 번역하지 않음 |
+| `heroic_gate_architect_chain_collapse` | 3 | 속삭이는 못, 긴 도화선, 회수 기록 강화 | 파괴 기록과 폭발 가치가 남아야 함 |
+| `heroic_gate_architect_inverted_path` | 3 | 낡은 관측 렌즈, 경로 표시 바리케이드 | 완전 길막 성공을 지원으로 인정하지 않음 |
+| `heroic_gate_elementalist_eye_of_stillness` | 3 | 예측 제어 렌즈, 냉기 저항 표시, 킬존 점화 | 보스/정예 CC 약화 규칙을 유지 |
+| `heroic_gate_elementalist_storm_ritual` | 3 | 검은 닻, 부위 집중 균열, 표식 핑 | 자동 추적 낙뢰나 처치 보상 증가 금지 |
+| `heroic_gate_tinkerer_resonance_amp` | 3 | 과열 증폭 코어, 수리 오라, 안전 간격 강화 | 전역 버프가 아니라 배치 밀도와 위험을 읽어야 함 |
+| `heroic_gate_tinkerer_reassembly_machine` | 3 | 금 간 종, 위기 수리, 과부하 안전장치 | 무료 재건이나 파괴 보상 루프로 이어지면 안 됨 |
+
+### 영웅 게이트 UI 제작표
+
+영웅 게이트 UI는 보상 화면, 카드 상세, 상점 조율 패널이 같은 판정 결과를 같은 말로 보여주게 만드는 제작 단위입니다.
+
+| ID | 분류 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `heroic_gate_presentation_profiles` | 데이터 | 예 | 8개 MVP 영웅 게이트의 표시 상태, 배지, 상세 행, 잠금 이유를 정의 |
+| `ui_reward_heroic_ready_badge` | 보상 UI | 예 | 통과한 영웅 후보에 `준비된 운영` 배지를 작게 표시 |
+| `ui_reward_heroic_detail_rows` | 보상 UI | 예 | 지원 카드, 동등 지원, 최근 증거, 남는 대가 4줄 표시 |
+| `ui_reward_heroic_downgrade_chip` | 보상 UI | 예 | 하향 후보 펼침 하단에 이유 칩 1개 표시 |
+| `ui_shop_heroic_owner_confirm` | 상점 UI | 예 | 대상 플레이어가 먼저 받을지 보류할지 결정 |
+| `ui_shop_heroic_party_vote` | 상점 UI | 예 | 대상 수락 후 파티 골드/보스 파편 투표 표시 |
+| `ui_shop_heroic_compare_drawer_limited` | 상점 UI | 예 | 게이트 통과 후보가 여러 개일 때 최대 2개만 비교 |
+| `copy_heroic_gate_ui_keys` | 문구 | 예 | `ui.reward.heroic_*`, `ui.shop.heroic_*` 키와 금지 태그 제작 |
+| `heroic_gate_ui_forbidden_visual_guard` | 검수 | 예 | 큰 광채, 추천 왕관, 강화 화살표, 보상 가격표, 겹치기 광채 금지 |
+| `heroic_gate_ui_solo_projection_guard` | 검수 | 예 | 솔로에서 북/서/남 증거 부족 문구가 나오지 않게 차단 |
+
+상태별 제작 기준:
+
+| 상태 | 보상 화면 | 상점 화면 | 검수 포인트 |
+| --- | --- | --- | --- |
+| 게이트 미통과 | 하향 후보만 표시 | 무료 조건 요약만 가능 | 잠긴 영웅 카드를 후보 슬롯에 남기지 않음 |
+| 게이트 통과 | 영웅 후보 1장 이하 | 대상 수락 대기 | 큰 추천 연출 없음 |
+| 파편 부족 | 보상에는 영향 없음 | 구매 버튼 없는 정보 패널 | 파편 부족을 벌점처럼 표시하지 않음 |
+| 대상 보류 | 보상에는 영향 없음 | 구매 없음으로 상점 복귀 | 파티가 강제로 투표하지 않음 |
+| 파티 투표 반대/시간 초과 | 보상에는 영향 없음 | 구매 없음 | 다음 후보 수/가격/희귀도 보정 없음 |
+
+### 영웅 증거 태그 제작표
+
+영웅 증거 태그는 전투 리포트에서 생성되고, 보상 후보와 `shop_heroic_tune`이 읽습니다.
+
+| ID | 분류 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `combat_report_heroic_proof_tag_profiles` | 데이터 | 예 | 24개 MVP 영웅 증거 태그와 생성 조건 정의 |
+| `combat_report_heroic_proof_event` | 전투 로그 | 예 | 플레이어, 직업, 활성 방향, 위치, 출처 카드/구조물, 영향값 기록 |
+| `ui_combat_report_heroic_proof_chip` | 리포트 UI | 예 | "이 운영이 실제로 굴러감"을 짧은 태그로 표시 |
+| `ui_heroic_gate_recent_proof_reason` | 보상 UI | 예 | 영웅 후보가 열린 이유나 내려간 이유를 최근 증거 태그로 설명 |
+| `ui_shop_heroic_proof_summary` | 상점 UI | 예 | 영웅 조율 패널에 최근 5일 증거 요약 표시 |
+| `heroic_proof_solo_projection_check` | 검수 | 예 | 모든 증거 태그가 1인 동쪽 전선에서 생성 가능한지 확인 |
+| `heroic_proof_inactive_direction_guard` | 검수 | 예 | 비활성 방향 사건이 증거 태그로 기록되지 않도록 차단 |
+| `heroic_proof_wave_stack_neutral_guard` | 검수 | 예 | 겹치기 여부가 태그 요구량, 보상, 가격, 후보 수를 바꾸지 않도록 확인 |
+
+증거 태그 제작 금지선:
+
+- 카드를 냈다는 사실만으로 증거 태그를 만들지 않습니다.
+- 자동 아티팩트 발동만으로 증거 태그를 만들지 않습니다.
+- 비활성 방향 사건은 증거 태그가 될 수 없습니다.
+- 한 전투 리포트는 플레이어당 영웅 증거 태그를 최대 2개까지만 표시합니다.
+- 같은 영웅 게이트에는 한 전투 리포트당 1개 증거만 계산합니다.
+- 증거 태그는 보상, 골드, 카드 후보 수, 희귀도, 보스 파편, 상점 가격을 바꾸지 않습니다.
+
+### 20~30일 영웅 카드 효과 잠금 제작표
+
+`MvpHeroicCardSpecLock`은 영웅 게이트를 통과한 후보가 실제 전투에서 어느 수치와 상한으로 작동하는지 고정합니다.
+
+영웅 효과는 강하지만 길게 남는 대가를 반드시 가집니다.
+
+| 효과 잠금 ID | 카드 | 비용 | 대상/범위 | 발동/지속 | 효과 | 상한/대가 | 보스 정책 |
+| --- | --- | ---: | --- | --- | --- | --- | --- |
+| `heroic_spec_lock_guardian_thorn_throne_mvp` | `card_guardian_thorn_throne` | 3 | 모든 아군 도발 구조물 | 1초 예고/웨이브 종료까지 | 받은 피해의 20% 반사, 기존 가시 +10%p | 수리 효율 -30%, 총 반사 60회, 실제 피격 필요 | 보스 본체 직접 피해 없음, 실제 피격 반사만 허용 |
+| `heroic_spec_lock_guardian_unbroken_gate_mvp` | `card_guardian_unbroken_gate` | 4 | 빈 설치 타일, 6타일 | 1초 예고/영구 구조물 | 체력 24, 도발 반경 2.5타일, 파괴 시 일반 적 1.2초 행동 중단 | 공격 없음, 웨이브당 1회, 위치 실패 손해 | 정예 0.4초, 보스 본체 정지 없음, 보스 부위 취약 3초 |
+| `heroic_spec_lock_architect_chain_collapse_mvp` | `card_architect_chain_collapse` | 3 | 자기 구조물 폭발 규칙 | 1초 예고/웨이브 종료까지 | 다음 3회 폭발 피해 +2, 4타일 안 연쇄 폭발이면 +1 추가 | 총 추가 피해 18, 같은 구조물 반복 폭발 불가 | 보스 본체 30%, 보스 부위 50%, 패턴 취소 없음 |
+| `heroic_spec_lock_architect_inverted_path_mvp` | `card_architect_inverted_path` | 3 | 활성 전선 경로 5타일 | 1초 예고/6초 | 경로 비용 +4, 구간 내 적 이동 속도 -20% | 완전 길막 금지, 전후 경로 검사 필수 | 보스 본체 경로 비용 +1.5, 정지 없음 |
+| `heroic_spec_lock_elementalist_eye_of_stillness_mvp` | `card_elementalist_eye_of_stillness` | 3 | 원형 반경 3타일, 6타일 | 1초 예고/5초 지대 | 일반 적 -70%, 정예 -35%, 보스 본체 -15% 이동 속도 | 종료 후 둔화 저항 +40% 8초, 완전 정지 아님 | 보스 본체 패턴 취소 없음, 부위 집중 보조만 허용 |
+| `heroic_spec_lock_elementalist_storm_ritual_mvp` | `card_elementalist_storm_ritual` | 4 | 활성 전선 고정 지점 4개, 각 반경 1.2타일 | 1.5초 예고/즉발 | 각 지점 피해 6 | 자동 추적 없음, 같은 적 최대 2회 적중 | 보스 부위 50%, 보스 본체 25%, 패턴 취소 없음 |
+| `heroic_spec_lock_tinkerer_resonance_amp_mvp` | `card_tinkerer_resonance_amp` | 3 | 빈 설치 타일, 6타일 | 1초 예고/영구 오라 구조물 | 체력 14, 반경 2타일 오라, 3타일 안 오라 효과 40% 공유 | 네트워크 3기, 총 공속 오라 +60%, 연결 구조물 범위 피해 +20% | 보스 압력 권역에서 밀집 취약, 패턴 완화 없음 |
+| `heroic_spec_lock_tinkerer_reassembly_machine_mvp` | `card_tinkerer_reassembly_machine` | 4 | 최근 8초 안에 파괴된 비임시 구조물 위치, 7타일 | 1초 예고/즉발 | 같은 구조물을 최대 체력 35%로 재설치 | 버프/파괴 보상 기록 제거, 같은 타일 반복 재건 페널티 | 보스 경로 압박 삭제 금지, 경로 검사 실패 시 사용 불가 |
+
+영웅 효과 잠금 금지선:
+
+- 영웅 효과는 `MvpHeroicCommitGate` 실패를 우회할 수 없습니다.
+- 영웅 효과는 카드 후보 수, 희귀도, 골드 거절량, 보스 파편, 아티팩트 후보 수를 바꾸지 않습니다.
+- 웨이브 겹치기, 클리어 시간, 처치 수, 보스 부위 파괴 수는 영웅 효과의 수치와 상한을 바꾸지 않습니다.
+- 4인에서도 한 영웅 카드가 모든 활성 전선을 동시에 안정화하면 안 됩니다.
+- 솔로에서는 모든 대상과 증거가 동쪽 전선 안의 전방, 중간, 후방, 경로 길이, 적 역할로 투영되어야 합니다.
 
 ## 첫 10일 카드 보상 프로필 제작표
 
@@ -677,9 +1372,41 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `reward_profile_common_soft_gap_fill` | 1~30일 | 예 | 빠진 역할을 약하게 보완하는 공용 후보 |
 | `reward_profile_no_stack_bonus_guard` | 전체 | 예 | 웨이브 겹치기로 후보 수, 희귀도, 보상 총량이 바뀌지 않게 검증 |
 
+MVP 11~30일 보상 프로필은 첫 10일 프로필을 대체하는 상위 보상이 아니라, 같은 3장 선택 안에서 후보 이유를 더 좁히는 필터입니다.
+
+| ID | 적용 일자 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `reward_profile_mvp_011_020_artifact_bridge` | 11~19일 | 예 | 첫 아티팩트와 전투 실패 태그를 연결하되 일반 라운드 영웅을 열지 않음 |
+| `reward_profile_mvp_015_contract_shop` | 15일 | 예 | 이벤트 계약, 작은 상점, 카드 거절이 한 선택 묶음처럼 읽히게 함 |
+| `reward_profile_mvp_020_boss_branch` | 20일 | 예 | 변형 보스 결산을 21~30일 빌드 확정 또는 정리로 연결 |
+| `reward_profile_mvp_021_030_commit` | 21~29일 | 예 | 지원 크레딧과 전투 증거가 있는 덱에만 영웅 확정 후보를 낮게 열고, 나머지는 희귀/일반으로 하향 |
+| `reward_profile_mvp_025_season_turn` | 25일 | 예 | 계절 전환을 보스 보상이 아니라 약점 정리와 과구매 방지로 처리 |
+| `reward_profile_mvp_030_result` | 30일 | 예 | MVP 운영을 유지할지, 정리할지, 계속하기 전에 판단하게 함 |
+
 보상 프로필은 `preferredResponseTags`, `nextWaveIntentIds`, `nextEnemyRoleProfileIds`를 함께 가져야 합니다.
 
-카드 3장 후보는 방금 실패한 태그 하나만 반복해서 보여주는 목록이 아니라, 직접 대응, 우회 대응, 덱 관리 또는 골드 선택이 함께 보이는 작은 운영 선택이어야 합니다.
+카드 3장 후보는 방금 실패한 태그 하나만 반복해서 보여주는 목록이 아니라, 직접 대응, 빌드 연결, 덱 상태 판단이 함께 보이는 작은 운영 선택이어야 합니다.
+
+골드 거절은 카드 후보 슬롯이 아니라 별도 버튼으로 유지합니다.
+
+### 71~100일 카드 보상 프로필 제작표
+
+후반 카드 보상 프로필은 새 전리품을 늘리는 표가 아니라, 이미 정의된 후반 잠금표 안에서 후보 이유를 좁히는 제작 기준입니다.
+
+| ID | 적용 | 연결 잠금 | 우선 대응 태그 | 역할 |
+| --- | --- | --- | --- | --- |
+| `reward_profile_late_071_080_space_patch` | 71~79일 | `loot_lock_round_071_080` | `space_relocation`, `rear_rebuild`, `resource_unjam` | 좁아진 공간에서 덱이 돌도록 위치와 손패를 보완 |
+| `reward_profile_boss_080_frost_rebuild` | 80일 보스 후 | `loot_lock_boss_080` | `frost_relocation`, `rear_rebuild`, `focus_fire_mark` | 결빙과 후방 재건 경험을 다음 10일 카드 이유로 회수 |
+| `reward_profile_late_081_090_pressure_patch` | 81~89일 | `loot_lock_round_081_090` | `pressure_safe_zone`, `repair_window`, `priority_burst` | 압력 밖 보조선과 우선 처치 선택지를 제공 |
+| `reward_profile_boss_090_final_patch` | 90일 보스 후 | `loot_lock_boss_090` | `pressure_safe_zone`, `resource_unjam`, `base_crisis_patch` | 최종 10일 약점 보완, 100일 정답 카드 지급 금지 |
+| `reward_profile_final_091_094_leak_patch` | 91~94일 | `loot_lock_round_091_094` | `base_crisis_patch`, `resource_unjam`, `repair_window` | 빠른 누수와 손패 꼬임을 마지막으로 보완 |
+| `reward_profile_final_shop_095_tune` | 95일 상점 | `loot_lock_shop_final_095` | `artifact_sync`, `space_relocation`, `rear_rebuild` | 기존 아티팩트와 카드 축을 조율하고 제거/강화와 경쟁 |
+| `reward_profile_final_096_099_closure` | 96~99일 | `loot_lock_round_096_099` | `base_crisis_patch`, `pressure_safe_zone`, `focus_fire_mark` | 마지막 위치 보정과 보스 전 집중 대상을 확정 |
+| `reward_profile_result_100_summary_only` | 100일 결과 | `loot_lock_boss_100_result` | 없음 | 카드 보상 없이 결과 기록과 해금 후보 안내만 표시 |
+
+후반 보상 프로필은 `newArchetypeEntryAllowed: false`를 기본값으로 둡니다.
+
+91일 이후 `commitmentLevel: commit` 후보는 이미 같은 아키타입 선행 카드가 있을 때만 보일 수 있습니다.
 
 ## 대응 태그 제작표
 
@@ -696,6 +1423,11 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `priority_burst` | 우선 처치 | 먼저 끊어야 할 적을 집중 공격 | 방해형, 지원형, 정예형 | 정예/보스 즉시 삭제 |
 | `resource_unjam` | 자원 풀림 | 손패/마나 꼬임을 일시 완화 | 방해형 | 무한 드로우/마나 |
 | `rear_rebuild` | 후방 재건 | 무너진 전선을 뒤로 옮김 | 압박형, 파괴형, 보스 | 같은 자리 반복 재건 정답화 |
+| `space_relocation` | 공간 재배치 | 설치 금지나 결빙 예정지 밖으로 핵심 구조물을 옮김 | 압박형, 보스 | 설치 공간 압박 삭제 |
+| `frost_relocation` | 결빙 회피 | 결빙 예고를 보고 타워와 킬존을 짧게 이전 | 압박형, 보스 | 결빙 상태 면역화 |
+| `pressure_safe_zone` | 압력 밖 운영 | 압력 타일 밖에 보조선과 임시 화력을 세움 | 압박형, 보스 | 압력 타일 삭제 또는 장기 무력화 |
+| `base_crisis_patch` | 기지 위기 보완 | 빠른 누수 직전의 지연, 표식, 짧은 수리 창을 만듦 | 돌파형, 압박형, 보스 | 기지 피해 무효화 |
+| `artifact_sync` | 아티팩트 조율 | 보유 아티팩트의 조건을 카드 타이밍과 맞춤 | 보스, 후반 복합 압박 | 아티팩트 슬롯/효과 수 증가 |
 | `focus_fire_mark` | 집중 표식 | 파티가 같은 대상을 보게 함 | 정예형, 보스 부위, 지원형 | 다른 플레이어 행동 자동 실행 |
 
 ## 기지 체력과 피해 제작표
@@ -1179,6 +1911,25 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 
 28일 겹치기 시험은 예약된 27~29일 일반 웨이브의 시간 압축으로만 구성하며, 30일 보스 스폰 플랜을 앞당기지 않습니다.
 
+### 26~30일 여름 예고 브리지 제작표
+
+25일 계절 전환, 26~29일 전투 리포트, 30일 관측자 예고형을 같은 태그 체계로 연결합니다.
+
+| ID | 종류 | MVP | 제작 내용 |
+| --- | --- | --- | --- |
+| `mvp_summer_preview_bridge_026_030` | 브리지 프로필 | 예 | 26~30일 압박 약속, 리포트 태그, 관측자 후보 참고 태그를 묶음 |
+| `summer_preview_report_tags_026_029` | 리포트 태그 묶음 | 예 | 빠른 누수, 우선 타겟, 겹치기 위험, 최종 약점 태그 정의 |
+| `observer_preview_candidate_from_recent_active_pressure` | 후보 선정 정책 | 예 | 26~29일 태그를 후보 방향 연출에만 반영하고 실제 방향은 후보 중 1개로 고정 |
+| `solo_east_front_mid_rear_projection` | 솔로 투영 정책 | 예 | 동쪽 전방/중간/후방 구간과 스폰 타이밍으로 방향 차이를 대체 |
+| `mvp_summer_bridge_forbidden_modifiers` | 금지 태그 묶음 | 예 | 보상, 희귀도, 카드 후보, 골드, 보스 파편, 비활성 방향 변경 금지 |
+
+26~30일 브리지 제작 금지선:
+
+- `season_preview_detail_unlocked`를 스폰 수량, 보상량, 카드 후보 수, 희귀도에 연결하지 않습니다.
+- 28일 고밀도 리허설은 보상 효율 버튼이 아니라 기다림 단축과 위험 판단으로만 설명합니다.
+- 30일 관측자는 후보 밖 기습 방향을 만들지 않습니다.
+- 솔로는 동쪽 외 방향을 실제 방어 대상으로 표시하지 않습니다.
+
 ### 41~50일 확정 스폰 패킷 제작표
 
 | ID | 일자 | 적 | 수량 | 첫 스폰 | 간격 | 방향 역할 | MVP | 역할 |
@@ -1327,6 +2078,164 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 70일 동반 웨이브는 위 선택적 패킷 중 하나만 사용할 수 있습니다.
 
 70일 선택적 동반 패킷은 보상 팩, 카드 후보, 보스 파편, 아티팩트 드롭 수를 추가하지 않습니다.
+
+### 71~80일 확정 스폰 패킷 제작표
+
+71~80일 스폰 패킷은 겨울 1장의 설치 공간 축소 리듬을 실제 전투 타이밍으로 고정하는 2인 기준 시작값입니다.
+
+| ID | 일자 | 적 | 수량 | 첫 스폰 | 간격 | 방향 역할 | MVP | 역할 |
+| --- | ---: | --- | ---: | ---: | ---: | --- | --- | --- |
+| `spawn_packet_day_071_gray_first_frost` | 71 | 회색 행렬 | 16 | 8초 | 1.35초 | `any` | 아니오 | 첫 결빙 예고 후 기본 전선 확인 |
+| `spawn_packet_day_071_gray_after_frost` | 71 | 회색 행렬 | 10 | 28초 | 1.45초 | `any` | 아니오 | 결빙 예정지 밖 설치 확인 |
+| `spawn_packet_day_072_gray_husk_setup` | 72 | 회색 행렬 | 14 | 7초 | 1.35초 | `short` | 아니오 | 겨울 껍질 전 기본 라인 |
+| `spawn_packet_day_072_winter_husk_intro` | 72 | 겨울 껍질 | 1 | 18초 | 없음 | `short` | 아니오 | 느린 저항형 첫 등장 |
+| `spawn_packet_day_072_gray_after_husk` | 72 | 회색 행렬 | 8 | 36초 | 1.5초 | `short` | 아니오 | 지속 화력 유지 확인 |
+| `spawn_packet_day_073_glass_narrow_hold` | 73 | 유리 껍질 | 4 | 8초 | 6.5초 | `slow` | 아니오 | 좁아진 설치 공간에서 장기 처리 |
+| `spawn_packet_day_073_winter_husk_inner` | 73 | 겨울 껍질 | 1 | 20초 | 없음 | `any` | 아니오 | 안쪽 킬존 후보 확인 |
+| `spawn_packet_day_073_gray_inner_fill` | 73 | 회색 행렬 | 12 | 34초 | 1.4초 | `any` | 아니오 | 후방 보조선 확인 |
+| `spawn_packet_day_074_heavy_pilgrim_slow` | 74 | 무거운 순례자 | 1 | 10초 | 없음 | `slow` | 아니오 | 느린 압박 라인 시작 |
+| `spawn_packet_day_074_winter_husk_pair` | 74 | 겨울 껍질 | 2 | 22초 | 10.0초 | `slow` | 아니오 | 둔화/도발/지속 화력 유지 |
+| `spawn_packet_day_074_gray_slow_fill` | 74 | 회색 행렬 | 10 | 38초 | 1.45초 | `slow` | 아니오 | 대형 적 처리 중 기본 전선 |
+| `spawn_packet_day_075_gray_thaw_diagnosis` | 75 | 회색 행렬 | 14 | 9초 | 1.5초 | `any` | 아니오 | 계절 전환 정비 전 진단 |
+| `spawn_packet_day_075_winter_husk_shop_hook` | 75 | 겨울 껍질 | 1 | 25초 | 없음 | `any` | 아니오 | 대형 적 대응 구매 이유 |
+| `spawn_packet_day_075_gray_after_shop_hook` | 75 | 회색 행렬 | 8 | 42초 | 1.5초 | `any` | 아니오 | 이전/해동 필요성 확인 |
+| `spawn_packet_day_076_gray_full_winter` | 76 | 회색 행렬 | 18 | 7초 | 1.3초 | `any` | 아니오 | 겨울 본격화 기본 밀도 |
+| `spawn_packet_day_076_winter_husk_double` | 76 | 겨울 껍질 | 2 | 19초 | 10.0초 | `any` | 아니오 | 활성 방향별 결빙 증가 대응 |
+| `spawn_packet_day_076_gray_after_outer2` | 76 | 회색 행렬 | 10 | 39초 | 1.4초 | `any` | 아니오 | 외곽 2개 결빙 후 복구 |
+| `spawn_packet_day_077_winter_husk_repair` | 77 | 겨울 껍질 | 2 | 8초 | 10.0초 | `any` | 아니오 | 얼어붙은 수리 우선순위 |
+| `spawn_packet_day_077_crack_frozen_repair` | 77 | 균열 망치 | 2 | 24초 | 7.0초 | `any` | 아니오 | 결빙 구조물 살림/포기 선택 |
+| `spawn_packet_day_077_gray_repair_fill` | 77 | 회색 행렬 | 12 | 36초 | 1.4초 | `any` | 아니오 | 수리 판단 중 기본 전선 |
+| `spawn_packet_day_078_gray_stack_space` | 78 | 회색 행렬 | 18 | 7초 | 1.3초 | `any` | 아니오 | 겹치기 전 남은 공간 읽기 |
+| `spawn_packet_day_078_winter_husk_stack` | 78 | 겨울 껍질 | 1 | 20초 | 없음 | `any` | 아니오 | 공간 부족 상태의 지속 화력 |
+| `spawn_packet_day_078_gray_after_space` | 78 | 회색 행렬 | 12 | 39초 | 1.4초 | `any` | 아니오 | 빠른 진행 후 복구 확인 |
+| `spawn_packet_day_079_gray_winter_recap` | 79 | 회색 행렬 | 16 | 6초 | 1.25초 | `any` | 아니오 | 겨울 1장 총정리 밀도 |
+| `spawn_packet_day_079_winter_husk_recap` | 79 | 겨울 껍질 | 2 | 17초 | 9.5초 | `any` | 아니오 | 느린 저항형 처리 재확인 |
+| `spawn_packet_day_079_heavy_pilgrim_recap` | 79 | 무거운 순례자 | 1 | 30초 | 없음 | `slow` | 아니오 | 대형 적 지속 화력 재확인 |
+| `spawn_packet_day_079_twisted_mark_space` | 79 | 뒤틀린 표식 | 2 | 42초 | 8.5초 | `any` | 아니오 | 결빙 중 도발 의존 흔들기 |
+| `spawn_packet_day_079_gray_final_space` | 79 | 회색 행렬 | 8 | 52초 | 1.35초 | `any` | 아니오 | 80일 전 후방 킬존 확인 |
+| `spawn_packet_day_080_winter_gate_preview_body` | 80 | 겨울의 문 예고형 | 1 | 0초 | 없음 | `boss` | 아니오 | 임시 결빙 권역 예고 |
+| `spawn_packet_day_080_optional_winter_husk_companion` | 80 | 겨울 껍질 | 1 | 70초 | 없음 | `slow` | 아니오 | 선택적 약한 대형 동반 |
+| `spawn_packet_day_080_optional_gray_companion` | 80 | 회색 행렬 | 8 | 92초 | 1.8초 | `short` | 아니오 | 선택적 약한 일반 전선 |
+
+78일 겹치기 시험은 78~79일 일반 웨이브의 시간 압축으로만 구성하며, 80일 보스 스폰 플랜을 앞당기지 않습니다.
+
+80일 선택적 동반 패킷은 보스전이 비어 보일 때만 사용하며, 보상 팩, 카드 후보, 보스 파편, 아티팩트 드롭 수를 추가하지 않습니다.
+
+80일 결빙은 임시 설치 권역 제한만 사용하며, 경로 타일 차단이나 장기 공간 봉쇄를 만들지 않습니다.
+
+### 81~90일 확정 스폰 패킷 제작표
+
+81~90일 스폰 패킷은 겨울 2장의 압력 권역과 마지막 킬존 이전 리듬을 실제 전투 타이밍으로 고정하는 2인 기준 시작값입니다.
+
+| ID | 일자 | 적 | 수량 | 첫 등장 | 간격 | 방향 역할 | MVP | 역할 |
+| --- | ---: | --- | ---: | ---: | ---: | --- | --- | --- |
+| `spawn_packet_day_081_gray_rebuild_check` | 81 | 회색 행렬 | 16 | 8초 | 1.45초 | `any` | 아니오 | 80일 이후 후방 후보 재확인 |
+| `spawn_packet_day_081_gray_rear_probe` | 81 | 회색 행렬 | 10 | 32초 | 1.65초 | `rear` | 아니오 | 압력 전 보조선 설치 확인 |
+| `spawn_packet_day_082_gray_pressure_intro` | 82 | 회색 행렬 | 14 | 8초 | 1.5초 | `short` | 아니오 | 첫 압력 전 안전한 군집 |
+| `spawn_packet_day_082_gray_after_pressure` | 82 | 회색 행렬 | 12 | 34초 | 1.6초 | `short` | 아니오 | 압력 밖 보조 화력 확인 |
+| `spawn_packet_day_083_winter_husk_pressure` | 83 | 겨울 껍질 | 1 | 10초 | 없음 | `slow` | 아니오 | 압력 밖 대형 적 지연 |
+| `spawn_packet_day_083_glass_under_pressure` | 83 | 유리 껍질 | 4 | 24초 | 3.2초 | `any` | 아니오 | 지속 화력 확인 |
+| `spawn_packet_day_083_gray_pressure_fill` | 83 | 회색 행렬 | 14 | 40초 | 1.45초 | `any` | 아니오 | 보조 킬존 군집 처리 |
+| `spawn_packet_day_084_heavy_centerline` | 84 | 무거운 순례자 | 1 | 10초 | 없음 | `slow` | 아니오 | 전방 포기와 중후방 지연 |
+| `spawn_packet_day_084_winter_husk_centerline` | 84 | 겨울 껍질 | 1 | 26초 | 없음 | `slow` | 아니오 | 압력 중 대형 적 유지 |
+| `spawn_packet_day_084_gray_centerline_fill` | 84 | 회색 행렬 | 12 | 42초 | 1.55초 | `any` | 아니오 | 이전 후 남은 화력 확인 |
+| `spawn_packet_day_085_gray_market_ease` | 85 | 회색 행렬 | 18 | 8초 | 1.45초 | `any` | 아니오 | 마지막 재설계 전 부담 완화 |
+| `spawn_packet_day_085_twisted_shop_hook` | 85 | 뒤틀린 표식 | 1 | 26초 | 없음 | `any` | 아니오 | 압력 예고/해동 선택 근거 |
+| `spawn_packet_day_085_gray_after_choice` | 85 | 회색 행렬 | 8 | 42초 | 1.7초 | `any` | 아니오 | 상점 전 잔여 대응 확인 |
+| `spawn_packet_day_086_gray_rotation_probe` | 86 | 회색 행렬 | 16 | 7초 | 1.4초 | `any` | 아니오 | 압력 회전 전 군집 |
+| `spawn_packet_day_086_winter_husk_rotation` | 86 | 겨울 껍질 | 2 | 20초 | 9초 | `slow` | 아니오 | 이동 압력 중 대형 적 지연 |
+| `spawn_packet_day_086_twisted_rotation` | 86 | 뒤틀린 표식 | 2 | 38초 | 8초 | `any` | 아니오 | 도발 의존 흔들기 |
+| `spawn_packet_day_086_gray_after_rotation` | 86 | 회색 행렬 | 10 | 54초 | 1.5초 | `any` | 아니오 | 두 번째 화력 지점 확인 |
+| `spawn_packet_day_087_gray_stack_pressure` | 87 | 회색 행렬 | 22 | 6초 | 1.35초 | `any` | 아니오 | 겹치기 전 남은 설치 공간 확인 |
+| `spawn_packet_day_087_winter_husk_stack` | 87 | 겨울 껍질 | 1 | 19초 | 없음 | `slow` | 아니오 | 압력 중 대형 적 부담 |
+| `spawn_packet_day_087_crack_stack_pressure` | 87 | 균열 망치 | 2 | 34초 | 6초 | `short` | 아니오 | 압력 안 핵심 구조물 위험 |
+| `spawn_packet_day_087_gray_after_stack` | 87 | 회색 행렬 | 10 | 49초 | 1.45초 | `any` | 아니오 | 겹치기 승인/보류 결과 확인 |
+| `spawn_packet_day_088_heavy_last_shift` | 88 | 무거운 순례자 | 1 | 9초 | 없음 | `slow` | 아니오 | 마지막 킬존 이전 압박 |
+| `spawn_packet_day_088_crack_last_shift` | 88 | 균열 망치 | 2 | 24초 | 6.5초 | `short` | 아니오 | 버릴 구조물과 살릴 구조물 판단 |
+| `spawn_packet_day_088_gray_last_shift` | 88 | 회색 행렬 | 14 | 39초 | 1.45초 | `killzone` | 아니오 | 후방 킬존 화력 확인 |
+| `spawn_packet_day_089_gray_recap` | 89 | 회색 행렬 | 16 | 7초 | 1.35초 | `any` | 아니오 | 겨울 2장 총정리 시작 |
+| `spawn_packet_day_089_winter_husk_recap` | 89 | 겨울 껍질 | 2 | 20초 | 9초 | `slow` | 아니오 | 압력 밖 지속 화력 재확인 |
+| `spawn_packet_day_089_autumn_mute_recap` | 89 | 가을의 묵자 | 1 | 34초 | 없음 | `any` | 아니오 | 방해형 우선순위 회수 |
+| `spawn_packet_day_089_heavy_recap` | 89 | 무거운 순례자 | 1 | 45초 | 없음 | `slow` | 아니오 | 최종 이전 전 대형 적 지연 |
+| `spawn_packet_day_089_twisted_recap` | 89 | 뒤틀린 표식 | 2 | 57초 | 8초 | `any` | 아니오 | 도발/부위 우선순위 흔들기 |
+| `spawn_packet_day_090_winter_gate_body` | 90 | 겨울의 문 | 1 | 0초 | 없음 | `boss` | 아니오 | 이동 압력 타일 보스 |
+| `spawn_packet_day_090_optional_winter_husk_companion` | 90 | 겨울 껍질 | 1 | 85초 | 없음 | `slow` | 아니오 | 선택적 약한 대형 동반 |
+| `spawn_packet_day_090_optional_gray_companion` | 90 | 회색 행렬 | 10 | 110초 | 1.7초 | `short` | 아니오 | 선택적 약한 일반 전선 |
+
+### 81~90일 압력 계획 제작표
+
+| ID | 일자 | 예고/지속 | 동시 권역 | 이동 | 역할 |
+| --- | ---: | --- | ---: | --- | --- |
+| `pressure_plan_day_081_rebuild_none` | 81 | 없음 | 0 | 없음 | 80일 이후 후방 후보만 표시 |
+| `pressure_plan_day_082_front_intro` | 82 | 5초/8초 | 1 | 전방 1회 | 첫 보스 압력 타일 학습 |
+| `pressure_plan_day_083_husk_anchor` | 83 | 5초/8초 | 1 | 전방에서 중간 후보 예고 | 대형 적을 압력 밖으로 끌기 |
+| `pressure_plan_day_084_centerline_squeeze` | 84 | 5초/9초 | 1 | 중심선 1회 | 전방 킬존 포기 유도 |
+| `pressure_plan_day_085_market_preview_static` | 85 | 예고만 | 0 | 다음 5일 후보 표시 | 마지막 재설계 상점 선택 근거 |
+| `pressure_plan_day_086_rotation_two_step` | 86 | 5초/9초 | 1 | 전방 -> 중간 | 압력 이동 학습 |
+| `pressure_plan_day_087_stack_pressure_warning` | 87 | 5초/9초 | 1 | 현재 압력 -> 다음 후보 | 겹치기 위험 판단 |
+| `pressure_plan_day_088_last_killzone_shift` | 88 | 5초/10초 | 1 | 중간 -> 후방 후보 | 마지막 킬존 이전 |
+| `pressure_plan_day_089_recap_rotation` | 89 | 5초/10초 | 1 | 전방 -> 중간 -> 후방 후보 예고 | 겨울 2장 총정리 |
+| `pressure_plan_day_090_boss_moving_preview` | 90 | 5초/10초 | 1 | 보스 단계가 관리 | 100일급 장기 압력 금지 |
+
+87일 겹치기 시험은 87~89일 일반 웨이브의 시간 압축으로만 구성하며, 90일 보스 스폰 플랜을 앞당기지 않습니다.
+
+90일 선택적 동반 패킷은 보스전이 비어 보일 때만 사용하며, 보상 팩, 카드 후보, 보스 파편, 아티팩트 드롭 수를 추가하지 않습니다.
+
+90일 압력 계획은 이동 압력 예고만 사용하며, 경로 타일 차단이나 100일급 장기 압력 권역을 만들지 않습니다.
+
+### 91~99일 최종 리허설 스폰 패킷 제작표
+
+91~99일 스폰 패킷은 마지막 방어선 점검, 약점 재확인, 마지막 이전, 보상 없는 겹치기 판단을 실제 전투 타이밍으로 고정하는 2인 기준 시작값입니다.
+
+| ID | 일자 | 적 | 수량 | 첫 등장 | 간격 | 방향 역할 | MVP | 역할 |
+| --- | ---: | --- | ---: | ---: | ---: | --- | --- | --- |
+| `spawn_packet_day_091_gray_audit_line` | 91 | 회색 행렬 | 14 | 9초 | 1.6초 | `any` | 아니오 | 마지막 방어선 기본 화력 확인 |
+| `spawn_packet_day_091_winter_husk_audit` | 91 | 겨울 껍질 | 1 | 28초 | 없음 | `slow` | 아니오 | 대형 적을 후방 킬존까지 늦출 수 있는지 확인 |
+| `spawn_packet_day_091_gray_rear_probe` | 91 | 회색 행렬 | 8 | 44초 | 1.7초 | `rear` | 아니오 | 91일 점검에서 고른 후방 후보 확인 |
+| `spawn_packet_day_092_sprinter_fast_check` | 92 | 여름 질주자 | 6 | 5초 | 2.0초 | `fast` | 아니오 | 빠른 라인 최종 점검 |
+| `spawn_packet_day_092_gap_runner_follow` | 92 | 틈새 주자 | 8 | 15초 | 2.1초 | `fast` | 예 | 둔화/도발/넉백 타이밍 확인 |
+| `spawn_packet_day_092_gray_after_fast` | 92 | 회색 행렬 | 12 | 30초 | 1.45초 | `any` | 아니오 | 빠른 적 처리 후 기본 전선 복구 |
+| `spawn_packet_day_093_gray_silence_setup` | 93 | 회색 행렬 | 12 | 8초 | 1.45초 | `any` | 아니오 | 방해형 등장 전 기본 밀도 |
+| `spawn_packet_day_093_silence_carrier_final` | 93 | 침묵 운반자 | 2 | 18초 | 9.0초 | `any` | 예 | 드로우 방해 우선 처치 확인 |
+| `spawn_packet_day_093_autumn_mute_final` | 93 | 가을의 묵자 | 1 | 33초 | 없음 | `any` | 아니오 | 마나 방해와 드로우 방해 구분 |
+| `spawn_packet_day_093_gray_after_mute` | 93 | 회색 행렬 | 8 | 45초 | 1.6초 | `any` | 아니오 | 방해형 처리 후 자원 흐름 회복 확인 |
+| `spawn_packet_day_094_gray_structure_setup` | 94 | 회색 행렬 | 14 | 8초 | 1.45초 | `short` | 아니오 | 핵심 구조물 주변 기본 압박 |
+| `spawn_packet_day_094_heat_saw_final` | 94 | 열톱니 | 2 | 19초 | 7.0초 | `short` | 아니오 | 약해진 구조물 표식 재확인 |
+| `spawn_packet_day_094_crack_hammer_final` | 94 | 균열 망치 | 3 | 32초 | 6.5초 | `short` | 예 | 살릴 구조물과 버릴 구조물 선택 |
+| `spawn_packet_day_094_gray_after_break` | 94 | 회색 행렬 | 8 | 50초 | 1.6초 | `any` | 아니오 | 파괴 후 후방 재건 확인 |
+| `spawn_packet_day_095_gray_market_ease` | 95 | 회색 행렬 | 14 | 10초 | 1.7초 | `any` | 아니오 | 마지막 상점 전 쉬운 진단 |
+| `spawn_packet_day_095_glass_market_hook` | 95 | 유리 껍질 | 2 | 30초 | 7.0초 | `slow` | 예 | 단일 집중/지속 화력 약점 확인 |
+| `spawn_packet_day_095_gray_lock_summary` | 95 | 회색 행렬 | 6 | 46초 | 1.8초 | `any` | 아니오 | 상점 전 과도한 피로 없이 마무리 |
+| `spawn_packet_day_096_gray_split_setup` | 96 | 회색 행렬 | 12 | 7초 | 1.4초 | `any` | 아니오 | 정예 분담 전 기본 전선 |
+| `spawn_packet_day_096_black_pack_final` | 96 | 검은 등짐 | 1 | 18초 | 없음 | `fast` | 예 | 정예 처치 담당자 확정 |
+| `spawn_packet_day_096_heavy_pilgrim_final` | 96 | 무거운 순례자 | 1 | 32초 | 없음 | `slow` | 아니오 | 다른 활성 전선의 장기 지연 담당 |
+| `spawn_packet_day_096_twisted_mark_final` | 96 | 뒤틀린 표식 | 1 | 45초 | 없음 | `any` | 예 | 정예 처리 중 도발 의존 흔들기 |
+| `spawn_packet_day_097_winter_husk_pressure_preview` | 97 | 겨울 껍질 | 2 | 10초 | 10.0초 | `slow` | 아니오 | 압력 예고 밖으로 대형 적을 끌기 |
+| `spawn_packet_day_097_gray_pressure_fill` | 97 | 회색 행렬 | 14 | 28초 | 1.5초 | `any` | 아니오 | 장기 압력 예고 중 보조선 화력 확인 |
+| `spawn_packet_day_097_heavy_last_anchor` | 97 | 무거운 순례자 | 1 | 46초 | 없음 | `slow` | 아니오 | 100일 전 마지막 대형 저지 확인 |
+| `spawn_packet_day_098_gray_stack_readable` | 98 | 회색 행렬 | 18 | 7초 | 1.35초 | `any` | 아니오 | 마지막 겹치기 판단용 읽기 쉬운 밀도 |
+| `spawn_packet_day_098_winter_husk_stack` | 98 | 겨울 껍질 | 1 | 22초 | 없음 | `slow` | 아니오 | 겹치기 중 지속 화력 부담 |
+| `spawn_packet_day_098_crack_stack_warning` | 98 | 균열 망치 | 2 | 37초 | 6.5초 | `short` | 예 | 손상 구조물이 많을 때 호출 보류 유도 |
+| `spawn_packet_day_098_gray_after_stack` | 98 | 회색 행렬 | 8 | 52초 | 1.55초 | `any` | 아니오 | 호출/보류 선택 이후 전선 복구 |
+| `spawn_packet_day_099_gray_rehearsal_base` | 99 | 회색 행렬 | 16 | 7초 | 1.35초 | `any` | 아니오 | 새 규칙 없는 총정리 기본 밀도 |
+| `spawn_packet_day_099_winter_husk_rehearsal` | 99 | 겨울 껍질 | 2 | 20초 | 9.5초 | `slow` | 아니오 | 대형 적과 후방 킬존 최종 확인 |
+| `spawn_packet_day_099_autumn_mute_rehearsal` | 99 | 가을의 묵자 | 1 | 34초 | 없음 | `any` | 아니오 | 마나 방해 우선순위 회수 |
+| `spawn_packet_day_099_black_pack_rehearsal` | 99 | 검은 등짐 | 1 | 44초 | 없음 | `any` | 예 | 정예 처치 창 마지막 확인 |
+| `spawn_packet_day_099_twisted_mark_rehearsal` | 99 | 뒤틀린 표식 | 2 | 56초 | 8.5초 | `any` | 예 | 도발/표식/우선 처치 충돌 회수 |
+| `spawn_packet_day_099_heavy_rehearsal_close` | 99 | 무거운 순례자 | 1 | 68초 | 없음 | `slow` | 아니오 | 100일 전 마지막 장기 저지 확인 |
+
+### 91~99일 최종 압력 예고 제작표
+
+| ID | 일자 | 예고 방식 | 실제 압력 적용 | 역할 |
+| --- | ---: | --- | --- | --- |
+| `final_pressure_preview_day_091_audit` | 91 | 후방 후보 타일 약한 윤곽 | 없음 | 90일 결과 태그로 마지막 킬존 후보 표시 |
+| `final_pressure_preview_day_095_market_note` | 95 | 96~100일 위험 태그 요약 | 없음 | 마지막 상점 선택과 포기 약점 결정 |
+| `final_pressure_preview_day_097_long_warning` | 97 | 6초 예고 연출 후 사라짐 | 없음 | 100일 장기 압력 권역의 시각 언어 예습 |
+| `final_pressure_preview_day_099_boss_hint` | 99 | 최종 보스 첫 후보 권역 1개 표시 | 없음 | 100일 시작 전 마지막 위치 확정 |
+
+98일 겹치기 시험은 98~99일 일반 웨이브의 시간 압축으로만 구성하며, 100일 보스 스폰 플랜을 앞당기지 않습니다.
+
+97일과 99일 압력 예고는 설치 금지, 수리 효율 감소, 공격 속도 감소를 적용하지 않는 UI 예고입니다.
 
 ## 적 제작표
 
@@ -1556,6 +2465,7 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `boss_part_fallen_clapper` | 부위 | 떨어진 추 | 아니오 | 살아 있으면 수리 약화 권역 지속 시간이 증가 |
 | `boss_pattern_mute_peal` | 패턴 | 소리 없는 종울림 | 아니오 | 예고된 권역의 오라와 수리 효율 약화 |
 | `boss_pattern_leaf_toll` | 패턴 | 낙엽 종소리 | 아니오 | 활성 방향 안의 낙엽 경로 비용 변화 |
+| `boss_pattern_debris_resonance` | 패턴 | 잔해 공명 | 아니오 | 오래 남는 잔해를 딜타임 또는 우회 유도로 사용 |
 | `boss_ui_suppression_zone` | UI | 무음 권역 예고 | 아니오 | 약화될 설치 구역과 지속 시간을 표시 |
 | `boss_phase_plan_fallen_belltower_060` | 전투 흐름 | 60일 무너진 종탑 흐름 | 아니오 | 권역 예고, 균열종, 낙엽 종소리, 떨어진 추, 잔해 공명, 결과 연결 |
 | `boss_phase_060_zone_warning` | 단계 | 권역 예고 | 아니오 | 첫 무음 권역과 낙엽/잔해 경로를 미리 표시 |
@@ -1619,6 +2529,33 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `boss_phase_080_frost_chain` | 단계 | 서리 사슬 선택 | 아니오 | 다음 결빙 예고 시간을 늘릴지 판단 |
 | `boss_phase_080_result_bridge` | 단계 | 결과 연결 | 아니오 | 81~90일 보스 압력 타일 대비 태그 연결 |
 
+### 80일 겨울의 문 예고형 세부 제작표
+
+| ID | 분류 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `winter_gate_preview_phase_lock_080` | 데이터 잠금 | 아니오 | 80일 보스가 6단계 흐름과 최대 4회 결빙 사이클을 벗어나지 않게 고정 |
+| `frost_cycle_080_outer_warning` | 결빙 사이클 | 아니오 | 40초 전후 외곽 설치 구역 결빙, 경로 타일 차단 금지 |
+| `frost_cycle_080_mid_relocation` | 결빙 사이클 | 아니오 | 100초 전후 전방/중간 설치 구역 결빙, 문경첩 상태에 따라 지속 시간 조정 |
+| `frost_cycle_080_rear_rehearsal` | 결빙 사이클 | 아니오 | 155초 전후 중간/후방 설치 구역 결빙, 후방 킬존 개방 확인 |
+| `frost_cycle_080_final_short` | 결빙 사이클 | 아니오 | 220초 전후 마지막 짧은 결빙, 서리 사슬 상태에 따라 예고 시간 조정 |
+| `boss_part_exposure_gate_hinge_080` | 부위 노출 | 아니오 | 70~125초 문경첩 노출, 결빙 지속 시간 감소 선택 |
+| `boss_part_exposure_frost_chain_080` | 부위 노출 | 아니오 | 185~250초 서리 사슬 노출, 마지막 결빙 예고 시간 증가 선택 |
+| `companion_policy_080_single_optional` | 동반 정책 | 아니오 | 겨울 껍질 1기 또는 회색 행렬 8기 중 1종만 선택 |
+| `direction_projection_080_active_only` | 방향 정책 | 아니오 | 결빙 후보와 동반 웨이브를 인원수별 활성 방향 안으로만 투영 |
+| `boss_reward_policy_080_no_stack_bonus` | 보상 정책 | 아니오 | 80일 보스와 선택 동반이 웨이브 겹치기 보상 증가를 만들지 않게 고정 |
+| `boss_result_tag_bridge_080` | 결과 연결 | 아니오 | 후방 킬존, 늦은 이전, 문경첩/서리 사슬 선택 결과를 81~90일 힌트로 연결 |
+
+80일 단계 수치:
+
+| 시간대 | 단계 ID | 핵심 수치 | 금지선 |
+| ---: | --- | --- | --- |
+| 0~15초 | `boss_phase_080_frost_zone_warning` | 첫 결빙 후보와 후방 후보 타일 표시 | 실제 결빙 즉시 적용 금지 |
+| 15~70초 | `boss_phase_080_slow_opening` | 1번 결빙, 보스 느린 접근 | 선택 동반 웨이브 조기 투입 금지 |
+| 70~125초 | `boss_phase_080_gate_hinge` | 문경첩 노출, 선택 동반 1종 허용 | 겨울 껍질과 회색 행렬 동시 선택 금지 |
+| 125~185초 | `boss_phase_080_threshold_frost` | 2~3번 결빙, 구조물 이전 확인 | 경로 타일 결빙 금지 |
+| 185~250초 | `boss_phase_080_frost_chain` | 서리 사슬 노출, 4번 결빙 예고 | 예고 4초 미만 금지 |
+| 250~330초 | `boss_phase_080_result_bridge` | 본체 마무리, 결과 태그 기록 | 보상/희귀도/카드 후보 증가 금지 |
+
 ### 겨울의 문 하위 제작표
 
 | ID | 분류 | 이름 | MVP | 역할 |
@@ -1636,13 +2573,40 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `boss_phase_090_frozen_threshold` | 단계 | 얼어붙은 문턱 선택 | 아니오 | 압력 예고 시간을 늘릴지 판단 |
 | `boss_phase_090_last_relocation` | 단계 | 마지막 이전 | 아니오 | 최종 리허설 전 마지막 방어선 후보 확정 |
 
+### 90일 겨울의 문 세부 제작표
+
+| ID | 분류 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `winter_gate_phase_lock_090` | 데이터 잠금 | 아니오 | 90일 보스가 6단계 흐름과 최대 4회 이동 압력 사이클을 벗어나지 않게 고정 |
+| `pressure_cycle_090_front_warning` | 압력 사이클 | 아니오 | 35초 전후 전방 설치 구역 압력, 경로 타일 차단 금지 |
+| `pressure_cycle_090_mid_relocation` | 압력 사이클 | 아니오 | 105초 전후 전방/중간 설치 구역 압력, 압력문틀 상태에 따라 지속 시간 조정 |
+| `pressure_cycle_090_secondary_killzone` | 압력 사이클 | 아니오 | 180초 전후 중간/보조 킬존 후보 압력, 두 번째 화력 지점 확인 |
+| `pressure_cycle_090_last_relocation` | 압력 사이클 | 아니오 | 255초 전후 후방/마지막 킬존 후보 압력, 얼어붙은 문턱 상태에 따라 예고 시간 조정 |
+| `boss_part_exposure_pressure_frame_090` | 부위 노출 | 아니오 | 80~145초 압력문틀 노출, 압력 지속 시간 감소 선택 |
+| `boss_part_exposure_frozen_threshold_090` | 부위 노출 | 아니오 | 210~285초 얼어붙은 문턱 노출, 마지막 압력 예고 시간 증가 선택 |
+| `companion_policy_090_single_optional` | 동반 정책 | 아니오 | 겨울 껍질 1기 또는 회색 행렬 10기 중 1종만 선택 |
+| `direction_projection_090_active_only` | 방향 정책 | 아니오 | 압력 후보와 동반 웨이브를 인원수별 활성 방향 안으로만 투영 |
+| `boss_reward_policy_090_no_stack_bonus` | 보상 정책 | 아니오 | 90일 보스와 선택 동반이 웨이브 겹치기 보상 증가를 만들지 않게 고정 |
+| `boss_result_tag_bridge_090` | 결과 연결 | 아니오 | 보조 킬존, 늦은 이전, 압력문틀/문턱 선택 결과를 91~100일 힌트로 연결 |
+
+90일 단계 수치:
+
+| 시간대 | 단계 ID | 핵심 수치 | 금지선 |
+| ---: | --- | --- | --- |
+| 0~18초 | `boss_phase_090_pressure_path_warning` | 첫/두 번째 압력 후보와 후방 후보 타일 표시 | 실제 압력 즉시 적용 금지 |
+| 18~80초 | `boss_phase_090_first_moving_pressure` | 1번 압력, 지나간 권역 회복 | 구조물 즉시 삭제 금지 |
+| 80~145초 | `boss_phase_090_pressure_frame` | 압력문틀 노출, 2번 압력 | 압력 지속 12초 초과 금지 |
+| 145~210초 | `boss_phase_090_gate_breath` | 선택 동반 1종 허용, 3번 압력 후보 예고 | 겨울 껍질과 회색 행렬 동시 선택 금지 |
+| 210~285초 | `boss_phase_090_frozen_threshold` | 얼어붙은 문턱 노출, 4번 압력 예고 | 예고 4초 미만 금지 |
+| 285~360초 | `boss_phase_090_last_relocation` | 마지막 이전 압력, 결과 태그 기록 | 장기 압력, 보상/희귀도/카드 후보 증가 금지 |
+
 ### 겨울의 문 완전체 하위 제작표
 
 | ID | 분류 | 이름 | MVP | 역할 |
 | --- | --- | --- | --- | --- |
 | `boss_part_final_core` | 부위 | 문의 핵 | 아니오 | 살아 있으면 장기 압력 권역이 더 오래 유지 |
 | `boss_part_last_chain` | 부위 | 마지막 사슬 | 아니오 | 살아 있으면 동반 웨이브 예고 시간이 짧아짐 |
-| `boss_part_threshold_heart` | 부위 | 문턱 심장 | 아니오 | 살아 있으면 최종 단계 압력 권역 수 증가 |
+| `boss_part_threshold_heart` | 부위 | 문턱 심장 | 아니오 | 살아 있으면 마지막 이전 예고 시간이 짧아짐 |
 | `boss_pattern_long_pressure` | 패턴 | 장기 압력 | 아니오 | 단계 종료까지 유지되는 압력 권역 생성 |
 | `boss_pattern_final_breath` | 패턴 | 마지막 숨 | 아니오 | 약한 복합 동반 웨이브 |
 | `boss_pattern_last_bastion` | 패턴 | 마지막 기지 | 아니오 | 남은 공간으로 최후 방어를 요구 |
@@ -1650,10 +2614,36 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `boss_phase_plan_winter_gate_final_100` | 전투 흐름 | 100일 겨울의 문 완전체 흐름 | 아니오 | 입장 예고, 전방 장기 압력, 부위 집중, 약한 복합 동반, 마지막 이전, 마지막 기지 |
 | `boss_phase_100_entry_warning` | 단계 | 입장 예고 | 아니오 | 첫 장기 압력 권역과 최종 방어선 후보 표시 |
 | `boss_phase_100_front_long_pressure` | 단계 | 전방 장기 압력 | 아니오 | 전방 킬존 유지/포기 판단 |
-| `boss_phase_100_part_focus` | 단계 | 부위 집중 | 아니오 | 문의 핵, 마지막 사슬, 문턱 심장 중 우선 대상 선택 |
+| `boss_phase_100_part_focus` | 단계 | 부위 집중 | 아니오 | 문의 핵, 마지막 사슬 중 우선 대상 선택. 문턱 심장은 확장 부위 |
 | `boss_phase_100_companion_priority` | 단계 | 약한 복합 동반 | 아니오 | 방해형/정예/대형 적 중 먼저 끊을 대상 합의 |
 | `boss_phase_100_last_relocation` | 단계 | 마지막 이전 | 아니오 | 남은 설치 공간으로 최종 방어선 이전 |
 | `boss_phase_100_last_bastion` | 단계 | 마지막 기지 | 아니오 | 남은 카드, 마나, 아티팩트 집중 사용 |
+| `pressure_plan_100_entry_candidate_ui_only` | 압력 계획 | 입장 후보 예고 | 아니오 | 99일 힌트 권역을 다시 표시하되 실제 압력 미적용 |
+| `pressure_plan_100_front_long_pressure` | 압력 계획 | 전방 장기 압력 | 아니오 | 전방 설치 권역 1곳을 단계 종료까지 압박 |
+| `pressure_plan_100_core_hold` | 압력 계획 | 부위 집중 중 압력 유지 | 아니오 | 압력은 늘리지 않고 부위 선택 시간을 만듦 |
+| `pressure_plan_100_maintain_one_zone` | 압력 계획 | 동반 분기 중 1권역 유지 | 아니오 | 동반 웨이브 중에도 장기 압력 1곳만 유지 |
+| `pressure_plan_100_last_relocation` | 압력 계획 | 마지막 이전 압력 | 아니오 | 중후방 후보 권역을 예고하고 최종 방어선 이전 요구 |
+| `pressure_plan_100_last_bastion_no_new_zone` | 압력 계획 | 마지막 기지 압력 고정 | 아니오 | 새 권역 추가 없이 남은 공간에서 결말 집중 |
+| `companion_policy_100_readable_gray_line` | 동반 정책 | 읽기 쉬운 회색 행렬 | 아니오 | 전방 압력 중 기본 군집만 투입 |
+| `companion_policy_100_single_husk_anchor` | 동반 정책 | 겨울 껍질 1기 | 아니오 | 부위 집중 중 대형 적 지연 확인 |
+| `companion_policy_100_abandoned_weakness_one_branch` | 동반 정책 | 포기 약점 1분기 회수 | 아니오 | 침묵/정예/파괴 중 1개만 약하게 투입 |
+| `companion_policy_100_single_large_anchor` | 동반 정책 | 마지막 대형 앵커 | 아니오 | 겨울 껍질 또는 무거운 순례자 1기 이하 |
+| `companion_policy_100_readable_final_line` | 동반 정책 | 최종 군집 1회 | 아니오 | 마지막 자원 집중 타이밍 제공 |
+
+### 100일 겨울의 문 완전체 세부 제작표
+
+| 시간대 | 단계 ID | 제작 내용 | 실제 압력 | 동반/부위 | 금지선 |
+| ---: | --- | --- | --- | --- | --- |
+| 0~20초 | `boss_phase_100_entry_warning` | 첫 장기 압력 후보와 후방 킬존 후보 표시 | 없음 | 없음 | 설치 금지/수리 감소/공속 감소 적용 금지 |
+| 20~95초 | `boss_phase_100_front_long_pressure` | 전방 설치 권역 1곳에 장기 압력 적용 | 1권역 | `companion_policy_100_readable_gray_line` | 경로 타일 차단, 비활성 방향 압력 금지 |
+| 95~175초 | `boss_phase_100_part_focus` | 문의 핵과 마지막 사슬을 노출하고 부위 선택 요구 | 1권역 유지 | `boss_part_final_core`, `boss_part_last_chain`, 겨울 껍질 1기 이하 | 부위 파괴를 보상/파편/카드 후보와 연결 금지 |
+| 175~255초 | `boss_phase_100_companion_priority` | 95일 포기 약점 태그 중 1개만 약한 동반 분기로 회수 | 1권역 유지 | 침묵/정예/파괴 분기 중 1개 | 포기 약점 2개 이상 동시 회수 금지 |
+| 255~335초 | `boss_phase_100_last_relocation` | 중후방 후보 권역을 예고하고 마지막 이전 요구 | 1권역, 4인만 제한적 후보 2개 표시 가능 | 겨울 껍질 또는 무거운 순례자 1기 이하 | 사방 동시 압박, 1인 2권역 압박 금지 |
+| 335~420초 | `boss_phase_100_last_bastion` | 새 권역 추가 없이 남은 카드/마나/아티팩트 집중 | 기존 1권역 유지 | 읽기 쉬운 최종 군집 1회 | 체력만 긴 반복, 예고 없는 즉시 패배 금지 |
+
+100일 보스의 시간 초과 조정은 본체 체력보다 단계 길이, 동반 웨이브 수, 예고 시간, 압력 지속을 먼저 조정합니다.
+
+단계 사이 2~4초 재배치 숨은 보상 화면이나 상점이 아니라 전투 안의 짧은 호흡입니다.
 
 ## 아티팩트 제작표
 
@@ -1738,6 +2728,40 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `artifact_keep_current_rule` | 슬롯 규칙 | 예 | 슬롯이 가득 찼을 때 현재 유지 선택 제공 |
 | `artifact_late_pool_lock_rule` | 후반 풀 규칙 | 아니오 | 91일 이후 새 빌드 시작형 후보 제외 |
 | `artifact_slot_cap_rule` | 슬롯 규칙 | 예 | 슬롯 증가 효과가 있어도 최대 4개 유지 |
+| `artifact_dormant_vault_rule` | 휴면 규칙 | 아니오 | 교체된 아티팩트를 효과가 꺼진 보관함으로 이동 |
+| `artifact_reactivation_rule` | 재장착 규칙 | 아니오 | 보스 후 정비에서 비용과 투표로 휴면 아티팩트 재장착 |
+| `artifact_reactivation_cost_profiles` | 비용 규칙 | 아니오 | 휴면 아티팩트 재장착 비용과 허용 위치 정의 |
+| `artifact_side_effect_profiles` | 부작용 규칙 | 예 | 후보, 슬롯, HUD에서 같은 대가 태그를 표시 |
+
+### 아티팩트 휴면/부작용 제작 기준
+
+| 항목 | 제작 기준 | 금지선 |
+| --- | --- | --- |
+| 휴면 보관함 | 기본 2칸, 효과 꺼짐, 마지막 장착 구간 표시 | 휴면 효과 유지, 전투 중 즉시 교체 |
+| 재장착 | 보스 후 선택/상점에서 보스 파편과 투표 요구 | 무료 재장착, 자동 추천 장착 |
+| 방출 | 보관함 초과 시 1개 선택, 환급 없음 | 골드/파편 환급, 보상 증가 |
+| 슬롯 감소 | 슬롯 증가 아티팩트를 내리면 초과 장착 해소 필요 | 슬롯 5개 이상, 초과 장착 유지 |
+| 부작용 표시 | 후보 카드, 슬롯, HUD에서 같은 태그 사용 | 숨은 패널티, 전투 정보 가림 |
+| 고위험 대가 | 20일 이후 위험 전환 후보부터 허용 | 10일 첫 후보에 `high` 대가 |
+
+기본 부작용 프로필:
+
+| ID | 태그 | 사용처 | 금지 효과 |
+| --- | --- | --- | --- |
+| `artifact_side_effect_start_hand_down` | `artifact_cost_start_hand_down` | 하루 시작 손패 감소 | 카드 후보 수 보정 |
+| `artifact_side_effect_seed_mana_down` | `artifact_cost_seed_mana_down` | 시드 마나 감소 | 시간 경과 마나 회복 |
+| `artifact_side_effect_structure_damage_up_stacked` | `artifact_cost_structure_damage_up` | 겹친 전투 구조물 피해 증가 | 겹치기 보상 증가 |
+| `artifact_side_effect_repair_down` | `artifact_cost_repair_down` | 수리 효율 감소 | 전투 중 기지 회복 보상 |
+| `artifact_side_effect_shop_surcharge` | `artifact_cost_shop_surcharge` | 상점 가격 상승 | 희귀도 보정 |
+| `artifact_side_effect_trigger_cap` | `artifact_cost_trigger_cap` | 웨이브당 발동 상한 | 무한 발동 |
+| `artifact_side_effect_conflict` | `artifact_cost_conflict` | 아티팩트 충돌 표시 | 정답 추천 |
+
+재장착 비용 프로필:
+
+| ID | 비용 | 허용 위치 | 금지선 |
+| --- | --- | --- | --- |
+| `artifact_reactivation_cost_boss_shard_1` | 보스 파편 1 | 보스 후 선택, 보스 후 상점 | 전투 중 재장착, 무료 재장착 |
+| `artifact_reactivation_cost_final_replace_095` | 보스 파편 1 + 골드 35 | 95일 최종 상점 | 아티팩트 행동 2회 이상, 보상 증가 할인 |
 
 ## 보상과 상점 제작표
 
@@ -1785,9 +2809,10 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `shop_repair_efficiency_boost` | 상점 항목 | 예 | 15일 이후 수리 효율 보강 |
 | `shop_one_shot_spell` | 상점 항목 | 예 | 위기 대응용 일회성 선택 |
 | `shop_temporary_seed_mana` | 상점 항목 | 예 | 다음 1웨이브만 적용되는 시드 마나 임시 보강 |
+| `temp_seed_mana_day_025_next_wave` | 배타 그룹 | 예 | 25일 이벤트/상점 임시 시드 마나 +1 중첩 방지 |
 | `shop_common_card` | 상점 항목 | 예 | 덱 빈틈 보완 |
 | `shop_class_card` | 상점 항목 | 예 | 10일 이후 직업 카드 구매 |
-| `shop_heroic_tune` | 상점 항목 | 예 | 20일 이후 선행 조건 충족 빌드 마무리 |
+| `shop_heroic_tune` | 상점 항목 | 예 | 20일/30일 허용 세션에서 게이트 조건을 통과한 빌드 마무리 |
 | `shop_boss_shard_extra_artifact_peek` | 보스 파편 항목 | 예 | 보스 파편 1개로 아티팩트 후보 1개 추가 확인 |
 | `shop_season_turn_summary` | 추천 항목 | 예 | 25일 봄 약점과 여름 속도 예고 요약 |
 | `shop_keep_current_build` | 결과 정비 항목 | 예 | 30일 MVP 후 현재 운영 유지 |
@@ -1799,8 +2824,41 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `shop_late_deck_trim_bundle` | 상점 항목 | 아니오 | 61일 이후 핵심 덱 압축 지원 |
 | `shop_final_weakness_patch` | 상점 항목 | 아니오 | 95일 최종 약점 보완, 새 아키타입 시작 금지 |
 | `shop_final_market_note` | 무료 정보 항목 | 아니오 | 95일 이후 잠기는 유지 축과 포기한 약점 요약 |
+| `shop_final_relocation_order` | 최종 상점 항목 | 아니오 | 핵심 구조물 1개 이전 또는 이전 비용 완화 |
+| `shop_final_deck_trim` | 최종 상점 항목 | 아니오 | 방치 카드 1장 제거 또는 저효율 카드 1장 안정화 |
+| `shop_final_core_tune` | 최종 상점 항목 | 아니오 | 최근 사용한 핵심 카드/구조물 축 1개 보완 |
+| `shop_final_artifact_replace` | 최종 상점 항목 | 아니오 | 아티팩트 1개 교체, 행동 한도 1회 소모 |
+| `shop_final_base_reinforce` | 최종 상점 항목 | 아니오 | 기지 회복 또는 마지막 방어선 내구 보강 |
+| `shop_final_boss_part_lens` | 최종 상점 항목 | 아니오 | 100일 3단계 부위 노출과 첫 부위 집중 보조 |
 | `shop_next_pressure_recommendation` | 추천 항목 | 예 | 11일 예고와 연결된 상점 추천 |
 | `mvp_reward_shop_event_simulation_001_030` | 운영표 | 예 | 1~30일 카드 보상, 이벤트, 상점, 보스 결산 실행 순서 |
+
+### 95일 최종 상점 실제 슬롯 제작표
+
+| 세션 ID | 고정 슬롯 | 진단 슬롯 | 조건 슬롯 | 파티 구매 한도 | 목표 시간 |
+| --- | --- | --- | --- | ---: | ---: |
+| `shop_session_day_095_final_market` | `shop_final_market_note`, `shop_keep_current_build` | `shop_final_relocation_order`, `shop_final_deck_trim`, `shop_final_core_tune` 중 진단 상위 3개 | `shop_final_artifact_replace`, `shop_final_base_reinforce`, `shop_final_boss_part_lens` 중 자원/약점 조건 1~2개 | 2 | 120~150초 |
+
+총 표시 항목은 7개를 넘기지 않습니다.
+
+`shop_final_market_note`와 `shop_keep_current_build`는 파티 구매 한도를 소모하지 않습니다.
+
+### 95일 최종 상점 가격 제작표
+
+| 상품 ID | 기본 비용 | 구매 한도 | 추가 제한 | 금지 효과 |
+| --- | ---: | ---: | --- | --- |
+| `shop_final_market_note` | 무료 | 0 | 항상 표시 | 구매 유도 문구 |
+| `shop_keep_current_build` | 무료 | 0 | 항상 표시 | 손해/실패 문구 |
+| `shop_final_relocation_order` | 골드 60 | 1 | 구조물 1개 또는 이전 비용 1회 | 경로 차단, 구조물 복제 |
+| `shop_final_deck_trim` | 골드 70 + 제거 누적값 | 1 | 카드 1장 제거 또는 1장 안정화 | 카드 2장 이상 제거, 대량 압축 |
+| `shop_final_core_tune` | 골드 75 | 1 | 최근 사용한 카드/구조물 축만 | 새 카드 구매, 새 아키타입 시작 |
+| `shop_final_artifact_replace` | 보스 파편 1 + 골드 35 | 1 | 아티팩트 행동 1회 소모 | 슬롯 증가, 겹치기 신규 증가 |
+| `shop_final_base_reinforce` | 골드 65 | 1 | 기지 회복 또는 방어선 보강 중 하나 | 100일 보스 패턴 취소 |
+| `shop_final_boss_part_lens` | 보스 파편 1 또는 골드 85 | 1 | 100일 3단계 부위 정보 보조 | 보스 부위 즉시 파괴, 보상 증가 |
+
+95일 상점 종료 시 `chosenFocusTags` 1~2개와 `abandonedWeaknessTags` 1~2개를 기록합니다.
+
+구매한 상품의 `cannotPatchWeaknessTags` 중 최소 1개는 남겨둔 위험 후보로 표시되어야 합니다.
 
 ### MVP 상점 실제 슬롯 제작표
 
@@ -1817,6 +2875,37 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 
 `shop_session_after_day_030_mvp_result`는 MVP 종료 후 계속하기를 선택했을 때만 31일 준비 화면으로 사용합니다.
 
+### 20~30일 영웅 확정 조율 상점 제작표
+
+`shop_heroic_tune`은 카드 후보 보상 UI가 아니라 파티 자원 상점 UI입니다.
+
+| ID | 분류 | MVP | 역할 |
+| --- | --- | --- | --- |
+| `shop_heroic_tune_offer` | 데이터 | 예 | `ShopHeroicTuneOffer`로 게이트, 카드, 가격, 투표, 결과를 묶음 |
+| `shop_heroic_tune_flow_profile` | 데이터 | 예 | 후보 생성, 전면 제안 선정, 대상 확인, 파티 투표, 종료 상태를 정의 |
+| `shop_heroic_tune_selection_policy` | 데이터 | 예 | 최근 리포트, 대상 중복 방지, 최근 증거, 고정 좌석 순서만 사용 |
+| `ui_shop_heroic_tune_card` | 상점 UI | 예 | 대상 플레이어, 영웅 카드, 비용, 남는 대가, 증거 태그를 한 카드에 표시 |
+| `ui_shop_heroic_tune_free_info` | 무료 정보 UI | 예 | 게이트 미통과 또는 파편 부족을 유료 구매 없이 조건 요약으로 표시 |
+| `ui_shop_heroic_tune_locked_reason` | 잠금 UI | 예 | 파편 부족, 게이트 미통과, 세션 구매 완료, 대상 거절을 구매 버튼 없이 표시 |
+| `ui_shop_heroic_tune_compare_drawer` | 비교 UI | 예 | 여러 게이트가 통과됐을 때 최대 2개 후보만 비교 표시 |
+| `ui_shop_heroic_owner_accept` | 개인 확인 | 예 | 카드를 받을 플레이어가 먼저 수락하거나 거절 |
+| `ui_shop_party_resource_vote` | 파티 투표 | 예 | 대상 수락 후 파티 골드와 보스 파편 사용을 과반수로 확인 |
+| `ui_shop_heroic_no_purchase_result` | 보류 결과 | 예 | 시간 초과, 대상 거절, 파티 반대, 파편 부족을 구매 없음으로 회수 |
+| `ui_shop_heroic_no_reoffer_hint` | 보류 안내 | 예 | 거절 뒤 같은 세션에서 다른 영웅 후보로 재설득하지 않음을 짧게 표시 |
+| `ui_shop_heroic_alternatives` | 대체 선택 | 예 | 제거, 강화, 회복, 구조물 보강, 일회성 주문 중 경쟁 항목을 보여줌 |
+| `telemetry_shop_heroic_tune_phase_changed` | 로그 | 예 | 조건 요약, 대상 확인, 파티 투표, 구매 없음, 구매 완료 전이를 기록 |
+
+영웅 확정 조율 제작 금지선:
+
+- 상점 항목은 1개만 차지하고, 비교 패널은 카드 후보 수나 상점 슬롯 수를 늘리지 않습니다.
+- 보스 파편 1개가 없으면 대체 골드 결제를 제공하지 않습니다.
+- 대상 플레이어가 거절하면 파티 투표를 열지 않습니다.
+- 대상 플레이어가 거절하거나 시간이 초과되면 같은 세션에서 다른 영웅 후보로 갈아타며 다시 제안하지 않습니다.
+- 멀티에서는 대상 수락과 파티 과반 동의가 모두 필요합니다.
+- 솔로에서는 같은 규칙을 8초 확인으로 축약합니다.
+- 구매 결과는 영웅 카드 1장 추가뿐이며, 카드 제거, 후보 수 증가, 희귀도 보정, 골드/보스 파편 보상 변화가 함께 붙지 않습니다.
+- 추천 이유는 최근 사용 증거 태그로만 표시하고, 웨이브 겹치기 횟수, 처치 수, 클리어 시간, 비활성 방향 압박을 사용하지 않습니다.
+
 ### MVP 1~30일 보상/상점/이벤트 제작표
 
 | 제작 ID | 일자 | 카드 보상 잠금 | 후속 제작물 | 확인할 감정 |
@@ -1830,7 +2919,7 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `mvp_day_reward_015` | 15 | `loot_lock_round_011_020` | `event_contract_lock_mvp_015`, `shop_session_day_015_small_shop` | 이벤트와 작은 상점이 90초 안에 끝남 |
 | `mvp_day_reward_016_019` | 16~19 | `loot_lock_round_011_020` | 없음 | 15일 선택을 전투에서 다시 체감함 |
 | `mvp_day_reward_020` | 20 | `loot_lock_boss_020` | `artifact_pool_branch_020`, `shop_session_after_day_020` | 영웅 확정 조율이 준비된 빌드만 마무리함 |
-| `mvp_day_reward_021_024` | 21~24 | `loot_lock_round_021_030` | 없음 | 영웅 후보가 낮은 빈도와 선행 조건으로만 보임 |
+| `mvp_day_reward_021_024` | 21~24 | `loot_lock_round_021_030` | 없음 | 영웅 후보가 낮은 빈도와 게이트 조건으로만 보임 |
 | `mvp_day_reward_025` | 25 | `loot_lock_round_021_030` | `event_contract_lock_mvp_025`, `shop_session_day_025_season_turn` | 계절 전환이 보스 보상처럼 느껴지지 않음 |
 | `mvp_day_reward_026_029` | 26~29 | `loot_lock_round_021_030` | 없음 | 고밀도 겹치기가 보상 펌핑으로 읽히지 않음 |
 | `mvp_day_reward_030` | 30 | `loot_lock_boss_030` | `artifact_pool_mvp_result_030`, `shop_session_after_day_030_mvp_result` | 현재 운영 유지와 정리 선택을 구분함 |
@@ -1894,6 +2983,8 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `event_choice_owner_rule` | 투표 규칙 | 예 | 개인, 파티, 혼합 선택의 처리 기준 |
 | `event_contract_lock_mvp_015` | 이벤트 잠금 | 예 | 15일 후보 이벤트 1개와 작은 상점 체류 시간 제한 |
 | `event_contract_lock_mvp_025` | 이벤트 잠금 | 예 | 25일 계절 전환 이벤트와 후보 1개 제한 |
+| `season_turn_transition_mvp_025` | 전환 프로필 | 예 | 계절의 징표, 조건부 후보, 작은 상점 브리지 태그를 제한 |
+| `season_turn_bridge_tag_set_025` | 전환 태그 | 예 | 정보 상세 공개, 임시 시드 잠금, 저주 할인 예약, 지나가기 |
 | `reward_choice_lock_flow` | 보상 UI | 예 | 카드 선택, 골드 거절, 임시 잠금, 되돌리기 처리 |
 | `reward_to_maintenance_gate` | 정비 UI | 예 | 보상 완료 후 저주 확인, 정비 메모, 상점 첫 투표 진입 관리 |
 | `deck_compression_candidate_badges` | 상점 UI | 예 | 낮은 사용률, 역할 중복, 저주 보유, 고비용 막힘 배지 |
@@ -1908,7 +2999,7 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | ID | 일자 | 후보 수 | 필수 이벤트 | 선택 후보 | 시간 목표 | 금지선 |
 | --- | ---: | ---: | --- | --- | ---: | --- |
 | `event_contract_lock_mvp_015` | 15 | 1 | 없음 | `event_cracked_storehouse`, `event_silent_pilgrim`, `event_fallen_workshop` 중 1개 | 30~60초 | 이벤트와 상점 합산 90초 초과 금지 |
-| `event_contract_lock_mvp_025` | 25 | 1~2 | `event_season_sign_025` | `event_reserve_core_025`, `event_quiet_contract_025` 중 조건부 1개 | 60~90초 | 31일 이후 새 빌드 강제 금지 |
+| `event_contract_lock_mvp_025` | 25 | 1~2 | `event_season_sign_025` | `event_reserve_core_025`, `event_quiet_contract_025` 중 조건부 1개 | 60~90초 | 31일 이후 새 빌드 강제, 임시 시드 마나 중첩 금지 |
 
 ### MVP 저주 계약 제작표
 
@@ -2064,6 +3155,7 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_chapter_phase_resolved` | 아니오 | 10일 챕터 안 운영 단계, 질문 태그, 실제 대응 태그 기록 |
 | `telemetry_mvp30_day_contract_resolved` | 예 | 1~30일 일자별 학습 약속, 잠금 태그, 조정 필드, 금지 태그 감지 기록 |
 | `telemetry_spring2_operation_choice_resolved` | 아니오 | 15일 작은 상점/보상 선택이 16~20일에서 검증됐는지 기록 |
+| `telemetry_mvp_summer_preview_bridge_resolved` | 아니오 | 25일 예고, 26~29일 리포트 태그, 30일 관측자 후보 방향 연결 여부 기록 |
 | `telemetry_observer_preview_resolved` | 아니오 | 30일 관측자 예고형 후보 방향, 실제 방향, 재분담 행동 기록 |
 | `telemetry_overheat_tile_decision_resolved` | 아니오 | 과열 타일 사용, 포기, 구조물 손실, 판단 이유 기록 |
 | `telemetry_overheated_colossus_phase_started` | 아니오 | 40일 과열된 거상 단계, 열 원인, 활성 과열 타일, 경고 표시 기록 |
@@ -2078,9 +3170,14 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_frost_zone_decision_resolved` | 아니오 | 결빙 예고 후 구조물 이전, 해동, 남은 설치 공간 기록 |
 | `telemetry_large_enemy_hold_resolved` | 아니오 | 겨울 껍질/무거운 순례자 지연 시간, 누수, 대응 태그 기록 |
 | `telemetry_winter_gate_preview_phase_started` | 아니오 | 80일 겨울의 문 예고형 단계, 결빙 권역, 남은 설치 공간, 경고 표시 기록 |
+| `telemetry_winter_gate_preview_frost_cycle_resolved` | 아니오 | 80일 결빙 사이클별 예고 이해, 이전 행동, 남은 설치 공간, 경로 차단 여부 기록 |
+| `telemetry_winter_gate_preview_part_choice_resolved` | 아니오 | 80일 문경첩/서리 사슬 선택, 파괴 여부, 선택 이유, 다음 결빙 완화 여부 기록 |
 | `telemetry_pressure_tile_decision_resolved` | 아니오 | 압력 예고 후 구조물 이전/포기/수리 유지와 남은 설치 공간 기록 |
 | `telemetry_rear_killzone_shift_resolved` | 아니오 | 주 킬존이 어느 권역에서 어디로 옮겨졌는지와 안정화 여부 기록 |
+| `telemetry_pressure_rotation_resolved` | 아니오 | 86~89일 압력 이동 순서, 다음 후보 예측, 보조 킬존 준비 여부 기록 |
 | `telemetry_winter_gate_phase_started` | 아니오 | 90일 겨울의 문 단계, 압력 후보 권역, 남은 설치 공간, 경고 표시 기록 |
+| `telemetry_winter_gate_pressure_cycle_resolved` | 아니오 | 90일 이동 압력 사이클별 예고 이해, 이전 행동, 권역 회복 여부, 경로 차단 여부 기록 |
+| `telemetry_winter_gate_part_choice_resolved` | 아니오 | 90일 압력문틀/얼어붙은 문턱 선택, 파괴 여부, 선택 이유, 다음 압력 완화 여부 기록 |
 | `telemetry_boss_encounter_budget_sampled` | 아니오 | 보스별 목표 시간, 경고선, 현재 단계별 소요 시간 기록 |
 | `telemetry_boss_pattern_loop_capped` | 아니오 | 같은 의미의 보스 패턴 루프가 반복 상한에 걸려 전환됐는지 기록 |
 | `telemetry_boss_encounter_budget_exceeded` | 아니오 | 목표 시간을 넘긴 원인과 조정 후보가 금지 태그를 건드리지 않았는지 기록 |
@@ -2093,6 +3190,7 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_next_run_suggestion_presented` | 예 | 제안 유형, 원인 태그, 자동 적용 금지 상태 기록 |
 | `telemetry_next_run_suggestion_carried` | 아니오 | 제안이 새 런 준비 메모나 훈련장으로 이어졌는지 기록 |
 | `telemetry_combat_report_created` | 아니오 | 웨이브 후 리포트와 패배 분석 카드의 원인 태그 기록 |
+| `telemetry_heroic_proof_tag_generated` | 아니오 | 증거 태그, 플레이어, 직업, 활성 방향, 위치, 출처 카드/구조물, 영향값 기록 |
 | `telemetry_structure_lifecycle_summary` | 아니오 | 구조물 목적, 위험 태그, 파괴/생존/재건 결과 기록 |
 | `telemetry_structure_rebuilt` | 아니오 | 같은 타일 재건, 후방 재건, 재건 정책 적용 기록 |
 | `telemetry_ping_suggestion_opened` | 아니오 | 자동 경고에서 어떤 핑 후보를 펼쳤는지 기록 |
@@ -2111,12 +3209,29 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_enemy_kill_summary` | 예 | 처치 기반 마나/드로우 펌핑량 기록 |
 | `telemetry_run_failed` | 예 | 붕괴 방향, 실패 일자, 실패 직전 손패 상태 기록 |
 | `telemetry_boss_part_destroyed` | 아니오 | 부위 파괴 타이밍과 보스 압박 완화량 기록 |
+| `telemetry_rarity_exposure_band_applied` | 아니오 | 희귀도 노출 밴드, 연결 희귀도 프로필, 런타임 보정 금지 여부 기록 |
+| `telemetry_card_pool_stage_applied` | 아니오 | 적용된 카드 풀 단계, 열린 라인, 미룬 라인, 차단 카드 종류 기록 |
+| `telemetry_rarity_roll_resolved` | 아니오 | 추첨 희귀도, 최종 희귀도, 하향 이유, 후보 위치 기록 |
+| `telemetry_card_reward_candidate_generated` | 아니오 | 보상 레일, 후보 카드, 대체 단계, 중복 축 검사, 골드 거절 이유 기록 |
+| `telemetry_card_reward_duplicate_axis_rerolled` | 아니오 | 같은 축 후보 3장 반복으로 다시 뽑은 후보와 최종 후보 기록 |
+| `telemetry_card_reward_fatigue_guard_applied` | 아니오 | 최근 보상 팩 검사 범위, 억제 수, 반복 허용 수, 후보 수/희귀도/골드 고정 여부 기록 |
+| `telemetry_card_reward_candidate_suppressed_for_fatigue` | 아니오 | 반복 피로도로 밀린 원래 후보, 최종 후보, 피로 사유 태그 기록 |
+| `telemetry_card_reward_repeat_allowed` | 아니오 | 반복 후보를 예외 허용한 카드, 후보 위치, 허용 사유 태그 기록 |
 | `telemetry_card_reward_presented` | 아니오 | 보상 프로필, 전리품 풀, 후보 희귀도, 후보 역할 태그, 후보 아키타입, 제외 태그 기록 |
 | `telemetry_card_reward_resolved` | 아니오 | 카드 선택, 거절, 후보 희귀도, 선택 소요 시간 기록 |
 | `telemetry_card_effect_resolved` | 아니오 | 카드 스펙 프로필, 대상 유효성, 실제 효과값, 지속 시간, 보스 정책 적용 기록 |
+| `telemetry_card_stat_budget_lock_checked` | 아니오 | 카드 스펙, 효과 예산 ID, 수치 잠금 ID, 통과 여부, 적용된 대가/정책 기록 |
+| `telemetry_card_stat_budget_violation_detected` | 아니오 | 예산 위반 축, 빠진 대가 태그, 빠진 정책 ID, 빌드 차단 여부 기록 |
 | `telemetry_card_archetype_signal_presented` | 아니오 | 보상 후보가 어떤 아키타입 신호로 읽혔는지 기록 |
-| `telemetry_card_archetype_commit_resolved` | 아니오 | 확정 카드 선택/거절, 선행 카드 수, 선택 이유 기록 |
+| `telemetry_card_archetype_commit_resolved` | 아니오 | 확정 카드 선택/거절, 지원 카드 수, 선택 이유 기록 |
+| `telemetry_heroic_equivalent_support_checked` | 아니오 | 실제 지원 카드 수, 동등 지원 태그, 적용 크레딧, 차단 상태, 런 중 선택 지원 충족 여부 기록 |
+| `telemetry_heroic_gate_ui_presented` | 아니오 | 표시 표면, 영웅 후보 상태, 상점 조율 상태, 표시 상세 행 수, 잠금 이유, 금지 시각/문구 태그 감지 기록 |
+| `telemetry_mvp_heroic_gate_checked` | 아니오 | 20~30일 영웅 후보의 지원 크레딧, 실제 카드 보유, 런 중 선택 지원, 최근 전투 증거, 하향 이유 기록 |
+| `telemetry_mvp_heroic_card_spec_lock_checked` | 아니오 | 영웅 카드 효과 잠금, 스펙 프로필, 예산, 보스 정책, 상한 통과 여부 기록 |
 | `telemetry_card_loot_choice_resolved` | 아니오 | 선택한 카드 희귀도, 선택 이유, 영웅 자동 선택 경고, 저주 동의 여부 기록 |
+| `telemetry_card_variant_candidate_presented` | 아니오 | 변형 후보, 표시 프로필, UI 표면, 기준 카드, 등장 경로, 아티팩트 해금 여부, 후보 수 고정 여부 기록 |
+| `telemetry_card_variant_chosen` | 아니오 | 선택한 변형 카드, 표시 프로필, 기준 카드, 선택 이유, 새 카드로 이해했는지 기록 |
+| `telemetry_card_variant_upgrade_confusion_reported` | 아니오 | 변형 카드를 강화로 오해한 UI 표면과 원인 기록 |
 | `telemetry_card_upgrade_presented` | 아니오 | 강화 후보, 대상 카드, 추천 태그, 현재 아키타입 카운트 기록 |
 | `telemetry_card_upgrade_resolved` | 아니오 | 선택/거절한 강화, 지불 가격, 강화 유형, 선택 이유 기록 |
 | `telemetry_early_deck_choice_resolved` | 아니오 | 1~10일 카드 선택이 직업 루프, 약점 보완, 골드 거절 중 어디에 속했는지 기록 |
@@ -2124,6 +3239,9 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_artifact_choice_presented` | 아니오 | 후보 풀, 운영 축 다양성, 장착 슬롯 상태 기록 |
 | `telemetry_artifact_choice_resolved` | 아니오 | 후보 풀, 선택/교체 결과, 투표 시간, 교체 대상 기록 |
 | `telemetry_artifact_replacement_resolved` | 아니오 | 현재 유지, 교체 대상, 교체 이유 태그 기록 |
+| `telemetry_artifact_loadout_changed` | 아니오 | 장착/휴면/방출 상태와 현재 슬롯 한도 기록 |
+| `telemetry_artifact_dormant_reactivated` | 아니오 | 휴면 아티팩트 재장착 비용, 교체 대상, 투표 시간 기록 |
+| `telemetry_artifact_side_effect_triggered` | 아니오 | 아티팩트 부작용 발동 시점과 적용값 기록 |
 | `telemetry_class_role_summary` | 아니오 | 직업별 구조물 설치, 카드 사용, 역할 수행 비율 기록 |
 | `telemetry_synergy_triggered` | 아니오 | 도발 군집, 계획 붕괴, 보스 부위 집중 등 시너지 발생 기록 |
 | `telemetry_enemy_role_pressure_summary` | 아니오 | 적 역할별 등장 횟수, 실패 방향, 대응 직업 분포 기록 |
@@ -2131,6 +3249,7 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_party_role_gap` | 아니오 | 파티에 부족한 역할과 공용 카드/아티팩트 보완 기록 |
 | `telemetry_shop_session_started` | 아니오 | 상점 세션 ID, 표시 항목, 파티 구매 한도 기록 |
 | `telemetry_shop_purchase` | 아니오 | 구매 항목, 최종 가격, 보스 파편 사용, 투표 여부 기록 |
+| `telemetry_shop_heroic_tune_offer_resolved` | 아니오 | 게이트 ID, 대상 플레이어, 대상 수락, 파티 투표 결과, 구매/보류 이유 기록 |
 | `telemetry_shop_session_completed` | 아니오 | 상점 체류 시간, 확인한 항목 수, 시작된 투표 수 기록 |
 | `telemetry_shop_recommendation_shown` | 아니오 | 피해 진단 태그, 다음 압박 태그, 추천 항목과 대안 확인 기록 |
 | `telemetry_shop_consumable_used` | 아니오 | 소모품 사용 창, 대상, 방향, 실제 방지 피해/효과 기록 |
@@ -2140,6 +3259,12 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_curse_contract_presented` | 아니오 | 저주 계약 카드, 즉시 이득, 장기 대가, 제안 대상 기록 |
 | `telemetry_curse_contract_confirmed` | 아니오 | 저주 수령 플레이어, 확인 시간, 선택 이벤트 기록 |
 | `telemetry_curse_contract_declined` | 아니오 | 거절 이유와 안전 선택 적용 여부 기록 |
+| `telemetry_curse_discount_reserved` | 아니오 | 25일 조용한 계약서 할인 예약, 대상 저주, 만료 상점 기록 |
+| `telemetry_curse_service_presented` | 아니오 | 저주 서비스 제안, 소유자, 가격, 할인, 가능 행동 기록 |
+| `telemetry_curse_service_resolved` | 아니오 | 안정화/제거/보류 결과, 투표, 구매 한도 소모 여부 기록 |
+| `telemetry_curse_stabilized` | 아니오 | 안정화 옵션, 남는 대가, 재안정화 잠금 기록 |
+| `telemetry_curse_removed` | 아니오 | 제거 가격, 할인, 파티 제거 할증 증가 기록 |
+| `telemetry_curse_service_deferred` | 아니오 | 보류, 시간 초과, 거절, 투표 실패 이유 기록 |
 | `telemetry_playtest_dashboard_run_aggregated` | 아니오 | 런 단위 대시보드 패널, 파생 지표, 위험 신호 집계 기록 |
 | `telemetry_playtest_dashboard_panel_flagged` | 아니오 | 특정 패널에서 발견된 위험 신호와 검토 태그 기록 |
 | `telemetry_playtest_observer_note_attached` | 아니오 | 관찰자 메모를 패널과 원본 이벤트에 연결 |
@@ -2153,22 +3278,36 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `telemetry_winter_gate_final_phase_started` | 아니오 | 100일 겨울의 문 완전체 단계 시작, 압력 계획, 활성 방향, 금지 압력 태그 기록 |
 | `telemetry_final_market_resolved` | 아니오 | 95일 마지막 상점의 선택 축과 포기한 약점 기록 |
 | `telemetry_final_boss_phase_completed` | 아니오 | 최종 보스 단계별 압력 권역, 방어선 이전, 부위 파괴 기록 |
+| `telemetry_final_boss_part_choice_resolved` | 아니오 | 최종 보스 부위 후보, 집중 대상, 파괴 결과, 보상 보정 차단 여부 기록 |
+| `telemetry_final_boss_companion_branch_selected` | 아니오 | 95일 포기 약점 태그와 100일 4단계 동반 분기 선택 결과 기록 |
 | `telemetry_final_result_reflection_started` | 아니오 | 최종 결과 회고 시작, 승패, 종료 일자, 플레이 시간, 활성 방향 기록 |
+| `telemetry_final_result_panel_viewed` | 아니오 | 결과 회고 패널별 체류, 건너뛰기, 결과 상태 기록 |
 | `telemetry_decisive_moment_card_presented` | 아니오 | 결과 화면의 결정적 장면 카드 유형, 일자, 방향, 위험 태그 기록 |
-| `telemetry_party_chronicle_saved` | 아니오 | 파티 기록 저장, 최종 방어선 태그, 다음 런 제안 기록 |
+| `telemetry_final_result_suggestion_presented` | 아니오 | 결과 회고에서 표시한 다음 런 제안 유형과 자동 적용 금지 상태 기록 |
+| `telemetry_party_chronicle_title_selected` | 아니오 | 연대기 제목 후보 선택, 직접 수정, 금지 문구 차단 기록 |
+| `telemetry_party_chronicle_memory_tags_generated` | 아니오 | 연대기 기억 태그 후보, 선택 태그, 차단 태그, 묶음 분포 기록 |
+| `telemetry_party_chronicle_saved` | 아니오 | 파티 조합, 아티팩트, 기억 태그, 다음 런 메모 저장 기록 |
+| `telemetry_party_chronicle_viewed` | 아니오 | 기록장 또는 결과 화면에서 연대기 상세 열람 기록 |
+| `telemetry_party_chronicle_filtered` | 아니오 | 기록장 정렬/필터 사용과 금지 비교 필터 부재 확인 |
+| `telemetry_post_run_learning_packet_created` | 아니오 | 결과 회고에서 생성한 학습 패킷, 원천, 연결 해금 규칙 기록 |
 | `telemetry_post_run_meta_progression_started` | 아니오 | 결과 회고 후 메타 진행 시작, 학습 태그, 도달 구간 기록 |
+| `telemetry_post_run_meta_panel_viewed` | 아니오 | 메타 패널 체류, 건너뛰기, 크게 표시한 해금 카드 기록 |
 | `telemetry_meta_unlock_resolved` | 아니오 | 해금 유형, 해금 이유, 파워 영향 여부 기록 |
 | `telemetry_encyclopedia_entry_unlocked` | 아니오 | 적/보스 도감 항목과 공개된 정보 태그 기록 |
 | `telemetry_training_scenario_unlocked` | 아니오 | 실패 태그와 연결된 훈련 장면 해금 기록 |
 | `telemetry_next_run_prep_loaded` | 아니오 | 다음 런 제안, 관련 해금, 강제 직업/카드 여부 기록 |
+| `telemetry_knowledge_revisit_offer_presented` | 아니오 | 재방문 제안 이유, 원천, 즉시 노출 여부, 훈련 연결 기록 |
 | `telemetry_knowledge_revisit_started` | 아니오 | 도감/훈련장 재방문 시작 이유, 출처, 추천 항목 기록 |
 | `telemetry_encyclopedia_entry_viewed` | 아니오 | 도감 항목 조회 시간, 항목 유형, 진입 출처 기록 |
 | `telemetry_training_scenario_started` | 아니오 | 훈련 장면 시작, 연결 도감, 목표 학습 태그, 보상 비활성 여부 기록 |
 | `telemetry_training_scenario_completed` | 아니오 | 훈련 시도 수, 사용 대응 태그, 제안 대응 태그 기록 |
 | `telemetry_knowledge_revisit_to_run_linked` | 아니오 | 재방문 후 다음 런 제안 연결과 강제 빌드 적용 여부 기록 |
 | `telemetry_new_run_setup_started` | 예 | 새 런 준비 출처, 다음 런 제안, 미리보기 인원수와 방향 기록 |
+| `telemetry_setup_suggestion_slot_changed` | 아니오 | 참고 메모 고정/접기/삭제와 자동 적용 금지 여부 기록 |
 | `telemetry_lobby_active_direction_previewed` | 예 | 로비 인원수별 활성 방향 미리보기와 비활성 방향 흐림 표시 기록 |
+| `telemetry_lobby_run_mode_selected` | 예 | 런 길이 선택, 예상 시간 범위, 보상 모드 비노출 여부 기록 |
 | `telemetry_class_selection_resolved` | 예 | 플레이어별 직업 선택, 역할 태그, 추천/강제 여부 기록 |
+| `telemetry_lobby_role_gap_hint_viewed` | 아니오 | 역할 빈틈 힌트 조회와 필수 직업 표시 금지 여부 기록 |
 | `telemetry_party_intent_confirmed` | 아니오 | 이번 런에서 시험할 운영 문장과 준비 완료 플레이어 기록 |
 | `telemetry_run_state_locked` | 예 | 시작 시 확정된 `playerCountAtStart`, `activeDirections`, `scalingProfileId`, 시드 기록 |
 | `telemetry_session_savepoint_created` | 예 | 안정 저장점 생성 시점, 일자, 페이즈 기록 |
@@ -2235,30 +3374,176 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `ui_decisive_moment_cards` | 결과 UI | 아니오 | 개인 책임 없는 전장 사건 카드 표시 |
 | `ui_next_run_suggestions` | 결과 UI | 아니오 | 정답 빌드가 아닌 운영 변화 제안 표시 |
 | `party_chronicle_card` | 기록 | 아니오 | 파티의 최종 조합과 회고 태그 저장 |
+| `party_chronicle_entry` | 기록 데이터 | 아니오 | 결과 회고를 파티 단위 기억 카드로 저장 |
+| `party_chronicle_title_options` | 제목 후보 | 아니오 | 결정적 장면과 기억 태그 기반 자동 제목 최대 3개 |
+| `party_chronicle_book_view` | 기록장 UI | 아니오 | 저장한 연대기 카드 목록, 펼침, 즐겨찾기, 허용 필터 제공 |
+| `party_chronicle_filter_preset` | 기록장 필터 | 아니오 | 결과, 도달 구간, 인원수, 직업 조합, 보스, 기억 태그 필터 |
+| `moment_last_relocation` | 결정적 장면 | 아니오 | 최종 보스 중 방어선 이전이 버틴 시간에 영향을 준 장면 |
+| `moment_base_crisis` | 결정적 장면 | 아니오 | 기지 치명 체력 진입과 회복/저지/후퇴 판단 장면 |
+| `moment_abandoned_weakness_branch` | 결정적 장면 | 아니오 | 95일에 남긴 약점이 100일 전장에 드러난 장면 |
+| `moment_boss_part_choice` | 결정적 장면 | 아니오 | 보스 부위 우선순위가 패턴 약화나 잔여 위험에 영향을 준 장면 |
+| `moment_held_structure` | 결정적 장면 | 아니오 | 핵심 구조물이 오라, 수리, 도발, 재건으로 오래 버틴 장면 |
+| `moment_wave_stack_tempo` | 결정적 장면 | 아니오 | 웨이브 겹치기 후 압박이 변한 템포 판단 장면 |
+| `moment_final_breach` | 결정적 장면 | 아니오 | 패배 시 마지막 누수의 반복 원인을 보여주는 장면 |
+| `final_suggest_rear_killzone` | 다음 런 제안 | 아니오 | 후방 킬존 이전 후보를 먼저 잡아보는 운영 메모 |
+| `final_suggest_save_or_break` | 다음 런 제안 | 아니오 | 살릴 구조물과 터뜨릴 구조물을 나누는 운영 메모 |
+| `final_suggest_hand_unjam` | 다음 런 제안 | 아니오 | 치명 구간 전 버리기와 저코스트 카드 정리를 권하는 운영 메모 |
+| `final_suggest_shop_commitment` | 다음 런 제안 | 아니오 | 마지막 상점에서 살린 축과 남긴 위험을 합의하는 운영 메모 |
+| `final_suggest_boss_part_focus` | 다음 런 제안 | 아니오 | 보스 부위 1개를 먼저 정하고 잔여 위험을 받아들이는 운영 메모 |
+| `final_suggest_stack_hold` | 다음 런 제안 | 아니오 | 치명 체력이나 이전 직전에는 웨이브 호출을 보류하는 운영 메모 |
 | `final_no_new_system_rule` | 금지선 | 아니오 | 99~100일에 새 적/새 규칙/새 아키타입 시작 금지 |
+
+### 100일 결과 회고 세부 제작표
+
+결과 회고 콘텐츠는 큰 문장보다 짧은 근거를 잘 고르는 것이 중요합니다.
+
+한 패널에 여러 판단을 섞지 않습니다.
+
+| 제작물 | 수량 | 문구 기준 | 연결 데이터 |
+| --- | ---: | --- | --- |
+| 결과 확정 문구 | 결과별 2~3개 | 승리는 버틴 선택, 패배는 전장 원인, 중단은 검증한 지점 | `outcome`, `finalDay`, `activeDirections` |
+| 마지막 방어선 지도 라벨 | 방향별 1세트 | 활성 방향만 라벨링하고 비활성 방향은 위험으로 표시하지 않음 | `finalKillzonePlanId`, `activeDirections` |
+| 95일 선택 회수 문구 | 태그 조합별 1개 | 고친 축과 남긴 위험을 함께 말함 | `chosenFocusTags`, `abandonedWeaknessTags` |
+| 결정적 장면 카드 | 유형별 3~5개 | 전장 사건, 구조물, 방향, 보스 단계 중심 | `DecisiveMomentCardProfile` |
+| 다음 런 제안 문구 | 유형별 2~3개 | 대응 태그와 운영 습관으로 말함 | `FinalResultSuggestionRule` |
+| 파티 연대기 문장 | 결과별 3~5개 | 점수보다 파티 조합, 아티팩트, 마지막 방어선 태그를 기억 | `partyChronicleId` |
+
+파티 연대기 제작 기준:
+
+| 제작물 | 수량 | 제작 기준 | 금지선 |
+| --- | ---: | --- | --- |
+| 연대기 제목 후보 | 장면 유형별 2~3개 | 결정적 장면, 마지막 방어선, 95일 선택을 한 문장으로 압축 | 캐리, 점수, 등급, 개인 비난 |
+| 기억 태그 사전 | 40~60개 | 전장 사건, 운영, 보스 부위, 아티팩트 역할, 포기한 약점 중심 | 개인 성과 태그 |
+| 카드 앞면 문구 | 결과별 3~5개 | 제목, 결과 줄, 파티 줄, 전장 줄이 5초 안에 읽힘 | 리더보드 문구 |
+| 기록장 빈 상태 | 출처별 2~3개 | 아직 저장한 기록이 없을 때 부드럽게 안내 | 저장하지 않으면 손해라는 표현 |
+| 필터 라벨 | 허용 필터별 1개 | 다시 보고 싶은 운영을 찾는 문구 | 승률/최고 점수/효율 필터 |
+
+기억 태그 사전 묶음:
+
+| 묶음 | 기본 수량 | 확장 상한 | 제작 기준 | 금지선 |
+| --- | ---: | ---: | --- | --- |
+| `lane_path` | 6 | 8 | 첫 굴곡, 후방 킬존, 마지막 이전처럼 방향에 투영 가능한 전선 판단 | 북/서/남 같은 비활성 방향 고정 태그 |
+| `structure_maze` | 8 | 10 | 도발, 바리케이드, 잔해, 수리, 오라처럼 구조물 운영을 기억 | 파괴 구조물 실패 목록 |
+| `resource_hand` | 6 | 8 | 시드 마나, 버리기, 드로우, 저비용 연쇄, 압축 선택 | 개인 손패 실수 |
+| `enemy_response` | 6 | 8 | 돌파형, 파괴형, 방해형, 대형 적, 정예, 군집 대응 | 처치 수, 딜량 |
+| `tempo_stack` | 5 | 6 | 겹치기 호출, 보류, 수습, 기다림 단축 | 보상 효율, 희귀도, 후보 수 |
+| `boss_weakness` | 7 | 9 | 보스 부위, 동반 분기, 95일 남긴 위험, 마지막 상점 합의 | 부위 파괴 보상 |
+| `artifact_role` | 6 | 8 | 아티팩트와 직업 역할이 만든 파티 운영 축 | 아티팩트 점수, 희귀도 점수 |
+| `ending_memory` | 4 | 5 | 결말의 톤과 마지막 보루 기억 | 클리어 등급, 리더보드 |
+
+기억 태그 라벨 작성 규칙:
+
+- 라벨은 2~10자 정도의 짧은 명사구로 씁니다.
+- 라벨에는 플레이어 이름, 개인 성과, 방향별 실패 낙인을 넣지 않습니다.
+- `tempo_stack` 라벨은 보상 기대가 아니라 시간, 보류, 수습을 떠올리게 해야 합니다.
+- `ending_memory` 라벨은 승리/패배를 평가하지 않고 기억의 톤만 정합니다.
+- 같은 결과 카드에는 같은 묶음 태그가 3개 이상 보이면 안 됩니다.
+
+연대기 제목 후보 기본 세트:
+
+| ID | 연결 장면 | 문구 방향 |
+| --- | --- | --- |
+| `chronicle_title_last_relocation` | `moment_last_relocation` | 마지막 방어선 이전으로 버틴 파티 |
+| `chronicle_title_held_structure` | `moment_held_structure` | 핵심 구조물을 끝까지 지킨 파티 |
+| `chronicle_title_abandoned_weakness` | `moment_abandoned_weakness_branch` | 남겨둔 위험을 안고 버틴 파티 |
+| `chronicle_title_boss_part_focus` | `moment_boss_part_choice` | 보스 부위를 먼저 본 파티 |
+| `chronicle_title_final_breach` | `moment_final_breach` | 다음에 다시 막아볼 전선을 남긴 파티 |
+| `chronicle_title_quiet_record` | 결과 공통 | 조용히 기록된 파티 |
+
+기록장 허용 필터:
+
+| 필터 ID | 용도 |
+| --- | --- |
+| `chronicle_filter_recent` | 최신 기록 보기 |
+| `chronicle_filter_favorite` | 즐겨찾기 기록 보기 |
+| `chronicle_filter_outcome` | 승리/패배/중단별 보기 |
+| `chronicle_filter_day_band` | 도달 구간별 보기 |
+| `chronicle_filter_player_count` | 시작 인원수별 보기 |
+| `chronicle_filter_class_combo` | 직업 조합별 보기 |
+| `chronicle_filter_boss_seen` | 본 보스별 보기 |
+| `chronicle_filter_memory_tag` | 운영/전장 기억 태그별 보기 |
+
+기록장에는 승률, 최고 점수, 평균 점수, 개인 기여도, 딜량, 처치 수, 웨이브 겹치기 효율 필터를 만들지 않습니다.
+
+결정적 장면 카드 제작 기준:
+
+| 유형 | 첫 줄 | 둘째 줄 | 버튼 |
+| --- | --- | --- | --- |
+| `moment_last_relocation` | 어느 권역으로 옮겼는지 | 그 이전이 몇 초를 벌었는지 | 짧은 스냅샷 |
+| `moment_base_crisis` | 기지가 치명 구간에 들어간 시점 | 열린 대응 태그와 실제 대응 | 스냅샷 보기 |
+| `moment_abandoned_weakness_branch` | 남긴 약점이 드러난 방향 | 그 약점을 어떻게 받아냈는지 | 95일 선택 보기 |
+| `moment_boss_part_choice` | 먼저 본 보스 부위 | 약해진 패턴과 남은 위험 | 보스 도감 |
+| `moment_held_structure` | 오래 버틴 구조물 | 연결된 오라/수리/도발/재건 태그 | 구조물 기록 |
+| `moment_wave_stack_tempo` | 호출한 시점 | 이후 압박 변화와 보류 가능 태그 | 겹치기 도감 |
+| `moment_final_breach` | 반복 누수가 생긴 활성 방향 | 다음에 시험할 대응 태그 | 다음 런 메모 |
+
+다음 런 제안은 최대 2개만 표시합니다.
+
+두 제안이 같은 `suggestionType`이면 더 설명력이 높은 하나만 남깁니다.
+
+솔로 결과 회고에서는 동쪽 외 방향을 결정적 장면이나 다음 런 제안의 실제 방어 대상으로 만들지 않습니다.
 
 ## 런 이후 메타 진행 제작표
 
 | ID | 분류 | MVP | 역할 |
 | --- | --- | --- | --- |
 | `post_run_meta_flow` | 흐름 | 아니오 | 런 기록 수집, 학습 태그, 정보/훈련 해금, 선택지 해금, 다음 런 준비, 프로필 저장 |
+| `post_run_learning_packet` | 연결 데이터 | 아니오 | 결과 회고, 패배 카드, 발견 기록을 메타 해금과 재방문 제안으로 연결 |
+| `meta_unlock_rule_set` | 해금 규칙 | 아니오 | 도감, 훈련, 카드 풀, 아티팩트 풀, 외형 해금을 역할 태그 기준으로 처리 |
 | `meta_panel_run_record_collect` | 메타 패널 | 아니오 | 도달 일자, 만난 적, 보스 부위, 마지막 방어선 태그 수집 |
 | `meta_panel_learning_tag_summary` | 메타 패널 | 아니오 | 반복 실패 원인, 포기한 약점, 자주 쓴 대응 태그 정리 |
 | `meta_panel_info_training_unlock` | 메타 패널 | 아니오 | 적 도감, 보스 기록, 훈련 장면 해금 |
 | `meta_panel_choice_pool_unlock` | 메타 패널 | 아니오 | 새 카드/아티팩트/외형 후보 해금 |
 | `meta_panel_next_run_prep` | 메타 패널 | 아니오 | 다음 런에서 시도할 운영 1~2개 연결 |
 | `meta_panel_profile_save` | 메타 패널 | 아니오 | 프로필 해금 상태와 파티 연대기 저장 |
+| `meta_ui_three_column_summary` | 메타 UI | 아니오 | 이번 런 기록, 새로 열린 것, 다음 판 메모 3단 구성 |
+| `meta_recent_revisit_queue` | 저장 | 아니오 | 즉시 보여주지 않은 재방문 제안을 최대 3개 저장 |
 | `profile_state_unlock_store` | 저장 | 아니오 | 카드 풀, 아티팩트 풀, 도감, 훈련, 외형 해금 저장 |
 | `encyclopedia_entry_enemy_role` | 도감 | 아니오 | 적 역할, 저항, 대응 태그 정보 제공 |
 | `encyclopedia_entry_boss_pattern` | 도감 | 아니오 | 보스 부위와 패턴 기록 제공 |
 | `training_scenario_from_failure_tag` | 훈련 | 아니오 | 패배/회고 태그와 연결된 짧은 재방문 장면 |
 | `cosmetic_unlock_non_power` | 외형 | 아니오 | 기지, 카드, 타워 외형처럼 밸런스에 영향 없는 보상 |
 
+### 메타-재방문 연결 제작표
+
+결과 직후 메타 화면은 많은 보상을 한꺼번에 보여주는 화면이 아니라, 다음 런으로 가져갈 기억을 정리하는 짧은 브릿지입니다.
+
+| 제작물 | 수량 | 제작 기준 | 금지선 |
+| --- | ---: | --- | --- |
+| `PostRunLearningPacket` 기본 규칙 | 원천별 1개 이상 | 결과 장면, 패배 원인, 발견, 포기 약점, 강점 태그 연결 | 보상 계산, 난이도 보정 |
+| `MetaUnlockRule` | 해금 유형별 1개 이상 | 도감/훈련/선택지/외형을 역할 태그와 도달 구간으로 연결 | 영구 스탯 증가 |
+| 메타 화면 카드 문구 | 영역별 3~5개 | 기록, 새 정보, 다음 메모를 조용한 문장으로 표현 | 리워드 폭죽, 파워 상승 문구 |
+| 재방문 제안 이유 문구 | 제안별 2~3개 | 방금 전장 사건과 한 문장으로 연결 | 숙제, 재교육, 꾸짖기 |
+| 최근 추천 목록 문구 | 상태별 2~3개 | 나중에 볼 수 있음을 부드럽게 안내 | 닫으면 손해처럼 보이는 문구 |
+
+메타 해금 기본 규칙:
+
+| ID | 해금 유형 | 표시 | 제작 기준 |
+| --- | --- | --- | --- |
+| `meta_unlock_enemy_entry_first_seen` | 도감 | 큰 카드 가능 | 처음 본 적의 행동, 저항, 대응 태그 3줄 |
+| `meta_unlock_boss_part_record` | 도감 | 큰 카드 가능 | 처음 본 보스 부위와 약화되는 패턴 |
+| `meta_unlock_training_repeat_cause` | 훈련 | 큰 카드 가능 | 반복 원인 태그 1개와 30~60초 훈련 연결 |
+| `meta_unlock_card_pool_role_tag` | 카드 풀 | 요약 카드 | 도달 구간과 역할 태그를 만족할 때 후보 풀만 확장 |
+| `meta_unlock_artifact_pool_role_tag` | 아티팩트 풀 | 요약 카드 | 보스 조우와 역할 태그를 만족할 때 후보 풀만 확장 |
+| `meta_unlock_chronicle_cosmetic` | 외형/기록 | 큰 카드 가능 | 파티 기록, 계절 완주, 보스 조우를 전투 수치 없이 저장 |
+
+재방문 제안 기본 규칙:
+
+| ID | 연결 대상 | 즉시 노출 조건 |
+| --- | --- | --- |
+| `revisit_offer_runner_slowdown` | `training_scenario_runner_slowdown` | 돌파형 누수나 짧은 경로 방치가 반복됨 |
+| `revisit_offer_structure_mark` | `training_scenario_breaker_rebuild` | 핵심 구조물 또는 표식 구조물이 연쇄 붕괴 |
+| `revisit_offer_disruptor_priority` | `training_scenario_disruptor_priority` | 방해형 생존 중 마나/드로우 손실 누적 |
+| `revisit_offer_boss_part_focus` | `training_scenario_boss_part_focus` | 보스 부위 방치가 패턴 압박으로 연결 |
+| `revisit_offer_wave_stack_tempo` | `encyclopedia_entry_wave_stack_tempo` | 겹치기 후 압박 급증 또는 보류 판단 필요 |
+| `revisit_offer_final_relocation` | `encyclopedia_entry_structure_mark` | 마지막 방어선 이전이 늦거나 반복됨 |
+
 ## 도감/훈련장 재방문 제작표
 
 | ID | 분류 | MVP | 역할 |
 | --- | --- | --- | --- |
 | `knowledge_revisit_flow` | 흐름 | 아니오 | 재방문 이유, 대상 선택, 도감 카드, 훈련 장면, 대응 비교, 다음 런 연결 |
+| `knowledge_revisit_offer_rule` | 제안 규칙 | 아니오 | 결과/패배/메타에서 재방문 후보를 1개 큰 카드와 최근 추천 목록으로 분리 |
 | `knowledge_panel_reason_card` | 재방문 패널 | 아니오 | 패배 원인, 결과 회고, 메타 해금, 처음 만난 적 중 이유 1개 표시 |
 | `knowledge_panel_target_select` | 재방문 패널 | 아니오 | 적, 보스 부위, 구조물, 상태이상, 겹치기, 직업 역할 중 대상 선택 |
 | `knowledge_panel_compact_entry` | 재방문 패널 | 아니오 | 행동, 저항, 대응 태그, 피해야 할 오해를 3줄 요약 |
@@ -2268,10 +3553,13 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `knowledge_panel_response_compare` | 재방문 패널 | 아니오 | 사용한 대응과 다른 가능성 최대 2개 비교 |
 | `knowledge_panel_run_link` | 재방문 패널 | 아니오 | 새 런 준비, 즐겨찾기, 관련 도감 저장 연결 |
 | `encyclopedia_entry_status_response` | 도감 | 아니오 | 상태이상 저항과 약화 변환 설명 |
+| `encyclopedia_entry_enemy_role_runner` | 도감 | 예 | 빠른 적의 첫 굴곡 지연, 둔화/도발/넉백 대응 설명 |
+| `encyclopedia_entry_enemy_role_breaker` | 도감 | 예 | 파괴형이 구조물을 두드리는 조건과 후방 재건 판단 설명 |
 | `encyclopedia_entry_wave_stack_tempo` | 도감 | 예 | 웨이브 겹치기가 보상 없는 템포 선택임을 설명 |
 | `encyclopedia_entry_shop_context` | 도감 | 예 | 첫 상점이 구매 강제가 아니라 방금 드러난 약점 정리임을 설명 |
 | `encyclopedia_entry_structure_mark` | 도감 | 예 | 표식 구조물을 살릴지 버릴지 판단하는 기준 설명 |
 | `encyclopedia_entry_enemy_role_disruptor` | 도감 | 예 | 방해형이 마나/드로우를 흔드는 방식과 우선 처치 대응 설명 |
+| `encyclopedia_entry_boss_part_focus_basic` | 도감 | 예 | 보스 본체보다 부위 노출과 패턴 시간을 먼저 보는 기준 설명 |
 | `training_scenario_runner_slowdown` | 훈련 | 예 | 빠른 적을 둔화/도발/넉백으로 늦추는 장면 |
 | `training_scenario_breaker_rebuild` | 훈련 | 예 | 표식 구조물을 살리거나 버리고 후방 재건하는 장면 |
 | `training_scenario_disruptor_priority` | 훈련 | 예 | 방해형 우선 처치와 핑 연결 장면 |
@@ -2279,6 +3567,37 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 | `training_hand_slow_or_taunt_basic` | 훈련 손패 | 예 | 빠른 적 지연용 고정 손패, 실제 덱 변경 없음 |
 | `training_hand_repair_or_rebuild_basic` | 훈련 손패 | 예 | 표식 구조물 판단용 고정 손패, 실제 덱 변경 없음 |
 | `training_hand_focus_ping_basic` | 훈련 손패 | 예 | 방해형 우선 처치와 집중 핑 연습용 고정 손패 |
+| `training_hand_part_focus_basic` | 훈련 손패 | 예 | 보스 부위 1개를 먼저 정하는 고정 손패, 실제 보스 보상 변경 없음 |
+
+MVP 도감/훈련장 샘플 제작 기준:
+
+| 제작물 | 수량 | 작성 기준 | 금지선 |
+| --- | ---: | --- | --- |
+| 도감 카드 | 6개 | 빠른 적, 파괴형, 방해형, 표식 구조물, 겹치기 템포, 보스 부위 집중 | 정답 빌드, 필수 직업, 특정 카드 강요 |
+| 도감 3줄 문구 | 항목당 3줄 | 행동, 위험/저항, 대응 순서로 작성 | 4줄 이상 기본 노출 |
+| 훈련 장면 | 4개 | 30~60초, 단일 `targetLearningTag`, 고정 소형 전장 | 복합 튜토리얼, 보상 파밍 |
+| 훈련 손패 | 4개 | 대응 태그를 시험하는 고정 카드 묶음 | 실제 덱, 상점, 아티팩트 수정 |
+| 결과 비교 문구 | 훈련당 2~3개 | 사용한 대응과 다른 가능성을 점수 없이 비교 | 등급, 성공률, 개인 평가 |
+
+MVP 도감 3줄 문구:
+
+| 도감 ID | 1줄 행동 | 2줄 위험/저항 | 3줄 대응 |
+| --- | --- | --- | --- |
+| `encyclopedia_entry_enemy_role_runner` | 빠르게 첫 굴곡을 지나갑니다. | 짧은 경로를 열어두면 바로 기지에 닿습니다. | 둔화, 도발, 넉백으로 몇 초를 벌어둡니다. |
+| `encyclopedia_entry_enemy_role_breaker` | 막힌 길이나 도발 구조물을 두드립니다. | 오래 맞은 바리케이드는 전선을 갑자기 열 수 있습니다. | 터질 위치와 후방 재건 위치를 먼저 정합니다. |
+| `encyclopedia_entry_enemy_role_disruptor` | 마나와 드로우 흐름을 흔듭니다. | 오래 살면 손패가 가벼워도 굴러가지 않습니다. | 첫 핑으로 집중 화력을 찍고 두 번째 방해 전에 끊습니다. |
+| `encyclopedia_entry_structure_mark` | 표식 구조물은 곧 압박받을 구조물입니다. | 모두 살리려 하면 수리와 카드가 흩어집니다. | 살릴 축과 버릴 축을 먼저 나눕니다. |
+| `encyclopedia_entry_wave_stack_tempo` | 겹치기는 기다림을 줄이는 호출입니다. | 누르면 압박은 즉시 커지지만 보상은 늘지 않습니다. | 기지 치명 체력이나 전선 이전 직전에는 보류할 수 있습니다. |
+| `encyclopedia_entry_boss_part_focus_basic` | 보스는 본체보다 부위 시간이 먼저 문제될 수 있습니다. | 남은 부위는 패턴 압박을 오래 끌고 갑니다. | 부위 1개를 먼저 정하고 파티 화력을 모읍니다. |
+
+MVP 훈련 장면:
+
+| 훈련 ID | `targetLearningTag` | 소요 | 전장/손패 | 통과 관찰 |
+| --- | --- | ---: | --- | --- |
+| `training_scenario_runner_slowdown` | `slow_fast_enemy_at_first_bend` | 45초 | 첫 굴곡, 빠른 적 3기, 둔화/도발/넉백 | 첫 굴곡 전에 지연 |
+| `training_scenario_breaker_rebuild` | `split_save_and_abandon_marked_structure` | 50초 | 표식 바리케이드 2개, 수리/해체/후방 설치 | 살릴 것 1개와 버릴 것 1개 분리 |
+| `training_scenario_disruptor_priority` | `focus_disruptor_before_second_cast` | 40초 | 군집 뒤 방해형 1기, 집중 핑/단일 화력 | 두 번째 방해 전 처치 |
+| `training_scenario_boss_part_focus` | `choose_one_boss_part_before_body` | 60초 | 미니 보스, 부위 2개, 부위 표식 손패 | 먼저 정한 부위 1개 제거 |
 
 ## 튜토리얼/첫 세션 제작표
 
@@ -2323,13 +3642,23 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 14. 카드 보상 프로필은 다음 웨이브 의도와 다음 적 역할 프로필을 함께 참조해야 합니다.
 15. 모든 직업은 1~10일과 30일 MVP 카드 풀 계약을 가져야 합니다.
 16. 모든 직업 전용 카드는 자기 직업의 카드 풀 라인 ID와 하나 이상의 카드 아키타입 ID를 가져야 합니다.
-17. 직업별 30일 MVP 카드 풀은 시작 카드와 보상 카드를 합쳐 14종 이상이어야 하며, 직업마다 3개 이상의 아키타입을 보여줘야 합니다.
+17. 직업별 30일 MVP 카드 풀은 시작 카드 6종과 보상 카드 8종을 합쳐 정확히 14종이어야 하며, 직업마다 3개 이상의 아키타입을 보여줘야 합니다.
 18. 카드 풀 라인은 특정 방위 전용 콘텐츠가 아니라 `WaveIntent`와 `LaneProjection`으로 현재 압박 전선에 투영되어야 합니다.
 19. 공용 카드는 직업 카드 풀 계약의 금지 대체 태그를 같은 강도로 해결하면 안 됩니다.
 20. 모든 카드는 `archetypeIds`, `archetypeRole`, `commitmentLevel`, `decisionQuestionKo`, `timingWindows`, `tradeoffTags`, `comboHookTags`, `missCostTag` 제작 필드를 가져야 합니다.
 21. 0비용, 영웅, 저주 카드는 대가나 선행 조건 없이 강한 효과를 가질 수 없습니다.
 22. 카드 리워크 매트릭스는 직업별 14종, 공용 8종을 30일 MVP 기준으로 채워야 합니다.
 23. 카드 효과 수치를 조정하기 전에 사용 타이밍, 대상 조건, 실패 손해를 먼저 점검합니다.
+
+후반 카드 제작 추가 규칙:
+
+- 100일 풀런 직업은 `full_100` 카드 풀 계약을 가져야 합니다.
+- 직업별 후반 신규 카드 6종, 총 24종은 `FullRunCardCatalogEntry`로 등록합니다.
+- 후반 신규 카드는 `class_late_patch` 또는 `class_late_payoff` 역할만 사용합니다.
+- 91일 이후 후반 영웅 카드는 기존 아키타입 게이트 조건 없이 후보로 노출할 수 없습니다.
+- 후반 카드의 `allowedDayRange`는 100일 결과를 포함하지 않습니다.
+- 후반 0비용 카드는 조건부와 대가를 모두 가져야 하며, 조건 없는 드로우, 마나 순증가, 피해, 대량 수리를 만들 수 없습니다.
+- 후반 이동/재배치 카드는 활성 전선 투영과 경로 검사를 반드시 통과해야 합니다.
 
 카드 스펙 추가 규칙:
 
@@ -2348,7 +3677,8 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 - MVP에서 카드 1장의 강화 후보는 최대 2개입니다.
 - 강화는 비용, 범위, 지속, 대상 선택, 발동 조건, 실패 손해, 대가 중 보통 1개 축만 바꿉니다.
 - 저주 안정화는 대가를 제거하지 않고 형태를 바꿔야 합니다.
-- 영웅 확정 조율은 선행 카드 조건과 실패 손해를 함께 가져야 합니다.
+- 영웅 확정 조율은 `MvpHeroicCommitGate` 조건과 실패 손해를 함께 가져야 합니다.
+- 영웅 동등 지원 강화/아티팩트는 실제 지원 카드 1장과 최근 전투 증거를 대신할 수 없고, 한 게이트에서 최대 1크레딧만 제공합니다.
 
 24. 모든 카드 보상 프로필은 하나 이상의 `CardLootPool`을 참조하고, 모든 `CardLootPool`은 하나의 `CardRarityProfile`과 포함 가능한 `CardArchetype` 목록을 가져야 합니다.
 25. 일반 라운드 전리품 풀과 희귀도 프로필은 저주 가중치를 0으로 둡니다.
@@ -2359,7 +3689,32 @@ MVP에서는 모든 카드에 프로필이 필요하지만, 먼저 아래 카드
 
 - 모든 1~30일 MVP 전리품 경로는 하나의 `MvpLootRarityLock`을 가져야 합니다.
 - 20~30일 상점 카드 슬롯은 영웅 카드를 랜덤 판매하지 않고, 조건부 `shop_heroic_tune` 상품으로만 처리합니다.
+- 71~100일 후반 전리품 경로는 하나의 `FullRunLootRarityLock`을 가져야 합니다.
+- 71~99일 후반 라운드와 보스 개인 카드 보상은 새 아키타입 진입 후보를 열 수 없습니다.
+- 91~99일 영웅 후보는 기존 아키타입 게이트 조건이 있을 때만 노출하고, 조건 미충족 시 같은 대응 태그의 희귀 또는 일반 후보로 내려갑니다.
+- 95일 최종 상점은 영웅 랜덤 판매, 신규 저주 계약, 웨이브 겹치기 보상 상품을 제공하지 않습니다.
+- 100일 결과 화면은 카드 3장 보상, 희귀도 보정, 다음 런 후보 수 증가를 표시하지 않습니다.
+
 29. 같은 카드 보상 후보 3장에 같은 대응 태그, 카드 풀 라인, 카드 아키타입만 반복해서 넣지 않습니다.
+
+보상 반복 피로도 추가 검수:
+
+- 모든 플레이어 보상 팩은 표시 후 개인 `RewardCandidateExposureMemory`를 남깁니다.
+- 같은 카드가 최근 5팩 안에 2회 이상 노출되면 우선 억제하고, 허용 시 `allowedRepeatReasonTags`를 남깁니다.
+- 기준 카드와 변형 카드는 같은 보상 화면에 함께 들어가지 않습니다.
+- 같은 `poolLaneId`가 3팩 연속 핵심 후보가 되면 같은 레일 안에서 다른 후보를 먼저 찾습니다.
+- 반복 거절된 카드는 5팩 동안 우선순위를 낮추되, 영구 제외나 새 카드 보장으로 표시하지 않습니다.
+- 반복 피로도 규칙은 후보 수, 희귀도, 골드량, 변형 카드 확률을 바꾸지 않습니다.
+
+카드 수치 예산 추가 검수:
+
+- 모든 MVP `CardSpecProfile`은 `effectBudgetId`와 `statBudgetLockId`를 함께 가져야 합니다.
+- `effectBudgetId`는 예산 ID와 잠금 ID 매핑표의 기본 `statBudgetLockId`로 검수합니다.
+- `budget_cost1_aura_device`는 `stat_budget_flexible_1`과 `aura_policy_stack_cap`을 요구합니다.
+- `budget_cost1_risky_focus`는 명시 계약/저주 카드에만 사용하고 `stat_budget_curse`로 검수합니다.
+- 예산 상한 초과는 `exceededAxisTags`, `compensationTagsApplied`, `requiredPolicyIds`를 남겨야 합니다.
+- 솔로 플레이, 웨이브 겹치기, 클리어 시간, 처치 수로 카드 예산을 완화하지 않습니다.
+
 30. 직업 성장 데이터는 약점을 완전히 제거하는 효과를 만들지 않습니다.
 31. 시너지 트리거는 한 직업 단독 해결이 아니라 최소 2개 역할의 시간/위치 상호작용으로 정의합니다.
 32. 적 역할 대응 데이터는 최소 2개 이상의 유효 대응을 가져야 합니다.
@@ -2479,7 +3834,7 @@ MVP 이벤트 계약 추가 검수:
 - 15일 작은 상점은 5~6개 항목, 파티 구매 최대 1회, 60~90초 목표를 넘지 않습니다.
 - 20일 변형 보스 후 상점은 7~8개 항목, 파티 구매 최대 2회, 90~120초 목표를 넘지 않습니다.
 - 상점 가격은 웨이브 겹치기 횟수, 클리어 시간, 처치 수, 비활성 방향 압박으로 바뀌지 않습니다.
-- 20일 이전 상점은 영웅 카드 구매를 제공하지 않습니다. 20일 이후에도 영웅 확정 조율은 선행 빌드 조건을 요구합니다.
+- MVP 1~30일에서는 20일/30일 허용 세션에만 영웅 확정 조율을 제공하며, 이후 구간의 영웅 확정 조율도 별도 후반 영웅 게이트 조건을 요구합니다.
 
 상점 소모품 검수:
 
@@ -2581,127 +3936,245 @@ MVP 이벤트 계약 추가 검수:
 182. 67일 겹치기 후보는 67~69일 일반 웨이브만 사용할 수 있으며, 70일 보스는 호출 대상이 아닙니다.
 183. 70일 선택적 동반 패킷은 한 번에 하나만 사용할 수 있으며 보상 팩, 카드 후보, 보스 파편, 아티팩트 드롭 수를 추가하지 않습니다.
 184. 61~70일 2인은 서쪽/남쪽 정예, 방해형, 동반 웨이브를 만들지 않습니다.
-185. 71~80일 WaveData는 `chapterFlowId: winter1_space_flow_071_080`와 `chapterPhaseIndex`를 가져야 합니다.
-186. 결빙 후보 타일은 항상 `activeDirections` 안의 설치 타일이어야 하며 경로 타일을 포함하지 않습니다.
-187. 결빙은 준비 항목 또는 전투 중 예고 후 적용되어야 하며, 웨이브 중 추가 결빙은 최대 1회입니다.
-188. 결빙은 구조물을 즉시 삭제하거나 보상 배율, 골드 증가, 카드 후보 증가를 만들 수 없습니다.
-189. 겨울 껍질은 체력만 높은 적이 아니라 지속 화력, 둔화, 도발, 잔해 중 하나 이상의 대응 태그를 가져야 합니다.
-190. 71~80일 1인은 동쪽 외 결빙, 대형 적, 동반 웨이브를 만들지 않습니다.
-191. 71~80일 3인은 남쪽 결빙, 대형 적, 동반 웨이브를 만들지 않습니다.
-192. 78일 공간 축소 중 겹치기 경고에는 보상, 희귀도, 카드 후보 증가 문구를 붙이지 않습니다.
-193. 80일 겨울의 문 예고형은 `boss_phase_plan_winter_gate_preview_080`을 사용해야 합니다.
-194. 80일 보스는 90일/100일급 장기 공간 봉쇄나 구조물 예고 없는 삭제를 사용하지 않습니다.
-195. 81~90일 WaveData는 `chapterFlowId: winter2_pressure_flow_081_090`와 `chapterPhaseIndex`를 가져야 합니다.
-196. 보스 압력 후보 권역은 항상 `activeDirections` 안의 설치 권역이어야 하며 경로 타일을 포함하지 않습니다.
-197. 보스 압력 타일은 예고 후 생성되어야 하며 구조물을 즉시 삭제하지 않습니다.
-198. 보스 압력 타일은 보상 배율, 골드 증가, 카드 후보 증가, 카드 희귀도 증가를 만들 수 없습니다.
-199. 81~90일 1인은 동쪽 외 압력 권역, 대형 적, 동반 웨이브를 만들지 않습니다.
-200. 81~90일 3인은 남쪽 압력 권역, 대형 적, 동반 웨이브를 만들지 않습니다.
-201. 87일 압력 중 겹치기 경고에는 보상, 희귀도, 카드 후보 증가 문구를 붙이지 않습니다.
-202. 90일 겨울의 문은 `boss_phase_plan_winter_gate_090`을 사용해야 합니다.
-203. 90일 보스는 100일 완전체처럼 지나간 권역을 장기 봉쇄하지 않습니다.
-204. 90일 보스 클리어에 웨이브 겹치기 보상 증가를 붙이지 않습니다.
-205. 91~100일 WaveData는 `chapterFlowId: final_rehearsal_flow_091_100`와 `chapterPhaseIndex`를 가져야 합니다.
-206. 91~100일은 새 적, 새 타일, 새 상태이상, 새 카드 규칙 학습을 추가하지 않습니다.
-207. 95일 마지막 상점은 모든 약점을 해결하지 않으며, 큰 파티 구매는 최대 2회까지만 허용합니다.
-208. 95일 최종 상점은 아티팩트 교체 행동을 최대 1회까지만 허용합니다.
-209. 95일 아티팩트 후보 풀은 새 아키타입 시작, 슬롯 증가, 웨이브 겹치기 최대치 신규 증가를 기본 후보로 제공하지 않습니다.
-210. 95일 상점 종료 시 `abandonedWeaknessTags`와 `lockedBuildAxisTags`가 반드시 기록되어야 합니다.
-211. 96일 이후에는 아티팩트 교체, 대형 카드 제거, 영웅 확정 조율 상점을 다시 열지 않습니다.
-212. 98일 마지막 겹치기 판단에는 보상, 희귀도, 카드 후보 증가 문구를 붙이지 않습니다.
-213. 99일은 새 규칙 튜토리얼 없이 최종 보스 전 리허설로 구성합니다.
-214. 100일 겨울의 문 완전체는 `boss_phase_plan_winter_gate_final_100`을 사용해야 합니다.
-215. 100일 장기 압력 권역은 `activeDirections` 안의 설치 권역에만 생성되며 경로 타일을 포함하지 않습니다.
-216. 100일 보스는 모든 압박을 한 순간에 최대 강도로 겹치지 않습니다.
-217. 100일 결과 요약은 마지막 킬존, 포기한 약점, 최종 방어선 이전 횟수를 포함해야 합니다.
-218. 100일 결과 화면은 `final_result_reflection_flow`를 사용해야 합니다.
-219. 결과 화면의 결정적 장면 카드는 최대 3장까지만 표시합니다.
-220. 결과 화면에는 개인 딜량 순위, 처치 순위, 개인 실수 소유자 필드를 만들지 않습니다.
-221. 웨이브 겹치기 사용량은 보상 효율, 추가 보상, 희귀도 효율로 표시하지 않습니다.
-222. 플레이테스트 대시보드는 `playtest_dashboard_layout_mvp`를 사용해야 합니다.
-223. 대시보드는 상단 런 스트립, 패널 카드 그리드, 위험 신호 드릴다운, 다음 빌드 액션 큐를 모두 가져야 합니다.
-224. 상단 런 스트립에는 `buildId`, `runMode`, `playerCountAtStart`, `activeDirections`가 반드시 있어야 합니다.
-225. 패널 카드는 핵심 수치 1~3개만 먼저 보여주고 원본 이벤트는 드릴다운에서만 펼칩니다.
-226. 대시보드 액션 큐는 전투, 보상, 상점, 카드 후보 수, 희귀도, 활성 방향을 자동으로 바꿀 수 없습니다.
-227. 승리와 패배는 같은 결과 회고 구조를 사용합니다.
-228. 다음 런 제안은 최대 2개이며, 정답 빌드나 필수 직업처럼 표시하지 않습니다.
-229. 95일에 포기한 약점이 있으면 결과 화면에 `abandonedWeaknessTags`를 표시합니다.
-230. 결정적 장면 카드의 방향은 `activeDirections` 밖을 위험 방향으로 표시할 수 없습니다.
-231. 파티 기록에는 점수 랭킹보다 파티 조합, 아티팩트, 마지막 방어선 태그를 우선합니다.
-232. 결과 화면은 플레이 성과를 추가 골드, 카드 후보, 아티팩트 후보 보상으로 환산하지 않습니다.
-233. 런 이후 메타 진행은 `post_run_meta_flow`를 사용해야 합니다.
-234. 메타 진행은 공격력, 구조물 체력, 마나 회복량, 웨이브 보상 배율을 직접 올리지 않습니다.
-235. 딜량, 처치 수, 웨이브 겹치기 횟수, 개인 실수 태그는 메타 해금량 증가 조건으로 쓰지 않습니다.
-236. 메타 해금은 카드 풀, 아티팩트 풀, 도감, 훈련 장면, 외형처럼 선택지나 정보 중심이어야 합니다.
-237. 새 카드/아티팩트 해금은 기존 풀을 난잡하게 만들지 않도록 역할 태그와 등장 구간을 가져야 합니다.
-238. 다음 런 준비 제안은 최대 2개이며, 직업이나 카드를 강제하지 않습니다.
-239. 도감 해금은 실제 만난 적/보스 또는 관련 실패 태그와 연결되어야 합니다.
-240. 훈련 장면 해금은 패배/회고 태그와 연결되지만 필수 재교육처럼 강제하지 않습니다.
-241. 외형 보상은 전투 수치나 보상 확률에 영향을 주지 않습니다.
-242. 숙련 플레이어는 메타 해금 없이도 클리어 가능해야 합니다.
-243. 도감/훈련장 재방문은 `knowledge_revisit_flow`를 사용해야 합니다.
-244. 재방문 제안은 패배 원인, 결과 회고, 메타 해금, 처음 만난 적 중 하나의 이유 태그를 가져야 합니다.
-245. 훈련 장면은 하나의 `targetLearningTag`만 다루며, 여러 규칙을 한 번에 가르치지 않습니다.
-246. 훈련 장면은 30~60초 안에 끝나야 하며 실패해도 바로 재시도하거나 나갈 수 있어야 합니다.
-247. 훈련 장면은 실제 골드, 카드, 아티팩트, 메타 파워를 지급하지 않습니다.
-248. 훈련 장면은 `activeDirections` 밖의 스폰이나 필수 방어 압박을 만들지 않습니다.
-249. 도감 카드는 정답 빌드, 필수 직업, 강제 카드 추천을 표시하지 않습니다.
-250. 대응 비교는 점수, 등급, 개인 평가가 아니라 대응 태그 차이만 보여줍니다.
-251. 훈련 손패와 훈련 구조물은 실제 런 덱, 상점, 아티팩트, 구조물 기록을 변경하지 않습니다.
-252. 재방문 이유 카드는 한 장만 표시하고, 플레이어를 꾸짖거나 숙제를 부여하는 문구를 쓰지 않습니다.
-253. 훈련 결과는 성공/실패 점수가 아니라 사용한 대응 태그와 다른 가능성 비교로만 표시합니다.
-254. 솔로 재방문 훈련은 동쪽 외 방향을 실제 방어 대상으로 표시하지 않습니다.
-255. 재방문 후 다음 런 연결은 즐겨찾기와 제안만 제공하고 자동 빌드를 적용하지 않습니다.
-256. 도감/훈련장 완료 여부는 런 시작, 난이도, 보상 확률, 카드 후보 수, 희귀도, 활성 방향을 잠그거나 보정하지 않습니다.
-257. 새 런 준비는 `new_run_setup_flow`를 사용해야 합니다.
-258. 다음 런 제안은 최대 2개이며 직업, 카드, 아티팩트, 활성 방향을 자동으로 바꾸지 않습니다.
-259. 로비 인원이 바뀌면 활성 방향 미리보기는 갱신할 수 있지만, 런 시작 후 `activeDirections`는 다시 계산하지 않습니다.
-260. 런 설정 화면에는 웨이브 겹치기 보상 모드, 희귀도 증가 모드, 카드 후보 수 증가 모드를 만들지 않습니다.
-261. 직업 선택 화면은 필수 직업, 정답 조합, 자동 빌드 문구를 표시하지 않습니다.
-262. 직업 중복은 MVP 기본 협동 밸런스에서는 허용하지 않습니다.
-263. 준비 합의 문장은 투표 결과나 보상 보정이 아니라 파티 의도 기록으로만 저장합니다.
-264. `run_state_locked` 이후 `playerCountAtStart`, `activeDirections`, `scalingProfileId`, `seed`는 변경할 수 없습니다.
-265. 로비 방향 미리보기는 인원수별 활성 방향 표와 일치해야 합니다.
-266. 비활성 방향은 로비 미리보기에서 어둡게 표시하되 위험 방향이나 추천 방어 방향으로 표시하지 않습니다.
-267. 중단과 재개는 `session_resume_flow`를 사용해야 합니다.
-268. 안정 저장점은 하루 시작, 보스 처치 후, 상점 진입, 아티팩트 선택 완료 중 하나여야 합니다.
-269. 전투 중 완전 저장은 MVP 콘텐츠와 UI에 포함하지 않습니다.
-270. 보류 모드 직업은 구조물을 유지하지만 개인 카드, 마나, 버리기 횟수를 자동 소비할 수 없습니다.
-271. MVP에서 AI는 이탈 플레이어의 카드를 대신 사용하지 않습니다.
-272. 재접속 또는 장기 이탈은 보상, 골드, 카드 후보 수, 희귀도, 웨이브 보상 배율을 바꾸지 않습니다.
-273. 재개 중 현재 접속 인원으로 `playerCountAtStart`, `activeDirections`, `scalingProfileId`, `WaveSpawnPlan.directions`를 다시 계산하지 않습니다.
-274. 복귀 플레이어는 같은 런, 같은 직업, 같은 저장 기준으로만 이어받습니다.
-275. 진행 중 투표에 복귀한 플레이어는 새 투표를 만들지 않고 남은 시간으로 합류해야 합니다.
-276. 재개 UI에서 비활성 방향은 위험 방향, 추천 방어 방향, 보상 방향으로 표시할 수 없습니다.
-277. 접근성과 연출 옵션은 `accessibility_presentation_options`를 사용해야 합니다.
-278. 접근성 옵션은 개인 화면/소리 표현만 바꾸며 `RunState`, `WaveSpawnPlan`, 보상, 카드 후보, 적 수, 활성 방향을 바꾸지 않습니다.
-279. 접근성 옵션 문구에 쉬운 모드, 보상 증가, 희귀도 증가, 카드 후보 증가, 적 약화 표현을 쓰지 않습니다.
-280. 화면 흔들림을 줄여도 보스 치명 예고, 경고 위치, 타이머, 타겟 하이라이트는 유지해야 합니다.
-281. 저주파 보스음을 줄여도 자막, 시각 경고, 핑 로그로 같은 정보를 제공해야 합니다.
-282. 경로 상시 표시, 적 윤곽선, 보스 부위 강조는 자동 타겟팅이나 추천 빌드처럼 표시하지 않습니다.
-283. 위험, 방향, 소유권, 핑 종류는 색상 하나로만 구분할 수 없습니다.
-284. 공포 연출은 경로, 타겟, 보스 패턴, 기지 위험 정보를 숨기거나 왜곡할 수 없습니다.
-285. 접근성 미리보기는 카드, 경로, 보스 경고, 핑을 모두 포함해야 합니다.
-286. 유혈, 고어, 점프 스케어, UI 판독성 고의 저하는 모든 연출 제작물에서 금지합니다.
+185. 70일 `belltower_variant_phase_plan_lock_070`은 60일 무너진 종탑 부위와 패턴만 재사용해야 합니다.
+186. 70일 `boss_ui_companion_priority_prompt`는 동반 조합 등장 8초 전까지 표시되어야 합니다.
+187. 70일 무음 권역과 선택 동반 조합은 동시에 최대치로 겹칠 수 없습니다.
+188. 70일 보스 결과 리포트는 첫 우선 대상, 대상 변경, 권역 후 재집결 여부를 기록해야 합니다.
+189. 70일 무너진 종탑 변형 제작 항목은 새 부위, 새 보스 패턴, 강한 동반 웨이브, 사방 동시 압박, 보상 증가를 포함할 수 없습니다.
+190. 71~80일 WaveData는 `chapterFlowId: winter1_space_flow_071_080`와 `chapterPhaseIndex`를 가져야 합니다.
+191. 결빙 후보 타일은 항상 `activeDirections` 안의 설치 타일이어야 하며 경로 타일을 포함하지 않습니다.
+192. 결빙은 준비 항목 또는 전투 중 예고 후 적용되어야 하며, 71~79일 일반 웨이브 중 추가 결빙은 최대 1회입니다.
+193. 결빙은 구조물을 즉시 삭제하거나 보상 배율, 골드 증가, 카드 후보 증가를 만들 수 없습니다.
+194. 겨울 껍질은 체력만 높은 적이 아니라 지속 화력, 둔화, 도발, 잔해 중 하나 이상의 대응 태그를 가져야 합니다.
+195. 71~80일 1인은 동쪽 외 결빙, 대형 적, 동반 웨이브를 만들지 않습니다.
+196. 71~80일 3인은 남쪽 결빙, 대형 적, 동반 웨이브를 만들지 않습니다.
+197. 78일 공간 축소 중 겹치기 경고에는 보상, 희귀도, 카드 후보 증가 문구를 붙이지 않습니다.
+198. 80일 겨울의 문 예고형은 `boss_phase_plan_winter_gate_preview_080`을 사용해야 합니다.
+199. 80일 보스는 90일/100일급 장기 공간 봉쇄나 구조물 예고 없는 삭제를 사용하지 않습니다.
+200. 71~80일 `Winter1SpaceSpawnPacketLock`은 존재하는 `WaveSpawnPacket`만 참조해야 합니다.
+201. 71~80일 결빙 후보 타일은 실제 경로 타일을 포함할 수 없습니다.
+202. 78일 겹치기 후보는 78~79일 일반 웨이브만 사용할 수 있으며, 80일 보스는 호출 대상이 아닙니다.
+203. 80일 선택적 동반 패킷은 보상 팩, 카드 후보, 보스 파편, 아티팩트 드롭 수를 추가하지 않습니다.
+204. 80일 보스 클리어에 웨이브 겹치기 보상 증가를 붙이지 않습니다.
+205. 80일 결빙은 임시 설치 권역 제한만 사용할 수 있으며 경로 타일 차단이나 장기 공간 봉쇄를 만들 수 없습니다.
+206. 80일 `winter_gate_preview_phase_lock_080`은 `boss_phase_plan_winter_gate_preview_080`의 6단계만 참조해야 합니다.
+207. 80일 결빙 사이클은 `frost_cycle_080_*` 4개를 넘을 수 없습니다.
+208. 80일 결빙 사이클은 동시에 1권역만 얼릴 수 있으며 경로 타일을 포함할 수 없습니다.
+209. 80일 결빙 예고 시간은 4초 미만이 될 수 없고, 결빙 지속 시간은 9초를 넘을 수 없습니다.
+210. 80일 `companion_policy_080_single_optional`은 겨울 껍질 1기 또는 회색 행렬 8기 중 1종만 허용합니다.
+211. 80일 선택 동반 웨이브는 둘을 동시에 쓰거나 보상, 희귀도, 카드 후보, 골드 계산에 연결할 수 없습니다.
+212. 80일 결과 연결 태그는 81~90일 힌트와 추천에만 사용하고, 보상 계산에는 사용할 수 없습니다.
+213. 80일 보스 시간이 길어질 때는 결빙 지속 시간, 예고 시간, 선택 동반, 부위 체력 순서로 조정하며 보상 증가는 금지합니다.
+214. 81~90일 WaveData는 `chapterFlowId: winter2_pressure_flow_081_090`와 `chapterPhaseIndex`를 가져야 합니다.
+215. 보스 압력 후보 권역은 항상 `activeDirections` 안의 설치 권역이어야 하며 경로 타일을 포함하지 않습니다.
+216. 보스 압력 타일은 예고 후 생성되어야 하며 구조물을 즉시 삭제하지 않습니다.
+217. 보스 압력 타일은 보상 배율, 골드 증가, 카드 후보 증가, 카드 희귀도 증가를 만들 수 없습니다.
+218. 81~90일 1인은 동쪽 외 압력 권역, 대형 적, 동반 웨이브를 만들지 않습니다.
+219. 81~90일 3인은 남쪽 압력 권역, 대형 적, 동반 웨이브를 만들지 않습니다.
+220. 87일 압력 중 겹치기 경고에는 보상, 희귀도, 카드 후보 증가 문구를 붙이지 않습니다.
+221. 90일 겨울의 문은 `boss_phase_plan_winter_gate_090`을 사용해야 합니다.
+222. 90일 보스는 100일 완전체처럼 지나간 권역을 장기 봉쇄하지 않습니다.
+223. 90일 보스 클리어에 웨이브 겹치기 보상 증가를 붙이지 않습니다.
+224. 81~90일 `Winter2PressureSpawnPacketLock`은 존재하는 `WaveSpawnPacket`만 참조해야 합니다.
+225. 81~90일 `PressureTilePlanLock`은 존재하는 압력 계획 ID만 사용해야 합니다.
+226. 81~90일 압력 후보 타일은 실제 경로 타일을 포함할 수 없습니다.
+227. 81~90일 압력 권역은 동시에 1개를 넘을 수 없습니다.
+228. 81~89일 일반 웨이브 중 압력 이동은 최대 2회입니다.
+229. 81~90일 2인은 서쪽/남쪽 압력 후보, 대형 적, 동반 웨이브를 실제 방향으로 사용할 수 없습니다.
+230. 87일 겹치기 후보는 87~89일 일반 웨이브만 사용할 수 있으며, 90일 보스는 호출 대상이 아닙니다.
+231. 90일 선택적 동반 패킷은 보상 팩, 카드 후보, 보스 파편, 아티팩트 드롭 수를 추가하지 않습니다.
+232. 90일 압력 계획은 경로 타일 차단, 장기 압력 권역, 구조물 즉시 삭제를 만들 수 없습니다.
+233. 90일 보스 시간이 길어질 때는 압력 지속 시간, 예고 시간, 선택 동반, 부위 체력 순서로 조정하며 보상 증가는 금지합니다.
+234. 90일 `winter_gate_phase_lock_090`은 `boss_phase_plan_winter_gate_090`의 6단계만 참조해야 합니다.
+235. 90일 이동 압력 사이클은 `pressure_cycle_090_*` 4개를 넘을 수 없습니다.
+236. 90일 이동 압력 사이클은 동시에 1권역만 누를 수 있으며 경로 타일을 포함할 수 없습니다.
+237. 90일 이동 압력 예고 시간은 4초 미만이 될 수 없고, 압력 지속 시간은 12초를 넘을 수 없습니다.
+238. 90일 이동 압력은 다음 사이클 전에 이전 권역을 회복해야 하며 장기 압력으로 남을 수 없습니다.
+239. 90일 `companion_policy_090_single_optional`은 겨울 껍질 1기 또는 회색 행렬 10기 중 1종만 허용합니다.
+240. 90일 선택 동반 웨이브는 둘을 동시에 쓰거나 보상, 희귀도, 카드 후보, 골드 계산에 연결할 수 없습니다.
+241. 90일 결과 연결 태그는 91~100일 힌트와 추천에만 사용하고, 보상 계산에는 사용할 수 없습니다.
+242. 91~100일 WaveData는 `chapterFlowId: final_rehearsal_flow_091_100`와 `chapterPhaseIndex`를 가져야 합니다.
+243. 91~100일은 새 적, 새 타일, 새 상태이상, 새 카드 규칙 학습을 추가하지 않습니다.
+
+최종 리허설 세부 검수:
+
+- 91~99일 일반 웨이브는 `FinalRehearsalDayContract`와 `FinalRehearsalSpawnLock`을 가져야 합니다.
+- 92~94일은 빠른 적, 자원 방해, 구조물 파괴 약점을 하루 하나씩 다시 묻고, 세 약점을 하루에 모두 최대 강도로 합치지 않습니다.
+- 97일과 99일 압력 예고는 UI 예고이며 설치 금지, 수리 효율 감소, 공격 속도 감소를 실제 적용하지 않습니다.
+- 98일 겹치기는 98~99일 일반 웨이브만 압축할 수 있고 100일 보스 스폰 플랜을 앞당길 수 없습니다.
+- 99일은 새 적, 새 타일, 새 상태이상, 새 카드 규칙을 추가하지 않습니다.
+
+244. 95일 마지막 상점은 모든 약점을 해결하지 않으며, 큰 파티 구매는 최대 2회까지만 허용합니다.
+245. 95일 최종 상점은 아티팩트 교체 행동을 최대 1회까지만 허용합니다.
+246. 95일 아티팩트 후보 풀은 새 아키타입 시작, 슬롯 증가, 웨이브 겹치기 최대치 신규 증가를 기본 후보로 제공하지 않습니다.
+247. 95일 상점 종료 시 `abandonedWeaknessTags`와 `lockedBuildAxisTags`가 반드시 기록되어야 합니다.
+   - 95일 상점 표시 항목은 6~7개여야 합니다.
+   - `shop_final_market_note`와 `shop_keep_current_build`는 항상 표시하며 구매 한도를 소모하지 않습니다.
+   - `shop_final_deck_trim`은 카드 1장 제거 또는 1장 안정화만 허용합니다.
+   - `shop_final_core_tune`은 새 카드 구매나 새 아키타입 시작을 만들 수 없습니다.
+   - `shop_final_boss_part_lens`는 보스 부위 즉시 파괴, 보상 증가, 파편 증가를 만들 수 없습니다.
+   - 구매한 상품의 `cannotPatchWeaknessTags` 중 최소 1개는 남겨둔 위험 후보로 표시합니다.
+248. 96일 이후에는 아티팩트 교체, 대형 카드 제거, 영웅 확정 조율 상점을 다시 열지 않습니다.
+249. 98일 마지막 겹치기 판단에는 보상, 희귀도, 카드 후보 증가 문구를 붙이지 않습니다.
+250. 99일은 새 규칙 튜토리얼 없이 최종 보스 전 리허설로 구성합니다.
+251. 100일 겨울의 문 완전체는 `boss_phase_plan_winter_gate_final_100`을 사용해야 합니다.
+252. 100일 장기 압력 권역은 `activeDirections` 안의 설치 권역에만 생성되며 경로 타일을 포함하지 않습니다.
+253. 100일 보스는 모든 압박을 한 순간에 최대 강도로 겹치지 않습니다.
+   - `boss_phase_plan_winter_gate_final_100`은 6단계 고정이며 단계 누락/중복을 허용하지 않습니다.
+   - 1단계 `boss_phase_100_entry_warning`은 UI 예고 전용이며 실제 압력을 적용하지 않습니다.
+   - 4단계 동반 분기는 침묵/정예/파괴 중 하나만 선택하고 두 분기를 동시에 실행하지 않습니다.
+   - 100일 보스 부위 파괴는 보상, 파편, 카드 후보, 희귀도 보정을 만들지 않습니다.
+   - 100일 보스는 98일 웨이브 겹치기 후보가 될 수 없습니다.
+254. 100일 결과 요약은 마지막 킬존, 포기한 약점, 최종 방어선 이전 횟수를 포함해야 합니다.
+255. 100일 결과 화면은 `final_result_reflection_flow`를 사용해야 합니다.
+256. 결과 화면의 결정적 장면 카드는 최대 3장까지만 표시합니다.
+257. 결과 화면에는 개인 딜량 순위, 처치 순위, 개인 실수 소유자 필드를 만들지 않습니다.
+258. 웨이브 겹치기 사용량은 보상 효율, 추가 보상, 희귀도 효율로 표시하지 않습니다.
+259. 플레이테스트 대시보드는 `playtest_dashboard_layout_mvp`를 사용해야 합니다.
+260. 대시보드는 상단 런 스트립, 패널 카드 그리드, 위험 신호 드릴다운, 다음 빌드 액션 큐를 모두 가져야 합니다.
+261. 상단 런 스트립에는 `buildId`, `runMode`, `playerCountAtStart`, `activeDirections`가 반드시 있어야 합니다.
+262. 패널 카드는 핵심 수치 1~3개만 먼저 보여주고 원본 이벤트는 드릴다운에서만 펼칩니다.
+263. 대시보드 액션 큐는 전투, 보상, 상점, 카드 후보 수, 희귀도, 활성 방향을 자동으로 바꿀 수 없습니다.
+264. 승리와 패배는 같은 결과 회고 구조를 사용합니다.
+265. 다음 런 제안은 최대 2개이며, 정답 빌드나 필수 직업처럼 표시하지 않습니다.
+266. 95일에 포기한 약점이 있으면 결과 화면에 `abandonedWeaknessTags`를 표시합니다.
+267. 결정적 장면 카드의 방향은 `activeDirections` 밖을 위험 방향으로 표시할 수 없습니다.
+268. 파티 기록에는 점수 랭킹보다 파티 조합, 아티팩트, 마지막 방어선 태그를 우선합니다.
+269. 결과 화면은 플레이 성과를 추가 골드, 카드 후보, 아티팩트 후보 보상으로 환산하지 않습니다.
+
+100일 결과 회고 세부 검수:
+
+- `result_panel_outcome_lock`, `result_panel_last_bastion_summary`, `result_panel_commitment_recall`, `result_panel_decisive_moments`, `result_panel_next_run_suggestion`, `result_panel_party_chronicle_save`가 순서대로 존재해야 합니다.
+- 결정적 장면 카드는 `moment_last_relocation`, `moment_base_crisis`, `moment_abandoned_weakness_branch`, `moment_boss_part_choice`, `moment_held_structure`, `moment_wave_stack_tempo`, `moment_final_breach` 중에서만 생성합니다.
+- 같은 `momentType`은 한 결과 화면에 1장만 표시합니다.
+- 결정적 장면 스냅샷은 5~10초이며 자동 반복 재생하지 않습니다.
+- `moment_wave_stack_tempo`는 호출 시점과 압박 변화만 표시하고 보상, 희귀도, 후보 수, 골드 효율을 표시하지 않습니다.
+- 결과 화면의 다음 런 제안은 `final_suggest_*` 계열 최대 2개이며 `autoApply: false`여야 합니다.
+- 솔로 결과 회고는 동쪽 외 방향을 위험 방향, 붕괴 방향, 다음 런 보강 방향으로 표시할 수 없습니다.
+
+파티 연대기 세부 검수:
+
+- `party_chronicle_entry`, `party_chronicle_title_options`, `party_chronicle_book_view`, `party_chronicle_filter_preset` 제작 항목이 모두 존재해야 합니다.
+- 기억 태그 사전은 기본 48개를 포함하고, 확장 후에도 40~60개 범위를 유지해야 합니다.
+- 기억 태그 묶음은 `lane_path`, `structure_maze`, `resource_hand`, `enemy_response`, `tempo_stack`, `boss_weakness`, `artifact_role`, `ending_memory`만 사용합니다.
+- 제목 후보는 최대 3개이며, 클리어 등급, 최고 점수, 캐리, 개인 비난 표현을 사용할 수 없습니다.
+- 기억 태그는 3~5개이며, 모두 파티 단위 전장 사건이나 운영 방식이어야 합니다.
+- 같은 결과의 기억 태그는 같은 묶음에서 3개 이상 고를 수 없고, `ending_memory`는 최대 1개만 고릅니다.
+- 다음 런 메모는 최대 2개이며, 직업, 카드, 아티팩트, 활성 방향을 자동 적용하지 않습니다.
+- 연대기 저장을 건너뛰어도 해금, 메타 진행, 재방문 제안, 새 런 준비가 막히지 않습니다.
+- 기록장 필터는 최근순, 즐겨찾기, 결과, 도달 구간, 인원수, 직업 조합, 보스, 기억 태그로 제한합니다.
+- 기록장에는 승률, 최고 점수, 평균 점수, 개인 기여도, 딜량, 처치 수, 겹치기 효율, 보상 효율 필터가 없어야 합니다.
+- 솔로 연대기는 동쪽 외 방향을 위험, 붕괴, 다음 런 보강 방향으로 표시할 수 없습니다.
+
+270. 런 이후 메타 진행은 `post_run_meta_flow`를 사용해야 합니다.
+271. 메타 진행은 공격력, 구조물 체력, 마나 회복량, 웨이브 보상 배율을 직접 올리지 않습니다.
+272. 딜량, 처치 수, 웨이브 겹치기 횟수, 개인 실수 태그는 메타 해금량 증가 조건으로 쓰지 않습니다.
+273. 메타 해금은 카드 풀, 아티팩트 풀, 도감, 훈련 장면, 외형처럼 선택지나 정보 중심이어야 합니다.
+274. 새 카드/아티팩트 해금은 기존 풀을 난잡하게 만들지 않도록 역할 태그와 등장 구간을 가져야 합니다.
+275. 다음 런 준비 제안은 최대 2개이며, 직업이나 카드를 강제하지 않습니다.
+276. 도감 해금은 실제 만난 적/보스 또는 관련 실패 태그와 연결되어야 합니다.
+277. 훈련 장면 해금은 패배/회고 태그와 연결되지만 필수 재교육처럼 강제하지 않습니다.
+278. 외형 보상은 전투 수치나 보상 확률에 영향을 주지 않습니다.
+279. 숙련 플레이어는 메타 해금 없이도 클리어 가능해야 합니다.
+
+런 이후 메타 세부 검수:
+
+- 결과 회고 뒤에는 `PostRunLearningPacket`을 만들고 `post_run_learning_packet_created`를 기록해야 합니다.
+- 한 결과에서 생성하는 학습 패킷은 6개를 넘지 않습니다.
+- 학습 패킷 하나의 `learningTags`와 `responseTags`는 각각 3개를 넘지 않습니다.
+- 결과 직후 메타 화면은 이번 런 기록 1장, 새 정보/훈련 해금 최대 2장, 다음 런 메모 1장만 크게 표시합니다.
+- 카드 풀/아티팩트 풀 해금은 후보 풀 확장만 허용하고, 후보 수나 희귀도를 올릴 수 없습니다.
+- 즉시 재방문 제안은 1개만 표시하고, 나머지는 최근 추천 목록에 최대 3개까지 저장합니다.
+- 같은 재방문 제안을 두 런 연속 닫으면 다음 런 종료까지 큰 카드로 다시 띄우지 않습니다.
+
+280. 도감/훈련장 재방문은 `knowledge_revisit_flow`를 사용해야 합니다.
+281. 재방문 제안은 패배 원인, 결과 회고, 메타 해금, 처음 만난 적 중 하나의 이유 태그를 가져야 합니다.
+282. 훈련 장면은 하나의 `targetLearningTag`만 다루며, 여러 규칙을 한 번에 가르치지 않습니다.
+283. 훈련 장면은 30~60초 안에 끝나야 하며 실패해도 바로 재시도하거나 나갈 수 있어야 합니다.
+284. 훈련 장면은 실제 골드, 카드, 아티팩트, 메타 파워를 지급하지 않습니다.
+285. 훈련 장면은 `activeDirections` 밖의 스폰이나 필수 방어 압박을 만들지 않습니다.
+286. 도감 카드는 정답 빌드, 필수 직업, 강제 카드 추천을 표시하지 않습니다.
+287. 대응 비교는 점수, 등급, 개인 평가가 아니라 대응 태그 차이만 보여줍니다.
+288. 훈련 손패와 훈련 구조물은 실제 런 덱, 상점, 아티팩트, 구조물 기록을 변경하지 않습니다.
+289. 재방문 이유 카드는 한 장만 표시하고, 플레이어를 꾸짖거나 숙제를 부여하는 문구를 쓰지 않습니다.
+290. 훈련 결과는 성공/실패 점수가 아니라 사용한 대응 태그와 다른 가능성 비교로만 표시합니다.
+291. 솔로 재방문 훈련은 동쪽 외 방향을 실제 방어 대상으로 표시하지 않습니다.
+292. 재방문 후 다음 런 연결은 즐겨찾기와 제안만 제공하고 자동 빌드를 적용하지 않습니다.
+293. 도감/훈련장 완료 여부는 런 시작, 난이도, 보상 확률, 카드 후보 수, 희귀도, 활성 방향을 잠그거나 보정하지 않습니다.
+
+도감/훈련장 샘플 세부 검수:
+
+- MVP 도감 카드 6개가 존재해야 합니다.
+- 도감 카드는 `encyclopedia_entry_enemy_role_runner`, `encyclopedia_entry_enemy_role_breaker`, `encyclopedia_entry_enemy_role_disruptor`, `encyclopedia_entry_structure_mark`, `encyclopedia_entry_wave_stack_tempo`, `encyclopedia_entry_boss_part_focus_basic`을 포함해야 합니다.
+- 각 도감 카드의 기본 요약은 정확히 3줄이며, 행동, 위험/저항, 대응 순서여야 합니다.
+- MVP 훈련 장면 4개가 존재해야 합니다.
+- 훈련 장면은 `training_scenario_runner_slowdown`, `training_scenario_breaker_rebuild`, `training_scenario_disruptor_priority`, `training_scenario_boss_part_focus`를 포함해야 합니다.
+- 훈련 손패는 `training_hand_slow_or_taunt_basic`, `training_hand_repair_or_rebuild_basic`, `training_hand_focus_ping_basic`, `training_hand_part_focus_basic`을 포함해야 합니다.
+- 모든 MVP 훈련 장면은 30~60초 목표 시간, 단일 `targetLearningTag`, `rewardDisabled: true`, `runStateMutationDisabled: true`를 가져야 합니다.
+- `encyclopedia_entry_wave_stack_tempo`는 훈련 장면이 없어도 되며, 보상 증가가 아니라 보류/호출 판단만 다뤄야 합니다.
+- `training_scenario_boss_part_focus`는 보스 보상, 보스 파편, 아티팩트 후보, 카드 후보 수를 바꿀 수 없습니다.
+- 솔로용 도감/훈련 노출은 동쪽 외 방향을 실제 위험이나 방어 대상으로 표시할 수 없습니다.
+
+294. 새 런 준비는 `new_run_setup_flow`를 사용해야 합니다.
+295. 다음 런 제안은 최대 2개이며 직업, 카드, 아티팩트, 활성 방향을 자동으로 바꾸지 않습니다.
+296. 로비 인원이 바뀌면 활성 방향 미리보기는 갱신할 수 있지만, 런 시작 후 `activeDirections`는 다시 계산하지 않습니다.
+297. 런 설정 화면에는 웨이브 겹치기 보상 모드, 희귀도 증가 모드, 카드 후보 수 증가 모드를 만들지 않습니다.
+298. 직업 선택 화면은 필수 직업, 정답 조합, 자동 빌드 문구를 표시하지 않습니다.
+299. 직업 중복은 MVP 기본 협동 밸런스에서는 허용하지 않습니다.
+300. 준비 합의 문장은 투표 결과나 보상 보정이 아니라 파티 의도 기록으로만 저장합니다.
+301. `run_state_locked` 이후 `playerCountAtStart`, `activeDirections`, `scalingProfileId`, `seed`는 변경할 수 없습니다.
+302. 로비 방향 미리보기는 인원수별 활성 방향 표와 일치해야 합니다.
+303. 비활성 방향은 로비 미리보기에서 어둡게 표시하되 위험 방향이나 추천 방어 방향으로 표시하지 않습니다.
+
+새 런 준비 세부 검수:
+
+- `setup_suggestion_slot`은 최대 2개만 표시하며 `canAutoApply: false`여야 합니다.
+- `lobby_direction_preset`은 1인 동쪽, 2인 북쪽/동쪽, 3인 서쪽/북쪽/동쪽, 4인 사방과 일치해야 합니다.
+- 준비 완료 후 시작 전 인원이 바뀌면 `readyPlayerIds`를 다시 확인해야 합니다.
+- `party_intent_note`는 비워도 시작 가능하며, 보상, 난이도, 활성 방향, 직업, 카드, 아티팩트를 바꿀 수 없습니다.
+- `run_config_lock_snapshot`은 `playerCountAtStart`, `activeDirections`, `scalingProfileId`, `seed`, `selectedMode`, `classIdsByPlayer`를 포함해야 합니다.
+- 역할 힌트는 대응 태그만 표시하고 필수 직업, 정답 조합, 특정 카드 강요 문구를 만들 수 없습니다.
+- 런 길이 카드는 예상 시간과 완료 기준만 보여주며 보상 차이를 만들 수 없습니다.
+
+304. 중단과 재개는 `session_resume_flow`를 사용해야 합니다.
+305. 안정 저장점은 하루 시작, 보스 처치 후, 상점 진입, 아티팩트 선택 완료 중 하나여야 합니다.
+306. 전투 중 완전 저장은 MVP 콘텐츠와 UI에 포함하지 않습니다.
+307. 보류 모드 직업은 구조물을 유지하지만 개인 카드, 마나, 버리기 횟수를 자동 소비할 수 없습니다.
+308. MVP에서 AI는 이탈 플레이어의 카드를 대신 사용하지 않습니다.
+309. 재접속 또는 장기 이탈은 보상, 골드, 카드 후보 수, 희귀도, 웨이브 보상 배율을 바꾸지 않습니다.
+310. 재개 중 현재 접속 인원으로 `playerCountAtStart`, `activeDirections`, `scalingProfileId`, `WaveSpawnPlan.directions`를 다시 계산하지 않습니다.
+311. 복귀 플레이어는 같은 런, 같은 직업, 같은 저장 기준으로만 이어받습니다.
+312. 진행 중 투표에 복귀한 플레이어는 새 투표를 만들지 않고 남은 시간으로 합류해야 합니다.
+313. 재개 UI에서 비활성 방향은 위험 방향, 추천 방어 방향, 보상 방향으로 표시할 수 없습니다.
+314. 접근성과 연출 옵션은 `accessibility_presentation_options`를 사용해야 합니다.
+315. 접근성 옵션은 개인 화면/소리 표현만 바꾸며 `RunState`, `WaveSpawnPlan`, 보상, 카드 후보, 적 수, 활성 방향을 바꾸지 않습니다.
+316. 접근성 옵션 문구에 쉬운 모드, 보상 증가, 희귀도 증가, 카드 후보 증가, 적 약화 표현을 쓰지 않습니다.
+317. 화면 흔들림을 줄여도 보스 치명 예고, 경고 위치, 타이머, 타겟 하이라이트는 유지해야 합니다.
+318. 저주파 보스음을 줄여도 자막, 시각 경고, 핑 로그로 같은 정보를 제공해야 합니다.
+319. 경로 상시 표시, 적 윤곽선, 보스 부위 강조는 자동 타겟팅이나 추천 빌드처럼 표시하지 않습니다.
+320. 위험, 방향, 소유권, 핑 종류는 색상 하나로만 구분할 수 없습니다.
+321. 공포 연출은 경로, 타겟, 보스 패턴, 기지 위험 정보를 숨기거나 왜곡할 수 없습니다.
+322. 접근성 미리보기는 카드, 경로, 보스 경고, 핑을 모두 포함해야 합니다.
+323. 유혈, 고어, 점프 스케어, UI 판독성 고의 저하는 모든 연출 제작물에서 금지합니다.
 
 ## 제작 우선순위
 
 MVP에서 반드시 먼저 제작할 콘텐츠:
 
-1. `run_test_010`
-2. 활성 방향 프리셋 4종
-3. 인원수 스케일링 프로필 4종
-4. `WaveSpawnPlan` 규칙 5종
-5. 1~10일 웨이브 원본 데이터
-6. 회색 행렬
-7. 기본 공격 타워
-8. 기본 바리케이드
-9. 도발벽
-10. 화염구
-11. 원격 수리
-12. 균열 망치
-13. 웨이브 겹치기 UI
-14. 침묵의 거상
-15. 균열난 종
+324. `run_test_010`
+325. 활성 방향 프리셋 4종
+326. 인원수 스케일링 프로필 4종
+327. `WaveSpawnPlan` 규칙 5종
+328. 1~10일 웨이브 원본 데이터
+329. 회색 행렬
+330. 기본 공격 타워
+331. 기본 바리케이드
+332. 도발벽
+333. 화염구
+334. 원격 수리
+335. 균열 망치
+336. 웨이브 겹치기 UI
+337. 침묵의 거상
+338. 균열난 종
 
 이 15개가 작동하면 인원수별 침공 방향, 미로 설계, 처치 기반 자원 펌핑, 첫 보스까지 한 번에 검증할 수 있습니다.

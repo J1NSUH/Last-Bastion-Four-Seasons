@@ -1,0 +1,341 @@
+{
+  "map": {
+    "id": "m0_test_map",
+    "width": 21,
+    "height": 21,
+    "base": {
+      "origin": [9, 9],
+      "size": [3, 3]
+    },
+    "entrances": {
+      "north": [10, 0],
+      "east": [20, 10],
+      "south": [10, 20],
+      "west": [0, 10]
+    }
+  },
+  "activeDirectionsByPlayerCount": {
+    "1": ["east"],
+    "2": ["north", "east"],
+    "3": ["west", "north", "east"],
+    "4": ["west", "north", "east", "south"]
+  },
+  "base": {
+    "id": "m0_base",
+    "hp": 100
+  },
+  "run": {
+    "maxRounds": 100
+  },
+  "resources": {
+    "seedMana": 4,
+    "startingGold": 0,
+    "maxHandSize": 5,
+    "openingDraw": 5,
+    "discardCharges": 1,
+    "discardChargeCap": 3,
+    "discardManaGain": 1
+  },
+  "rewards": {
+    "manaPerKill": 1,
+    "goldPerKill": 1,
+    "drawGaugePerKill": 1,
+    "drawGaugePerCard": 2,
+    "cardOfferCount": 3,
+    "artifactOfferCount": 2,
+    "artifactPool": [
+      "m0_deep_pockets",
+      "m0_seed_core"
+    ]
+  },
+  "shop": {
+    "bossShopEveryRounds": 10,
+    "deckRemovalOfferCount": 4,
+    "deckRemovalLimit": 1,
+    "deckRemovalGoldCost": 6
+  },
+  "structures": {
+    "m0_basic_tower": {
+      "label": "Basic Tower",
+      "hp": 12,
+      "range": 3,
+      "damage": 1
+    },
+    "m0_barricade": {
+      "label": "Barricade",
+      "hp": 20
+    }
+  },
+  "cards": {
+    "m0_tower_permit": {
+      "label": "Tower Permit",
+      "rarity": "common",
+      "rewardMinRound": 1,
+      "cost": 2,
+      "kind": "place_structure",
+      "structureType": "tower"
+    },
+    "m0_barricade_kit": {
+      "label": "Barricade Kit",
+      "rarity": "common",
+      "rewardMinRound": 1,
+      "cost": 1,
+      "kind": "place_structure",
+      "structureType": "barricade"
+    },
+    "m0_quick_brace": {
+      "label": "Quick Brace",
+      "rarity": "uncommon",
+      "rewardMinRound": 2,
+      "cost": 0,
+      "kind": "place_structure",
+      "structureType": "barricade"
+    },
+    "m0_arc_spark": {
+      "label": "Arc Spark",
+      "rarity": "common",
+      "rewardMinRound": 1,
+      "cost": 1,
+      "kind": "damage_enemy",
+      "damage": 2
+    },
+    "m0_field_patch": {
+      "label": "Field Patch",
+      "rarity": "common",
+      "rewardMinRound": 1,
+      "cost": 1,
+      "kind": "repair_structure",
+      "repair": 4
+    },
+    "m0_quick_think": {
+      "label": "Quick Think",
+      "rarity": "uncommon",
+      "rewardMinRound": 3,
+      "cost": 0,
+      "kind": "draw_cards",
+      "draw": 1
+    },
+    "m0_heavy_bolt": {
+      "label": "Heavy Bolt",
+      "rarity": "rare",
+      "rewardMinRound": 5,
+      "cost": 2,
+      "kind": "damage_enemy",
+      "damage": 4
+    },
+    "m0_repair_drone": {
+      "label": "Repair Drone",
+      "rarity": "rare",
+      "rewardMinRound": 5,
+      "cost": 2,
+      "kind": "repair_structure",
+      "repair": 8
+    }
+  },
+  "classes": {
+    "guardian": {
+      "label": "Guardian",
+      "effects": {
+        "towerHpBonus": 4,
+        "tauntPriority": 100,
+        "thornsDamage": 1
+      },
+      "autoplay": {
+        "cardPriority": [
+          "m0_tower_permit",
+          "m0_repair_drone",
+          "m0_field_patch",
+          "m0_barricade_kit",
+          "m0_quick_brace"
+        ],
+        "tilePlan": "guard_line"
+      }
+    },
+    "architect": {
+      "label": "Architect",
+      "effects": {
+        "barricadeHpBonus": 4,
+        "barricadeDeathDamage": 2,
+        "barricadeDeathRadius": 1
+      },
+      "autoplay": {
+        "cardPriority": [
+          "m0_barricade_kit",
+          "m0_quick_brace",
+          "m0_repair_drone",
+          "m0_field_patch",
+          "m0_tower_permit"
+        ],
+        "tilePlan": "maze_grid"
+      }
+    },
+    "elementalist": {
+      "label": "Elementalist",
+      "effects": {
+        "towerSplashDamage": 1,
+        "towerSplashRadius": 1
+      },
+      "autoplay": {
+        "cardPriority": [
+          "m0_heavy_bolt",
+          "m0_arc_spark",
+          "m0_tower_permit",
+          "m0_barricade_kit",
+          "m0_quick_brace"
+        ],
+        "tilePlan": "killzone"
+      }
+    },
+    "tinkerer": {
+      "label": "Tinkerer",
+      "effects": {
+        "auraRange": 1,
+        "auraTowerDamageBonus": 1,
+        "repairPerRound": 2
+      },
+      "autoplay": {
+        "cardPriority": [
+          "m0_repair_drone",
+          "m0_field_patch",
+          "m0_quick_think",
+          "m0_tower_permit",
+          "m0_barricade_kit",
+          "m0_quick_brace"
+        ],
+        "tilePlan": "cluster"
+      }
+    }
+  },
+  "artifacts": {
+    "m0_deep_pockets": {
+      "label": "Deep Pockets",
+      "effects": {
+        "maxHandBonus": 1
+      }
+    },
+    "m0_seed_core": {
+      "label": "Seed Core",
+      "effects": {
+        "seedManaBonus": 1
+      }
+    }
+  },
+  "deck": {
+    "startingCards": [
+      "m0_tower_permit",
+      "m0_barricade_kit",
+      "m0_tower_permit",
+      "m0_barricade_kit",
+      "m0_barricade_kit"
+    ],
+    "rewardCards": [
+      "m0_tower_permit",
+      "m0_arc_spark",
+      "m0_field_patch",
+      "m0_barricade_kit",
+      "m0_quick_brace",
+      "m0_quick_think",
+      "m0_heavy_bolt",
+      "m0_repair_drone"
+    ]
+  },
+  "enemies": {
+    "m0_walker": {
+      "label": "Walker",
+      "hp": 6,
+      "speedTilesPerSecond": 1.0,
+      "baseDamage": 1,
+      "structureDamage": 4,
+      "boss": false
+    },
+    "m0_skitter": {
+      "label": "Skitter",
+      "hp": 4,
+      "speedTilesPerSecond": 1.4,
+      "moveSteps": 2,
+      "baseDamage": 1,
+      "structureDamage": 2,
+      "boss": false
+    },
+    "m0_breaker": {
+      "label": "Breaker",
+      "hp": 8,
+      "speedTilesPerSecond": 0.9,
+      "baseDamage": 2,
+      "structureDamage": 7,
+      "structurePriority": true,
+      "boss": false
+    },
+    "m0_bulwark": {
+      "label": "Bulwark",
+      "hp": 12,
+      "speedTilesPerSecond": 0.7,
+      "baseDamage": 1,
+      "structureDamage": 3,
+      "damageReduction": 1,
+      "boss": false
+    },
+    "m0_colossus": {
+      "label": "Colossus",
+      "hp": 30,
+      "speedTilesPerSecond": 0.6,
+      "baseDamage": 10,
+      "structureDamage": 8,
+      "phaseHpThreshold": 15,
+      "phasePulseDamage": 3,
+      "phasePulseRadius": 1,
+      "siegeGazeIntervalSteps": 2,
+      "siegeGazeDamage": 2,
+      "siegeGazeRange": 4,
+      "boss": true
+    }
+  },
+  "wave": {
+    "id": "m0_wave_001",
+    "enemyId": "m0_walker",
+    "bossEnemyId": "m0_colossus",
+    "bossEveryRounds": 10,
+    "spawnCount": 12,
+    "spawnGrowthPerRound": 1,
+    "enemyMix": [
+      {
+        "enemyId": "m0_walker",
+        "minRound": 1,
+        "weight": 2
+      },
+      {
+        "enemyId": "m0_skitter",
+        "minRound": 2,
+        "weight": 1
+      },
+      {
+        "enemyId": "m0_breaker",
+        "minRound": 3,
+        "weight": 1
+      },
+      {
+        "enemyId": "m0_bulwark",
+        "minRound": 4,
+        "weight": 1
+      }
+    ],
+    "stackLimit": 3,
+    "spawnIntervalSec": 1.0
+  },
+  "debug": {
+    "defaultPlayerCount": 1,
+    "autoStepIntervalSec": 0.6,
+    "autoplayRounds": 2,
+    "autoplayMaxStepsPerRound": 180,
+    "autoplayCardsPerRound": 2,
+    "tutorialRounds": 3,
+    "wavePreviewRounds": 3,
+    "autoplayClassIds": [
+      "guardian",
+      "architect",
+      "elementalist",
+      "tinkerer"
+    ],
+    "showLogs": false
+  }
+}
