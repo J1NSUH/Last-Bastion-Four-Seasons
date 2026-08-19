@@ -1,9 +1,10 @@
 param(
 	[string]$GodotPath = "",
-	[ValidateSet("m0", "autoplay")]
+	[ValidateSet("m0", "scene", "scene_startup", "scene_map", "scene_alpha", "scene_combat_hud", "scene_reward_ui", "scene_shop_artifact", "scene_shop_service", "scene_wave_tempo", "scene_tactical_signals", "scene_planned_collapse", "scene_full", "autoplay", "autoplay_boss", "alpha_coverage")]
 	[string]$Suite = "m0",
 	[switch]$VerboseSearch,
-	[switch]$ShowGodotOutput
+	[switch]$ShowGodotOutput,
+	[int]$TimeoutSeconds = 120
 )
 
 $ErrorActionPreference = "Stop"
@@ -11,7 +12,21 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $TestScripts = @{
 	m0 = "res://scripts/m0/M0SmokeTest.gd"
+	scene = "res://scripts/m0/M0SceneStartupSmokeTest.gd"
+	scene_startup = "res://scripts/m0/M0SceneStartupSmokeTest.gd"
+	scene_map = "res://scripts/m0/M0SceneMapBadgeSmokeTest.gd"
+	scene_alpha = "res://scripts/m0/M0SceneAlphaSmokeTest.gd"
+	scene_combat_hud = "res://scripts/m0/M0SceneCombatHudSmokeTest.gd"
+	scene_reward_ui = "res://scripts/m0/M0SceneRewardSmokeTest.gd"
+	scene_shop_artifact = "res://scripts/m0/M0SceneShopArtifactSmokeTest.gd"
+	scene_shop_service = "res://scripts/m0/M0SceneShopServiceSmokeTest.gd"
+	scene_wave_tempo = "res://scripts/m0/M0SceneWaveTempoSmokeTest.gd"
+	scene_tactical_signals = "res://scripts/m0/M0SceneTacticalSignalsSmokeTest.gd"
+	scene_planned_collapse = "res://scripts/m0/M0ScenePlannedCollapseSmokeTest.gd"
+	scene_full = "res://scripts/m0/M0SceneSmokeTest.gd"
 	autoplay = "res://scripts/m0/M0AutoplaySmokeTest.gd"
+	autoplay_boss = "res://scripts/m0/M0AutoplayBossSmokeTest.gd"
+	alpha_coverage = "res://scripts/m0/M0AlphaCoverageSmokeTest.gd"
 }
 $TestUserRoot = Join-Path $ProjectRoot ".godot-test-user"
 $TestLogDir = Join-Path $TestUserRoot "logs"
@@ -108,6 +123,26 @@ function Join-IfSet {
 	return Join-Path $Base $Child
 }
 
+function Quote-ProcessArgument {
+	param([string]$Argument)
+
+	if ($null -eq $Argument) {
+		return '""'
+	}
+
+	if ($Argument -notmatch '[\s"]') {
+		return $Argument
+	}
+
+	return '"' + ($Argument -replace '"', '\"') + '"'
+}
+
+function Join-ProcessArguments {
+	param([string[]]$Arguments)
+
+	return ($Arguments | ForEach-Object { Quote-ProcessArgument -Argument $_ }) -join " "
+}
+
 function Find-Godot {
 	param([string]$ExplicitPath)
 
@@ -185,6 +220,7 @@ Write-Host "[Godot] source $($Godot.Source)"
 Write-Host "[Godot] version $($Godot.Version)"
 Write-Host "[Test] $ScriptPath"
 Write-Host "[Log] $LogPath"
+Write-Host "[Timeout] ${TimeoutSeconds}s"
 
 New-Item -ItemType Directory -Path $TestLogDir -Force | Out-Null
 
@@ -198,8 +234,26 @@ try {
 	if (-not $ShowGodotOutput) {
 		$godotArgs = @("--quiet") + $godotArgs
 	}
-	& $Godot.Path @godotArgs
-	$exitCode = $LASTEXITCODE
+
+	$processInfo = [System.Diagnostics.ProcessStartInfo]::new()
+	$processInfo.FileName = $Godot.Path
+	$processInfo.UseShellExecute = $false
+	$processInfo.CreateNoWindow = $true
+	$processInfo.Arguments = Join-ProcessArguments -Arguments $godotArgs
+
+	$process = [System.Diagnostics.Process]::Start($processInfo)
+	if ($null -eq $process) {
+		throw "Failed to start Godot."
+	}
+
+	if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
+		Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+		$process.WaitForExit()
+		$exitCode = 124
+		Write-Host "[FAIL] Godot smoke test timed out after ${TimeoutSeconds}s"
+	} else {
+		$exitCode = $process.ExitCode
+	}
 } finally {
 	$env:APPDATA = $oldAppData
 	$env:LOCALAPPDATA = $oldLocalAppData

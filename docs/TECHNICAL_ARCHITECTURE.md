@@ -152,6 +152,8 @@ project.godot 열림
 
 대신 이후 구현이 붙을 자리가 화면에 보이고, 데이터 로드와 디버그 로그가 작동해야 합니다.
 
+M0 장면 검증은 작은 스위트가 기본입니다. `scene`은 `Main` 진입과 핵심 HUD만 빠르게 확인하고, `scene_map`은 지도 배지만 확인하며, `scene_alpha`는 알파 커버리지 패널, 사람 검토 큐, 추천 대비 샘플, 아티팩트 준비 메모를 확인합니다. `scene_combat_hud`는 런 시작 직후 손패 계획, 첫 카드 추천, 전선 준비 문구를 확인하고, `scene_reward_ui`는 카드 보상 추천, 골드 선택, 알파 리뷰가 붙은 추천 문구를 확인합니다. `scene_shop_artifact`는 아티팩트 추천, 슬롯 가득 참 교체/휴면 방출/현재 유지, 다음 웨이브 준비 메모, 상점 제거 추천, 선택 추적 로그를 확인하고, `scene_shop_service`는 상점 회복/구조물 보강/휴면 아티팩트 재활성화 대상 선택과 서비스 구매 로그를 확인합니다. `scene_wave_tempo`는 웨이브 당겨오기 템포 문구, 풀링 영향, 처치 후 전투 후속 추천을 확인합니다. `scene_tactical_signals`는 수리 타이밍, 위험 핑 후보/확정, 보스 부위 경고 대응을 확인하고, `scene_planned_collapse`는 건축가 계획 붕괴, 수리 보류, 비수리 대응 우선순위를 확인합니다. 긴 통합 장면 검사는 `scene_full`로 남기되, 타임아웃이 나면 기능 단위 스위트로 분해합니다.
+
 ### Godot M0 첫 구현 중단선
 
 첫 구현은 아래 순서의 중단선을 사용합니다.
@@ -775,6 +777,8 @@ WaveData
 
 전투 중에는 `ReplaceArtifactCommand`, `ReactivateDormantArtifactCommand`, `ReleaseDormantArtifactCommand`를 받을 수 없습니다.
 
+M0 시뮬레이션은 현재 장착 슬롯 한도, 휴면 보관함 한도, 슬롯 초과 장착 거절, 명시적 교체 시 휴면 이동, 보스 파편 1개와 아티팩트 행동 1회를 쓰는 휴면 아티팩트 재활성화 상점 서비스, 재활성화 대상 선택 버튼까지 검증합니다. 정식 파티 투표 UI는 이후 단계에서 붙입니다.
+
 ## 시뮬레이션 틱
 
 전투는 고정 틱으로 처리하는 것을 권장합니다.
@@ -1017,6 +1021,7 @@ MVP에서는 전투 중 저장을 제외합니다.
 - `requiredSignalIds`
 - `missingSignalIds`
 - `rejectReasonIds`
+- `artifact_preparation_summary`
 
 필수 신호:
 

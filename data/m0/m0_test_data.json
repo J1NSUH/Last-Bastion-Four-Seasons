@@ -29,9 +29,13 @@
   },
   "resources": {
     "seedMana": 4,
+    "seedManaPerExtraFront": 2,
     "startingGold": 0,
+    "startingBossShards": 0,
     "maxHandSize": 5,
     "openingDraw": 5,
+    "seedDraw": 1,
+    "seedDrawPerExtraFront": 1,
     "discardCharges": 1,
     "discardChargeCap": 3,
     "discardManaGain": 1
@@ -42,17 +46,57 @@
     "drawGaugePerKill": 1,
     "drawGaugePerCard": 2,
     "cardOfferCount": 3,
+    "cardRewardGold": 2,
+    "bossShardReward": 1,
     "artifactOfferCount": 2,
+    "artifactActionLimit": 1,
+    "artifactSlotLimit": 3,
+    "artifactSlotHardCap": 4,
+    "dormantArtifactLimit": 2,
     "artifactPool": [
       "m0_deep_pockets",
-      "m0_seed_core"
+      "m0_seed_core",
+      "m0_mana_coil",
+      "m0_draw_lens",
+      "m0_tempo_bell",
+      "m0_gold_tag"
     ]
   },
   "shop": {
     "bossShopEveryRounds": 10,
     "deckRemovalOfferCount": 4,
     "deckRemovalLimit": 1,
-    "deckRemovalGoldCost": 6
+    "deckRemovalGoldCost": 6,
+    "purchaseLimit": 1,
+    "serviceOfferIds": [
+      "m0_restore_base_3",
+      "m0_structure_brace",
+      "m0_reactivate_dormant_artifact"
+    ],
+    "services": {
+      "m0_restore_base_3": {
+        "label": "Restore Base +3",
+        "type": "restore_base",
+        "goldCost": 4,
+        "heal": 3,
+        "requiresBaseDamage": true,
+        "summary": "Restore 3 base HP without raising the maximum."
+      },
+      "m0_structure_brace": {
+        "label": "Brace Structures",
+        "type": "structure_hp_boost",
+        "goldCost": 3,
+        "hpBonus": 2,
+        "summary": "Give existing structures +2 current and maximum HP."
+      },
+      "m0_reactivate_dormant_artifact": {
+        "label": "Reactivate Dormant Artifact",
+        "type": "reactivate_dormant_artifact",
+        "goldCost": 0,
+        "bossShardCost": 1,
+        "summary": "Spend 1 boss shard to bring one dormant artifact back into the equipped loadout."
+      }
+    }
   },
   "structures": {
     "m0_basic_tower": {
@@ -155,16 +199,19 @@
       "label": "Architect",
       "effects": {
         "barricadeHpBonus": 4,
-        "barricadeDeathDamage": 2,
+        "barricadeDeathDamage": 6,
         "barricadeDeathRadius": 1
       },
       "autoplay": {
         "cardPriority": [
           "m0_barricade_kit",
           "m0_quick_brace",
+          "m0_tower_permit",
+          "m0_arc_spark",
+          "m0_heavy_bolt",
+          "m0_quick_think",
           "m0_repair_drone",
-          "m0_field_patch",
-          "m0_tower_permit"
+          "m0_field_patch"
         ],
         "tilePlan": "maze_grid"
       }
@@ -172,8 +219,9 @@
     "elementalist": {
       "label": "Elementalist",
       "effects": {
-        "towerSplashDamage": 1,
-        "towerSplashRadius": 1
+        "towerSplashDamage": 2,
+        "towerSplashRadius": 1,
+        "cardBossDamageBonus": 2
       },
       "autoplay": {
         "cardPriority": [
@@ -217,6 +265,30 @@
       "label": "Seed Core",
       "effects": {
         "seedManaBonus": 1
+      }
+    },
+    "m0_mana_coil": {
+      "label": "Mana Coil",
+      "effects": {
+        "manaPerKillBonus": 1
+      }
+    },
+    "m0_draw_lens": {
+      "label": "Draw Lens",
+      "effects": {
+        "drawGaugePerKillBonus": 1
+      }
+    },
+    "m0_tempo_bell": {
+      "label": "Tempo Bell",
+      "effects": {
+        "waveStackLimitBonus": 1
+      }
+    },
+    "m0_gold_tag": {
+      "label": "Gold Tag",
+      "effects": {
+        "goldPerKillBonus": 1
       }
     }
   },
@@ -287,7 +359,81 @@
       "siegeGazeIntervalSteps": 2,
       "siegeGazeDamage": 2,
       "siegeGazeRange": 4,
+      "bossParts": [
+        {
+          "id": "m0_colossus_legs",
+          "label": "Legs",
+          "hp": 4,
+          "priority": 1,
+          "effects": {
+            "strideSkipEvery": 2
+          }
+        },
+        {
+          "id": "m0_colossus_front",
+          "label": "Front",
+          "hp": 5,
+          "priority": 2,
+          "effects": {
+            "siegeGazeIntervalBonus": 1,
+            "siegeGazeDamageReduction": 1
+          }
+        },
+        {
+          "id": "m0_colossus_lantern",
+          "label": "Lantern",
+          "hp": 3,
+          "priority": 3,
+          "effects": {
+            "drawOnBreak": 1
+          }
+        }
+      ],
       "boss": true
+    }
+  },
+  "waveIntents": {
+    "intent_route_read": {
+      "label": "Route Read",
+      "primaryRole": "swarm",
+      "question": "Can players read the shown route before committing the first build?",
+      "recommendedPrepTags": ["path_read", "cover_active_fronts", "killzone_setup"],
+      "forbiddenPairTags": ["hidden_spawn_direction", "inactive_direction_forecast"]
+    },
+    "intent_fast_response": {
+      "label": "Fast Response",
+      "primaryRole": "fast",
+      "question": "Can players catch the short path before fast enemies leak?",
+      "recommendedPrepTags": ["path_read", "cover_active_fronts", "split_front_attention", "short_path_check", "slow_or_taunt_ready"],
+      "forbiddenPairTags": ["all_fronts_every_wave", "reward_multiplier"]
+    },
+    "intent_planned_structure_break": {
+      "label": "Planned Structure Break",
+      "primaryRole": "structure_break",
+      "question": "Can players decide which structure may break and where the rear line goes?",
+      "recommendedPrepTags": ["path_read", "cover_active_fronts", "planned_collapse_check", "repair_or_rebuild"],
+      "forbiddenPairTags": ["unannounced_breaker", "forced_class_counter"]
+    },
+    "intent_path_stretch": {
+      "label": "Path Stretch",
+      "primaryRole": "armored",
+      "question": "Can players make the route long enough for sustained damage to matter?",
+      "recommendedPrepTags": ["path_read", "cover_active_fronts", "split_front_attention", "long_path", "sustained_damage"],
+      "forbiddenPairTags": ["hidden_armor_check", "single_solution_build"]
+    },
+    "intent_swarm_compression": {
+      "label": "Swarm Compression",
+      "primaryRole": "swarm",
+      "question": "Can players compress the wave into a kill zone without losing front coverage?",
+      "recommendedPrepTags": ["path_read", "cover_active_fronts", "killzone_setup", "splash_or_thorns"],
+      "forbiddenPairTags": ["bonus_gold", "rarity_adjustment"]
+    },
+    "intent_final_focus": {
+      "label": "Final Focus",
+      "primaryRole": "boss",
+      "question": "Can players choose one boss part and keep a delay answer ready?",
+      "recommendedPrepTags": ["path_read", "cover_active_fronts", "split_front_attention", "boss_part_focus", "delay_ready"],
+      "forbiddenPairTags": ["surprise_boss_part", "reward_multiplier"]
     }
   },
   "wave": {
@@ -319,6 +465,77 @@
         "weight": 1
       }
     ],
+    "intentSchedule": [
+      {
+        "intentId": "intent_route_read",
+        "minRound": 1,
+        "maxRound": 1
+      },
+      {
+        "intentId": "intent_fast_response",
+        "minRound": 2,
+        "maxRound": 2
+      },
+      {
+        "intentId": "intent_planned_structure_break",
+        "minRound": 3,
+        "maxRound": 3
+      },
+      {
+        "intentId": "intent_path_stretch",
+        "minRound": 4,
+        "maxRound": 4
+      },
+      {
+        "intentId": "intent_swarm_compression",
+        "minRound": 5,
+        "maxRound": 9
+      },
+      {
+        "intentId": "intent_final_focus",
+        "bossRound": true
+      }
+    ],
+    "spawnPlanRules": {
+      "baseThreatBudget": 12,
+      "threatBudgetGrowthPerRound": 1,
+      "normalEnemyBudget": 1,
+      "bossEnemyBudget": 8,
+      "defaultRouteProfileId": "route_active_main",
+      "defaultWarningLeadTimeSeconds": 2.0,
+      "directionRoleByIntent": {
+        "intent_route_read": "any",
+        "intent_fast_response": "fast",
+        "intent_planned_structure_break": "short",
+        "intent_path_stretch": "slow",
+        "intent_swarm_compression": "killzone",
+        "intent_final_focus": "boss"
+      },
+      "routeProfileByIntent": {
+        "intent_route_read": "route_read_main",
+        "intent_fast_response": "route_short_response",
+        "intent_planned_structure_break": "route_structure_target",
+        "intent_path_stretch": "route_long_pressure",
+        "intent_swarm_compression": "route_killzone_compression",
+        "intent_final_focus": "route_boss_focus"
+      },
+      "stackRiskLevelByIntent": {
+        "intent_route_read": "low",
+        "intent_fast_response": "medium",
+        "intent_planned_structure_break": "medium",
+        "intent_path_stretch": "medium",
+        "intent_swarm_compression": "low",
+        "intent_final_focus": "high"
+      },
+      "criticalWarningTagsByIntent": {
+        "intent_route_read": ["path_read"],
+        "intent_fast_response": ["fast_leak"],
+        "intent_planned_structure_break": ["structure_marked", "planned_collapse"],
+        "intent_path_stretch": ["long_path_required"],
+        "intent_swarm_compression": ["killzone_density"],
+        "intent_final_focus": ["boss_part_focus", "base_breach_soon"]
+      }
+    },
     "stackLimit": 3,
     "spawnIntervalSec": 1.0
   },
@@ -326,6 +543,7 @@
     "defaultPlayerCount": 1,
     "autoStepIntervalSec": 0.6,
     "autoplayRounds": 2,
+    "autoplayBossRounds": 10,
     "autoplayMaxStepsPerRound": 180,
     "autoplayCardsPerRound": 2,
     "tutorialRounds": 3,
