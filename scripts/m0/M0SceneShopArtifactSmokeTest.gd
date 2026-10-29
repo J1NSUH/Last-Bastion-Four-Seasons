@@ -231,6 +231,54 @@ func _run() -> void:
 			_assert(shop_choice_trace_log.contains("followed suggestion"), "shop choice trace records followed suggestion state")
 			_assert(shop_choice_trace_log.contains("Why now:"), "shop choice trace keeps recommendation context")
 
+	m0_scene._on_reset_pressed()
+	await process_frame
+	m0_scene._on_player_count_pressed(2)
+	await process_frame
+	m0_scene._on_begin_run_pressed()
+	await process_frame
+	_assert(m0_scene.run_started and m0_scene.player_count == 2, "artifact vote UI test begins a two-player run")
+	m0_scene.simulation.debug_generate_artifact_offer()
+	m0_scene._refresh_screen()
+	await process_frame
+
+	var vote_artifact_option = scene.find_child("ArtifactOption0", true, false)
+	_assert(vote_artifact_option != null, "two-player artifact vote option button is present")
+	if vote_artifact_option != null:
+		_assert(vote_artifact_option.visible, "two-player artifact vote option button is visible")
+		_assert(not vote_artifact_option.disabled, "two-player artifact vote option starts enabled")
+		vote_artifact_option.pressed.emit()
+		await process_frame
+
+		_assert(m0_scene.simulation.has_active_artifact_choice_vote(), "first two-player artifact click opens an artifact vote")
+		_assert(not m0_scene.simulation.get_artifact_offer().is_empty(), "artifact vote start keeps the offer open")
+		_assert(m0_scene.simulation.get_artifact_actions_remaining() == 1, "artifact vote start does not spend action")
+		_assert(str(vote_artifact_option.text).contains("Approve Equip"), "active artifact vote button changes to approve equip")
+		_assert(str(vote_artifact_option.text).contains("Vote 1/2"), "active artifact vote button shows approval count")
+		_assert(str(vote_artifact_option.tooltip_text).contains("Active vote"), "active artifact vote tooltip explains vote state")
+		_assert(str(m0_scene.artifact_status_label.text).contains("Artifact vote:"), "artifact status label shows the active vote")
+		_assert(str(m0_scene.action_status_label.text).contains("Party vote=Artifact vote:"), "action status label shows the active artifact party vote")
+		_assert(str(m0_scene.party_vote_label.text).contains("Artifact vote:"), "party vote panel routes to artifact vote")
+		_assert(str(m0_scene.party_vote_label.text).contains("Status Open"), "party vote panel shows artifact vote open status")
+		_assert(str(m0_scene.party_vote_label.text).contains("Window 30s"), "party vote panel shows artifact vote duration")
+		_assert(str(m0_scene.party_vote_badge_label.text) == "ARTIFACT", "party vote badge names the artifact vote")
+		_assert(not m0_scene.party_vote_hold_button.disabled, "party vote hold button enables during artifact vote")
+		_assert(str(m0_scene.party_vote_hold_button.text).contains("Hold artifact vote"), "party vote hold button names artifact hold")
+		_assert(str(m0_scene.skip_artifact_button.text).contains("Hold artifact vote"), "keep-current button becomes hold vote during active vote")
+		var artifact_vote_start_log = m0_scene.debug_log.to_text_filtered("", false)
+		_assert(artifact_vote_start_log.contains("Artifact choice vote started"), "artifact vote start is logged")
+		_assert(artifact_vote_start_log.contains("artifact_choice_vote:"), "artifact vote trace is logged")
+
+		vote_artifact_option.pressed.emit()
+		await process_frame
+
+		_assert(not m0_scene.simulation.has_active_artifact_choice_vote(), "second two-player artifact click clears the artifact vote")
+		_assert(m0_scene.simulation.get_artifact_offer().is_empty(), "passed artifact vote applies the equip and clears the offer")
+		_assert(m0_scene.simulation.get_artifact_actions_remaining() == 0, "passed artifact vote spends action only when applied")
+		var artifact_vote_pass_log = m0_scene.debug_log.to_text_filtered("", false)
+		_assert(artifact_vote_pass_log.contains("Artifact choice vote passed"), "artifact vote pass is logged")
+		_assert(artifact_vote_pass_log.contains("Artifact equipped:"), "artifact equip occurs after vote pass")
+
 	root.remove_child(scene)
 	scene.queue_free()
 	await process_frame

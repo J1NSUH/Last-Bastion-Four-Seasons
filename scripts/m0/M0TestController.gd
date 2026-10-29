@@ -67,6 +67,10 @@ var stack_risk_label: Label
 var tactical_hint_label: Label
 var risk_ping_row: HBoxContainer
 var action_status_label: Label
+var party_vote_row: HBoxContainer
+var party_vote_badge_label: Label
+var party_vote_label: Label
+var party_vote_hold_button: Button
 var wave_readiness_label: Label
 var stats_label: Label
 var round_report_label: Label
@@ -175,6 +179,8 @@ var selected_alpha_recommendation_fix_check_ids: Array[String] = []
 var last_alpha_coverage_result: Dictionary = {}
 var last_boss_warning_response_line = ""
 var card_target_report_cache: Dictionary = {}
+var last_party_vote_panel_session_id = ""
+var last_party_vote_panel_remaining_seconds = -1
 
 
 func _ready() -> void:
@@ -184,6 +190,37 @@ func _ready() -> void:
 	_build_layout()
 	_load_m0_data()
 	_refresh_screen()
+	set_process(true)
+
+
+func _process(_delta: float) -> void:
+	if simulation == null or debug_log == null:
+		return
+	if not simulation.is_loaded() or not run_started:
+		return
+	if not simulation.has_active_party_vote():
+		last_party_vote_panel_session_id = ""
+		last_party_vote_panel_remaining_seconds = -1
+		return
+
+	var timeout_result = simulation.expire_active_party_vote_if_needed(_run_player_count())
+	if bool(timeout_result.get("timed_out", false)):
+		_push_party_vote_result(timeout_result)
+		last_party_vote_panel_session_id = ""
+		last_party_vote_panel_remaining_seconds = -1
+		_refresh_screen()
+		return
+
+	var timer_report = simulation.get_party_vote_timer_report(_run_player_count())
+	var vote_session: Dictionary = timer_report.get("voteSession", {})
+	var session_id = str(vote_session.get("id", ""))
+	var remaining_seconds = int(timer_report.get("remainingSeconds", -1))
+	if session_id == last_party_vote_panel_session_id and remaining_seconds == last_party_vote_panel_remaining_seconds:
+		return
+
+	last_party_vote_panel_session_id = session_id
+	last_party_vote_panel_remaining_seconds = remaining_seconds
+	_refresh_party_vote_panel()
 
 
 func _build_layout() -> void:
@@ -922,6 +959,32 @@ func _build_layout() -> void:
 	action_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	side.add_child(action_status_label)
 
+	party_vote_row = HBoxContainer.new()
+	party_vote_row.name = "PartyVotePanel"
+	party_vote_row.add_theme_constant_override("separation", 6)
+	side.add_child(party_vote_row)
+
+	party_vote_badge_label = Label.new()
+	party_vote_badge_label.name = "PartyVoteBadgeLabel"
+	party_vote_badge_label.text = "IDLE"
+	party_vote_badge_label.custom_minimum_size = Vector2(72, 0)
+	party_vote_badge_label.add_theme_color_override("font_color", Color(0.62, 0.65, 0.68))
+	party_vote_row.add_child(party_vote_badge_label)
+
+	party_vote_label = Label.new()
+	party_vote_label.name = "PartyVotePanelLabel"
+	party_vote_label.text = "Party vote: -"
+	party_vote_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	party_vote_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	party_vote_row.add_child(party_vote_label)
+
+	party_vote_hold_button = Button.new()
+	party_vote_hold_button.name = "PartyVoteHoldButton"
+	party_vote_hold_button.text = "Hold vote"
+	party_vote_hold_button.focus_mode = Control.FOCUS_NONE
+	party_vote_hold_button.pressed.connect(_on_hold_party_vote_pressed)
+	party_vote_row.add_child(party_vote_hold_button)
+
 	wave_readiness_label = Label.new()
 	wave_readiness_label.name = "WaveReadinessLabel"
 	wave_readiness_label.text = "Wave readiness: -"
@@ -1025,6 +1088,7 @@ func _refresh_screen() -> void:
 	_refresh_setup_plan_button()
 	_refresh_rewards()
 	_refresh_status()
+	_refresh_party_vote_panel()
 	_refresh_tactical_hint()
 	_refresh_risk_ping_buttons()
 	_refresh_wave_readiness()
@@ -1219,6 +1283,29 @@ func _format_shop_purchase_vote_session_trace(result: Dictionary) -> String:
 		vote_session.get("artifactActionCost", 0),
 		vote_session.get("timeoutAction", "decline"),
 		vote_session.get("timeoutDefaultResult", "no_purchase"),
+	]
+
+
+func _format_artifact_choice_vote_session_trace(result: Dictionary) -> String:
+	var vote_session: Dictionary = result.get("voteSession", {})
+	if vote_session.is_empty():
+		return "artifact_choice_vote: session missing"
+
+	var yes_player_ids = _string_values_from_array(vote_session.get("yesPlayerIds", []))
+	var hold_player_ids = _string_values_from_array(vote_session.get("holdPlayerIds", []))
+	return "artifact_choice_vote: id=%s action=%s consent=%s yes=%s hold=%s option=%s artifact=%s equippedTarget=%s releasedDormant=%s artifactActionCost=%s timeoutAction=%s default=%s" % [
+		vote_session.get("id", ""),
+		vote_session.get("resolvedAction", "open"),
+		vote_session.get("requiredConsentMode", ""),
+		_join_values(yes_player_ids),
+		_join_values(hold_player_ids),
+		vote_session.get("optionKey", ""),
+		vote_session.get("artifactId", ""),
+		vote_session.get("equippedArtifactId", ""),
+		vote_session.get("releasedDormantArtifactId", ""),
+		vote_session.get("artifactActionCost", 1),
+		vote_session.get("timeoutAction", "keep_current"),
+		vote_session.get("timeoutDefaultResult", "no_change"),
 	]
 
 
@@ -1562,6 +1649,7 @@ func _refresh_rewards() -> void:
 			report["recommendation_detail"] = artifact_recommendation.get("detail_text", "")
 			report["recommendation_summary"] = artifact_recommendation.get("summary", "")
 			report["recommendation_rewrite_preset"] = _alpha_artifact_recommendation_rewrite_preset_text(artifact_recommendation)
+		report = _artifact_vote_report_for_button(report)
 		button.visible = true
 		button.text = _artifact_button_text(report)
 		button.disabled = not bool(report.get("can_claim", true))
@@ -1575,6 +1663,9 @@ func _refresh_rewards() -> void:
 		if artifact_offer.is_empty():
 			skip_artifact_button.text = "Keep current artifacts"
 			skip_artifact_button.tooltip_text = ""
+		elif simulation.has_active_artifact_choice_vote():
+			skip_artifact_button.text = "Hold artifact vote"
+			skip_artifact_button.tooltip_text = "Close the active artifact vote without changing passives or spending the artifact action. %s" % simulation.get_artifact_choice_vote_summary(player_count)
 		elif selected_artifact_replacement_offer_id.is_empty():
 			skip_artifact_button.text = "Keep current artifacts"
 			skip_artifact_button.tooltip_text = "Close this artifact offer without changing party passives. This is a normal choice. %s" % simulation.get_artifact_loadout_summary()
@@ -1663,6 +1754,10 @@ func _refresh_artifact_replace_buttons() -> void:
 	var release_ready = dormant_full and not selected_dormant_artifact_release_id.is_empty()
 	var release_label = simulation.get_artifact_label(selected_dormant_artifact_release_id) if release_ready else ""
 	var action_available = simulation.get_artifact_actions_remaining() > 0
+	var active_artifact_vote = simulation.has_active_artifact_choice_vote()
+	var artifact_vote_session = simulation.get_active_artifact_choice_vote_session() if active_artifact_vote else {}
+	var active_vote_key = str(artifact_vote_session.get("optionKey", ""))
+	var active_shop_vote = simulation.has_active_shop_purchase_vote()
 	for index in range(artifact_replace_buttons.size()):
 		var button: Button = artifact_replace_buttons[index]
 		if index >= equipped_artifacts.size():
@@ -1670,14 +1765,39 @@ func _refresh_artifact_replace_buttons() -> void:
 
 		var old_artifact_id = str(equipped_artifacts[index])
 		var old_label = simulation.get_artifact_label(old_artifact_id)
+		var option_key = simulation.get_artifact_choice_option_key(
+			"replace",
+			selected_artifact_replacement_offer_id,
+			old_artifact_id,
+			selected_dormant_artifact_release_id
+		)
+		var vote_matches = active_artifact_vote and str(artifact_vote_session.get("choiceAction", "")) == "replace" and option_key == active_vote_key
+		var vote_blocks = active_shop_vote or (active_artifact_vote and not vote_matches)
+		var vote_state = ""
+		if vote_matches:
+			vote_state = " | Vote %s/%s" % [
+				artifact_vote_session.get("approvals", 0),
+				artifact_vote_session.get("required", simulation.get_artifact_choice_required_votes(player_count)),
+			]
 		button.visible = true
-		button.text = "Replace %s\nEquip %s" % [
+		button.text = "%s %s\nEquip %s%s" % [
+			"Approve Replace" if vote_matches else "Replace",
 			old_label,
 			new_label,
+			vote_state,
 		]
-		button.disabled = (not action_available) or (dormant_full and not release_ready)
+		button.disabled = vote_blocks or (not action_available) or (dormant_full and not release_ready)
 		var state_text = "Ready: %s becomes dormant." % old_label
-		if not action_available:
+		if active_shop_vote:
+			state_text = "Blocked: finish the active shop vote first."
+		elif active_artifact_vote and not vote_matches:
+			state_text = "Blocked: finish the active artifact vote first."
+		elif vote_matches:
+			state_text = "Vote active: approve to equip %s; %s becomes dormant." % [
+				new_label,
+				old_label,
+			]
+		elif not action_available:
 			state_text = "Blocked: artifact action already used this maintenance."
 		elif dormant_full and release_ready:
 			state_text = "Ready: %s becomes dormant, %s is released with no refund." % [
@@ -1726,12 +1846,18 @@ func _refresh_artifact_release_buttons() -> void:
 		var dormant_label = simulation.get_artifact_label(dormant_artifact_id)
 		var selected_prefix = "Selected release" if selected_dormant_artifact_release_id == dormant_artifact_id else "Release"
 		button.visible = true
+		button.disabled = simulation.has_active_artifact_choice_vote() or simulation.has_active_shop_purchase_vote()
 		button.text = "%s %s\nFree dormant slot" % [
 			selected_prefix,
 			dormant_label,
 		]
-		button.tooltip_text = "Release %s with no refund, then choose which equipped artifact becomes dormant. Current: %s" % [
-			dormant_label,
+		var release_state = "Release %s with no refund, then choose which equipped artifact becomes dormant." % dormant_label
+		if simulation.has_active_artifact_choice_vote():
+			release_state = "Finish the active artifact vote before changing the release target."
+		elif simulation.has_active_shop_purchase_vote():
+			release_state = "Finish the active shop vote before changing the release target."
+		button.tooltip_text = "%s Current: %s" % [
+			release_state,
 			slot_report.get("summary", simulation.get_artifact_loadout_summary()),
 		]
 
@@ -1903,7 +2029,48 @@ func _shop_reactivation_selection_ready(shop_report: Dictionary) -> bool:
 	return selected_shop_reactivation_replaced_artifact_id.is_empty()
 
 
+func _artifact_vote_report_for_button(artifact_report: Dictionary) -> Dictionary:
+	var report = artifact_report.duplicate(true)
+	var artifact_id = str(report.get("artifact_id", ""))
+	if simulation.has_active_shop_purchase_vote():
+		report["artifact_vote_blocked"] = true
+		report["can_claim"] = false
+		report["reason"] = "shop_vote_active"
+		report["artifact_vote_summary"] = simulation.get_shop_purchase_vote_summary(player_count)
+		return report
+
+	if not simulation.has_active_artifact_choice_vote():
+		return report
+
+	var vote_session = simulation.get_active_artifact_choice_vote_session()
+	var active_key = str(vote_session.get("optionKey", ""))
+	var option_key = simulation.get_artifact_choice_option_key("equip", artifact_id)
+	var vote_summary = simulation.get_artifact_choice_vote_summary(player_count)
+	report["artifact_vote_summary"] = vote_summary
+	report["artifact_vote_approvals"] = vote_session.get("approvals", 0)
+	report["artifact_vote_required"] = vote_session.get("required", simulation.get_artifact_choice_required_votes(player_count))
+	report["artifact_vote_session_id"] = vote_session.get("id", "")
+	if str(vote_session.get("choiceAction", "")) == "equip" and option_key == active_key:
+		report["artifact_vote_active"] = true
+		report["can_claim"] = true
+		return report
+
+	report["artifact_vote_blocked"] = true
+	report["can_claim"] = false
+	report["reason"] = "artifact_vote_active"
+	return report
+
+
 func _shop_vote_report_for_button(shop_report: Dictionary) -> Dictionary:
+	if simulation.has_active_artifact_choice_vote():
+		var artifact_blocked_report = shop_report.duplicate(true)
+		artifact_blocked_report["shop_vote_blocked"] = true
+		artifact_blocked_report["can_buy"] = false
+		artifact_blocked_report["can_remove"] = false
+		artifact_blocked_report["reason"] = "artifact_vote_active"
+		artifact_blocked_report["shop_vote_summary"] = simulation.get_artifact_choice_vote_summary(player_count)
+		return artifact_blocked_report
+
 	if not simulation.has_active_shop_purchase_vote():
 		return shop_report
 
@@ -2003,7 +2170,7 @@ func _refresh_status() -> void:
 	data_label.text = "%s | %s | %s" % [
 		simulation.get_wave_summary(),
 		simulation.get_wave_stack_summary(),
-		simulation.get_wave_stack_vote_summary(active_player_count),
+		simulation.get_party_vote_summary(active_player_count),
 	]
 	wave_preview_label.text = _wave_preview_text(active_player_count)
 	var front_lines = PackedStringArray()
@@ -2074,6 +2241,157 @@ func _refresh_action_status() -> void:
 		return
 
 	action_status_label.text = _action_status_text()
+
+
+func _refresh_party_vote_panel() -> void:
+	if party_vote_label == null or party_vote_hold_button == null or party_vote_badge_label == null:
+		return
+
+	party_vote_badge_label.text = _party_vote_badge_text()
+	party_vote_badge_label.tooltip_text = _party_vote_badge_tooltip()
+	party_vote_badge_label.add_theme_color_override("font_color", _party_vote_badge_color())
+	party_vote_label.text = _party_vote_panel_text()
+	party_vote_hold_button.text = _party_vote_hold_button_text()
+	party_vote_hold_button.disabled = not (
+		simulation.is_loaded()
+		and run_started
+		and simulation.has_active_party_vote()
+	)
+	party_vote_hold_button.tooltip_text = _party_vote_hold_tooltip()
+	if simulation.is_loaded() and simulation.has_active_party_vote():
+		var timer_report = simulation.get_party_vote_timer_report(_run_player_count())
+		var vote_session: Dictionary = timer_report.get("voteSession", {})
+		last_party_vote_panel_session_id = str(vote_session.get("id", ""))
+		last_party_vote_panel_remaining_seconds = int(timer_report.get("remainingSeconds", -1))
+	else:
+		last_party_vote_panel_session_id = ""
+		last_party_vote_panel_remaining_seconds = -1
+
+
+func _party_vote_badge_text() -> String:
+	if not simulation.is_loaded() or not run_started:
+		return "IDLE"
+
+	var timer_report = simulation.get_party_vote_timer_report(_run_player_count())
+	if not bool(timer_report.get("active", false)):
+		return "IDLE"
+
+	if str(timer_report.get("urgency", "")) == "ending_soon":
+		return "SOON"
+	if bool(timer_report.get("expired", false)):
+		return "EXPIRED"
+
+	match str(timer_report.get("vote_type", "none")):
+		"wave_stack":
+			return "PULL"
+		"shop_purchase":
+			return "SHOP"
+		"artifact_choice":
+			return "ARTIFACT"
+		_:
+			return "VOTE"
+
+
+func _party_vote_badge_tooltip() -> String:
+	if not simulation.is_loaded():
+		return "Party vote data is not loaded."
+	if not run_started:
+		return "Begin the run before party votes can open."
+
+	var timer_report = simulation.get_party_vote_timer_report(_run_player_count())
+	if not bool(timer_report.get("active", false)):
+		return "No active party vote."
+
+	return "Party vote status: %s, %s remaining." % [
+		timer_report.get("urgencyLabel", "Open"),
+		timer_report.get("remainingLabel", "0s"),
+	]
+
+
+func _party_vote_badge_color() -> Color:
+	if not simulation.is_loaded() or not run_started:
+		return Color(0.62, 0.65, 0.68)
+
+	var timer_report = simulation.get_party_vote_timer_report(_run_player_count())
+	if not bool(timer_report.get("active", false)):
+		return Color(0.62, 0.65, 0.68)
+	if bool(timer_report.get("expired", false)):
+		return Color(1.0, 0.35, 0.22)
+	if str(timer_report.get("urgency", "")) == "ending_soon":
+		return Color(1.0, 0.78, 0.18)
+
+	match str(timer_report.get("vote_type", "none")):
+		"wave_stack":
+			return Color(0.95, 0.74, 0.28)
+		"shop_purchase":
+			return Color(0.44, 0.82, 0.62)
+		"artifact_choice":
+			return Color(0.62, 0.76, 1.0)
+		_:
+			return Color(0.82, 0.82, 0.86)
+
+
+func _party_vote_panel_text() -> String:
+	if not simulation.is_loaded():
+		return "Party vote: data missing"
+	if not run_started:
+		return "Party vote: begin the run first"
+
+	var report: Dictionary = simulation.get_party_vote_lock_report(_run_player_count())
+	var summary = str(report.get("summary", simulation.get_party_vote_summary(_run_player_count())))
+	if not bool(report.get("active", false)):
+		return summary
+
+	var timer_report: Dictionary = report.get("timerReport", simulation.get_party_vote_timer_report(_run_player_count()))
+	var vote_session: Dictionary = report.get("voteSession", {})
+	var label = str(vote_session.get("label", "party decision"))
+	var approvals = int(vote_session.get("approvals", 0))
+	var required = int(vote_session.get("required", 0))
+	var duration = int(timer_report.get("durationSeconds", vote_session.get("voteDurationSeconds", 0)))
+	var remaining = int(timer_report.get("remainingSeconds", duration))
+	var urgency_label = str(timer_report.get("urgencyLabel", "Open"))
+	var consent = str(vote_session.get("requiredConsentMode", report.get("requiredConsentMode", "majority")))
+	var timeout_action = str(vote_session.get("timeoutAction", report.get("timeoutAction", "hold")))
+	return "%s\nDecision: %s | Status %s | Yes %s/%s | Remaining %ss / Window %ss | Consent %s | Timeout %s" % [
+		summary,
+		label,
+		urgency_label,
+		approvals,
+		required,
+		remaining,
+		duration,
+		consent,
+		timeout_action,
+	]
+
+
+func _party_vote_hold_button_text() -> String:
+	if not simulation.is_loaded():
+		return "Hold vote"
+	if not run_started:
+		return "Hold vote"
+
+	match simulation.get_active_party_vote_type():
+		"wave_stack":
+			return "Hold pull"
+		"shop_purchase":
+			return "Hold shop vote"
+		"artifact_choice":
+			return "Hold artifact vote"
+		_:
+			return "Hold vote"
+
+
+func _party_vote_hold_tooltip() -> String:
+	if not simulation.is_loaded():
+		return "Party vote data is not loaded."
+	if not run_started:
+		return "Begin the run before party votes can open."
+	if not simulation.has_active_party_vote():
+		return "No active party vote."
+
+	var report: Dictionary = simulation.get_party_vote_lock_report(_run_player_count())
+	return "%s\nHolding closes the current vote without spending party resources or changing the chosen system." % str(report.get("summary", "Party vote active."))
 
 
 func _refresh_tactical_hint() -> void:
@@ -2327,12 +2645,32 @@ func _rebuild_after_collapse_line() -> String:
 
 
 func _action_status_text() -> String:
-	return "Actions: Start wave=%s | Pull next=%s | Hold pull=%s | Step=%s" % [
+	return "Actions: Start wave=%s | Pull next=%s | Party vote=%s | Hold pull=%s | Step=%s" % [
 		_start_wave_action_state(),
 		_call_next_action_state(),
+		_party_vote_action_state(),
 		_hold_action_state(),
 		_step_action_state(),
 	]
+
+
+func _party_vote_action_state() -> String:
+	if not simulation.is_loaded():
+		return "Data missing"
+	if not run_started:
+		return "Begin run first"
+
+	var active_player_count = _run_player_count()
+	var vote_type = simulation.get_active_party_vote_type()
+	match vote_type:
+		"wave_stack":
+			return simulation.get_wave_stack_vote_summary(active_player_count)
+		"shop_purchase":
+			return simulation.get_shop_purchase_vote_summary(active_player_count)
+		"artifact_choice":
+			return simulation.get_artifact_choice_vote_summary(active_player_count)
+		_:
+			return "Solo instant" if active_player_count <= 1 else "None"
 
 
 func _start_wave_action_state() -> String:
@@ -3608,6 +3946,21 @@ func _on_artifact_button_pressed(index: int) -> void:
 
 	var artifact_id = str(offer[index])
 	var recommendation = simulation.get_artifact_recommendation_report()
+	var vote_result = _request_artifact_vote_for_apply("equip", artifact_id)
+	if not bool(vote_result.get("ok", false)):
+		if str(vote_result.get("reason", "")) == "artifact_slots_full":
+			selected_artifact_replacement_offer_id = artifact_id
+			selected_dormant_artifact_release_id = ""
+			debug_log.push("Artifact replacement armed: %s. Choose which equipped artifact becomes dormant, or keep current." % simulation.get_artifact_label(artifact_id))
+		else:
+			debug_log.push("Artifact vote rejected: %s." % vote_result.get("reason", "blocked"))
+		_refresh_screen()
+		return
+
+	if not bool(vote_result.get("ready_to_apply", false)):
+		_refresh_screen()
+		return
+
 	var result = simulation.claim_artifact(artifact_id)
 	if bool(result["ok"]):
 		selected_artifact_replacement_offer_id = ""
@@ -3648,6 +4001,21 @@ func _on_artifact_replace_button_pressed(index: int) -> void:
 	var old_artifact_id = str(equipped_artifacts[index])
 	var new_artifact_id = selected_artifact_replacement_offer_id
 	var recommendation = simulation.get_artifact_recommendation_report()
+	var vote_result = _request_artifact_vote_for_apply(
+		"replace",
+		new_artifact_id,
+		old_artifact_id,
+		selected_dormant_artifact_release_id
+	)
+	if not bool(vote_result.get("ok", false)):
+		debug_log.push("Artifact replacement vote rejected: %s." % vote_result.get("reason", "blocked"))
+		_refresh_screen()
+		return
+
+	if not bool(vote_result.get("ready_to_apply", false)):
+		_refresh_screen()
+		return
+
 	var result = simulation.replace_artifact(old_artifact_id, new_artifact_id, selected_dormant_artifact_release_id)
 	if bool(result.get("ok", false)):
 		selected_artifact_replacement_offer_id = ""
@@ -3693,6 +4061,15 @@ func _on_skip_artifact_pressed() -> void:
 		_refresh_log()
 		return
 
+	if simulation.has_active_artifact_choice_vote():
+		var hold_result = simulation.hold_artifact_choice_vote()
+		if bool(hold_result.get("ok", false)):
+			_push_artifact_vote_result(hold_result)
+		else:
+			debug_log.push("Artifact vote hold rejected: %s." % hold_result.get("reason", "blocked"))
+		_refresh_screen()
+		return
+
 	var recommendation = simulation.get_artifact_recommendation_report()
 	var result = simulation.skip_artifact_offer()
 	if bool(result["ok"]):
@@ -3704,6 +4081,31 @@ func _on_skip_artifact_pressed() -> void:
 		debug_log.push("Artifact skip rejected: %s." % result["reason"])
 
 	_refresh_screen()
+
+
+func _request_artifact_vote_for_apply(
+	action_type: String,
+	offered_artifact_id: String,
+	equipped_artifact_id: String = "",
+	released_dormant_artifact_id: String = ""
+) -> Dictionary:
+	var vote_result = simulation.request_artifact_choice_vote(
+		action_type,
+		offered_artifact_id,
+		player_count,
+		equipped_artifact_id,
+		released_dormant_artifact_id
+	)
+	_push_artifact_vote_result(vote_result)
+	return vote_result
+
+
+func _push_artifact_vote_result(result: Dictionary) -> void:
+	for event in result.get("events", []):
+		debug_log.push(str(event))
+
+	if result.has("voteSession"):
+		debug_log.push(_format_artifact_choice_vote_session_trace(result), "system")
 
 
 func _on_shop_reactivation_dormant_pressed(index: int) -> void:
@@ -3771,6 +4173,32 @@ func _push_shop_vote_result(result: Dictionary) -> void:
 
 	if result.has("voteSession"):
 		debug_log.push(_format_shop_purchase_vote_session_trace(result), "system")
+
+
+func _push_party_vote_result(result: Dictionary) -> void:
+	var vote_type = str(result.get("vote_type", result.get("activeVoteType", "")))
+	match vote_type:
+		"wave_stack":
+			var wave_vote_session: Dictionary = result.get("voteSession", {})
+			if not wave_vote_session.is_empty():
+				debug_log.push(_format_wave_stack_vote_session_trace(result), "system")
+			for event in result.get("events", []):
+				debug_log.push(str(event))
+		"shop_purchase":
+			_push_shop_vote_result(result)
+		"artifact_choice":
+			_push_artifact_vote_result(result)
+		_:
+			for event in result.get("events", []):
+				debug_log.push(str(event))
+
+	var timeout_event: Dictionary = result.get("party_vote_timed_out", {})
+	if not timeout_event.is_empty():
+		debug_log.push("party_vote_timeout: type=%s action=%s duration=%ss" % [
+			timeout_event.get("voteType", vote_type),
+			timeout_event.get("timeoutAction", "hold"),
+			timeout_event.get("durationSeconds", 0),
+		], "system")
 
 
 func _on_shop_button_pressed(index: int) -> void:
@@ -4080,6 +4508,42 @@ func _on_hold_stack_vote_pressed() -> void:
 			debug_log.push(str(event))
 	else:
 		debug_log.push("Wave stack vote hold rejected: %s." % result["reason"])
+
+	_refresh_screen()
+
+
+func _on_hold_party_vote_pressed() -> void:
+	if not simulation.is_loaded():
+		debug_log.push("Cannot hold party vote: data is not loaded.")
+		_refresh_log()
+		return
+
+	if not run_started:
+		debug_log.push("Cannot hold party vote: begin the run first.")
+		_refresh_log()
+		return
+
+	var vote_type = simulation.get_active_party_vote_type()
+	var result: Dictionary = {}
+	match vote_type:
+		"wave_stack":
+			result = simulation.hold_wave_stack_vote()
+		"shop_purchase":
+			result = simulation.hold_shop_purchase_vote()
+		"artifact_choice":
+			result = simulation.hold_artifact_choice_vote()
+		_:
+			debug_log.push("No active party vote to hold.")
+
+	if not result.is_empty():
+		if bool(result.get("ok", false)):
+			if vote_type == "wave_stack":
+				confirmed_risk_ping_marker.clear()
+			result["vote_type"] = vote_type
+			result["activeVoteType"] = vote_type
+			_push_party_vote_result(result)
+		else:
+			debug_log.push("Party vote hold rejected: %s." % result.get("reason", "blocked"))
 
 	_refresh_screen()
 
@@ -9087,6 +9551,12 @@ func _short_block_reason(reason: String) -> String:
 			return "Vote open"
 		"shop_vote_player_count_changed":
 			return "Players changed"
+		"artifact_vote_active", "artifact_vote_already_active":
+			return "Vote open"
+		"artifact_vote_player_count_changed":
+			return "Players changed"
+		"artifact_replacement_target_required":
+			return "Choose swap"
 		"base_full":
 			return "Base full"
 		"no_structures":
@@ -9585,12 +10055,20 @@ func _artifact_button_text(report: Dictionary) -> String:
 	var action = "Suggested Equip" if bool(report.get("recommended", false)) else "Equip"
 	if bool(report.get("requires_replacement", false)):
 		action = "Suggested Replace" if bool(report.get("recommended", false)) else "Replace Needed"
+	if bool(report.get("artifact_vote_active", false)):
+		action = "Approve Equip"
 	if not bool(report.get("can_claim", true)):
 		action = _short_block_reason(str(report.get("reason", "blocked")))
+	var state = "Equipped" if bool(report.get("equipped", false)) else "New"
+	if bool(report.get("artifact_vote_active", false)):
+		state = "Vote %s/%s" % [
+			report.get("artifact_vote_approvals", 0),
+			report.get("artifact_vote_required", simulation.get_artifact_choice_required_votes(player_count)),
+		]
 	return "%s %s - %s\nParty passive: %s\nAction: %s -> %s" % [
 		action,
 		report.get("label", report.get("artifact_id", "?")),
-		"Equipped" if bool(report.get("equipped", false)) else "New",
+		state,
 		report.get("effect", ""),
 		report.get("artifact_actions_remaining", simulation.get_artifact_actions_remaining()),
 		report.get("artifact_actions_after", report.get("artifact_actions_remaining", simulation.get_artifact_actions_remaining())),
@@ -9598,6 +10076,11 @@ func _artifact_button_text(report: Dictionary) -> String:
 
 
 func _artifact_button_tooltip(report: Dictionary) -> String:
+	var vote_text = ""
+	if bool(report.get("artifact_vote_active", false)):
+		vote_text = " | Active vote: %s" % report.get("artifact_vote_summary", simulation.get_artifact_choice_vote_summary(player_count))
+	elif bool(report.get("artifact_vote_blocked", false)):
+		vote_text = " | Another vote is open: %s" % report.get("artifact_vote_summary", simulation.get_artifact_choice_vote_summary(player_count))
 	var recommendation_text = ""
 	if bool(report.get("recommended", false)):
 		recommendation_text = " | Suggested: %s" % report.get("recommendation_reason", "best party passive")
@@ -9610,13 +10093,14 @@ func _artifact_button_tooltip(report: Dictionary) -> String:
 	var replace_text = ""
 	if bool(report.get("requires_replacement", false)):
 		replace_text = " | Slot full: choose which equipped artifact becomes dormant, or keep current."
-	return "Equip: party passive | Action %s/%s | %s | %s%s%s" % [
+	return "Equip: party passive | Action %s/%s | %s | %s%s%s%s" % [
 		report.get("artifact_actions_remaining", simulation.get_artifact_actions_remaining()),
 		report.get("artifact_action_limit", simulation.get_artifact_action_limit()),
 		report.get("loadout_summary", "equipped %s" % report.get("equipped_count", 0)),
 		report.get("summary", ""),
 		recommendation_text,
 		replace_text,
+		vote_text,
 	]
 
 

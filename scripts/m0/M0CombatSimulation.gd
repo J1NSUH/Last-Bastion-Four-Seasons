@@ -156,6 +156,8 @@ const WAVE_STACK_VOTE_DURATION_SECONDS = 8
 const WAVE_STACK_SPAWN_COUNTDOWN_SECONDS = 2
 const WAVE_STACK_TEMPO_MOMENT_WINDOW_SECONDS = 20.0
 const SHOP_PURCHASE_VOTE_DURATION_SECONDS = 20
+const ARTIFACT_CHOICE_VOTE_DURATION_SECONDS = 30
+const PARTY_VOTE_ENDING_SOON_SECONDS = 5
 const DIR_STEPS = [
 	Vector2i(1, 0),
 	Vector2i(-1, 0),
@@ -196,6 +198,7 @@ var reward_queue: Array[Dictionary] = []
 var active_reward_packet: Dictionary = {}
 var wave_stack_vote: Dictionary = {}
 var shop_purchase_vote: Dictionary = {}
+var artifact_choice_vote: Dictionary = {}
 var round_start_stats: Dictionary = {}
 var last_round_report: Dictionary = {}
 var last_round_resource_report: Dictionary = {}
@@ -260,6 +263,7 @@ func reset_run() -> void:
 	active_reward_packet.clear()
 	wave_stack_vote.clear()
 	shop_purchase_vote.clear()
+	artifact_choice_vote.clear()
 	round_start_stats.clear()
 	last_round_report.clear()
 	last_round_resource_report.clear()
@@ -355,6 +359,10 @@ func reset_run() -> void:
 		"artifact_rewards_taken": 0,
 		"artifact_rewards_skipped": 0,
 		"artifact_actions_spent": 0,
+		"artifact_votes_started": 0,
+		"artifact_votes_approved": 0,
+		"artifact_votes_passed": 0,
+		"artifact_votes_held": 0,
 		"artifact_replacements": 0,
 		"artifact_reactivations": 0,
 		"artifact_dormant_added": 0,
@@ -380,6 +388,7 @@ func reset_run() -> void:
 		"shop_votes_approved": 0,
 		"shop_votes_passed": 0,
 		"shop_votes_held": 0,
+		"party_vote_timeouts": 0,
 		"wave_stack_tempo_moments": 0,
 		"round_mana_refills": 0,
 		"front_seed_mana_gained": 0,
@@ -1468,6 +1477,8 @@ func get_artifact_offer_summary() -> String:
 		slot_report.get("summary", get_artifact_loadout_summary()),
 		get_artifact_action_summary(),
 	]
+	if has_active_artifact_choice_vote():
+		slot_text += " | %s" % get_artifact_choice_vote_summary(int(artifact_choice_vote.get("player_count", 2)))
 	if bool(slot_report.get("slots_full", false)):
 		slot_text += " | slots full: replace one or keep current"
 
@@ -1477,6 +1488,466 @@ func get_artifact_offer_summary() -> String:
 		recommendation_text,
 		slot_text,
 	]
+
+
+func has_active_artifact_choice_vote() -> bool:
+	return not artifact_choice_vote.is_empty()
+
+
+func get_active_artifact_choice_vote_session() -> Dictionary:
+	return artifact_choice_vote.duplicate(true)
+
+
+func get_artifact_choice_required_votes(player_count: int) -> int:
+	var normalized_count = clamp(player_count, 1, 4)
+	if normalized_count <= 1:
+		return 1
+
+	return int(floor(float(normalized_count) / 2.0)) + 1
+
+
+func get_artifact_choice_option_key(
+	action_type: String,
+	offered_artifact_id: String,
+	equipped_artifact_id: String = "",
+	released_dormant_artifact_id: String = ""
+) -> String:
+	var normalized_action = str(action_type)
+	if normalized_action == "equip":
+		return "equip:%s" % offered_artifact_id
+	if normalized_action == "replace":
+		return "replace:%s:%s:%s" % [
+			equipped_artifact_id,
+			offered_artifact_id,
+			released_dormant_artifact_id,
+		]
+
+	return ""
+
+
+func get_artifact_choice_vote_summary(player_count: int) -> String:
+	if not is_loaded():
+		return "Artifact vote: data not loaded"
+	if player_count <= 1:
+		return "Artifact vote: solo instant"
+	if artifact_offer.is_empty():
+		return "Artifact vote: idle"
+	if artifact_choice_vote.is_empty():
+		return "Artifact vote: none required=%s majority" % get_artifact_choice_required_votes(player_count)
+
+	return "Artifact vote: %s %s/%s %s timeout=%s" % [
+		artifact_choice_vote.get("label", "choice"),
+		artifact_choice_vote.get("approvals", 0),
+		artifact_choice_vote.get("required", get_artifact_choice_required_votes(player_count)),
+		artifact_choice_vote.get("requiredConsentMode", "majority"),
+		artifact_choice_vote.get("timeoutAction", "keep_current"),
+	]
+
+
+func request_artifact_choice_vote(
+	action_type: String,
+	offered_artifact_id: String,
+	player_count: int,
+	equipped_artifact_id: String = "",
+	released_dormant_artifact_id: String = ""
+) -> Dictionary:
+	if not is_loaded():
+		return _reject("data_not_loaded")
+
+	var validation = _artifact_choice_validation_report(
+		action_type,
+		offered_artifact_id,
+		equipped_artifact_id,
+		released_dormant_artifact_id
+	)
+	if not bool(validation.get("ok", false)):
+		validation["requires_vote"] = true
+		validation["ready_to_apply"] = false
+		return validation
+
+	var normalized_count = clamp(player_count, 1, 4)
+	if normalized_count <= 1:
+		return {
+			"ok": true,
+			"reason": "vote_not_required",
+			"requires_vote": false,
+			"ready_to_apply": true,
+			"choiceAction": validation.get("choiceAction", action_type),
+			"optionKey": validation.get("optionKey", ""),
+			"events": [],
+		}
+
+	if has_active_shop_purchase_vote():
+		return {
+			"ok": false,
+			"reason": "shop_vote_already_active",
+			"requires_vote": true,
+			"ready_to_apply": false,
+			"shopVoteSession": shop_purchase_vote.duplicate(true),
+			"events": [
+				"Artifact vote blocked: a shop purchase vote is already active.",
+			],
+		}
+
+	var requested_key = str(validation.get("optionKey", ""))
+	if requested_key.is_empty():
+		return _reject("artifact_choice_missing")
+
+	if has_active_artifact_choice_vote():
+		if int(artifact_choice_vote.get("player_count", normalized_count)) != normalized_count:
+			artifact_choice_vote.clear()
+			return _reject("artifact_vote_player_count_changed")
+
+		if str(artifact_choice_vote.get("optionKey", "")) != requested_key:
+			return {
+				"ok": false,
+				"reason": "artifact_vote_already_active",
+				"requires_vote": true,
+				"ready_to_apply": false,
+				"voteSession": artifact_choice_vote.duplicate(true),
+				"events": [
+					"Artifact choice vote already active. %s" % get_artifact_choice_vote_summary(normalized_count),
+				],
+			}
+
+		var required_votes = get_artifact_choice_required_votes(normalized_count)
+		var approvals = min(normalized_count, int(artifact_choice_vote.get("approvals", 0)) + 1)
+		artifact_choice_vote["approvals"] = approvals
+		artifact_choice_vote["required"] = required_votes
+		artifact_choice_vote["yesPlayerIds"] = _player_ids_for_count(approvals)
+		run_stats["artifact_votes_approved"] = int(run_stats.get("artifact_votes_approved", 0)) + 1
+
+		if approvals < required_votes:
+			return {
+				"ok": true,
+				"reason": "vote_waiting",
+				"requires_vote": true,
+				"ready_to_apply": false,
+				"approvals": approvals,
+				"required": required_votes,
+				"voteSession": artifact_choice_vote.duplicate(true),
+				"events": [
+					"Artifact choice vote waiting: %s/%s for %s." % [
+						approvals,
+						required_votes,
+						artifact_choice_vote.get("label", "choice"),
+					],
+				],
+			}
+
+		run_stats["artifact_votes_passed"] = int(run_stats.get("artifact_votes_passed", 0)) + 1
+		var resolved_vote_session = _resolved_artifact_choice_vote_session(
+			_artifact_choice_resolved_action(str(artifact_choice_vote.get("choiceAction", action_type))),
+			["required_votes_met"],
+			normalized_count,
+			approvals
+		)
+		artifact_choice_vote.clear()
+		return {
+			"ok": true,
+			"reason": "vote_passed",
+			"requires_vote": true,
+			"ready_to_apply": true,
+			"choiceAction": resolved_vote_session.get("choiceAction", action_type),
+			"approvals": approvals,
+			"required": required_votes,
+			"voteSession": resolved_vote_session,
+			"artifact_choice_vote_resolved": _artifact_choice_vote_resolved_event(resolved_vote_session),
+			"events": [
+				"Artifact choice vote passed: %s/%s for %s." % [
+					approvals,
+					required_votes,
+					resolved_vote_session.get("label", "choice"),
+				],
+			],
+		}
+
+	artifact_choice_vote = _build_artifact_choice_vote_session(validation, normalized_count)
+	run_stats["artifact_votes_started"] = int(run_stats.get("artifact_votes_started", 0)) + 1
+	run_stats["artifact_votes_approved"] = int(run_stats.get("artifact_votes_approved", 0)) + 1
+
+	return {
+		"ok": true,
+		"reason": "vote_started",
+		"requires_vote": true,
+		"ready_to_apply": false,
+		"approvals": 1,
+		"required": artifact_choice_vote.get("required", get_artifact_choice_required_votes(normalized_count)),
+		"voteSession": artifact_choice_vote.duplicate(true),
+		"artifact_choice_vote_started": _artifact_choice_vote_started_event(artifact_choice_vote),
+		"events": [
+			"Artifact choice vote started: 1/%s for %s. Timeout keeps current loadout." % [
+				artifact_choice_vote.get("required", get_artifact_choice_required_votes(normalized_count)),
+				artifact_choice_vote.get("label", "choice"),
+			],
+		],
+	}
+
+
+func hold_artifact_choice_vote(reason_tags: Array = [], result_reason: String = "vote_held") -> Dictionary:
+	if not has_active_artifact_choice_vote():
+		return _reject("no_artifact_vote")
+
+	var approvals = int(artifact_choice_vote.get("approvals", 0))
+	var required_votes = int(artifact_choice_vote.get("required", 0))
+	var vote_player_count = int(artifact_choice_vote.get("player_count", max(1, required_votes)))
+	var resolved_reason_tags = reason_tags.duplicate()
+	if resolved_reason_tags.is_empty():
+		resolved_reason_tags = ["hold_requested"]
+	var resolved_vote_session = _resolved_artifact_choice_vote_session("held", resolved_reason_tags, vote_player_count, approvals)
+	artifact_choice_vote.clear()
+	run_stats["artifact_votes_held"] = int(run_stats.get("artifact_votes_held", 0)) + 1
+	var event_text = "Artifact choice held: %s/%s approvals. Current loadout stays and no artifact action was spent." % [
+		approvals,
+		required_votes,
+	]
+	if result_reason == "vote_timed_out":
+		event_text = "Artifact choice timed out: %s/%s approvals. Current loadout stays and no artifact action was spent." % [
+			approvals,
+			required_votes,
+		]
+
+	return {
+		"ok": true,
+		"reason": result_reason,
+		"requires_vote": true,
+		"ready_to_apply": false,
+		"voteSession": resolved_vote_session,
+		"artifact_choice_vote_resolved": _artifact_choice_vote_resolved_event(resolved_vote_session),
+		"events": [event_text],
+	}
+
+
+func _artifact_choice_validation_report(
+	action_type: String,
+	offered_artifact_id: String,
+	equipped_artifact_id: String = "",
+	released_dormant_artifact_id: String = ""
+) -> Dictionary:
+	var normalized_action = str(action_type)
+	if artifact_offer.is_empty():
+		return _artifact_choice_reject("no_artifact_offer", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+	if not artifact_offer.has(offered_artifact_id):
+		return _artifact_choice_reject("artifact_not_offered", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+	if equipped_artifacts.has(offered_artifact_id):
+		return _artifact_choice_reject("artifact_already_equipped", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+	if artifact_actions_remaining <= 0:
+		return _artifact_choice_reject("artifact_action_unavailable", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+
+	var slot_limit = get_artifact_slot_limit()
+	if normalized_action == "equip":
+		if equipped_artifacts.size() >= slot_limit:
+			var slot_full_reject = _artifact_choice_reject("artifact_slots_full", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+			slot_full_reject["equipped_count"] = equipped_artifacts.size()
+			slot_full_reject["slot_limit"] = slot_limit
+			return slot_full_reject
+
+		return _artifact_choice_ready_report(normalized_action, offered_artifact_id, "", "")
+
+	if normalized_action != "replace":
+		return _artifact_choice_reject("unknown_artifact_choice_action", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+	if equipped_artifact_id.is_empty():
+		return _artifact_choice_reject("artifact_replacement_target_required", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+	if not equipped_artifacts.has(equipped_artifact_id):
+		return _artifact_choice_reject("artifact_not_equipped", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+
+	var dormant_limit = get_dormant_artifact_limit()
+	var release_required = dormant_artifacts.size() >= dormant_limit
+	if release_required:
+		if released_dormant_artifact_id.is_empty():
+			var dormant_full_reject = _artifact_choice_reject("artifact_dormant_full", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+			dormant_full_reject["release_required"] = true
+			return dormant_full_reject
+		if not dormant_artifacts.has(released_dormant_artifact_id):
+			var invalid_release_reject = _artifact_choice_reject("artifact_release_not_dormant", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+			invalid_release_reject["release_required"] = true
+			return invalid_release_reject
+	elif not released_dormant_artifact_id.is_empty():
+		var release_not_required = _artifact_choice_reject("artifact_release_not_required", normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+		release_not_required["release_required"] = false
+		return release_not_required
+
+	return _artifact_choice_ready_report(normalized_action, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+
+
+func _artifact_choice_ready_report(
+	action_type: String,
+	offered_artifact_id: String,
+	equipped_artifact_id: String = "",
+	released_dormant_artifact_id: String = ""
+) -> Dictionary:
+	var option_key = get_artifact_choice_option_key(action_type, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id)
+	var label = get_artifact_label(offered_artifact_id)
+	var action_label = "Equip" if action_type == "equip" else "Replace"
+	var summary = "%s %s" % [action_label, label]
+	if action_type == "replace":
+		summary = "Replace %s with %s" % [
+			get_artifact_label(equipped_artifact_id),
+			label,
+		]
+		if not released_dormant_artifact_id.is_empty():
+			summary += "; release %s" % get_artifact_label(released_dormant_artifact_id)
+
+	return {
+		"ok": true,
+		"reason": "ok",
+		"choiceAction": action_type,
+		"optionKey": option_key,
+		"artifact_id": offered_artifact_id,
+		"artifact_label": label,
+		"effect": get_artifact_effect_summary(offered_artifact_id),
+		"equipped_artifact_id": equipped_artifact_id,
+		"equipped_artifact_label": get_artifact_label(equipped_artifact_id) if not equipped_artifact_id.is_empty() else "",
+		"released_dormant_artifact_id": released_dormant_artifact_id,
+		"released_dormant_artifact_label": get_artifact_label(released_dormant_artifact_id) if not released_dormant_artifact_id.is_empty() else "",
+		"artifact_actions_remaining": artifact_actions_remaining,
+		"artifact_action_limit": get_artifact_action_limit(),
+		"artifact_actions_after": max(0, artifact_actions_remaining - 1),
+		"equipped_count": equipped_artifacts.size(),
+		"slot_limit": get_artifact_slot_limit(),
+		"dormant_count": dormant_artifacts.size(),
+		"dormant_limit": get_dormant_artifact_limit(),
+		"loadout_summary": get_artifact_loadout_summary(),
+		"label": summary,
+		"summary": summary,
+	}
+
+
+func _artifact_choice_reject(
+	reason: String,
+	action_type: String,
+	offered_artifact_id: String,
+	equipped_artifact_id: String = "",
+	released_dormant_artifact_id: String = ""
+) -> Dictionary:
+	return {
+		"ok": false,
+		"reason": reason,
+		"choiceAction": action_type,
+		"optionKey": get_artifact_choice_option_key(action_type, offered_artifact_id, equipped_artifact_id, released_dormant_artifact_id),
+		"artifact_id": offered_artifact_id,
+		"artifact_label": get_artifact_label(offered_artifact_id) if not offered_artifact_id.is_empty() else "",
+		"equipped_artifact_id": equipped_artifact_id,
+		"equipped_artifact_label": get_artifact_label(equipped_artifact_id) if not equipped_artifact_id.is_empty() else "",
+		"released_dormant_artifact_id": released_dormant_artifact_id,
+		"released_dormant_artifact_label": get_artifact_label(released_dormant_artifact_id) if not released_dormant_artifact_id.is_empty() else "",
+		"artifact_actions_remaining": artifact_actions_remaining,
+		"artifact_action_limit": get_artifact_action_limit(),
+		"artifact_actions_after": artifact_actions_remaining,
+		"equipped_count": equipped_artifacts.size(),
+		"slot_limit": get_artifact_slot_limit(),
+		"dormant_count": dormant_artifacts.size(),
+		"dormant_limit": get_dormant_artifact_limit(),
+		"loadout_summary": get_artifact_loadout_summary(),
+	}
+
+
+func _artifact_choice_vote_session_id(day_number: int, vote_index: int) -> String:
+	return "artifact_vote_day_%s_%s" % [
+		_round_id_suffix(day_number),
+		_round_id_suffix(vote_index),
+	]
+
+
+func _build_artifact_choice_vote_session(validation: Dictionary, player_count: int) -> Dictionary:
+	var normalized_count = clamp(player_count, 1, 4)
+	var vote_index = int(run_stats.get("artifact_votes_started", 0)) + 1
+	var duration_seconds = ARTIFACT_CHOICE_VOTE_DURATION_SECONDS
+	var started_msec = _party_vote_now_msec()
+	return {
+		"id": _artifact_choice_vote_session_id(current_round, vote_index),
+		"runId": "m0_local_debug_run",
+		"sessionId": "session_local_001",
+		"day": current_round,
+		"sourceType": "artifact_button",
+		"sourcePlayerId": "player_1",
+		"choiceAction": validation.get("choiceAction", "equip"),
+		"optionKey": validation.get("optionKey", ""),
+		"artifactId": validation.get("artifact_id", ""),
+		"artifactLabel": validation.get("artifact_label", ""),
+		"equippedArtifactId": validation.get("equipped_artifact_id", ""),
+		"equippedArtifactLabel": validation.get("equipped_artifact_label", ""),
+		"releasedDormantArtifactId": validation.get("released_dormant_artifact_id", ""),
+		"releasedDormantArtifactLabel": validation.get("released_dormant_artifact_label", ""),
+		"label": validation.get("label", validation.get("artifact_label", "choice")),
+		"effect": validation.get("effect", ""),
+		"artifactActionCost": 1,
+		"artifactActionsBefore": artifact_actions_remaining,
+		"requiredConsentMode": "majority",
+		"voteDurationSeconds": duration_seconds,
+		"startedAtMsec": started_msec,
+		"expiresAtMsec": started_msec + duration_seconds * 1000,
+		"remainingSecondsAtStart": duration_seconds,
+		"timerSource": "local_monotonic",
+		"timeoutAction": "keep_current",
+		"timeoutDefaultResult": "no_change",
+		"yesPlayerIds": ["player_1"],
+		"holdPlayerIds": [],
+		"resolvedAction": null,
+		"resolvedReasonTags": [],
+		"approvals": 1,
+		"required": get_artifact_choice_required_votes(normalized_count),
+		"player_count": normalized_count,
+		"loadoutSummaryBefore": get_artifact_loadout_summary(),
+		"summary": "Artifact vote: %s 1/%s majority" % [
+			validation.get("label", validation.get("artifact_label", "choice")),
+			get_artifact_choice_required_votes(normalized_count),
+		],
+	}
+
+
+func _resolved_artifact_choice_vote_session(action: String, reason_tags: Array, player_count: int, approvals: int) -> Dictionary:
+	if artifact_choice_vote.is_empty():
+		return {}
+
+	var resolved = artifact_choice_vote.duplicate(true)
+	resolved["approvals"] = approvals
+	resolved["yesPlayerIds"] = _player_ids_for_count(approvals)
+	resolved["resolvedAction"] = action
+	resolved["resolvedReasonTags"] = reason_tags.duplicate()
+	if action == "held":
+		resolved["holdPlayerIds"] = _hold_player_ids_for_vote(player_count, approvals)
+	else:
+		resolved["holdPlayerIds"] = []
+	return resolved
+
+
+func _artifact_choice_resolved_action(action_type: String) -> String:
+	if action_type == "replace":
+		return "replaced"
+
+	return "equipped"
+
+
+func _artifact_choice_vote_started_event(vote_session: Dictionary) -> Dictionary:
+	return {
+		"event": "artifact_choice_vote_started",
+		"voteSessionId": vote_session.get("id", ""),
+		"day": vote_session.get("day", current_round),
+		"choiceAction": vote_session.get("choiceAction", "equip"),
+		"optionKey": vote_session.get("optionKey", ""),
+		"artifactId": vote_session.get("artifactId", ""),
+		"artifactActionCost": vote_session.get("artifactActionCost", 1),
+		"requiredConsentMode": vote_session.get("requiredConsentMode", "majority"),
+		"timeoutAction": vote_session.get("timeoutAction", "keep_current"),
+		"timeoutDefaultResult": vote_session.get("timeoutDefaultResult", "no_change"),
+	}
+
+
+func _artifact_choice_vote_resolved_event(vote_session: Dictionary) -> Dictionary:
+	return {
+		"event": "artifact_choice_vote_resolved",
+		"voteSessionId": vote_session.get("id", ""),
+		"day": vote_session.get("day", current_round),
+		"choiceAction": vote_session.get("choiceAction", "equip"),
+		"optionKey": vote_session.get("optionKey", ""),
+		"resolvedAction": vote_session.get("resolvedAction", "unknown"),
+		"resolvedReasonTags": vote_session.get("resolvedReasonTags", []),
+		"yesCount": vote_session.get("yesPlayerIds", []).size(),
+		"holdCount": vote_session.get("holdPlayerIds", []).size(),
+		"timeoutAction": vote_session.get("timeoutAction", "keep_current"),
+		"timeoutDefaultResult": vote_session.get("timeoutDefaultResult", "no_change"),
+	}
 
 
 func get_artifact_recommendation_report() -> Dictionary:
@@ -4682,6 +5153,8 @@ func _build_wave_stack_vote_session(player_count: int, next_round: int, risk_rep
 	var active_directions = _array_string_values(get_active_directions(normalized_count))
 	var preview_card = _cached_wave_preview_card(normalized_count, next_round, active_directions)
 	var spawn_plan = _cached_wave_spawn_plan(normalized_count, next_round, active_directions)
+	var duration_seconds = WAVE_STACK_VOTE_DURATION_SECONDS
+	var started_msec = _party_vote_now_msec()
 	return {
 		"id": _wave_stack_vote_session_id(next_round, vote_index),
 		"runId": "m0_local_debug_run",
@@ -4699,7 +5172,11 @@ func _build_wave_stack_vote_session(player_count: int, next_round: int, risk_rep
 		"currentWaveStackLimit": get_wave_stack_limit(),
 		"baseHpPercentAtStart": _base_hp_percent(),
 		"requiredConsentMode": _wave_stack_required_consent_mode(normalized_count),
-		"voteDurationSeconds": WAVE_STACK_VOTE_DURATION_SECONDS,
+		"voteDurationSeconds": duration_seconds,
+		"startedAtMsec": started_msec,
+		"expiresAtMsec": started_msec + duration_seconds * 1000,
+		"remainingSecondsAtStart": duration_seconds,
+		"timerSource": "local_monotonic",
 		"timeoutAction": "hold",
 		"yesPlayerIds": ["player_1"],
 		"holdPlayerIds": [],
@@ -4839,6 +5316,264 @@ func get_shop_purchase_vote_summary(player_count: int) -> String:
 	]
 
 
+func get_active_party_vote_type() -> String:
+	if has_active_wave_stack_vote():
+		return "wave_stack"
+	if has_active_shop_purchase_vote():
+		return "shop_purchase"
+	if has_active_artifact_choice_vote():
+		return "artifact_choice"
+
+	return "none"
+
+
+func has_active_party_vote() -> bool:
+	return get_active_party_vote_type() != "none"
+
+
+func get_active_party_vote_session() -> Dictionary:
+	var vote_type = get_active_party_vote_type()
+	var session: Dictionary = {}
+	match vote_type:
+		"wave_stack":
+			session = get_active_wave_stack_vote_session()
+		"shop_purchase":
+			session = get_active_shop_purchase_vote_session()
+		"artifact_choice":
+			session = get_active_artifact_choice_vote_session()
+		_:
+			return {}
+
+	session["voteType"] = vote_type
+	return session
+
+
+func get_party_vote_timer_report(player_count: int, now_msec: int = -1) -> Dictionary:
+	if not is_loaded():
+		return {
+			"ok": false,
+			"reason": "data_not_loaded",
+			"active": false,
+			"vote_type": "none",
+			"activeVoteType": "none",
+			"summary": "Party vote: data not loaded",
+			"voteSession": {},
+			"durationSeconds": 0,
+			"remainingSeconds": 0,
+			"remainingMilliseconds": 0,
+			"urgency": "idle",
+			"urgencyLabel": "Idle",
+			"remainingLabel": "0s",
+			"expired": false,
+			"timeoutAction": "",
+			"player_count": clamp(player_count, 1, 4),
+		}
+
+	var vote_type = get_active_party_vote_type()
+	if vote_type == "none":
+		return {
+			"ok": true,
+			"reason": "no_active_party_vote",
+			"active": false,
+			"vote_type": "none",
+			"activeVoteType": "none",
+			"summary": get_party_vote_summary(player_count),
+			"voteSession": {},
+			"durationSeconds": 0,
+			"remainingSeconds": 0,
+			"remainingMilliseconds": 0,
+			"urgency": "idle",
+			"urgencyLabel": "Idle",
+			"remainingLabel": "0s",
+			"expired": false,
+			"timeoutAction": "",
+			"player_count": clamp(player_count, 1, 4),
+		}
+
+	var session = get_active_party_vote_session()
+	var duration_seconds = max(0, int(session.get("voteDurationSeconds", 0)))
+	var current_msec = now_msec if now_msec >= 0 else _party_vote_now_msec()
+	var started_msec = int(session.get("startedAtMsec", current_msec))
+	var expires_msec = int(session.get("expiresAtMsec", started_msec + duration_seconds * 1000))
+	if expires_msec <= 0 and duration_seconds > 0:
+		expires_msec = started_msec + duration_seconds * 1000
+	var remaining_msec = max(0, expires_msec - current_msec)
+	var remaining_seconds = int(ceil(float(remaining_msec) / 1000.0)) if remaining_msec > 0 else 0
+	var expired = duration_seconds > 0 and current_msec >= expires_msec
+	var urgency = "open"
+	var urgency_label = "Open"
+	if expired:
+		urgency = "expired"
+		urgency_label = "Expired"
+	elif remaining_seconds <= PARTY_VOTE_ENDING_SOON_SECONDS:
+		urgency = "ending_soon"
+		urgency_label = "Ending soon"
+
+	return {
+		"ok": true,
+		"reason": "vote_expired" if expired else "vote_active",
+		"active": true,
+		"vote_type": vote_type,
+		"activeVoteType": vote_type,
+		"summary": get_party_vote_summary(player_count),
+		"voteSession": session,
+		"durationSeconds": duration_seconds,
+		"remainingSeconds": remaining_seconds,
+		"remainingMilliseconds": remaining_msec,
+		"urgency": urgency,
+		"urgencyLabel": urgency_label,
+		"remainingLabel": "%ss" % remaining_seconds,
+		"startedAtMsec": started_msec,
+		"expiresAtMsec": expires_msec,
+		"checkedAtMsec": current_msec,
+		"expired": expired,
+		"timeoutAction": str(session.get("timeoutAction", "")),
+		"player_count": clamp(player_count, 1, 4),
+	}
+
+
+func expire_active_party_vote_if_needed(player_count: int, now_msec: int = -1) -> Dictionary:
+	var timer_report = get_party_vote_timer_report(player_count, now_msec)
+	if not bool(timer_report.get("ok", false)):
+		return timer_report
+	if not bool(timer_report.get("active", false)):
+		return {
+			"ok": true,
+			"reason": "no_active_party_vote",
+			"timed_out": false,
+			"timerReport": timer_report,
+			"events": [],
+		}
+	if not bool(timer_report.get("expired", false)):
+		return {
+			"ok": true,
+			"reason": "vote_still_active",
+			"timed_out": false,
+			"timerReport": timer_report,
+			"events": [],
+		}
+
+	var vote_type = str(timer_report.get("vote_type", "none"))
+	var result: Dictionary = {}
+	match vote_type:
+		"wave_stack":
+			result = hold_wave_stack_vote(["timeout"], "vote_timed_out")
+		"shop_purchase":
+			result = hold_shop_purchase_vote(["timeout"], "vote_timed_out")
+		"artifact_choice":
+			result = hold_artifact_choice_vote(["timeout"], "vote_timed_out")
+		_:
+			return _reject("no_active_party_vote")
+
+	if bool(result.get("ok", false)):
+		run_stats["party_vote_timeouts"] = int(run_stats.get("party_vote_timeouts", 0)) + 1
+		result["reason"] = "vote_timed_out"
+		result["timed_out"] = true
+		result["vote_type"] = vote_type
+		result["activeVoteType"] = vote_type
+		result["timerReport"] = timer_report
+		var timeout_event = _party_vote_timeout_event(vote_type, result.get("voteSession", {}), timer_report)
+		result["party_vote_timed_out"] = timeout_event
+		var events: Array = result.get("events", [])
+		events.append("Party vote timed out: %s -> %s." % [
+			timer_report.get("summary", "party vote"),
+			timer_report.get("timeoutAction", "hold"),
+		])
+		result["events"] = events
+
+	return result
+
+
+func get_party_vote_summary(player_count: int) -> String:
+	if not is_loaded():
+		return "Party vote: data not loaded"
+
+	var normalized_count = clamp(player_count, 1, 4)
+	if normalized_count <= 1:
+		return "Party vote: solo instant"
+
+	match get_active_party_vote_type():
+		"wave_stack":
+			return "Party vote: wave pull | %s" % get_wave_stack_vote_summary(normalized_count)
+		"shop_purchase":
+			return "Party vote: shop | %s" % get_shop_purchase_vote_summary(normalized_count)
+		"artifact_choice":
+			return "Party vote: artifact | %s" % get_artifact_choice_vote_summary(normalized_count)
+		_:
+			if wave_active:
+				return "Party vote: none | %s" % get_wave_stack_vote_summary(normalized_count)
+			if _has_open_shop_offer():
+				return "Party vote: none | %s" % get_shop_purchase_vote_summary(normalized_count)
+			if not artifact_offer.is_empty():
+				return "Party vote: none | %s" % get_artifact_choice_vote_summary(normalized_count)
+
+	return "Party vote: none"
+
+
+func get_party_vote_lock_report(player_count: int) -> Dictionary:
+	if not is_loaded():
+		return {
+			"ok": false,
+			"reason": "data_not_loaded",
+			"active": false,
+			"vote_type": "none",
+			"activeVoteType": "none",
+			"blocks_new_party_votes": false,
+			"summary": "Party vote: data not loaded",
+			"voteSession": {},
+			"requiredConsentMode": "",
+			"timeoutAction": "",
+			"urgency": "idle",
+			"urgencyLabel": "Idle",
+			"remainingLabel": "0s",
+			"player_count": clamp(player_count, 1, 4),
+		}
+
+	var vote_type = get_active_party_vote_type()
+	var active = vote_type != "none"
+	var session = get_active_party_vote_session()
+	var timer_report = get_party_vote_timer_report(player_count)
+	return {
+		"ok": true,
+		"reason": "active_party_vote" if active else "no_active_party_vote",
+		"active": active,
+		"vote_type": vote_type,
+		"activeVoteType": vote_type,
+		"blocks_new_party_votes": active,
+		"summary": get_party_vote_summary(player_count),
+		"voteSession": session,
+		"timerReport": timer_report,
+		"durationSeconds": int(timer_report.get("durationSeconds", 0)),
+		"remainingSeconds": int(timer_report.get("remainingSeconds", 0)),
+		"remainingMilliseconds": int(timer_report.get("remainingMilliseconds", 0)),
+		"expired": bool(timer_report.get("expired", false)),
+		"urgency": str(timer_report.get("urgency", "idle")),
+		"urgencyLabel": str(timer_report.get("urgencyLabel", "Idle")),
+		"remainingLabel": str(timer_report.get("remainingLabel", "0s")),
+		"requiredConsentMode": str(session.get("requiredConsentMode", "")),
+		"timeoutAction": str(session.get("timeoutAction", "")),
+		"player_count": clamp(player_count, 1, 4),
+	}
+
+
+func _party_vote_now_msec() -> int:
+	return int(Time.get_ticks_msec())
+
+
+func _party_vote_timeout_event(vote_type: String, vote_session: Dictionary, timer_report: Dictionary) -> Dictionary:
+	return {
+		"event": "party_vote_timed_out",
+		"voteType": vote_type,
+		"voteSessionId": vote_session.get("id", ""),
+		"day": vote_session.get("day", current_round),
+		"resolvedAction": vote_session.get("resolvedAction", "held"),
+		"resolvedReasonTags": vote_session.get("resolvedReasonTags", []),
+		"timeoutAction": vote_session.get("timeoutAction", timer_report.get("timeoutAction", "hold")),
+		"durationSeconds": timer_report.get("durationSeconds", 0),
+		"remainingSeconds": timer_report.get("remainingSeconds", 0),
+	}
+
+
 func get_shop_purchase_action_label(option_report: Dictionary, player_count: int) -> String:
 	if has_active_shop_purchase_vote() and player_count > 1:
 		return "Approve buy" if str(option_report.get("shop_option_type", "remove_card")) == "service" else "Approve remove"
@@ -4858,6 +5593,17 @@ func request_shop_purchase_vote(
 		return _reject("shop_option_missing")
 	if not _has_open_shop_offer():
 		return _reject("no_shop_offer")
+	if has_active_artifact_choice_vote():
+		return {
+			"ok": false,
+			"reason": "artifact_vote_already_active",
+			"requires_vote": true,
+			"ready_to_purchase": false,
+			"artifactVoteSession": artifact_choice_vote.duplicate(true),
+			"events": [
+				"Shop vote blocked: an artifact choice vote is already active.",
+			],
+		}
 
 	var normalized_count = clamp(player_count, 1, 4)
 	if not _shop_purchase_vote_uses_party_resource(option_report):
@@ -4986,30 +5732,37 @@ func request_shop_purchase_vote(
 	}
 
 
-func hold_shop_purchase_vote() -> Dictionary:
+func hold_shop_purchase_vote(reason_tags: Array = [], result_reason: String = "vote_held") -> Dictionary:
 	if not has_active_shop_purchase_vote():
 		return _reject("no_shop_vote")
 
 	var approvals = int(shop_purchase_vote.get("approvals", 0))
 	var required_votes = int(shop_purchase_vote.get("required", 0))
 	var vote_player_count = int(shop_purchase_vote.get("player_count", max(1, required_votes)))
-	var resolved_vote_session = _resolved_shop_purchase_vote_session("held", ["hold_requested"], vote_player_count, approvals)
+	var resolved_reason_tags = reason_tags.duplicate()
+	if resolved_reason_tags.is_empty():
+		resolved_reason_tags = ["hold_requested"]
+	var resolved_vote_session = _resolved_shop_purchase_vote_session("held", resolved_reason_tags, vote_player_count, approvals)
 	shop_purchase_vote.clear()
 	run_stats["shop_votes_held"] = int(run_stats.get("shop_votes_held", 0)) + 1
+	var event_text = "Shop purchase held: %s/%s approvals. No gold, boss shard, artifact action, or purchase limit was spent." % [
+		approvals,
+		required_votes,
+	]
+	if result_reason == "vote_timed_out":
+		event_text = "Shop purchase timed out: %s/%s approvals. No gold, boss shard, artifact action, or purchase limit was spent." % [
+			approvals,
+			required_votes,
+		]
 
 	return {
 		"ok": true,
-		"reason": "vote_held",
+		"reason": result_reason,
 		"requires_vote": true,
 		"ready_to_purchase": false,
 		"voteSession": resolved_vote_session,
 		"shop_purchase_vote_resolved": _shop_purchase_vote_resolved_event(resolved_vote_session),
-		"events": [
-			"Shop purchase held: %s/%s approvals. No gold, boss shard, artifact action, or purchase limit was spent." % [
-				approvals,
-				required_votes,
-			],
-		],
+		"events": [event_text],
 	}
 
 
@@ -5088,6 +5841,8 @@ func _build_shop_purchase_vote_session(
 		dormant_id = str(option_report.get("dormant_artifact_id", ""))
 	if replaced_id.is_empty():
 		replaced_id = str(option_report.get("replaced_artifact_id", ""))
+	var duration_seconds = SHOP_PURCHASE_VOTE_DURATION_SECONDS
+	var started_msec = _party_vote_now_msec()
 
 	return {
 		"id": _shop_purchase_vote_session_id(current_round, vote_index),
@@ -5116,7 +5871,11 @@ func _build_shop_purchase_vote_session(
 		"bossShardsBefore": boss_shards,
 		"artifactActionsBefore": artifact_actions_remaining,
 		"requiredConsentMode": _shop_purchase_vote_consent_mode(normalized_count),
-		"voteDurationSeconds": SHOP_PURCHASE_VOTE_DURATION_SECONDS,
+		"voteDurationSeconds": duration_seconds,
+		"startedAtMsec": started_msec,
+		"expiresAtMsec": started_msec + duration_seconds * 1000,
+		"remainingSecondsAtStart": duration_seconds,
+		"timerSource": "local_monotonic",
 		"timeoutAction": "decline",
 		"timeoutDefaultResult": "no_purchase",
 		"yesPlayerIds": ["player_1"],
@@ -5331,7 +6090,7 @@ func approve_wave_stack_vote(player_count: int) -> Dictionary:
 	return stack_result
 
 
-func hold_wave_stack_vote() -> Dictionary:
+func hold_wave_stack_vote(reason_tags: Array = [], result_reason: String = "vote_held") -> Dictionary:
 	if not has_active_wave_stack_vote():
 		return _reject("no_stack_vote")
 
@@ -5339,24 +6098,32 @@ func hold_wave_stack_vote() -> Dictionary:
 	var approvals = int(wave_stack_vote.get("approvals", 0))
 	var required_votes = int(wave_stack_vote.get("required", 0))
 	var vote_player_count = int(wave_stack_vote.get("player_count", max(1, required_votes)))
-	var resolved_vote_session = _resolved_wave_stack_vote_session("held", ["hold_requested"], vote_player_count, approvals)
+	var resolved_reason_tags = reason_tags.duplicate()
+	if resolved_reason_tags.is_empty():
+		resolved_reason_tags = ["hold_requested"]
+	var resolved_vote_session = _resolved_wave_stack_vote_session("held", resolved_reason_tags, vote_player_count, approvals)
 	wave_stack_vote.clear()
 	run_stats["wave_stack_votes_held"] = int(run_stats.get("wave_stack_votes_held", 0)) + 1
+	var event_text = "Wave pull held for round %s: %s/%s approvals." % [
+		vote_round,
+		approvals,
+		required_votes,
+	]
+	if result_reason == "vote_timed_out":
+		event_text = "Wave pull timed out for round %s: %s/%s approvals. Pull is held with no bonus rewards." % [
+			vote_round,
+			approvals,
+			required_votes,
+		]
 
 	return {
 		"ok": true,
-		"reason": "vote_held",
+		"reason": result_reason,
 		"voteSession": resolved_vote_session,
 		"wave_stack_vote_resolved": _wave_stack_vote_resolved_event(resolved_vote_session),
 		"noBonusRewards": true,
 		"forbiddenRewardFields": WAVE_STACK_FORBIDDEN_REWARD_FIELDS.duplicate(),
-		"events": [
-			"Wave pull held for round %s: %s/%s approvals." % [
-				vote_round,
-				approvals,
-				required_votes,
-			],
-		],
+		"events": [event_text],
 	}
 
 
@@ -6559,6 +7326,7 @@ func claim_artifact(artifact_id: String) -> Dictionary:
 	var equipped_count_before = equipped_artifacts.size()
 	equipped_artifacts.append(artifact_id)
 	artifact_offer.clear()
+	artifact_choice_vote.clear()
 	run_stats["artifact_rewards_taken"] = int(run_stats.get("artifact_rewards_taken", 0)) + 1
 	last_artifact_report = {
 		"ok": true,
@@ -6669,6 +7437,7 @@ func replace_artifact(equipped_artifact_id: String, offered_artifact_id: String,
 	equipped_artifacts[replace_index] = offered_artifact_id
 	dormant_artifacts.append(equipped_artifact_id)
 	artifact_offer.clear()
+	artifact_choice_vote.clear()
 	run_stats["artifact_rewards_taken"] = int(run_stats.get("artifact_rewards_taken", 0)) + 1
 	run_stats["artifact_replacements"] = int(run_stats.get("artifact_replacements", 0)) + 1
 	run_stats["artifact_dormant_added"] = int(run_stats.get("artifact_dormant_added", 0)) + 1
@@ -6772,6 +7541,7 @@ func skip_artifact_offer() -> Dictionary:
 
 	var skipped_count = artifact_offer.size()
 	artifact_offer.clear()
+	artifact_choice_vote.clear()
 	run_stats["artifact_rewards_skipped"] = int(run_stats.get("artifact_rewards_skipped", 0)) + 1
 	last_artifact_report = {
 		"ok": true,
@@ -7076,6 +7846,7 @@ func start_wave(player_count: int) -> Dictionary:
 	active_wave_packets.clear()
 	wave_stack_vote.clear()
 	shop_purchase_vote.clear()
+	artifact_choice_vote.clear()
 	_add_active_wave_packet(active_round, false, normalized_player_count)
 	enemies.clear()
 	run_stats["rounds_started"] = int(run_stats.get("rounds_started", 0)) + 1
@@ -7288,6 +8059,7 @@ func step_wave(player_count: int) -> Array[String]:
 		active_wave_packets.clear()
 		wave_stack_vote.clear()
 		shop_purchase_vote.clear()
+		artifact_choice_vote.clear()
 		events.append("Base destroyed. M0 run failed.")
 		events.append("Outcome: %s" % get_run_outcome_summary(player_count))
 
@@ -9907,6 +10679,7 @@ func _generate_reward_offer(events: Array[String], reward_round = -1) -> void:
 
 func _generate_artifact_offer(events: Array[String]) -> void:
 	artifact_offer.clear()
+	artifact_choice_vote.clear()
 	var artifact_pool: Array = data.get("rewards", {}).get("artifactPool", [])
 	var offer_count = min(get_artifact_offer_count(), artifact_pool.size())
 	if offer_count <= 0:
@@ -10127,6 +10900,7 @@ func _complete_active_rounds(events: Array[String]) -> void:
 	active_wave_packets.clear()
 	wave_stack_vote.clear()
 	shop_purchase_vote.clear()
+	artifact_choice_vote.clear()
 
 	if completed_rounds >= get_max_rounds():
 		run_complete = true
